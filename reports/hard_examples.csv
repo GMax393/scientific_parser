@@ -1,0 +1,2555 @@
+domain,url,tag,classes,label_true,label_pred,confidence,text
+arxiv.org,https://arxiv.org/abs/2302.00001,div,,journal,other,0.885,arXiv-issued DOI via DataCite
+arxiv.org,https://arxiv.org/abs/2301.00001,h1,,journal,other,0.8525,arXivLabs: experimental projects with community collaborators
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,title,0.33056877292448333,"P. Frazier, D. Kempe, J. Kleinberg, R. Kleinberg.
+Incentivizing Exploration.
+Proc. 15th ACM Conference on Economics and Computation (EC), 2014.
+
+ 
+A. Anderson, D. Huttenlocher, J. Kleinberg, J. Leskovec.
+Steering User Behavior with Badges.
+Proc. 22nd International World Wide Web Conference, 2013.
+
+
+J. Kleinberg, K. Ligett.
+Information-sharing in social networks.
+Games and Economic Behavior 82, 2013.
+
+F. Chierichetti, J. Kleinberg.
+
+Voting with Limited Information and Many Alternatives.
+Proc. 23r"
+arxiv.org,https://arxiv.org/abs/2301.00001,td,tablecell arxividv,journal,other,0.8175,"(or 
+arXiv:2301.00001v1 [cs.HC] for this version)"
+arxiv.org,https://arxiv.org/abs/2302.00123,div,column,journal,other,0.89,"contact arXivClick here to contact arXiv
+ Contact
+
+
+subscribe to arXiv mailingsClick here to subscribe
+ Subscribe"
+arxiv.org,https://arxiv.org/abs/2302.00123,div,browse,year,other,0.43,"Current browse context: cs.CV
+
+
+< prev
+
+  |   
+next >
+
+
+new
+ | 
+recent
+ | 2023-02
+
+    Change to browse by:
+    
+cs
+cs.AI"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.435,"J. Kleinberg.  Approximation Algorithms
+for Disjoint Paths Problems.
+Ph.D Thesis, Dept. of EECS, MIT, 1996."
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,title,0.4301470707427454,"A. Krause, C. Guestrin, A. Gupta, J. Kleinberg. 
+
+Near-optimal Sensor Placements: Maximizing Information 
+while Minimizing Communication Cost. 
+Proc. Information Processing in Sensor Networks (IPSN), 2006.
+
+
+J. Kleinberg.
+An Approximation Algorithm for the
+Disjoint Paths Problem in Even-Degree Planar Graphs.
+Proc. 46th IEEE Symposium on Foundations of Computer Science, 2005.
+
+
+I. Abraham, Y. Bartal, T-H. Chan, K. Dhamdhere,
+A. Gupta, J. Kleinberg, O. Neiman, A. Slivkins.
+Metric Embeddings with R"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,title,0.40332371794871796,"J. Cheng, D. Romero, B. Meeder, J. Kleinberg.
+Predicting Reciprocity in Social Networks.
+Proc. 3rd IEEE Conference on Social Computing, 2011.
+
+
+D. Romero, J. Kleinberg.
+The Directed Closure Process in Hybrid Social-Information Networks, with an Analysis of Link Formation on Twitter.
+Proc. 4th International AAAI Conference on Weblogs and Social Media, 2010.
+
+
+S. Arbesman, J. Kleinberg, S. Strogatz. 
+Superlinear Scaling 
+for Innovation in Cities.
+Physical Review E 79(1), 2009.
+
+
+J. Kleinberg, S. S"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.618445652173913,"K. Tomlinson, T. Namjoshi, J. Ugander, J. Kleinberg.
+Replicating Electoral Success.
+Proc. 39th AAAI Conference on Artificial Intelligence (AAAI-25), 2025.
+
+
+E. Pierson, D. Shanmugam, R. Movva, J. Kleinberg, M. Agrawal, M. Dredze, K. Ferryman, J.W. Gichoya, D. Jurafsky, P.W. Koh, K. Levy, S. Mullainathan, Z. Obermeyer, H. Suresh, K. Vafa. 
+Using Large Language Models to Promote Health Equity.
+New England Journal of Medicine AI (NEJM AI) 2(2), 2025.
+
+
+K. Blumer, J. Kleinberg.
+Tracking Patterns in "
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,title,0.48076062997504415,"L.T. Liu, S. Barocas, J. Kleinberg, K. Levy.
+On the Actionability of Outcome Prediction.
+Proc. 38th AAAI Conference on Artificial Intelligence (AAAI-24), 2024.
+
+
+A. F. Cooper, K. Lee, M. Z. Choksi, S. Barocas, C. De Sa, J. Grimmelmann, J. Kleinberg, S. Sen, B. Zhang.
+
+Is My Prediction Arbitrary? The Confounding Effects of Variance in Fair Classification Benchmarks.
+Proc. 38th AAAI Conference on Artificial Intelligence (AAAI-24), 2024.
+
+
+J. Kleinberg, E. Ryu, E. Tardos.
+
+Calibrated Recommendation"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,author,title,0.5734456521739131,"K. Van Koevering, Y. Hong, J. Kleinberg.
+
+Exporting Geography Into A Virtual Landscape: A Global Pandemic Locally Discussed.
+arXiv/2210.07187, 2022.
+
+
+J. Gaitonde, J. Kleinberg, E. Tardos.
+
+Polarization in Geometric Opinion Dynamics.
+Proc. 22nd ACM Conference on Economics and Computation (EC), 2021.
+
+
+J. Gaitonde, J. Kleinberg, E. Tardos.
+
+Adversarial Perturbations of Opinion Dynamics in Networks.
+Proc. 21st ACM Conference on Economics and Computation (EC), 2020.
+
+
+R. Abebe, L. Adamic, J. Kleinb"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.33,"E. Dantsin, A. Goerdt, E. Hirsch,
+R. Kannan, J. Kleinberg, C. Papadimitriou, P. Raghavan, U. Schoning,
+A deterministic algorithm for satisfiability 
+based on local search. Theoretical Computer Science, 289(2002).
+
+ J. Kleinberg, M. Goemans.  The Lovasz theta
+function and a semi-definite programming relaxation of vertex cover.
+SIAM J. Discrete Math, 11(1998).
+
+ M. Goemans, J. Kleinberg.  An improved
+approximation ratio for the minimum latency problem.
+Proc. 7th ACM-SIAM Symposium on Discrete Algo"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,title,0.5085349781636147,"K. Tomlinson, J. Ugander, J. Kleinberg.
+
+The Moderating Effect of Instant Runoff Voting.
+Proc. 38th AAAI Conference on Artificial Intelligence (AAAI-24), 2024.
+
+ L.T. Liu, S. Barocas, J. Kleinberg, K. Levy.
+On the Actionability of Outcome Prediction.
+Proc. 38th AAAI Conference on Artificial Intelligence (AAAI-24), 2024.
+
+
+A. F. Cooper, K. Lee, M. Z. Choksi, S. Barocas, C. De Sa, J. Grimmelmann, J. Kleinberg, S. Sen, B. Zhang.
+
+Is My Prediction Arbitrary? The Confounding Effects of Variance in Fa"
+arxiv.org,https://arxiv.org/abs/2301.00001,p,,journal,other,0.7725,arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+arxiv.org,https://arxiv.org/abs/2302.00123,p,,title,other,0.6475,"Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them."
+arxiv.org,https://arxiv.org/abs/2303.00456,div,button-and-tooltip,journal,other,0.8825,"Focus to learn more
+
+
+
+                  arXiv-issued DOI via DataCite"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,author,title,0.38667720955096224,"A. Anderson, D. Huttenlocher, J. Kleinberg, J. Leskovec.
+
+Effects of User Similarity in Social Media.
+Proc. 5th ACM Conference on Web Search and Data Mining, 2012.
+
+
+A. Anderson, D. Huttenlocher, J. Kleinberg, J. Leskovec.
+Discovering Value from Community Activity on Focused Question Answering Sites: A Case Study of Stack Overflow.
+Proc. 18th ACM SIGKDD Intl. Conf. on Knowledge Discovery and Data Mining, 2012.
+
+
+D. Bindel, J. Kleinberg, S. Oren.
+
+How Bad is Forming Your Own Opinion?
+Proc. 52nd I"
+arxiv.org,https://arxiv.org/abs/2301.00002,div,extra-services,title,author,0.3325,"Full-text links:
+Access Paper:
+
+
+View a PDF of the paper titled Evaluating Alternative Glyph Design for Showing Large-Magnitude-Range Quantum Spins, by Henan Zhao and Garnett W. Bryant and Wesley Griffin and Judith E. Terrill and Jian ChenView PDFTeX Source
+ 
+
+
+view license
+
+
+ 
+    Current browse context: cs.HC
+
+
+< prev
+
+  |   
+next >
+
+
+new
+ | 
+recent
+ | 2023-01
+
+    Change to browse by:
+    
+cs
+cs.GR
+quant-ph
+
+
+
+
+References & Citations
+
+
+INSPIRE HEP
+
+NASA ADSGoogle Scholar
+Semantic Scholar
+
+
+
+
+"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,title,0.3913846945051216,"J. Kleinberg, M. Sandler, A. Slivkins.
+Network Failure Detection and
+Graph Connectivity.
+Proc. 15th ACM-SIAM Symposium on Discrete Algorithms, 2004.
+(In PDF.)
+
+ A. Gupta, J. Kleinberg, A. Kumar, R. Rastogi, B. Yener.
+
+Provisioning a virtual private network: 
+A network design problem for multicommodity flow.
+Proc. 33rd ACM Symposium on Theory of Computing, 2001.
+
+ J. Kleinberg.
+
+Detecting a Network Failure.
+Proc. 41st IEEE Symposium on Foundations of Computer Science, 2000.
+
+ D. Kempe, J. Kleinbe"
+arxiv.org,https://arxiv.org/abs/2302.00123,div,column,journal,other,0.855,"About
+Help
+
+
+
+
+
+contact arXivClick here to contact arXiv
+ Contact
+
+
+subscribe to arXiv mailingsClick here to subscribe
+ Subscribe"
+arxiv.org,https://arxiv.org/abs/2302.00001,div,columns,journal,other,0.755,"Happy Open Access Week from arXiv!
+YOU make open access possible! Tell us why you support #openaccess and give to arXiv this week to help keep science open for all.
+
+
+Donate!"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.3975,"J. Kleinberg, E. Tardos.
+Algorithm Design.
+Addison Wesley, 2005. 
+
+
+
+
+This book is based on the undergraduate algorithms course that we both teach.
+We also use the more advanced parts for our graduate algorithms course.
+
+
+I teach a PhD-level course on network models, entitled
+	
+The Structure of Information Networks (CS 6850)."
+arxiv.org,https://arxiv.org/abs/2302.00123,div,control,journal,author,0.6425,"All fields
+Title
+Author
+Abstract
+Comments
+Journal reference
+ACM classification
+MSC classification
+Report number
+arXiv identifier
+DOI
+ORCID
+arXiv author ID
+Help pages
+Full text"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.53,"M. Raghu, B. Poole, J. Kleinberg, S. Ganguli, J. Sohl-Dickstein.
+
+On the expressive power of deep neural networks.
+Proc. 34th Intl. Conf. on Machine Learning (ICML), 2017."
+arxiv.org,https://arxiv.org/abs/2302.00001,p,,journal,other,0.775,Have an idea for a project that will add value for arXiv's community? Learn more about arXivLabs.
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.45332155929721824,"D. Liben-Nowell, J. Kleinberg.
+Tracing
+  Information Flow on a Global Scale Using Internet Chain-Letter
+  Data.  Proc. National Academy of Sciences,
+  105(12):4633–4638, 25 March 2008.
+  
+    We are interested in gathering additional data about the spread
+    of the chain-letter petitions described in this paper.  
+    Please visit
+    
+    http://petitions.cs.cornell.edu
+    or
+    
+    http://petitions.cs.carleton.edu
+    to learn more or to help.  
+ 
+
+G. Kossinets, J. Kleinberg, D. Watts.
+The"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,author,0.3725,"D. Gibson, J. Kleinberg, P. Raghavan.
+Inferring Web communities from link topology.
+Proc. 9th ACM Conference on Hypertext and Hypermedia, 1998.
+
+ S. Chakrabarti, B. Dom, D. Gibson, J. Kleinberg,
+P. Raghavan, S. Rajagopalan,
+
+Automatic resource list compilation by
+analyzing hyperlink structure and associated text.
+Proc. 7th International World Wide Web Conference, 1998.
+
+ S. Chakrabarti, B. Dom, D. Gibson, J. Kleinberg, S.R. Kumar,
+P. Raghavan, S. Rajagopalan, A. Tomkins,
+
+Hypersearching the Web."
+arxiv.org,https://arxiv.org/abs/2302.00001,li,,journal,other,0.955,"contact arXivClick here to contact arXiv
+ Contact"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.565945652173913,"K. Peng, R. Movva, J. Kleinberg, E. Pierson, N. Garg.
+Use Sparse Autoencoders to Discover Unknown Concepts, Not to Act on Known Concepts.
+arXiv/2506.23845, 2025.
+
+
+Z. Tang, D. Jiao, E. Xue, R. McIlroy-Young, J. Kleinberg, S. Sen, A. Anderson.
+Learning to Imitate with Less: Efficient Individual Behavior Modeling in Chess.
+arXiv/2507.21488, 2025.
+
+
+T. Qiu, B. Laufer, J. Kleinberg, H. Heidari.
+A Formal Model of the Economic Impacts of AI Openness Regulation.
+arXiv/2507.14193, 2025.
+
+
+B. Laufer, H. "
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,author,title,0.5409456521739131,"N. Veldt, A. Benson, J. Kleinberg.
+
+Localized Flow-Based Clustering in Hypergraphs.
+Proc. 26th ACM SIGKDD Intl. Conf. on Knowledge Discovery and Data Mining, 2020.
+
+
+A. Benson, J. Kleinberg.
+
+Core-fringe link prediction.
+Proc. 28th International World Wide Web Conference, 2019.
+See also the
+code and data
+accompanying the paper.
+
+
+
+A. Benson, R. Abebe, M. Schaub, A. Jadbabaie, J. Kleinberg.
+
+Simplicial Closure and Higher-order Link Prediction.
+Proc. National Academy of Sciences, 
+115(48) E11221-E"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,title,0.31027813712807245,"A. Aggarwal, J. Kleinberg, D. Williamson.  
+Node-disjoint
+paths on the mesh, and a new trade-off in VLSI layout.
+Proc. 28th ACM Symposium on Theory of Computing, 1996.
+
+ J. Kleinberg, E. Tardos.  Disjoint
+paths in densely embedded graphs.
+Proc. 36th IEEE Symposium on Foundations of Computer Science,
+1995. 
+
+ J. Kleinberg, E. Tardos.  Approximations
+for the disjoint paths problem in high-diameter planar networks.
+Proc. 27th ACM Symposium on Theory of Computing, 1995.
+
+ J. Kleinberg.  Approximatio"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,title,0.307514718141994,"J. Kleinberg, J. Ludwig, S. Mullainathan, M. Raghavan.
+The Inversion Problem: Why Algorithms Should Infer Mental State and Not Just Predict Behavior.
+Perspectives on Psychological Science 19:5(2024).
+
+
+K. Van Koevering, J. Kleinberg.
+How Random is Random? Evaluating the Randomness and Humanness of LLMs' Coin Flips.
+arXiv/2406.00092, 2024.
+
+
+K. Van Koevering, M. Ye, J. Kleinberg.
+What's in a Niche? Migration Patterns in Online Communities.
+arXiv/2407.11794, 2024."
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,title,0.3402781371280724,"J. Kleinberg, Y. Rabani, E. Tardos.
+
+Fairness in routing and load balancing.
+Proc. 40th IEEE Symposium on Foundations of Computer Science, 1999.
+
+ J. Kleinberg, A. Kumar.  Wavelength
+conversion in optical networks.
+Proc. 10th ACM-SIAM Symposium on Discrete Algorithms, 1999.
+
+ M. Charikar, J. Kleinberg, S.R. Kumar, S. Rajagopalan,
+A. Sahai, A. Tomkins.
+
+Minimizing wirelength in zero and bounded skew clock trees.
+Proc. 10th ACM-SIAM Symposium on Discrete Algorithms, 1999.
+
+ J. Kleinberg.  Decision"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,author,title,0.5784456521739131,"Z. Tang, D. Jiao, E. Xue, R. McIlroy-Young, J. Kleinberg, S. Sen, A. Anderson.
+Learning to Imitate with Less: Efficient Individual Behavior Modeling in Chess.
+arXiv/2507.21488, 2025.
+
+
+T. Qiu, B. Laufer, J. Kleinberg, H. Heidari.
+A Formal Model of the Economic Impacts of AI Openness Regulation.
+arXiv/2507.14193, 2025.
+
+
+B. Laufer, H. Oderinwale, J. Kleinberg.
+
+Anatomy of a Machine Learning Ecosystem: 2 Million Models on Hugging Face.
+arXiv/2508.06811, 2025.
+
+
+J. Kleinberg, S. Mullainathan.
+Langu"
+arxiv.org,https://arxiv.org/abs/2301.00002,div,leftcolumn,title,title,0.5342077467742747,"Computer Science > Human-Computer Interaction
+
+
+arXiv:2301.00002 (cs)
+    
+
+
+
+
+  [Submitted on 25 Dec 2022]
+Title:Evaluating Alternative Glyph Design for Showing Large-Magnitude-Range Quantum Spins
+Authors:Henan Zhao, Garnett W. Bryant, Wesley Griffin, Judith E. Terrill, Jian Chen View a PDF of the paper titled Evaluating Alternative Glyph Design for Showing Large-Magnitude-Range Quantum Spins, by Henan Zhao and Garnett W. Bryant and Wesley Griffin and Judith E. Terrill and Jian Chen
+View PDF
+
+A"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.4075,"K. Van Koevering, J. Kleinberg.
+How Random is Random? Evaluating the Randomness and Humanness of LLMs' Coin Flips.
+arXiv/2406.00092, 2024.
+
+
+K. Van Koevering, M. Ye, J. Kleinberg.
+What's in a Niche? Migration Patterns in Online Communities.
+arXiv/2407.11794, 2024."
+arxiv.org,https://arxiv.org/abs/2302.00001,p,help,journal,other,0.8175,arXiv Operational Status
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.36,"H. Lakkaraju, J. Leskovec, J. Kleinberg, S. Mullainathan.
+A Bayesian Framework for Modeling Human Evaluations.  
+Proc. 15th SIAM International Conference on Data Mining (SDM), 2015.
+
+
+
+J. Kleinberg, S. Mullainathan.
+We Built Them, But We Don't Understand Them.
+In What to Think About Machines That Think: Today's Leading Thinkers on the Age of Machine Intelligence.
+Harper Perennial 2015."
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.38695534667903464,"L. Blume, D. Easley, J. Kleinberg, R. Kleinberg, E. Tardos.
+Introduction to computer science and economic theory.
+Journal of Economic Theory 156(2015).
+
+ 
+J. Kleinberg, S. Oren.
+
+Time-Inconsistent Planning: A Computational Problem in Behavioral Economics.
+Proc. 15th ACM Conference on Economics and Computation (EC), 2014.
+
+
+P. Frazier, D. Kempe, J. Kleinberg, R. Kleinberg.
+Incentivizing Exploration.
+Proc. 15th ACM Conference on Economics and Computation (EC), 2014.
+
+ 
+A. Anderson, D. Huttenlocher"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.47,"D. Romero, D. Huttenlocher, J. Kleinberg.
+
+Coordination and Efficiency in Decentralized Collaboration.
+Proc. 9th International AAAI Conference on Weblogs and Social Media, 2015."
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,author,title,0.6134456521739131,"Y. Wang, J. Kleinberg.
+On the Relationship Between Relevance and Conflict in Online Social Link Recommendations.
+Advances in Neural Information Processing Systems (NeurIPS) 37, 2023.
+
+
+M. Meister, J. Kleinberg.
+
+Optimizing the order of actions in contact tracing.
+PNAS Nexus, January 2023.
+
+
+M. Papachristou, S. Banerjee, J. Kleinberg.
+Dynamic Interventions for Networked Contagions.
+Proc. 32nd International World Wide Web Conference, 2023.
+
+ 
+M. Papachristou, J. Kleinberg.
+
+Allocating Stimulus Che"
+arxiv.org,https://arxiv.org/abs/2302.00001,div,browse,year,other,0.4475,"Current browse context: physics.plasm-ph
+
+
+< prev
+
+  |   
+next >
+
+
+new
+ | 
+recent
+ | 2023-02
+
+    Change to browse by:
+    
+physics
+quant-ph"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.46787500000000004,"F. Chierichetti, J. Kleinberg, D. Liben-Nowell.
+
+Reconstructing Patterns of Information Diffusion from Incomplete Observations.
+Advances in Neural Information Processing Systems 24, 2011.
+
+
+D. Romero, B. Meeder, J. Kleinberg.
+Differences in the Mechanics of Information Diffusion Across Topics: Idioms, Political Hashtags, and Complex Contagion on Twitter. 
+Proc. 20th International World Wide Web Conference, 2011.
+
+
+S. Wu, C. Tan, J. Kleinberg, M. Macy.
+Does Bad News Go Away Faster?
+Proc. 5th Inte"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.5082957957957958,"H. Heidari, J. Kleinberg.
+
+Allocating Opportunities in a Dynamic Model of Intergenerational Mobility.
+Proc. ACM Conference on Fairness, Accountability, and Transparency (FAccT), 2021.
+
+
+K. Donahue, J. Kleinberg.
+
+Model-sharing Games: Analyzing Federated Learning Under Voluntary Participation.
+Proc. 35th AAAI Conference on Artificial Intelligence (AAAI-21), 2021.
+
+
+K. Donahue, J. Kleinberg.
+
+Optimality and Stability in Federated Learning: A Game-theoretic Approach.
+Advances in Neural Information "
+arxiv.org,https://arxiv.org/abs/2301.00002,span,arxivid,journal,other,0.9055112719764672,arXiv:2301.00002 [cs.HC]
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.4275,"D. Huttenlocher, K. Kedem, J. Kleinberg.  On
+dynamic Voronoi diagrams and the minimum Hausdorff distance for point
+sets under Euclidean motion in the plane.  Proc. 8th ACM Symposium
+on Computational Geometry, 1992."
+arxiv.org,https://arxiv.org/abs/2303.00456,div,is-hidden-mobile,journal,author,0.6475,"> cs > arXiv:2303.00456
+  
+
+
+
+
+
+
+
+Help | Advanced Search
+
+
+
+
+All fields
+Title
+Author
+Abstract
+Comments
+Journal reference
+ACM classification
+MSC classification
+Report number
+arXiv identifier
+DOI
+ORCID
+arXiv author ID
+Help pages
+Full text
+
+
+
+
+Search"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.6159456521739131,"K. Donahue, J. Kleinberg.
+
+Private Blotto: Viewpoint Competition with Polarized Agents.
+Proc. 39th AAAI Conference on Artificial Intelligence (AAAI-25), 2025.
+
+
+K. Peng, N. Garg, J. Kleinberg.
+A No Free Lunch Theorem for Human-AI Collaboration.
+Proc. 39th AAAI Conference on Artificial Intelligence (AAAI-25), 2025.
+
+
+K. Tomlinson, T. Namjoshi, J. Ugander, J. Kleinberg.
+Replicating Electoral Success.
+Proc. 39th AAAI Conference on Artificial Intelligence (AAAI-25), 2025.
+
+
+E. Pierson, D. Shanmugam,"
+arxiv.org,https://arxiv.org/abs/2302.00123,div,,journal,other,0.885,arXiv-issued DOI via DataCite
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.3875,"J. Kleinberg.
+Efficient Algorithms for Protein Sequence Design 
+and the Analysis of Certain 
+Evolutionary Fitness Landscapes.
+Proc. 3rd ACM RECOMB Intl. Conference on Computational 
+Molecular Biology, 1999."
+arxiv.org,https://arxiv.org/abs/2303.00456,div,search-block level-right,journal,author,0.6525,"Help | Advanced Search
+
+
+
+
+All fields
+Title
+Author
+Abstract
+Comments
+Journal reference
+ACM classification
+MSC classification
+Report number
+arXiv identifier
+DOI
+ORCID
+arXiv author ID
+Help pages
+Full text
+
+
+
+
+Search"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.5183215592972182,"F. Chierichetti, J. Kleinberg, S. Oren.
+
+On discrete preferences and coordination.
+Proc. 14th ACM Conference on Electronic Commerce, 2013.
+
+
+D. Kempe, J. Kleinberg, S. Oren, A. Slivkins.
+
+Selection and Influence in Cultural Dynamics.
+Proc. 14th ACM Conference on Electronic Commerce, 2013.
+
+J. Ugander, L. Backstrom, C. Marlow, J. Kleinberg.
+
+Structural Diversity in Social Contagion.
+Proc. National Academy of Sciences, 109(16) 5962-5966, 17 April 2012.
+
+
+K. Bhawalkar, J. Kleinberg, K. Lewi, T. Rou"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,author,title,0.5734456521739131,"R. Abebe, T-H Chan, J. Kleinberg, Z. Liang, D. Parkes, M. Sozio, C. Tsourakakis.
+Opinion Dynamics with Varying Susceptibility to Persuasion via Non-Convex Local Search.
+ACM Transactions on Knowledge Discovery from Data, 2022.
+
+
+
+K. Van Koevering, Y. Hong, J. Kleinberg.
+
+Exporting Geography Into A Virtual Landscape: A Global Pandemic Locally Discussed.
+arXiv/2210.07187, 2022.
+
+
+J. Gaitonde, J. Kleinberg, E. Tardos.
+
+Polarization in Geometric Opinion Dynamics.
+Proc. 22nd ACM Conference on Economic"
+arxiv.org,https://arxiv.org/abs/2301.00002,p,,journal,other,0.7725,arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.605945652173913,"K. Vafa, S. Bentley, J. Kleinberg, S. Mullainathan.
+What's Producible May Not Be Reachable: Measuring the Steerability of Generative Models.
+arXiv/2503.17482, 2025.
+
+
+B. Laufer, J. Kleinberg, H. Heidari.
+The Backfiring Effect of Weak AI Safety Regulation.
+arXiv/2503.20848, 2025.
+
+
+M. Papachristou, J. Kleinberg.
+Echoes of Disagreement: Measuring Disparity in Social Consensus.
+arXiv/2504.07480, 2025.
+
+
+K. Peng, R. Movva, J. Kleinberg, E. Pierson, N. Garg.
+Use Sparse Autoencoders to Discover Unknow"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.43562477497749774,"J. Kleinberg, M. Raghavan.
+
+How Do Classifiers Induce Agents To Invest Effort Strategically?
+Proc. 20th ACM Conference on Economics and Computation (EC), 2019.
+
+
+J. Kleinberg, R. Kleinberg.
+ 
+Delegated Search Approximates Efficient Search.
+Proc. 19th ACM Conference on Economics and Computation (EC), 2018.
+
+
+J. Kleinberg, S. Oren, M. Raghavan.
+
+Planning with Multiple Biases.
+Proc. 18th ACM Conference on Economics and Computation (EC), 2017.
+
+
+J. Kleinberg, S. Mullainathan, J. Ugander.
+
+Comparison"
+arxiv.org,https://arxiv.org/abs/2303.00456,p,help,journal,other,0.8175,arXiv Operational Status
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,author,title,0.5380181658919185,"L. Backstrom, J. Kleinberg.
+
+Romantic Partnerships and the Dispersion of Social Ties: A Network Analysis of Relationship Status on Facebook.
+Proc. 17th ACM Conference on Computer Supported Cooperative Work and Social Computing (CSCW), 2014.
+
+
+I. Kloumann, J. Kleinberg.
+Community membership identification from small seed sets.
+Proc. 20th ACM SIGKDD Intl. Conf. on Knowledge Discovery and Data Mining, 2014.
+
+
+J. Ugander, L. Backstrom, J. Kleinberg.
+Subgraph Frequencies: Mapping the Empirical and Ex"
+arxiv.org,https://arxiv.org/abs/2303.00456,td,tablecell doi,doi,other,0.4775,"https://doi.org/10.21437/Interspeech.2023-1616
+
+
+
+
+Focus to learn more
+
+
+
+
+                DOI(s) linking to related resources"
+arxiv.org,https://arxiv.org/abs/2301.00001,li,,journal,other,0.825,arXiv Operational Status
+arxiv.org,https://arxiv.org/abs/2301.00001,p,help,journal,other,0.8175,arXiv Operational Status
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,title,0.4759146068101962,"J. Kleinberg.
+An Impossibility Theorem for Clustering.
+Advances in Neural Information Processing Systems 15, 2002.
+
+ J. Kleinberg, C. Papadimitriou, P. Raghavan.
+On the Value of Private Information.
+Proc. 8th Conf. on Theoretical Aspects of Rationality and Knowledge, 2001.
+
+
+ J. Kleinberg, E. Tardos.
+
+Approximation Algorithms for
+Classification Problems with Pairwise Relationships:
+Metric Labeling and Markov Random Fields.
+Proc. 40th IEEE Symposium on Foundations of Computer Science, 1999.
+
+ J. "
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.3225,"J. Kleinberg.
+
+The Small-World Phenomenon and Decentralized Search.
+A short essay as part of 
+Math Awareness Month 2004, 
+appearing in SIAM News 37(3), April 2004
+
+
+ 
+J. Kleinberg.
+
+Complex Networks and Decentralized Search Algorithms.
+Proceedings of the International Congress of Mathematicians (ICM), 2006."
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.315,"D. Liben-Nowell, J. Kleinberg.
+
+The Link Prediction Problem for Social Networks.
+Proc. 12th International Conference on Information 
+and Knowledge Management (CIKM), 2003.
+
+ D. Callaway, J. Hopcroft, J. Kleinberg, M. Newman, S. Strogatz.
+
+Are randomly grown graphs really random?
+Physical Review E 64, 041902 (2001)."
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,title,0.3372203256460834,"J. Kleinberg.
+What Can Huge Datasets Teach Us About Society and Ourselves?
+In Future Science, Vintage 2011.
+
+ 
+J. Kleinberg.
+The convergence of social and technological networks.
+Communications of the ACM, 51(11):66-72, 2008.
+
+
+J. Kleinberg, S. Lawrence.
+The Structure of the Web. Science 294(2001), 1849.
+This version also appears in the 
+
+on-line edition of Science.
+
+
+ J. Kleinberg, S.R. Kumar, P. Raghavan, S. Rajagopalan, A. Tomkins. 
+The Web as a graph: Measurements, models and methods.
+Invite"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,author,title,0.595945652173913,"M. Meister, J. Kleinberg.
+
+Optimizing the order of actions in contact tracing.
+PNAS Nexus, January 2023.
+
+
+M. Papachristou, S. Banerjee, J. Kleinberg.
+Dynamic Interventions for Networked Contagions.
+Proc. 32nd International World Wide Web Conference, 2023.
+
+ 
+M. Papachristou, J. Kleinberg.
+
+Allocating Stimulus Checks in Times of Crisis.
+Proc. 31st International World Wide Web Conference, 2022.
+
+
+R. Abebe, T-H Chan, J. Kleinberg, Z. Liang, D. Parkes, M. Sozio, C. Tsourakakis.
+Opinion Dynamics wit"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,title,0.5134237804878049,"K. Hamade, R. McIlroy-Young, S. Sen, J. Kleinberg, A. Anderson.
+Designing Skill-Compatible AI: Methodologies and Frameworks in Chess.
+Proc 12th International Conference on Learning Representations (ICLR), 2024.
+
+
+Y. Wang, J. Kleinberg.
+
+From Graphs to Hypergraphs: Hypergraph Projection and its Remediation.
+Proc 12th International Conference on Learning Representations (ICLR), 2024.
+
+
+C. Dwork, C. Hays, J. Kleinberg, M. Raghavan.
+Equilibria, Efficiency, and Inequality in Network Formation for Hir"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.37,"J. Leskovec, A. Singh, J. Kleinberg.
+
+Patterns of Influence in a Recommendation Network.
+Proc. Pacific-Asia Conference on Knowledge Discovery and Data Mining
+(PAKDD), 2006.
+
+
+D. Kempe, J. Kleinberg, E. Tardos.
+
+Influential Nodes in a Diffusion Model for Social Networks.
+Proc. 32nd International Colloquium on 
+Automata, Languages and Programming (ICALP), 2005.
+
+
+D. Kempe, J. Kleinberg, E. Tardos.
+
+Maximizing the Spread of Influence through a Social Network.
+Proc. 9th ACM SIGKDD Intl. Conf. on Kno"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,title,0.33662661150576556,"J. Kleinberg, S. Mullainathan.
+
+Simplicity Creates Inequity: Implications for Fairness, Stereotypes, and Interpretability.
+Proc. 20th ACM Conference on Economics and Computation (EC), 2019.
+
+
+
+J. Kleinberg, M. Raghavan.
+
+Selection Problems in the Presence of Implicit Bias.
+Proc. 9th Conf. on Innovations in Theoretical Computer Science (ITCS), 2018.
+
+
+J. Kleinberg, J. Ludwig, S. Mullainathan, A. Rambachan.
+Algorithmic Fairness.
+AEA Papers and Proceedings 108:22-27, 2018.
+
+
+R. Abebe, J. Kleinberg,"
+arxiv.org,https://arxiv.org/abs/2302.00123,div,column sorry-app-links,journal,other,0.7525,"Web Accessibility Assistance
+
+
+arXiv Operational Status"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.36,"D. Goldberg, S. McCouch, J. Kleinberg.
+Constructing comparative maps with unresolved marker 
+order.
+Proc. Pacific Symposium on Biocomputing, 2002.
+
+ D. Goldberg, S. McCouch, J. Kleinberg.
+Algorithms for Constructing Comparative Maps.
+Conference on Gene Order Dynamics, Comparative Maps, and Multigene Families,
+2000.
+(In PDF.)
+
+ J. Kleinberg, D. Liben-Nowell.
+The Syntenic Diameter of the Space of
+N-Chromosome Genomes.
+Conference on Gene Order Dynamics, Comparative Maps, and Multigene Families,
+200"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,author,author,0.2975,"J. Leskovec, D. Huttenlocher, J. Kleinberg.
+Predicting Positive and Negative Links in Online Social Networks.
+Proc. 19th International World Wide Web Conference, 2010.
+
+
+S. Marvel, J. Kleinberg, S. Strogatz. 
+The Energy Landscape of 
+Social Balance.
+Physical Review Letters 103(19), 2009.
+
+ C. Danescu-Niculescu-Mizil, G. Kossinets, J. Kleinberg, L. Lee.
+
+How Opinions are Received by Online Communities: 
+A Case Study on Amazon.com Helpfulness Votes.
+Proc. 18th International World Wide Web Conferen"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.5247550874241307,"B. Laufer, J. Kleinberg, K. Levy, H. Nissenbaum.
+Strategic Evaluation: Subjects, Evaluators, and Society.
+Proc. 3rd ACM Conference on Equity and Access in Algorithms, Mechanisms, and Optimization (EAAMO), 2023.
+
+
+B. Laufer, S. Jain, A.F. Cooper, J. Kleinberg, H. Heidari.
+Four Years of FAccT: A Reflexive, Mixed-Methods Analysis of Research Contributions, Shortcomings, and Future Prospects.
+Proc. ACM Conference on Fairness, Accountability, and Transparency (FAccT), 2022.
+
+
+J. Kleinberg, M. Raghava"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.42565313712807246,"J. Kleinberg, S. Oren, M. Raghavan.
+Planning Problems for Sophisticated Agents with Present Bias.  
+Proc. 17th ACM Conference on Economics and Computation (EC), 2016.
+
+ 
+J. Kleinberg, S. Oren.
+
+Dynamic Models of Reputation and Competition in Job-Market Matching.
+Proc. 6th Conference on Innovations in Theoretical Computer Science (ITCS), 
+2015.
+
+
+L. Blume, D. Easley, J. Kleinberg, R. Kleinberg, E. Tardos.
+Introduction to computer science and economic theory.
+Journal of Economic Theory 156(2015).
+"
+arxiv.org,https://arxiv.org/abs/2302.00123,div,header-breadcrumbs-mobile,journal,other,0.8751299212598426,arXiv:2302.00123 (cs)
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.4758215592972182,"L. Blume, D. Easley, J. Kleinberg, R. Kleinberg, E. Tardos.
+
+Network Formation in the Presence of Contagious Risk.
+Proc. 12th ACM Conference on Electronic Commerce, 2011.
+
+F. Chierichetti, J. Kleinberg, D. Liben-Nowell.
+
+Reconstructing Patterns of Information Diffusion from Incomplete Observations.
+Advances in Neural Information Processing Systems 24, 2011.
+
+
+D. Romero, B. Meeder, J. Kleinberg.
+Differences in the Mechanics of Information Diffusion Across Topics: Idioms, Political Hashtags, and C"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,title,0.4237623762376238,"J. Kleinberg, A. Liang, S. Mullainathan.
+
+The Theory is Predictive, but is it Complete? An Application to Human Perception of Randomness.
+Proc. 18th ACM Conference on Economics and Computation (EC), 2017.
+
+
+J. Kleinberg, J. Ludwig, S. Mullainathan.
+A Guide to Solving Social Problems with Machine Learning.
+Harvard Business Review, December 2016.
+
+
+M. Luca, J. Kleinberg, S. Mullainathan.
+
+Algorithms Need Managers, Too.
+Harvard Business Review, 94:1(Jan/Feb 2016).
+
+
+A. Anderson, J. Kleinberg, S. Mu"
+arxiv.org,https://arxiv.org/abs/2302.00123,p,,journal,other,0.7725,arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+arxiv.org,https://arxiv.org/abs/2301.00001,div,metatable,journal,other,0.555,"Subjects:
+
+Human-Computer Interaction (cs.HC)
+
+Cite as:
+arXiv:2301.00001 [cs.HC]
+
+
+ 
+(or 
+arXiv:2301.00001v1 [cs.HC] for this version)
+          
+
+
+ 
+ https://doi.org/10.48550/arXiv.2301.00001
+
+
+Focus to learn more
+
+
+
+                  arXiv-issued DOI via DataCite"
+arxiv.org,https://arxiv.org/abs/2302.00123,div,tab,author,author,0.525,"Recommenders and Search Tools
+
+
+
+
+
+
+Link to Influence Flower
+
+
+
+Influence Flower (What are Influence Flowers?)
+
+
+
+
+
+
+
+Core recommender toggle
+
+
+
+CORE Recommender (What is CORE?)
+
+
+
+
+
+Author
+Venue
+Institution
+Topic"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.335,"J. Kleinberg.
+
+Small-World Phenomena and the Dynamics of Information.
+Advances in Neural Information Processing Systems 14, 2001.
+
+
+J. Kleinberg.
+
+The Small-World Phenomenon and Decentralized Search.
+A short essay as part of 
+Math Awareness Month 2004, 
+appearing in SIAM News 37(3), April 2004
+
+
+ 
+J. Kleinberg.
+
+Complex Networks and Decentralized Search Algorithms.
+Proceedings of the International Congress of Mathematicians (ICM), 2006."
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.5588922114711312,"J. Cheng, L. Adamic, A. Dow, J. Kleinberg, J. Leskovec.
+Can Cascades Be Predicted?
+Proc. 23rd International World Wide Web Conference, 2014.
+See also the 
+Facebook Data Science blog post about this work.
+
+
+L. Backstrom, J. Kleinberg, L. Lee, C. Danescu-Niculescu-Mizil.
+
+Characterizing and Curating Conversation Threads: Expansion, Focus, 
+Volume, Re-entry.
+Proc. 6th ACM Conference on Web Search and Data Mining, 2013.
+
+
+F. Chierichetti, J. Kleinberg, S. Oren.
+
+On discrete preferences and coordinat"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.3175,"K. Van Koevering, A. Benson, J. Kleinberg.
+Frozen Binomials on the Web: Word Ordering and Language Conventions in Online Text.
+Proc. 29th International World Wide Web Conference, 2020.
+
+
+C. Danescu-Niculescu-Mizil, J. Cheng, J. Kleinberg, L. Lee.
+
+You had me at hello: How phrasing affects memorability.
+Proc. 50th Annual Meeting of the Association for Computational Linguistics, 
+2012.
+
+
+C. Danescu-Niculescu-Mizil, L. Lee, B. Pang, J. Kleinberg.
+
+Echoes of power: 
+Language effects and power differ"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,author,author,0.4275,"J. Kleinberg.  Authoritative sources
+in a hyperlinked environment.
+Proc. 9th ACM-SIAM Symposium on Discrete Algorithms, 1998.
+Extended version in Journal of the ACM 46(1999).
+Also appears as IBM Research Report RJ 10076, May 1997.
+
+ D. Gibson, J. Kleinberg, P. Raghavan.
+Inferring Web communities from link topology.
+Proc. 9th ACM Conference on Hypertext and Hypermedia, 1998.
+
+ S. Chakrabarti, B. Dom, D. Gibson, J. Kleinberg,
+P. Raghavan, S. Rajagopalan,
+
+Automatic resource list compilation by
+ana"
+arxiv.org,https://arxiv.org/abs/2301.00002,td,tablecell comments mathjax,journal,author,0.2825,This article has been accepted by IEEE Transactions on Visualization and Computer Graphics. arXiv admin note: substantial text overlap with arXiv:1905.02586
+arxiv.org,https://arxiv.org/abs/2303.00456,div,tab,author,author,0.525,"Recommenders and Search Tools
+
+
+
+
+
+
+Link to Influence Flower
+
+
+
+Influence Flower (What are Influence Flowers?)
+
+
+
+
+
+
+
+Core recommender toggle
+
+
+
+CORE Recommender (What is CORE?)
+
+
+
+
+
+Author
+Venue
+Institution
+Topic"
+arxiv.org,https://arxiv.org/abs/2301.00002,li,,journal,other,0.93,"subscribe to arXiv mailingsClick here to subscribe
+ Subscribe"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,p,,year,other,0.455,"Current and former postdocs (and associated visiting scientist / research assistant professor positions):
+
+David M. Liu,
+
+Harini Suresh (2024),
+
+Lydia Liu (2024),
+
+Jonas Juul (2022),
+
+Nate Veldt (2021),
+
+David Robinson (2021),
+
+Hoda Heidari (2020),
+
+Austin Benson (2018),
+
+Flavio Chierichetti (2012),
+
+Jure Leskovec (2009),
+
+Sid Suri (2008),
+
+Gregory Kossinets. (2008),
+
+Mohammad Mahdian (2006),
+
+Frank McSherry (2003),
+
+Anupam Gupta (2001)."
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,h1,,title,other,0.965,Jon Kleinberg
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.555945652173913,"R. Rotabi, C. Danescu-Niculescu-Mizil, J. Kleinberg.
+
+Competition and Selection Among Conventions.
+Proc. 26th International World Wide Web Conference, 2017.
+
+
+R. Rotabi, K. Kamath, J. Kleinberg, A. Sharma.
+
+Cascades: A view from Audience.
+Proc. 26th International World Wide Web Conference, 2017.
+
+
+D. Romero, B. Uzzi, J. Kleinberg.
+
+Social Networks Under Stress.
+Proc. 25th International World Wide Web Conference, 2016.
+
+
+J. Cheng, L. Adamic, J. Kleinberg, J. Leskovec.
+
+Do Cascades Recur?.
+Proc. 2"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.3325,"L. Backstrom, J. Kleinberg, R. Kumar.
+Optimizing Web traffic via the Media 
+Scheduling Problem.
+Proc. 15th ACM SIGKDD Intl. Conf. on Knowledge Discovery and Data Mining,
+2009.
+
+ J. Kleinberg.
+Temporal Dynamics of 
+On-Line Information Streams.
+In Data Stream Management: Processing High-Speed Data Streams,
+(M. Garofalakis, J. Gehrke, R. Rastogi, eds.), Springer, 2004.
+
+ J. Aizen, D. Huttenlocher, J. Kleinberg, A. Novak.
+
+Traffic-Based Feedback on the Web.
+Proceedings of the National Academy of Sci"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.305,"J. Kleinberg.  Single-source unsplittable flow.
+Proc. 37th IEEE Symposium on Foundations of Computer Science, 1996.
+
+ J. Kleinberg, R. Rubinfeld.  Short paths
+in expander graphs.
+Proc. 37th IEEE Symposium on Foundations of Computer Science, 1996.
+
+ A. Aggarwal, J. Kleinberg, D. Williamson.  
+Node-disjoint
+paths on the mesh, and a new trade-off in VLSI layout.
+Proc. 28th ACM Symposium on Theory of Computing, 1996.
+
+ J. Kleinberg, E. Tardos.  Disjoint
+paths in densely embedded graphs.
+Proc. 36th I"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.39,"E. Anshelevich, D. Kempe, J. Kleinberg.
+
+Stability of Load Balancing Algorithms in Dynamic Adversarial Systems.
+Proc. 34th ACM Symposium on Theory of Computing, 2002."
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.450375,"D. Cosley, D. Huttenlocher, J. Kleinberg, X. Lan, S. Suri.
+Sequential Influence Models in Social Networks.
+Proc. 4th International AAAI Conference on Weblogs and Social Media, 2010.
+
+
+
+
+
+D. Liben-Nowell, J. Kleinberg.
+Tracing
+  Information Flow on a Global Scale Using Internet Chain-Letter
+  Data.  Proc. National Academy of Sciences,
+  105(12):4633–4638, 25 March 2008.
+  
+    We are interested in gathering additional data about the spread
+    of the chain-letter petitions described in this paper"
+arxiv.org,https://arxiv.org/abs/2303.00456,div,browse,year,other,0.445,"Current browse context: cs.CL
+
+
+< prev
+
+  |   
+next >
+
+
+new
+ | 
+recent
+ | 2023-03
+
+    Change to browse by:
+    
+cs
+cs.SD
+eess
+eess.AS"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.4475,"J. Kleinberg.  On-line search in a simple
+polygon.  Proc. 5th ACM-SIAM Symposium on Discrete Algorithms, 1994.
+
+ J. Kleinberg.  A lower bound for two-server
+balancing algorithms.  Information Processing Letters 51(1994)."
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,title,0.4611623376623377,"D. Easley, J. Kleinberg.
+
+Networks, Crowds, and Markets: Reasoning About a Highly Connected World.
+Cambridge University Press, 2010.
+
+
+
+
+This book is based on an inter-disciplinary course that we teach entitled 
+
+Networks.  
+The book, like the
+course, is designed at the introductory undergraduate
+level with no formal prerequisites. To support deeper
+explorations, most of the chapters are supplemented with
+optional advanced sections.
+
+
+
+There is an on-line edX course 
+based on the book:
+Networks,"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,author,title,0.5734456521739131,"J. Gaitonde, J. Kleinberg, E. Tardos.
+
+Polarization in Geometric Opinion Dynamics.
+Proc. 22nd ACM Conference on Economics and Computation (EC), 2021.
+
+
+J. Gaitonde, J. Kleinberg, E. Tardos.
+
+Adversarial Perturbations of Opinion Dynamics in Networks.
+Proc. 21st ACM Conference on Economics and Computation (EC), 2020.
+
+
+R. Abebe, L. Adamic, J. Kleinberg.
+
+Mitigating Overexposure in Viral Marketing.
+Proc. 32nd AAAI Conference on Artificial Intelligence (AAAI-18), 2018.
+
+
+M. Raghavan, A. Anderson, J."
+arxiv.org,https://arxiv.org/abs/2303.00456,div,full-text,title,author,0.6025,"Full-text links:
+Access Paper:
+
+
+View a PDF of the paper titled N-best T5: Robust ASR Error Correction using Multiple Input Hypotheses and Constrained Decoding Space, by Rao Ma and 3 other authorsView PDFTeX Source
+ 
+view license"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.3575,"L. Backstrom, D. Huttenlocher, J. Kleinberg, X. Lan.
+
+Group Formation in Large Social Networks: Membership, Growth, and Evolution.
+
+Proc. 12th ACM SIGKDD Intl. Conf. on Knowledge Discovery and Data Mining,
+2006.
+
+
+J. Leskovec, A. Singh, J. Kleinberg.
+
+Patterns of Influence in a Recommendation Network.
+Proc. Pacific-Asia Conference on Knowledge Discovery and Data Mining
+(PAKDD), 2006.
+
+
+D. Kempe, J. Kleinberg, E. Tardos.
+
+Influential Nodes in a Diffusion Model for Social Networks.
+Proc. 32nd Inte"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.5283215592972182,"D. Kempe, J. Kleinberg, S. Oren, A. Slivkins.
+
+Selection and Influence in Cultural Dynamics.
+Proc. 14th ACM Conference on Electronic Commerce, 2013.
+
+J. Ugander, L. Backstrom, C. Marlow, J. Kleinberg.
+
+Structural Diversity in Social Contagion.
+Proc. National Academy of Sciences, 109(16) 5962-5966, 17 April 2012.
+
+
+K. Bhawalkar, J. Kleinberg, K. Lewi, T. Roughgarden, A. Sharma. 
+Preventing Unraveling in Social Networks: 
+The Anchored k-Core Problem,
+Proc. 39th International Colloquium on 
+Automat"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.3425,"R. Abebe, J. Kleinberg, D. Parkes.
+
+Fair Division via Social Comparison.
+Proc. 16th Intl. Conf. on Autonomous Agents and Multiagent Systems (AAMAS), 2017
+.
+
+
+G. Pleiss, M. Raghavan, F. Wu, J. Kleinberg, K. Weinberger.
+
+On Fairness and Calibration.
+Advances in Neural Information Processing Systems 31, 2017.
+
+
+J. Kleinberg, S. Mullainathan, M. Raghavan.
+
+Inherent Trade-Offs in the Fair Determination of Risk Scores.
+Proc. 8th Conf. on Innovations in Theoretical Computer Science (ITCS), 2017.
+
+
+J. K"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.3425,"J. Leskovec, L. Backstrom, J. Kleinberg.
+Meme-tracking and the
+dynamics of the news cycle.
+Proc. 15th ACM SIGKDD Intl. Conf. on Knowledge Discovery and Data Mining,
+2009.
+
+
+L. Backstrom, J. Kleinberg, R. Kumar.
+Optimizing Web traffic via the Media 
+Scheduling Problem.
+Proc. 15th ACM SIGKDD Intl. Conf. on Knowledge Discovery and Data Mining,
+2009.
+
+ J. Kleinberg.
+Temporal Dynamics of 
+On-Line Information Streams.
+In Data Stream Management: Processing High-Speed Data Streams,
+(M. Garofalakis, J. G"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,title,0.35777813712807244,"A. Kumar, J. Kleinberg.
+
+Fairness measures for resource allocation.
+Proc. 41st IEEE Symposium on Foundations of Computer Science, 2000.
+
+ J. Kleinberg, Y. Rabani, E. Tardos.
+
+Fairness in routing and load balancing.
+Proc. 40th IEEE Symposium on Foundations of Computer Science, 1999.
+
+ J. Kleinberg, A. Kumar.  Wavelength
+conversion in optical networks.
+Proc. 10th ACM-SIAM Symposium on Discrete Algorithms, 1999.
+
+ M. Charikar, J. Kleinberg, S.R. Kumar, S. Rajagopalan,
+A. Sahai, A. Tomkins.
+
+Minimiz"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,title,0.34872565424288626,"J. Kleinberg.
+The Human Texture of Information. 
+In 
+Is the Internet Changing the Way You Think?
+Harper Perennial 2011.
+
+ 
+J. Kleinberg.
+What Can Huge Datasets Teach Us About Society and Ourselves?
+In Future Science, Vintage 2011.
+
+ 
+J. Kleinberg.
+The convergence of social and technological networks.
+Communications of the ACM, 51(11):66-72, 2008.
+
+
+J. Kleinberg, S. Lawrence.
+The Structure of the Web. Science 294(2001), 1849.
+This version also appears in the 
+
+on-line edition of Science.
+
+
+ J. Kl"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.590945652173913,"B. Laufer, J. Kleinberg, H. Heidari.
+The Backfiring Effect of Weak AI Safety Regulation.
+arXiv/2503.20848, 2025.
+
+
+M. Papachristou, J. Kleinberg.
+Echoes of Disagreement: Measuring Disparity in Social Consensus.
+arXiv/2504.07480, 2025.
+
+
+K. Peng, R. Movva, J. Kleinberg, E. Pierson, N. Garg.
+Use Sparse Autoencoders to Discover Unknown Concepts, Not to Act on Known Concepts.
+arXiv/2506.23845, 2025.
+
+
+Z. Tang, D. Jiao, E. Xue, R. McIlroy-Young, J. Kleinberg, S. Sen, A. Anderson.
+Learning to Imitate "
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.325,"J. Kleinberg.
+Temporal Dynamics of 
+On-Line Information Streams.
+In Data Stream Management: Processing High-Speed Data Streams,
+(M. Garofalakis, J. Gehrke, R. Rastogi, eds.), Springer, 2004.
+
+ J. Aizen, D. Huttenlocher, J. Kleinberg, A. Novak.
+
+Traffic-Based Feedback on the Web.
+Proceedings of the National Academy of Sciences 101(Suppl.1):5254-5260, 2004.
+(Also available in pre-print form.)
+
+ J. Kleinberg.
+Bursty and Hierarchical Structure in Streams.
+Proc. 8th ACM SIGKDD Intl. Conf. on Knowledg"
+arxiv.org,https://arxiv.org/abs/2301.00001,div,header-breadcrumbs-mobile,journal,other,0.8751299212598426,arXiv:2301.00001 (cs)
+arxiv.org,https://arxiv.org/abs/2302.00001,p,,journal,other,0.795,YOU make open access possible! Tell us why you support #openaccess and give to arXiv this week to help keep science open for all.
+arxiv.org,https://arxiv.org/abs/2301.00001,div,column sorry-app-links,journal,other,0.7525,"Web Accessibility Assistance
+
+
+arXiv Operational Status"
+arxiv.org,https://arxiv.org/abs/2301.00001,div,browse,year,other,0.445,"Current browse context: cs.HC
+
+
+< prev
+
+  |   
+next >
+
+
+new
+ | 
+recent
+ | 2023-01
+
+    Change to browse by:
+    
+cs"
+arxiv.org,https://arxiv.org/abs/2301.00002,div,button-and-tooltip,journal,other,0.8825,"Focus to learn more
+
+
+
+                  arXiv-issued DOI via DataCite"
+arxiv.org,https://arxiv.org/abs/2301.00001,div,tab,journal,other,0.5425,"arXivLabs: experimental projects with community collaborators
+arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.
+Have an idea for a project that will add value for arXiv's community? Learn more"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.3725,"J. Kleinberg, H. Attiya, N. Lynch.  Trade-offs
+between message delivery and quiesce times in connection management
+protocols.  Proc. 3rd Israel Symposium on Theory of Computing and Systems,
+1995.
+
+ J. Kleinberg, S. Mullainathan.  Resource bounds
+and combinations of consensus objects.  Proc. 12th ACM Symposium on
+Principles of Distributed Computing, 1993."
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.44626237623762377,"M. Raghu, K. Blumer, G. Corrado, J. Kleinberg, Z. Obermeyer, S. Mullainathan.
+
+The Algorithmic Automation Problem: Prediction, Triage, and Human Effort.
+Machine Learning for Health (ML4H), 2018.
+
+
+J. Kleinberg, H. Lakkaraju, J. Leskovec, J. Ludwig, S. Mullainathan.
+
+Human Decisions and Machine Predictions.
+Quarterly Journal of Economics (QJE) volume 133:1, February 2018.
+Also appears as NBER Working Paper Number 23180, February 2017.
+
+
+H. Lakkaraju, J. Kleinberg, J. Leskovec, J. Ludwig, S. Mulla"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.36,"R. El-Yaniv, J. Kleinberg.  Geometric two-server
+algorithms.  Information Processing Letters 53(1995).
+
+ J. Kleinberg.  The localization problem for
+mobile robots.  Proc. 35th IEEE Symposium on Foundations of Computer
+Science, 1994.
+
+ J. Kleinberg.  On-line search in a simple
+polygon.  Proc. 5th ACM-SIAM Symposium on Discrete Algorithms, 1994.
+
+ J. Kleinberg.  A lower bound for two-server
+balancing algorithms.  Information Processing Letters 51(1994)."
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,title,0.4552701375245579,"J. Kleinberg, C. Papadimitriou, P. Raghavan.
+On the Value of Private Information.
+Proc. 8th Conf. on Theoretical Aspects of Rationality and Knowledge, 2001.
+
+
+ J. Kleinberg, E. Tardos.
+
+Approximation Algorithms for
+Classification Problems with Pairwise Relationships:
+Metric Labeling and Markov Random Fields.
+Proc. 40th IEEE Symposium on Foundations of Computer Science, 1999.
+
+ J. Kleinberg, C. Papadimitriou, P. Raghavan.
+A micro-economic
+view of data mining.
+Data Mining and Knowledge Discovery, "
+arxiv.org,https://arxiv.org/abs/2302.00123,div,tab,title,other,0.5425,"arXivLabs: experimental projects with community collaborators
+arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.
+Have an idea for a project that will add value for arXiv's community? Learn more"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.5409456521739131,"R. Rotabi, C. Danescu-Niculescu-Mizil, J. Kleinberg.
+
+Tracing the Use of Practices through Networks of Collaboration.
+Proc. 11th International AAAI Conference on Weblogs and Social Media (ICWSM), 2017.
+
+
+R. Rotabi, C. Danescu-Niculescu-Mizil, J. Kleinberg.
+
+Competition and Selection Among Conventions.
+Proc. 26th International World Wide Web Conference, 2017.
+
+
+R. Rotabi, K. Kamath, J. Kleinberg, A. Sharma.
+
+Cascades: A view from Audience.
+Proc. 26th International World Wide Web Conference, 2017."
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.6209456521739131,"R. Movva, K. Peng, N. Garg, J. Kleinberg, E. Pierson.
+Sparse Autoencoders for Hypothesis Generation.
+Proc. 42nd Intl. Conf. on Machine Learning (ICML), 2025.
+
+
+K. Donahue, J. Kleinberg.
+
+Private Blotto: Viewpoint Competition with Polarized Agents.
+Proc. 39th AAAI Conference on Artificial Intelligence (AAAI-25), 2025.
+
+
+K. Peng, N. Garg, J. Kleinberg.
+A No Free Lunch Theorem for Human-AI Collaboration.
+Proc. 39th AAAI Conference on Artificial Intelligence (AAAI-25), 2025.
+
+
+K. Tomlinson, T. Namjo"
+arxiv.org,https://arxiv.org/abs/2302.00123,h1,,journal,other,0.8525,arXivLabs: experimental projects with community collaborators
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.33,"J. Kleinberg, J. Ludwig, S. Mullainathan, A. Rambachan.
+Algorithmic Fairness.
+AEA Papers and Proceedings 108:22-27, 2018.
+
+
+R. Abebe, J. Kleinberg, D. Parkes.
+
+Fair Division via Social Comparison.
+Proc. 16th Intl. Conf. on Autonomous Agents and Multiagent Systems (AAMAS), 2017
+.
+
+
+G. Pleiss, M. Raghavan, F. Wu, J. Kleinberg, K. Weinberger.
+
+On Fairness and Calibration.
+Advances in Neural Information Processing Systems 31, 2017.
+
+
+J. Kleinberg, S. Mullainathan, M. Raghavan.
+
+Inherent Trade-Offs i"
+arxiv.org,https://arxiv.org/abs/2302.00001,div,column,journal,other,0.735,"Copyright
+Privacy Policy
+
+
+
+
+Web Accessibility Assistance
+
+
+arXiv Operational Status"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.425,"J. Kleinberg, P. Raghavan.
+Query Incentive Networks.
+Proc. 46th IEEE Symposium on Foundations of Computer Science, 2005.
+
+ E. Anshelevich, A. Dasgupta, 
+J. Kleinberg, E. Tardos, T. Wexler, T. Roughgarden.
+The Price of Stability for Network Design with
+Fair Cost Allocation.
+Proc. 45th IEEE Symposium on Foundations of Computer Science, 2004."
+arxiv.org,https://arxiv.org/abs/2303.00456,div,control,journal,author,0.6425,"All fields
+Title
+Author
+Abstract
+Comments
+Journal reference
+ACM classification
+MSC classification
+Report number
+arXiv identifier
+DOI
+ORCID
+arXiv author ID
+Help pages
+Full text"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.4025,"J. Kleinberg.  Two algorithms
+for nearest-neighbor search in high dimensions.
+Proc. 29th ACM Symposium on Theory of Computing, 1997."
+arxiv.org,https://arxiv.org/abs/2303.00456,p,,journal,other,0.6475,"Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them."
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.3575,"A. Borodin, J. Kleinberg, P. Raghavan, M. Sudan, D. Williamson.
+Adversarial queueing theory.
+Proc. 28th ACM Symposium on Theory of Computing, 1996.
+
+ D.M. Andrews, B. Awerbuch, A. Fernandez,
+J. Kleinberg, F.T. Leighton, Z. Liu.
+Universal stability results for greedy
+contention-resolution protocols.
+Proc. 37th IEEE Symposium on Foundations of Computer Science, 1996.
+
+
+ E. Anshelevich, D. Kempe, J. Kleinberg.
+
+Stability of Load Balancing Algorithms in Dynamic Adversarial Systems.
+Proc. 34th ACM Sy"
+arxiv.org,https://arxiv.org/abs/2302.00123,td,tablecell arxividv,journal,other,0.8175,"(or 
+arXiv:2302.00123v1 [cs.CV] for this version)"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,title,0.31527813712807246,"J. Kleinberg.  Decision algorithms for
+unsplittable flow and the half-disjoint paths problem.
+Proc. 30th ACM Symposium on Theory of Computing, 1998.
+
+ J. Kleinberg, Y. Rabani, E. Tardos.
+Allocating bandwidth for bursty connections.
+Proc. 29th ACM Symposium on Theory of Computing, 1997.
+
+ J. Kleinberg.  Single-source unsplittable flow.
+Proc. 37th IEEE Symposium on Foundations of Computer Science, 1996.
+
+ J. Kleinberg, R. Rubinfeld.  Short paths
+in expander graphs.
+Proc. 37th IEEE Symposium on Fou"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.435,"J. Kleinberg, M. Goemans.  The Lovasz theta
+function and a semi-definite programming relaxation of vertex cover.
+SIAM J. Discrete Math, 11(1998).
+
+ M. Goemans, J. Kleinberg.  An improved
+approximation ratio for the minimum latency problem.
+Proc. 7th ACM-SIAM Symposium on Discrete Algorithms, 1996."
+arxiv.org,https://arxiv.org/abs/2301.00002,div,header-breadcrumbs is-hidden-mobile,journal,other,0.8905112719764672,> cs > arXiv:2301.00002
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.3375,"D. Huttenlocher, J. Kleinberg.  Comparing
+point sets under projection.  Proc. 5th ACM-SIAM Symposium on
+Discrete Algorithms, 1994.
+
+ D. Huttenlocher, K. Kedem, J. Kleinberg.  On
+dynamic Voronoi diagrams and the minimum Hausdorff distance for point
+sets under Euclidean motion in the plane.  Proc. 8th ACM Symposium
+on Computational Geometry, 1992."
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,title,0.4398989670433035,"A. Hemida, A.B. Asghar, C. Kamhoua, J. Kleinberg.
+A Game-Theoretic Framework for Multi-Domain Cyber-Deception. Proc. IEEE European Symposium on Security and Privacy Workshops (EuroS&PW), 2024.
+
+
+J. Juul, A. Benson, J. Kleinberg.
+
+Hypergraph patterns and collaboration structure.
+Frontiers in Physics 11(2024).
+
+ A. Evtushenko, J. Kleinberg.
+A comprehensive generalization of the Friendship Paradox to weights and attributes.
+Scientific Reports 14(13730), 2024.
+
+
+J. Kleinberg, J. Ludwig, S. Mullainat"
+arxiv.org,https://arxiv.org/abs/2301.00002,div,,title,author,0.415,"View a PDF of the paper titled Evaluating Alternative Glyph Design for Showing Large-Magnitude-Range Quantum Spins, by Henan Zhao and Garnett W. Bryant and Wesley Griffin and Judith E. Terrill and Jian Chen"
+arxiv.org,https://arxiv.org/abs/2303.00456,div,,journal,other,0.365,"Bibliographic Tools
+
+Bibliographic and Citation Tools
+
+
+
+
+
+
+Bibliographic Explorer Toggle
+
+
+
+Bibliographic Explorer (What is the Explorer?)
+
+
+
+
+
+
+
+Connected Papers Toggle
+
+
+
+Connected Papers (What is Connected Papers?)
+
+
+
+
+
+
+Litmaps Toggle
+
+
+
+Litmaps (What is Litmaps?)
+
+
+
+
+
+
+
+scite.ai Toggle
+
+
+
+scite Smart Citations (What are Smart Citations?)
+
+
+
+
+
+
+
+
+
+Code, Data, Media
+
+Code, Data and Media Associated with this Article
+
+
+
+
+
+
+alphaXiv Toggle
+
+
+
+alphaXiv (What is alphaXiv?)
+
+
+
+
+
+
+
+Links to Code T"
+arxiv.org,https://arxiv.org/abs/2301.00002,h1,title mathjax,title,other,0.7275,Title:Evaluating Alternative Glyph Design for Showing Large-Magnitude-Range Quantum Spins
+arxiv.org,https://arxiv.org/abs/2302.00123,div,column,journal,other,0.735,"Copyright
+Privacy Policy
+
+
+
+
+Web Accessibility Assistance
+
+
+arXiv Operational Status"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.305,"F. Chierichetti, J. Kleinberg.
+
+Voting with Limited Information and Many Alternatives.
+Proc. 23rd ACM-SIAM Symposium on Discrete Algorithms, 2012.
+
+
+
+J. Kleinberg, E. Tardos.
+
+Balanced Outcomes in Social Exchange Networks.
+Proc. 40th ACM Symposium on Theory of Computing, 2008.
+
+
+L. Blume, D. Easley, J. Kleinberg, E. Tardos.
+
+Trading Networks with Price-Setting Agents.
+Proc. 8th ACM Conference on Electronic Commerce, 2007.
+
+
+J. Kleinberg, P. Raghavan.
+Query Incentive Networks.
+Proc. 46th IEEE Sym"
+arxiv.org,https://arxiv.org/abs/2303.00456,p,,journal,other,0.7725,arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,title,0.4251470707427454,"J. Kleinberg.
+An Approximation Algorithm for the
+Disjoint Paths Problem in Even-Degree Planar Graphs.
+Proc. 46th IEEE Symposium on Foundations of Computer Science, 2005.
+
+
+I. Abraham, Y. Bartal, T-H. Chan, K. Dhamdhere,
+A. Gupta, J. Kleinberg, O. Neiman, A. Slivkins.
+Metric Embeddings with Relaxed Guarantees.
+Proc. 46th IEEE Symposium on Foundations of Computer Science, 2005.
+
+ J. Kleinberg, A. Slivkins, T. Wexler.
+Triangulation and Embedding 
+using Small Sets of Beacons.
+Proc. 45th IEEE Symposi"
+arxiv.org,https://arxiv.org/abs/2303.00456,td,tablecell arxivdoi,journal,doi,0.62,"https://doi.org/10.48550/arXiv.2303.00456
+
+
+Focus to learn more
+
+
+
+                  arXiv-issued DOI via DataCite"
+arxiv.org,https://arxiv.org/abs/2301.00002,div,submission-history,year,year,0.4675,"Submission history From: Jian Chen [view email]       [v1]
+        Sun, 25 Dec 2022 20:57:47 UTC (25,848 KB)"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,author,title,0.643445652173913,"N. Veldt, A. Benson, J. Kleinberg.
+
+Combinatorial characterizations and impossibilities for higher-order homophily.
+Science Advances, 9(1), 2023.
+
+
+A. Evtushenko, J. Kleinberg.
+
+Node-based Generalized Friendship Paradox fails.
+Scientific Reports 13(2074), 2023.
+
+
+R. Abebe, N. Immorlica, J. Kleinberg, B. Lucier, A. Shirali.
+On the Effect of Triadic Closure on Network Segregation.
+Proc. 23rd ACM Conference on Economics and Computation (EC), 2022.
+
+ 
+M. Papachristou, J. Kleinberg.
+Core-periphery Mo"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.5033215592972182,"F. Chierichetti, J. Kleinberg, A. Panconesi.
+
+How to schedule a cascade in an arbitrary graph.
+Proc. 13th ACM Conference on Electronic Commerce, 2012.
+
+
+L. Blume, D. Easley, J. Kleinberg, R. Kleinberg, E. Tardos.
+
+Which Networks Are Least Susceptible to Cascading Failures?
+Proc. 52nd IEEE Symposium on Foundations of Computer Science, 2011.
+
+
+L. Blume, D. Easley, J. Kleinberg, R. Kleinberg, E. Tardos.
+
+Network Formation in the Presence of Contagious Risk.
+Proc. 12th ACM Conference on Electronic C"
+arxiv.org,https://arxiv.org/abs/2303.00456,td,tablecell arxividv,journal,other,0.8175,"(or 
+arXiv:2303.00456v3 [cs.CL] for this version)"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.4125,"L.P. Chew, D. Huttenlocher, K. Kedem, J. Kleinberg.
+Fast Detection of 
+Common Geometric Substructure in Proteins.
+Proc. 3rd ACM RECOMB Intl. Conference on Computational 
+Molecular Biology, 1999.
+
+ B. Berger, J. Kleinberg, F.T. Leighton.  
+Reconstructing a
+Three-Dimensional Model with Arbitrary Errors.
+Proc. 28th ACM Symposium on Theory of Computing, 1996."
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,title,0.5353088778618996,"M. Meister, J. Kleinberg.
+
+Containing the spread of a contagion on a tree.
+Proc. 23rd Intl. Conf. on Autonomous Agents and Multiagent Systems (AAMAS), 2024.
+
+
+K. Tomlinson, J. Ugander, J. Kleinberg.
+
+The Moderating Effect of Instant Runoff Voting.
+Proc. 38th AAAI Conference on Artificial Intelligence (AAAI-24), 2024.
+
+ L.T. Liu, S. Barocas, J. Kleinberg, K. Levy.
+On the Actionability of Outcome Prediction.
+Proc. 38th AAAI Conference on Artificial Intelligence (AAAI-24), 2024.
+
+
+A. F. Cooper, K. "
+arxiv.org,https://arxiv.org/abs/2303.00456,li,,journal,other,0.955,"contact arXivClick here to contact arXiv
+ Contact"
+arxiv.org,https://arxiv.org/abs/2302.00001,div,metatable,title,other,0.5201372190277052,"Comments:
+20 pages, 2 figures, GitHub repository of Living Review at this https URL
+
+
+Subjects:
+
+Plasma Physics (physics.plasm-ph); Quantum Physics (quant-ph)
+
+Cite as:
+arXiv:2302.00001 [physics.plasm-ph]
+
+
+ 
+(or 
+arXiv:2302.00001v1 [physics.plasm-ph] for this version)
+          
+
+
+ 
+ https://doi.org/10.48550/arXiv.2302.00001
+
+
+Focus to learn more
+
+
+
+                  arXiv-issued DOI via DataCite"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.475,"E. Anshelevich, A. Dasgupta, 
+J. Kleinberg, E. Tardos, T. Wexler, T. Roughgarden.
+The Price of Stability for Network Design with
+Fair Cost Allocation.
+Proc. 45th IEEE Symposium on Foundations of Computer Science, 2004."
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,author,title,0.5502092916283349,"J. Kleinberg.
+Foreword to Behind Deep Blue, by Feng-Hsiung Hsu. Princeton Univ. Press, 25th anniversary edition, 2022.
+See also Princeton University Press's page for the book.
+
+
+J. Kleinberg.
+Digital Representation.  In This Idea Is Brilliant: Lost, Overlooked, and Underappreciated Scientific Concepts Everyone Should Know.  
+Harper Perennial 2018.
+
+
+J. Kleinberg. 
+The Pigeonhole Principle.
+In This Explains Everything.
+Harper Perennial 2013.
+
+ J. Kleinberg.
+The Mathematics of Algorithm Design.
+In"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.4418359031341004,"R. Abebe, J. Kleinberg, M. Weinberg.
+
+Subsidy Allocations in the Presence of Income Shocks.
+Proc. 34th AAAI Conference on Artificial Intelligence (AAAI-20), 2020.
+
+
+R. Abebe, S. Barocas, J. Kleinberg, K. Levy, M. Raghavan, D. Robinson.
+
+Roles for Computing in Social Change.
+Proc. ACM Conference on Fairness, Accountability, and Transparency (FAT*), 2020.
+
+
+K. Donahue, J. Kleinberg.
+
+Fairness and Utilization in Allocating Resources with Uncertain Demand.
+Proc. ACM Conference on Fairness, Accountab"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.4007957957957958,"A. Rambachan, J. Kleinberg, J. Ludwig, S. Mullainathan.
+
+An Economic Approach to Regulating Algorithms.
+NBER Working Paper Number 27111, May 2020.
+
+
+J. Kleinberg, J. Ludwig, S. Mullainathan, C. Sunstein.
+Discrimination in the Age of Algorithms. Journal of Legal Analysis, 2019.
+Also appears as NBER Working Paper Number 25548, February 2019.
+
+J. Kleinberg, S. Mullainathan.
+
+Simplicity Creates Inequity: Implications for Fairness, Stereotypes, and Interpretability.
+Proc. 20th ACM Conference on Econo"
+arxiv.org,https://arxiv.org/abs/2301.00001,div,submission-history,year,other,0.51,"Submission history From: Tauheed Khan Mohd [view email]       [v1]
+        Wed, 21 Dec 2022 18:07:06 UTC (1,260 KB)"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,author,title,0.5884456521739131,"R. Abebe, J. Kleinberg, D. Parkes, C. Tsourakakis.
+
+Opinion Dynamics with Varying Susceptibility to Persuasion.
+Proc. 24th ACM SIGKDD Intl. Conf. on Knowledge Discovery and Data Mining, 2018.
+This KDD 2018 version of the paper has been superseded by an
+updated version
+that merges the KDD 2018 paper with a WWW 2019 paper of Chan, Liang, and Sozio.
+
+
+J. Cheng, J. Kleinberg, J. Leskovec, D. Liben-Nowell, B. State,
+K. Subbian, L. Adamic.
+
+Do Diffusion Protocols Govern Cascade Growth?
+Proc. 12th Inte"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.430375,"J. Kleinberg, S. Mullainathan, J. Ugander.
+
+Comparison-Based Choices.
+Proc. 18th ACM Conference on Economics and Computation (EC), 2017.
+
+
+J. Kleinberg, S. Oren, M. Raghavan.
+Planning Problems for Sophisticated Agents with Present Bias.  
+Proc. 17th ACM Conference on Economics and Computation (EC), 2016.
+
+ 
+J. Kleinberg, S. Oren.
+
+Dynamic Models of Reputation and Competition in Job-Market Matching.
+Proc. 6th Conference on Innovations in Theoretical Computer Science (ITCS), 
+2015.
+
+
+L. Blume, D. "
+arxiv.org,https://arxiv.org/abs/2301.00002,li,,journal,other,0.955,"contact arXivClick here to contact arXiv
+ Contact"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,span,reduced,year,other,0.69,"2012, co-adv. with Dan Cosley, Michael Macy"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,title,0.4251470707427454,"A. Frieze, J. Kleinberg, R. Ravi, W. Debany.
+
+Line-of-Sight Networks.
+Proc. 18th ACM-SIAM Symposium on Discrete Algorithms, 2007.
+
+
+A. Krause, C. Guestrin, A. Gupta, J. Kleinberg. 
+
+Near-optimal Sensor Placements: Maximizing Information 
+while Minimizing Communication Cost. 
+Proc. Information Processing in Sensor Networks (IPSN), 2006.
+
+
+J. Kleinberg.
+An Approximation Algorithm for the
+Disjoint Paths Problem in Even-Degree Planar Graphs.
+Proc. 46th IEEE Symposium on Foundations of Computer Scien"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,author,title,0.595945652173913,"M. Papachristou, J. Kleinberg.
+
+Allocating Stimulus Checks in Times of Crisis.
+Proc. 31st International World Wide Web Conference, 2022.
+
+
+R. Abebe, T-H Chan, J. Kleinberg, Z. Liang, D. Parkes, M. Sozio, C. Tsourakakis.
+Opinion Dynamics with Varying Susceptibility to Persuasion via Non-Convex Local Search.
+ACM Transactions on Knowledge Discovery from Data, 2022.
+
+
+
+K. Van Koevering, Y. Hong, J. Kleinberg.
+
+Exporting Geography Into A Virtual Landscape: A Global Pandemic Locally Discussed.
+arXiv/2"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.4275,"D. Kempe, J. Kleinberg.
+
+Protocols and Impossibility Results for
+Gossip-Based Communication Mechanisms.
+Proc. 43rd IEEE Symposium on Foundations of Computer Science, 2002."
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.5157484412720925,"A. Dasgupta, J. Hopcroft, J. Kleinberg, M. Sandler.
+On Learning Mixtures
+of Heavy-Tailed Distributions.
+Proc. 46th IEEE Symposium on Foundations of Computer Science, 2005.
+
+ J. Kleinberg, M. Sandler.
+
+Using Mixture Models for Collaborative Filtering.
+Proc. 36th ACM Symposium on Theory of Computing, 2004.
+
+ J. Kleinberg, C. Papadimitriou, P. Raghavan.
+Segmentation problems.
+Journal of the ACM, 51(2), 2004.
+
+
+P. Felzenszwalb, D. Huttenlocher, J. Kleinberg.
+Fast Algorithms for Large-State-Space HMM"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.3325,"J. Kleinberg, J. Ludwig, S. Mullainathan, Z. Obermeyer.
+Prediction Policy Problems.
+American Economic Review: Papers and Proceedings 105:5(2015).
+
+
+H. Lakkaraju, J. Leskovec, J. Kleinberg, S. Mullainathan.
+A Bayesian Framework for Modeling Human Evaluations.  
+Proc. 15th SIAM International Conference on Data Mining (SDM), 2015.
+
+
+
+J. Kleinberg, S. Mullainathan.
+We Built Them, But We Don't Understand Them.
+In What to Think About Machines That Think: Today's Leading Thinkers on the Age of Machine "
+arxiv.org,https://arxiv.org/abs/2302.00123,div,extra-services,title,author,0.465,"Full-text links:
+Access Paper:
+
+
+View a PDF of the paper titled Design and Implementation of A Soccer Ball Detection System with Multiple Cameras, by Lei Li and 3 other authorsView PDFTeX Source
+ 
+
+
+view license
+
+
+ 
+    Current browse context: cs.CV
+
+
+< prev
+
+  |   
+next >
+
+
+new
+ | 
+recent
+ | 2023-02
+
+    Change to browse by:
+    
+cs
+cs.AI
+
+
+
+
+References & Citations
+
+NASA ADSGoogle Scholar
+Semantic Scholar
+
+
+
+
+export BibTeX citation
+Loading...
+
+
+
+
+BibTeX formatted citation
+×
+
+
+loading...
+
+
+Data "
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.40945534667903466,"J. Kleinberg, S. Oren.
+
+Dynamic Models of Reputation and Competition in Job-Market Matching.
+Proc. 6th Conference on Innovations in Theoretical Computer Science (ITCS), 
+2015.
+
+
+L. Blume, D. Easley, J. Kleinberg, R. Kleinberg, E. Tardos.
+Introduction to computer science and economic theory.
+Journal of Economic Theory 156(2015).
+
+ 
+J. Kleinberg, S. Oren.
+
+Time-Inconsistent Planning: A Computational Problem in Behavioral Economics.
+Proc. 15th ACM Conference on Economics and Computation (EC), 2014."
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.4825,"S. Chakrabarti, B. Dom, D. Gibson, J. Kleinberg, S.R. Kumar,
+P. Raghavan, S. Rajagopalan, A. Tomkins,
+
+Mining the link structure of the World Wide Web.
+IEEE Computer, August 1999."
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.3668359031341004,"J. Kleinberg, J. Ludwig, S. Mullainathan, C. Sunstein.
+Discrimination in the Age of Algorithms. Journal of Legal Analysis, 2019.
+Also appears as NBER Working Paper Number 25548, February 2019.
+
+J. Kleinberg, S. Mullainathan.
+
+Simplicity Creates Inequity: Implications for Fairness, Stereotypes, and Interpretability.
+Proc. 20th ACM Conference on Economics and Computation (EC), 2019.
+
+
+
+J. Kleinberg, M. Raghavan.
+
+Selection Problems in the Presence of Implicit Bias.
+Proc. 9th Conf. on Innovations i"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,author,title,0.34700120772946863,"S. Marvel, J. Kleinberg, R. Kleinberg, S. Strogatz.
+Continuous-Time Model of Structural Balance.
+Proc. National Academy of Sciences, 108(5) 1771-1776, 1 February 2011.
+
+
+J. Leskovec, D. Huttenlocher, J. Kleinberg.
+Governance in Social Media: 
+A case study of the Wikipedia promotion process.
+Proc. 4th International AAAI Conference on Weblogs and Social Media, 2010.
+
+
+J. Leskovec, D. Huttenlocher, J. Kleinberg.
+Signed Networks in Social Media.
+Proc. 28th ACM SIGCHI Conference on Human Factors in C"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.5158215592972182,"K. Bhawalkar, J. Kleinberg, K. Lewi, T. Roughgarden, A. Sharma. 
+Preventing Unraveling in Social Networks: 
+The Anchored k-Core Problem,
+Proc. 39th International Colloquium on 
+Automata, Languages and Programming (ICALP), 2012.
+
+F. Chierichetti, J. Kleinberg, A. Panconesi.
+
+How to schedule a cascade in an arbitrary graph.
+Proc. 13th ACM Conference on Electronic Commerce, 2012.
+
+
+L. Blume, D. Easley, J. Kleinberg, R. Kleinberg, E. Tardos.
+
+Which Networks Are Least Susceptible to Cascading Failure"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.4407957957957958,"J. Kleinberg, J. Ludwig, S. Mullainathan, C. Sunstein.
+
+Algorithms as discrimination detectors.
+Proc. National Academy of Sciences, 117(48) 30096-30100, 1 December 2020.
+
+
+A. Rambachan, J. Kleinberg, J. Ludwig, S. Mullainathan.
+
+An Economic Approach to Regulating Algorithms.
+NBER Working Paper Number 27111, May 2020.
+
+
+J. Kleinberg, J. Ludwig, S. Mullainathan, C. Sunstein.
+Discrimination in the Age of Algorithms. Journal of Legal Analysis, 2019.
+Also appears as NBER Working Paper Number 25548, F"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,year,0.3025,"R. Kleinberg, J. Kleinberg,
+
+Isomorphism and Embedding Problems for Infinite Limits of Scale-Free Graphs.
+Proc. 16th ACM-SIAM Symposium on Discrete Algorithms, 2005.
+
+
+D. Liben-Nowell, J. Kleinberg.
+
+The Link Prediction Problem for Social Networks.
+Proc. 12th International Conference on Information 
+and Knowledge Management (CIKM), 2003.
+
+ D. Callaway, J. Hopcroft, J. Kleinberg, M. Newman, S. Strogatz.
+
+Are randomly grown graphs really random?
+Physical Review E 64, 041902 (2001)."
+arxiv.org,https://arxiv.org/abs/2303.00456,div,,title,title,0.535,"[Submitted on 1 Mar 2023 (v1), last revised 10 Oct 2023 (this version, v3)]
+Title:N-best T5: Robust ASR Error Correction using Multiple Input Hypotheses and Constrained Decoding Space
+Authors:Rao Ma, Mark J. F. Gales, Kate M. Knill, Mengjie Qian View a PDF of the paper titled N-best T5: Robust ASR Error Correction using Multiple Input Hypotheses and Constrained Decoding Space, by Rao Ma and 3 other authors
+View PDF
+
+Abstract:Error correction models form an important part of Automatic Speech Reco"
+arxiv.org,https://arxiv.org/abs/2303.00456,div,column,journal,other,0.855,"About
+Help
+
+
+
+
+
+contact arXivClick here to contact arXiv
+ Contact
+
+
+subscribe to arXiv mailingsClick here to subscribe
+ Subscribe"
+arxiv.org,https://arxiv.org/abs/2302.00001,div,header-breadcrumbs-mobile,journal,other,0.8802671402875478,arXiv:2302.00001 (physics)
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,title,0.36306877292448336,"J. Kleinberg, S. Oren.
+
+Time-Inconsistent Planning: A Computational Problem in Behavioral Economics.
+Proc. 15th ACM Conference on Economics and Computation (EC), 2014.
+
+
+P. Frazier, D. Kempe, J. Kleinberg, R. Kleinberg.
+Incentivizing Exploration.
+Proc. 15th ACM Conference on Economics and Computation (EC), 2014.
+
+ 
+A. Anderson, D. Huttenlocher, J. Kleinberg, J. Leskovec.
+Steering User Behavior with Badges.
+Proc. 22nd International World Wide Web Conference, 2013.
+
+
+J. Kleinberg, K. Ligett.
+Infor"
+arxiv.org,https://arxiv.org/abs/2303.00456,div,,journal,other,0.885,arXiv-issued DOI via DataCite
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.4675,"J. Kleinberg.
+Bursty and Hierarchical Structure in Streams.
+Proc. 8th ACM SIGKDD Intl. Conf. on Knowledge Discovery and Data Mining, 2002.
+See also some sample results
+from the burst detection algorithm described in this paper."
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.3375,"D. Crandall, L. Backstrom, D. Huttenlocher, J. Kleinberg.
+ 
+Mapping the World's Photos.
+Proc. 18th International World Wide Web Conference, 2009.
+See also some 
+maps of
+cities and continents constructed using the methods 
+in this paper.
+ L. Backstrom, J. Kleinberg, R. Kumar, J. Novak.
+
+Spatial Variation in Search Engine Queries.
+Proc. 17th International World Wide Web Conference, 2008."
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.533445652173913,"J. Cheng, J. Kleinberg, J. Leskovec, D. Liben-Nowell, B. State,
+K. Subbian, L. Adamic.
+
+Do Diffusion Protocols Govern Cascade Growth?
+Proc. 12th International AAAI Conference on Weblogs and Social Media (ICWSM), 
+2018.
+
+
+R. Rotabi, C. Danescu-Niculescu-Mizil, J. Kleinberg.
+
+Tracing the Use of Practices through Networks of Collaboration.
+Proc. 11th International AAAI Conference on Weblogs and Social Media (ICWSM), 2017.
+
+
+R. Rotabi, C. Danescu-Niculescu-Mizil, J. Kleinberg.
+
+Competition and Selec"
+arxiv.org,https://arxiv.org/abs/2302.00001,div,full-text,title,author,0.415,"Full-text links:
+Access Paper:
+
+
+View a PDF of the paper titled A Living Review of Quantum Computing for Plasma Physics, by \'Oscar Amaro and Diogo CruzView PDFTeX Source
+ 
+view license"
+arxiv.org,https://arxiv.org/abs/2302.00001,div,search-block level-right,journal,author,0.6525,"Help | Advanced Search
+
+
+
+
+All fields
+Title
+Author
+Abstract
+Comments
+Journal reference
+ACM classification
+MSC classification
+Report number
+arXiv identifier
+DOI
+ORCID
+arXiv author ID
+Help pages
+Full text
+
+
+
+
+Search"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.44562477497749775,"J. Kleinberg, S. Oren, M. Raghavan, N. Sklar.
+Stochastic Model for Sunk Cost Bias.
+Proc. 37th Conference on Uncertainty in Artificial Intelligence (UAI), 2021.
+
+J. Kleinberg, M. Raghavan.
+
+How Do Classifiers Induce Agents To Invest Effort Strategically?
+Proc. 20th ACM Conference on Economics and Computation (EC), 2019.
+
+
+J. Kleinberg, R. Kleinberg.
+ 
+Delegated Search Approximates Efficient Search.
+Proc. 19th ACM Conference on Economics and Computation (EC), 2018.
+
+
+J. Kleinberg, S. Oren, M. Ragh"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,author,title,0.623445652173913,"K. Van Koevering, A. Benson, J. Kleinberg.
+
+Random Graphs with Prescribed k-Core Sequences:
+A New Null Model for Network Analysis.
+Proc. 30th International World Wide Web Conference, 2021.
+
+
+C. Comrie, J. Kleinberg.
+Hypergraph Ego-networks and Their Temporal Evolution.
+IEEE Intl. Conf. on Data Mining (ICDM), 2021.
+
+
+
+A. Evtushenko, J. Kleinberg.
+
+The paradox of second-order homophily in networks.
+Scientific Reports 11(13360), 2021.
+
+
+N. Veldt, A. Benson, J. Kleinberg.
+
+The Generalized Mean Dense"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,title,0.36277813712807244,"R. Fagin, A. Karlin, J. Kleinberg, P. Raghavan, S. Rajagopalan,
+R. Rubinfeld, M. Sudan, A. Tomkins.
+Random Walks with `Back Buttons.'
+Proc. 32nd ACM Symposium on Theory of Computing, 2000.
+
+ A. Kumar, J. Kleinberg.
+
+Fairness measures for resource allocation.
+Proc. 41st IEEE Symposium on Foundations of Computer Science, 2000.
+
+ J. Kleinberg, Y. Rabani, E. Tardos.
+
+Fairness in routing and load balancing.
+Proc. 40th IEEE Symposium on Foundations of Computer Science, 1999.
+
+ J. Kleinberg, A. Kumar. "
+arxiv.org,https://arxiv.org/abs/2303.00456,li,,journal,other,0.825,arXiv Operational Status
+arxiv.org,https://arxiv.org/abs/2302.00123,span,arxivid,journal,other,0.9030112719764672,arXiv:2302.00123v1 [cs.CV]
+arxiv.org,https://arxiv.org/abs/2301.00001,li,,journal,other,0.93,"subscribe to arXiv mailingsClick here to subscribe
+ Subscribe"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,author,title,0.5206030927835051,"R. McIlroy-Young, S. Sen, J. Kleinberg, A. Anderson.
+
+Aligning Superhuman AI and Human Behavior: Chess as a Model System.
+Proc. 26th ACM SIGKDD Intl. Conf. on Knowledge Discovery and Data Mining, 2020.
+See also the project page for the Maia Chess Engine, which is based on this work, and a Microsoft Research blog post about the project.
+
+
+M. Raghu, K. Blumer, R. Sayres, Z. Obermeyer, R. Kleinberg, S. Mullainathan, J. Kleinberg.
+
+Direct Uncertainty Prediction for Medical Second Opinions.
+Proc. 36t"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.395,"C. Danescu-Niculescu-Mizil, J. Cheng, J. Kleinberg, L. Lee.
+
+You had me at hello: How phrasing affects memorability.
+Proc. 50th Annual Meeting of the Association for Computational Linguistics, 
+2012.
+
+
+C. Danescu-Niculescu-Mizil, L. Lee, B. Pang, J. Kleinberg.
+
+Echoes of power: 
+Language effects and power differences in social interaction.
+Proc. 21st International World Wide Web Conference, 2012."
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,title,0.3887623762376238,"J. Kleinberg, J. Ludwig, S. Mullainathan.
+A Guide to Solving Social Problems with Machine Learning.
+Harvard Business Review, December 2016.
+
+
+M. Luca, J. Kleinberg, S. Mullainathan.
+
+Algorithms Need Managers, Too.
+Harvard Business Review, 94:1(Jan/Feb 2016).
+
+
+A. Anderson, J. Kleinberg, S. Mullainathan.
+
+Assessing Human Error Against a Benchmark of Perfection.
+Proc. 22nd ACM SIGKDD Intl. Conf. on Knowledge Discovery and Data Mining, 2016.
+
+
+J. Kleinberg, J. Ludwig, S. Mullainathan, Z. Obermeyer."
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.352875,"D. Crandall, D. Cosley, D. Huttenlocher, J. Kleinberg, S. Suri.
+Feedback Effects between Similarity and 
+Social Influence in Online Communities.
+Proc. 14th ACM SIGKDD Intl. Conf. on Knowledge Discovery and Data Mining,
+2008.
+
+
+J. Kleinberg.
+Cascading Behavior in Networks: 
+Algorithmic and Economic Issues.
+In Algorithmic Game Theory
+(N. Nisan, T. Roughgarden, E. Tardos, V. Vazirani, eds.),
+Cambridge University Press, 2007.
+
+
+J. Kleinberg
+The Wireless Epidemic.
+Nature (News and Views) 449(2007), 2"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.5445457957957958,"K. Donahue, J. Kleinberg.
+Fairness in model-sharing games.
+Proc. 32nd International World Wide Web Conference, 2023.
+
+
+B. Laufer, J. Kleinberg, K. Levy, H. Nissenbaum.
+Strategic Evaluation: Subjects, Evaluators, and Society.
+Proc. 3rd ACM Conference on Equity and Access in Algorithms, Mechanisms, and Optimization (EAAMO), 2023.
+
+
+B. Laufer, S. Jain, A.F. Cooper, J. Kleinberg, H. Heidari.
+Four Years of FAccT: A Reflexive, Mixed-Methods Analysis of Research Contributions, Shortcomings, and Future "
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,other,0.3325,"I. V. Yap, D. Schneider, J. Kleinberg, D. Matthews, S. Cartinhour, 
+S. R. McCouch.
+
+A Graph-Theoretic Approach to Comparing and Integrating Genetic, 
+Physical and Sequence-Based Maps.
+Genetics, Vol. 165(2003).
+
+ D. Goldberg, S. McCouch, J. Kleinberg.
+Constructing comparative maps with unresolved marker 
+order.
+Proc. Pacific Symposium on Biocomputing, 2002.
+
+ D. Goldberg, S. McCouch, J. Kleinberg.
+Algorithms for Constructing Comparative Maps.
+Conference on Gene Order Dynamics, Comparative Maps, a"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.5484456521739131,"R. Rotabi, K. Kamath, J. Kleinberg, A. Sharma.
+
+Cascades: A view from Audience.
+Proc. 26th International World Wide Web Conference, 2017.
+
+
+D. Romero, B. Uzzi, J. Kleinberg.
+
+Social Networks Under Stress.
+Proc. 25th International World Wide Web Conference, 2016.
+
+
+J. Cheng, L. Adamic, J. Kleinberg, J. Leskovec.
+
+Do Cascades Recur?.
+Proc. 25th International World Wide Web Conference, 2016.
+
+ 
+R. Rotabi, J. Kleinberg.
+
+The Status Gradient of Trends in Social Media.
+Proc. 10th International AAAI Co"
+arxiv.org,https://arxiv.org/abs/2301.00002,div,browse,year,other,0.4375,"Current browse context: cs.HC
+
+
+< prev
+
+  |   
+next >
+
+
+new
+ | 
+recent
+ | 2023-01
+
+    Change to browse by:
+    
+cs
+cs.GR
+quant-ph"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.3925,"J. Kleinberg, E. Tardos.  Approximations
+for the disjoint paths problem in high-diameter planar networks.
+Proc. 27th ACM Symposium on Theory of Computing, 1995.
+
+ J. Kleinberg.  Approximation Algorithms
+for Disjoint Paths Problems.
+Ph.D Thesis, Dept. of EECS, MIT, 1996."
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,journal,title,0.4308215592972182,"D. Romero, B. Meeder, J. Kleinberg.
+Differences in the Mechanics of Information Diffusion Across Topics: Idioms, Political Hashtags, and Complex Contagion on Twitter. 
+Proc. 20th International World Wide Web Conference, 2011.
+
+
+S. Wu, C. Tan, J. Kleinberg, M. Macy.
+Does Bad News Go Away Faster?
+Proc. 5th International AAAI Conference on Weblogs and Social Media, 2011.
+
+
+
+D. Cosley, D. Huttenlocher, J. Kleinberg, X. Lan, S. Suri.
+Sequential Influence Models in Social Networks.
+Proc. 4th Internati"
+cs.cornell.edu,http://www.cs.cornell.edu/home/kleinber/,li,,year,other,0.435,"J. Aizen, D. Huttenlocher, J. Kleinberg, A. Novak.
+
+Traffic-Based Feedback on the Web.
+Proceedings of the National Academy of Sciences 101(Suppl.1):5254-5260, 2004.
+(Also available in pre-print form.)
+
+ J. Kleinberg.
+Bursty and Hierarchical Structure in Streams.
+Proc. 8th ACM SIGKDD Intl. Conf. on Knowledge Discovery and Data Mining, 2002.
+See also some sample results
+from the burst detection algorithm described in this paper."
