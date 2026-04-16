@@ -1,0 +1,242 @@
+{
+  "generated_at_utc": "2026-04-14T12:53:29.969324+00:00",
+  "data": {
+    "total_samples": 3637,
+    "class_distribution": {
+      "other": 2338,
+      "journal": 322,
+      "year": 394,
+      "author": 304,
+      "title": 271,
+      "doi": 8
+    },
+    "domain_distribution_top10": {
+      "link.springer.com": 2328,
+      "arxiv.org": 756,
+      "cs.cornell.edu": 317,
+      "ieeexplore.ieee.org": 118,
+      "researchrepository.wvu.edu": 75,
+      "dspace.mit.edu": 43
+    },
+    "split_strategy": "group_by_domain"
+  },
+  "models": {
+    "logreg_balanced": {
+      "summary": {
+        "accuracy": 0.047530288909599254,
+        "f1_macro": 0.015482695810564663,
+        "f1_weighted": 0.004415382029853483
+      },
+      "classification_report": {
+        "author": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 88.0
+        },
+        "doi": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 2.0
+        },
+        "journal": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 214.0
+        },
+        "other": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 528.0
+        },
+        "title": {
+          "precision": 0.04871060171919771,
+          "recall": 1.0,
+          "f1-score": 0.09289617486338798,
+          "support": 51.0
+        },
+        "year": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 190.0
+        },
+        "accuracy": 0.047530288909599254,
+        "macro avg": {
+          "precision": 0.008118433619866285,
+          "recall": 0.16666666666666666,
+          "f1-score": 0.015482695810564663,
+          "support": 1073.0
+        },
+        "weighted avg": {
+          "precision": 0.0023152289726738893,
+          "recall": 0.047530288909599254,
+          "f1-score": 0.004415382029853483,
+          "support": 1073.0
+        }
+      },
+      "domain_metrics": {
+        "arxiv.org": {
+          "samples": 756,
+          "accuracy": 0.06349206349206349,
+          "f1_macro": 0.020512820512820513,
+          "f1_weighted": 0.007814407814407814
+        },
+        "cs.cornell.edu": {
+          "samples": 317,
+          "accuracy": 0.00946372239747634,
+          "f1_macro": 0.003773584905660378,
+          "f1_weighted": 0.00017856079995238382
+        }
+      }
+    },
+    "random_forest_balanced": {
+      "summary": {
+        "accuracy": 0.5601118359739049,
+        "f1_macro": 0.2649343704799258,
+        "f1_weighted": 0.4759904125253298
+      },
+      "classification_report": {
+        "author": {
+          "precision": 0.5072463768115942,
+          "recall": 0.3977272727272727,
+          "f1-score": 0.445859872611465,
+          "support": 88.0
+        },
+        "doi": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 2.0
+        },
+        "journal": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 214.0
+        },
+        "other": {
+          "precision": 0.6934210526315789,
+          "recall": 0.9981060606060606,
+          "f1-score": 0.8183229813664596,
+          "support": 528.0
+        },
+        "title": {
+          "precision": 0.0990990990990991,
+          "recall": 0.43137254901960786,
+          "f1-score": 0.16117216117216118,
+          "support": 51.0
+        },
+        "year": {
+          "precision": 1.0,
+          "recall": 0.08947368421052632,
+          "f1-score": 0.16425120772946858,
+          "support": 190.0
+        },
+        "accuracy": 0.5601118359739049,
+        "macro avg": {
+          "precision": 0.383294421423712,
+          "recall": 0.3194465944272446,
+          "f1-score": 0.2649343704799258,
+          "support": 1073.0
+        },
+        "weighted avg": {
+          "precision": 0.5646020978592247,
+          "recall": 0.5601118359739049,
+          "f1-score": 0.4759904125253298,
+          "support": 1073.0
+        }
+      },
+      "domain_metrics": {
+        "arxiv.org": {
+          "samples": 756,
+          "accuracy": 0.7685185185185185,
+          "f1_macro": 0.4910318631087989,
+          "f1_weighted": 0.688354064977626
+        },
+        "cs.cornell.edu": {
+          "samples": 317,
+          "accuracy": 0.06309148264984227,
+          "f1_macro": 0.07609084459928177,
+          "f1_weighted": 0.05291520186058721
+        }
+      }
+    },
+    "linear_svc_calibrated": {
+      "summary": {
+        "accuracy": 0.53215284249767,
+        "f1_macro": 0.21374444595796907,
+        "f1_weighted": 0.4343749076567341
+      },
+      "classification_report": {
+        "author": {
+          "precision": 0.37254901960784315,
+          "recall": 0.2159090909090909,
+          "f1-score": 0.2733812949640288,
+          "support": 88.0
+        },
+        "doi": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 2.0
+        },
+        "journal": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 214.0
+        },
+        "other": {
+          "precision": 0.6796368352788587,
+          "recall": 0.9924242424242424,
+          "f1-score": 0.806774441878368,
+          "support": 528.0
+        },
+        "title": {
+          "precision": 0.09716599190283401,
+          "recall": 0.47058823529411764,
+          "f1-score": 0.1610738255033557,
+          "support": 51.0
+        },
+        "year": {
+          "precision": 1.0,
+          "recall": 0.021052631578947368,
+          "f1-score": 0.041237113402061855,
+          "support": 190.0
+        },
+        "accuracy": 0.53215284249767,
+        "macro avg": {
+          "precision": 0.35822530779825595,
+          "recall": 0.283329033367733,
+          "f1-score": 0.21374444595796907,
+          "support": 1073.0
+        },
+        "weighted avg": {
+          "precision": 0.5466803619196385,
+          "recall": 0.53215284249767,
+          "f1-score": 0.4343749076567341,
+          "support": 1073.0
+        }
+      },
+      "domain_metrics": {
+        "arxiv.org": {
+          "samples": 756,
+          "accuracy": 0.7380952380952381,
+          "f1_macro": 0.3768382371145324,
+          "f1_weighted": 0.6532879810039472
+        },
+        "cs.cornell.edu": {
+          "samples": 317,
+          "accuracy": 0.04100946372239748,
+          "f1_macro": 0.045096877908452494,
+          "f1_weighted": 0.007371705132862315
+        }
+      }
+    }
+  },
+  "best_model": "random_forest_balanced"
+}
