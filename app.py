@@ -71,6 +71,7 @@ body {
   font-family: "Segoe UI", Arial, sans-serif;
   background: radial-gradient(circle at top right, #e9f2ff, var(--bg) 45%);
   color: var(--text);
+  scroll-behavior: smooth;
 }
 [data-theme="dark"] {
   --bg: #0b1220;
@@ -99,11 +100,47 @@ body {
   backdrop-filter: blur(8px);
 }
 .topbar-left, .topbar-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.topbar-left {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.topbar-right {
+  flex: 0 0 auto;
+}
+.topbar-tabs {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--card) 80%, #dbeafe 20%);
+  border: 1px solid color-mix(in srgb, var(--border) 78%, #bfdbfe 22%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+.tab-indicator {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  height: calc(100% - 8px);
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent), #60a5fa);
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.22);
+  transition: transform 0.28s ease, width 0.28s ease, opacity 0.2s ease;
+  z-index: 0;
+  opacity: 0;
+}
 .brand {
   font-weight: 700;
   font-size: 14px;
   color: var(--text);
   padding: 6px 8px;
+}
+.result-nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 .hero {
   background: linear-gradient(120deg, #0f172a, #1e3a8a);
@@ -144,6 +181,8 @@ body {
 input, select, button {
   font-family: inherit;
   font-size: 14px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 input, select {
   width: 100%;
@@ -167,8 +206,38 @@ input:focus, select:focus {
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 .btn:hover { filter: brightness(0.98); }
+.tab-button {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+.tab-button:hover {
+  background: color-mix(in srgb, var(--card) 65%, #dbeafe 35%);
+  border-color: color-mix(in srgb, var(--border) 70%, #93c5fd 30%);
+  box-shadow: 0 6px 18px rgba(59, 130, 246, 0.12);
+  transform: translateY(-1px);
+}
+.tab-button .tab-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+.tab-button .tab-label {
+  line-height: 1;
+}
+.nav-link.active {
+  color: #fff;
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
 .btn-primary {
   background: var(--accent);
   color: #fff;
@@ -179,12 +248,51 @@ input:focus, select:focus {
   color: #1e3a8a;
   border: 1px solid #c7d2fe;
 }
-.theme-toggle { min-width: 116px; text-align: center; }
+.theme-toggle {
+  min-width: 116px;
+  text-align: center;
+  border-radius: 12px;
+  border-color: color-mix(in srgb, var(--border) 78%, #bfdbfe 22%);
+  background: color-mix(in srgb, var(--card) 82%, #dbeafe 18%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+.theme-toggle:hover {
+  background: color-mix(in srgb, var(--card) 70%, #dbeafe 30%);
+  border-color: color-mix(in srgb, var(--border) 65%, #93c5fd 35%);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.14);
+  transform: translateY(-1px);
+}
 .section-title {
   margin: 0 0 10px;
   font-size: 18px;
   font-weight: 700;
 }
+.tab-shell {
+  margin-top: 16px;
+  position: relative;
+  min-height: 320px;
+}
+.tab-panel {
+  display: none;
+  opacity: 0;
+  transform: translateY(18px) scale(0.985);
+  filter: blur(4px);
+  transform-origin: top center;
+  transition: opacity 0.32s ease, transform 0.32s ease, filter 0.32s ease;
+}
+.tab-panel.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+.info-card p {
+  margin: 0 0 10px 0;
+  line-height: 1.55;
+  color: var(--text);
+}
+.info-card p:last-child { margin-bottom: 0; }
 .mono-box {
   white-space: pre-wrap;
   background: color-mix(in srgb, var(--card) 85%, #e2e8f0 15%);
@@ -250,6 +358,19 @@ input:focus, select:focus {
   font-size: 12px;
   color: var(--muted);
 }
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.summary-score {
+  color: #64748b;
+  font-weight: 500;
+}
+.mt-10 { margin-top: 10px; }
+.mt-12 { margin-top: 12px; }
+.mb-8 { margin-bottom: 8px; }
+.empty-text { margin: 0; color: #64748b; }
 .status-chip {
   display: inline-flex;
   align-items: center;
@@ -268,6 +389,28 @@ input:focus, select:focus {
 [data-theme="dark"] .status-bad { color: #fda4af; background: #3f1018; border-color: #7f1d1d; }
 [data-theme="dark"] .variant-collapse {
   background: color-mix(in srgb, var(--card) 94%, #1d4ed8 6%);
+}
+[data-theme="dark"] .topbar-tabs {
+  background: color-mix(in srgb, var(--card) 88%, #1d4ed8 12%);
+  border-color: color-mix(in srgb, var(--border) 76%, #2563eb 24%);
+}
+[data-theme="dark"] .tab-button:hover {
+  background: color-mix(in srgb, var(--card) 78%, #2563eb 22%);
+  border-color: color-mix(in srgb, var(--border) 62%, #60a5fa 38%);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.22);
+}
+[data-theme="dark"] .tab-indicator {
+  box-shadow: 0 10px 28px rgba(59, 130, 246, 0.28);
+}
+[data-theme="dark"] .theme-toggle {
+  background: color-mix(in srgb, var(--card) 86%, #1d4ed8 14%);
+  border-color: color-mix(in srgb, var(--border) 72%, #2563eb 28%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+[data-theme="dark"] .theme-toggle:hover {
+  background: color-mix(in srgb, var(--card) 74%, #2563eb 26%);
+  border-color: color-mix(in srgb, var(--border) 58%, #60a5fa 42%);
+  box-shadow: 0 10px 24px rgba(59, 130, 246, 0.24);
 }
 .loading-overlay {
   position: fixed;
@@ -303,9 +446,170 @@ input:focus, select:focus {
 }
 a { color: #1d4ed8; text-decoration: none; }
 a:hover { text-decoration: underline; }
+.variant-body a {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.toast {
+  display: none;
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  background: #222;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  max-width: min(420px, calc(100vw - 28px));
+  z-index: 9999;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+}
 @media (max-width: 760px) {
   .grid-2, .meta-row { grid-template-columns: 1fr; }
   .topbar { position: static; }
+  .container {
+    margin-top: 10px;
+    padding:
+      0 calc(10px + env(safe-area-inset-right))
+      calc(28px + env(safe-area-inset-bottom))
+      calc(10px + env(safe-area-inset-left));
+  }
+  .topbar {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+  }
+  .topbar-left {
+    gap: 6px;
+    width: 100%;
+  }
+  .topbar-right {
+    width: 100%;
+  }
+  .brand {
+    width: 100%;
+    padding: 2px 2px 6px;
+  }
+  .topbar-tabs {
+    width: 100%;
+    gap: 6px;
+    padding: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .topbar-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .tab-button {
+    flex: 1 0 auto;
+    justify-content: center;
+    min-width: max-content;
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+  .tab-button .tab-icon {
+    font-size: 13px;
+  }
+  .theme-toggle {
+    width: 100%;
+    min-width: 0;
+    justify-content: center;
+    padding: 10px 12px;
+  }
+  .hero {
+    padding: 18px 16px;
+    border-radius: 14px;
+  }
+  .hero h1, .hero h2 {
+    font-size: 22px;
+  }
+  .hero p {
+    font-size: 13px;
+  }
+  .card {
+    border-radius: 12px;
+    padding: 14px 12px;
+  }
+  .section-title {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  .mono-box {
+    font-size: 12.5px;
+    padding: 9px 10px;
+  }
+  .variant-collapse summary {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 10px;
+  }
+  .variant-body {
+    padding: 10px;
+  }
+  .candidate, .meta-item {
+    padding: 9px;
+  }
+  .action-row .btn {
+    width: 100%;
+    text-align: center;
+  }
+  .result-nav {
+    width: 100%;
+    gap: 6px;
+  }
+  .result-nav .btn {
+    flex: 1 1 calc(50% - 6px);
+    min-width: 120px;
+    text-align: center;
+    padding: 9px 10px;
+    font-size: 13px;
+  }
+  .btn, input, select {
+    min-height: 44px;
+  }
+  #parseSubmitBtn {
+    width: 100%;
+  }
+  .toast {
+    right: calc(10px + env(safe-area-inset-right));
+    left: calc(10px + env(safe-area-inset-left));
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    max-width: none;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar {
+    border-radius: 14px;
+  }
+  .tab-button {
+    gap: 6px;
+    padding: 8px 9px;
+    border-radius: 9px;
+    font-size: 12px;
+  }
+  .tab-button .tab-label {
+    max-width: 96px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .theme-toggle {
+    border-radius: 10px;
+    font-size: 13px;
+  }
+  .result-nav .btn {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+  .tab-shell {
+    min-height: 0;
+  }
+  .loading-panel {
+    width: calc(100vw - 20px - env(safe-area-inset-left) - env(safe-area-inset-right));
+    padding: 12px;
+  }
 }
 """
 
@@ -643,7 +947,21 @@ def index():
         <div class="topbar">
           <div class="topbar-left">
             <div class="brand">📚 Scientific Parser</div>
-            <a class="btn" href="/">Главная</a>
+            <div class="topbar-tabs" id="topbarTabs">
+              <div class="tab-indicator" id="tabIndicator"></div>
+              <a class="btn nav-link tab-button active" href="#home" data-tab-target="home">
+                <span class="tab-icon">🏠</span>
+                <span class="tab-label">Главная</span>
+              </a>
+              <a class="btn nav-link tab-button" href="#about" data-tab-target="about">
+                <span class="tab-icon">ℹ️</span>
+                <span class="tab-label">О проекте</span>
+              </a>
+              <a class="btn nav-link tab-button" href="#howto" data-tab-target="howto">
+                <span class="tab-icon">✨</span>
+                <span class="tab-label">Как пользоваться</span>
+              </a>
+            </div>
           </div>
           <div class="topbar-right">
             <button id="themeToggle" class="btn theme-toggle">🌙 Dark</button>
@@ -654,48 +972,65 @@ def index():
           <h1>Scientific Parser Demo</h1>
           <p>Извлечение метаданных научных статей, проверка полного текста и экспорт библиографии.</p>
         </div>
+        <div id="tabContentRoot" class="tab-shell">
+          <section id="panel-home" class="tab-panel active" data-tab-panel="home">
+            <div class="card">
+              <form id="parseForm" method="POST" action="/parse">
+                <label class="label"><b>URL статьи</b> (опционально)</label>
+                <div class="field-wrap">
+                  <span class="field-icon">🔗</span>
+                  <input class="with-icon" name="url" placeholder="https://..." />
+                </div>
 
-        <div class="card">
-          <form id="parseForm" method="POST" action="/parse">
-            <label class="label"><b>URL статьи</b> (опционально)</label>
-            <div class="field-wrap">
-              <span class="field-icon">🔗</span>
-              <input class="with-icon" name="url" placeholder="https://..." />
-            </div>
+                <div style="height:10px;"></div>
+                <label class="label"><b>DOI</b> (опционально)</label>
+                <div class="field-wrap">
+                  <span class="field-icon">🧬</span>
+                  <input class="with-icon" name="doi" placeholder="10.1016/j.net.2025.103970" />
+                </div>
 
-            <div style="height:10px;"></div>
-            <label class="label"><b>DOI</b> (опционально)</label>
-            <div class="field-wrap">
-              <span class="field-icon">🧬</span>
-              <input class="with-icon" name="doi" placeholder="10.1016/j.net.2025.103970" />
-            </div>
+                <div style="height:10px;"></div>
+                <label class="label"><b>Название статьи</b> (опционально)</label>
+                <div class="field-wrap">
+                  <span class="field-icon">📝</span>
+                  <input class="with-icon" name="title" placeholder="Toward Verified Artificial Intelligence" />
+                </div>
 
-            <div style="height:10px;"></div>
-            <label class="label"><b>Название статьи</b> (опционально)</label>
-            <div class="field-wrap">
-              <span class="field-icon">📝</span>
-              <input class="with-icon" name="title" placeholder="Toward Verified Artificial Intelligence" />
-            </div>
+                <div class="grid-2" style="margin-top:12px;">
+                  <div>
+                    <label class="label"><b>Количество вариантов</b></label>
+                    <input name="max_variants" type="number" min="1" max="10" value="5" />
+                  </div>
+                  <div>
+                    <label class="label"><b>Стиль цитирования</b></label>
+                    <select name="citation_style">
+                      <option value="gost">ГОСТ-like</option>
+                      <option value="apa">APA</option>
+                      <option value="ieee">IEEE</option>
+                    </select>
+                  </div>
+                </div>
 
-            <div class="grid-2" style="margin-top:12px;">
-              <div>
-                <label class="label"><b>Количество вариантов</b></label>
-                <input name="max_variants" type="number" min="1" max="10" value="5" />
-              </div>
-              <div>
-                <label class="label"><b>Стиль цитирования</b></label>
-                <select name="citation_style">
-                  <option value="gost">ГОСТ-like</option>
-                  <option value="apa">APA</option>
-                  <option value="ieee">IEEE</option>
-                </select>
-              </div>
+                <div style="margin-top:14px;">
+                  <button id="parseSubmitBtn" class="btn btn-primary">Parse</button>
+                </div>
+              </form>
             </div>
-
-            <div style="margin-top:14px;">
-              <button id="parseSubmitBtn" class="btn btn-primary">Parse</button>
+          </section>
+          <section id="panel-about" class="tab-panel" data-tab-panel="about">
+            <div class="card info-card">
+              <h3 class="section-title">О проекте</h3>
+              <p><b>Scientific Parser</b> помогает быстро извлекать метаданные научных статей по `URL`, `DOI` или названию.</p>
+              <p>Сервис показывает несколько релевантных вариантов, проверяет доступность полного текста и помогает собрать аккуратный библиографический список для учебной или исследовательской работы.</p>
             </div>
-          </form>
+          </section>
+          <section id="panel-howto" class="tab-panel" data-tab-panel="howto">
+            <div class="card info-card">
+              <h3 class="section-title">Как пользоваться</h3>
+              <p>Введи `URL`, `DOI` или название статьи, затем нажми `Parse` и дождись результатов анализа.</p>
+              <p>После этого выбери подходящий вариант, при необходимости скачай PDF, добавь запись в итоговый список и экспортируй ссылки в нужном формате.</p>
+            </div>
+          </section>
         </div>
       </div>
       <div id="loadingOverlay" class="loading-overlay">
@@ -725,6 +1060,60 @@ def index():
             const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
             localStorage.setItem(key, next);
             apply(next);
+          }});
+        }})();
+        (function() {{
+          const tabs = Array.from(document.querySelectorAll("[data-tab-target]"));
+          const panels = Array.from(document.querySelectorAll("[data-tab-panel]"));
+          const contentRoot = document.getElementById("tabContentRoot");
+          const tabsWrap = document.getElementById("topbarTabs");
+          const indicator = document.getElementById("tabIndicator");
+          if (!tabs.length || !panels.length || !contentRoot) return;
+
+          function updateIndicator(targetTab) {{
+            if (!tabsWrap || !indicator || !targetTab) return;
+            const wrapRect = tabsWrap.getBoundingClientRect();
+            const tabRect = targetTab.getBoundingClientRect();
+            indicator.style.width = tabRect.width + "px";
+            indicator.style.transform = "translateX(" + (tabRect.left - wrapRect.left) + "px)";
+            indicator.style.opacity = "1";
+          }}
+
+          function activateTab(name, updateHash = true) {{
+            const safeName = panels.some((panel) => panel.dataset.tabPanel === name) ? name : "home";
+            let activeTab = null;
+            tabs.forEach((tab) => {{
+              const isActive = tab.dataset.tabTarget === safeName;
+              tab.classList.toggle("active", isActive);
+              if (isActive) activeTab = tab;
+            }});
+            panels.forEach((panel) => {{
+              panel.classList.toggle("active", panel.dataset.tabPanel === safeName);
+            }});
+            updateIndicator(activeTab);
+            if (updateHash) {{
+              history.replaceState(null, "", "#" + (safeName === "home" ? "home" : safeName));
+            }}
+            contentRoot.scrollIntoView({{ behavior: "smooth", block: "start" }});
+          }}
+
+          tabs.forEach((tab) => {{
+            tab.addEventListener("click", function(event) {{
+              event.preventDefault();
+              activateTab(tab.dataset.tabTarget);
+            }});
+          }});
+
+          const initial = (window.location.hash || "#home").replace("#", "");
+          activateTab(initial, false);
+
+          window.addEventListener("hashchange", function() {{
+            const next = (window.location.hash || "#home").replace("#", "");
+            activateTab(next, false);
+          }});
+          window.addEventListener("resize", function() {{
+            const activeTab = tabs.find((tab) => tab.classList.contains("active"));
+            updateIndicator(activeTab);
           }});
         }})();
         (function() {{
@@ -956,7 +1345,7 @@ def parse():
         <div class="card">
           <h3 class="section-title">Итоговый выбранный список ({len(selected_papers)})</h3>
           <pre class="mono-box">{escape(format_bibliography_list(selected_papers, style=citation_style))}</pre>
-          <div style="margin-top:10px;">
+          <div class="mt-10 action-row">
             <a class="btn btn-soft" href="/export_bibtex">Экспорт BibTeX</a>
             <a class="btn btn-soft" href="/export_ris">Экспорт RIS</a>
           </div>
@@ -999,14 +1388,14 @@ def parse():
         <details class="variant-collapse" {open_attr}>
           <summary>
             <span>Вариант {idx}</span>
-            <span style="color:#64748b; font-weight:500;">score: {escape(score)}</span>
+            <span class="summary-score">score: {escape(score)}</span>
           </summary>
           <div class="variant-body">
             <div class="row"><b>Citation:</b> {escape(format_citation(item, style=citation_style))}</div>
             <div class="row"><span class="status-chip {item_status_class}">{item_status_icon} {escape(full["label"])}</span></div>
             <div class="row"><b>Комментарий:</b> {escape(full["reason"])}</div>
             <div class="row"><b>Ссылки:</b><br/>{links}</div>
-            <div class="row">{pdf_btn} {save_btn}</div>
+            <div class="row action-row">{pdf_btn} {save_btn}</div>
             <div class="hint">Кнопка добавляет этот вариант в общий список для экспорта BibTeX/RIS.</div>
           </div>
         </details>
@@ -1024,9 +1413,14 @@ def parse():
         <div class="topbar">
           <div class="topbar-left">
             <div class="brand">📚 Scientific Parser</div>
-            <a class="btn" href="/">Новый поиск</a>
-            <a class="btn btn-soft" href="/export_bibtex">BibTeX</a>
-            <a class="btn btn-soft" href="/export_ris">RIS</a>
+            <div class="result-nav">
+              <a class="btn nav-link" href="/">Главная</a>
+              <a class="btn nav-link" href="/#about">О проекте</a>
+              <a class="btn nav-link" href="/#howto">Как пользоваться</a>
+              <a class="btn" href="/">Новый поиск</a>
+              <a class="btn btn-soft" href="/export_bibtex">BibTeX</a>
+              <a class="btn btn-soft" href="/export_ris">RIS</a>
+            </div>
           </div>
           <div class="topbar-right">
             <button id="themeToggle" class="btn theme-toggle">🌙 Dark</button>
@@ -1040,7 +1434,7 @@ def parse():
 
         <div class="card">
           <a class="btn" href="/">← Назад к поиску</a>
-          <div class="meta-row" style="margin-top:12px;">
+          <div class="meta-row mt-12">
             <div class="meta-item">
               <div class="k">Mode</div>
               <div class="v">{escape(mode_used)}</div>
@@ -1057,7 +1451,7 @@ def parse():
 
         <div class="card">
           <h3 class="section-title">Блок полного текста (лучший результат)</h3>
-          <div style="margin-bottom:8px;">
+          <div class="mb-8">
             <span class="status-chip {status_class}">{status_icon} {escape(best_info["label"])}</span>
           </div>
           <pre class="mono-box">Статус: {escape(best_info["label"])}
@@ -1068,7 +1462,7 @@ def parse():
           <h3 class="section-title">Библиографический список (текущий результат)</h3>
           <pre class="mono-box">{escape(bibliography_text)}</pre>
           <pre id="bibliography_data" style="display:none;">{escape(bibliography_text)}</pre>
-          <div style="margin-top:10px;">
+          <div class="mt-10 action-row">
             <button class="btn btn-soft" onclick="copyBibliography()">Скопировать список</button>
           </div>
         </div>
@@ -1077,11 +1471,11 @@ def parse():
 
         <div class="card">
           <h3 class="section-title">Найденные варианты</h3>
-          {variants_html or "<p style='margin:0; color:#64748b;'>Нет вариантов.</p>"}
+          {variants_html or "<p class='empty-text'>Нет вариантов.</p>"}
         </div>
       </div>
 
-      <div id="toast" style="display:none; position:fixed; right:24px; bottom:24px; background:#222; color:#fff; padding:10px 14px; border-radius:8px; max-width:420px; z-index:9999;"></div>
+      <div id="toast" class="toast"></div>
 
       <script>
         (function() {{
