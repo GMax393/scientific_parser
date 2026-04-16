@@ -1,0 +1,2953 @@
+{
+  "id": "arxiv_simple_2",
+  "url": "https://arxiv.org/abs/2302.00123",
+  "source_type": "arxiv_simple",
+  "complexity": {
+    "score": 2,
+    "level": "medium",
+    "text_blocks_count": 212
+  },
+  "text_blocks": [
+    {
+      "text": "Skip to main content\n\n\n\n\n\nWe gratefully acknowledge support from the Simons Foundation, member institutions, and all contributors.\nDonate\n\n\n\n\n\n > cs > arXiv:2302.00123\n  \n\n\n\n\n\n\n\nHelp | Advanced Search\n\n\n\n\nAll fields\nTitle\nAuthor\nAbstract\nComments\nJournal reference\nACM classification\nMSC classification\nReport number\narXiv identifier\nDOI\nORCID\narXiv author ID\nHelp pages\nFull text\n\n\n\n\nSearch\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nopen search\n\n\n\n\n\n\nGO\n\n\n\nopen navigation menu\n\n\nquick links\n\nLogin\nHelp Pages\nAbout\n\n\n\n\n\n\n\n\n\n\n\n\nComputer Science > Computer Vision and Pattern Recognition\n\n\narXiv:2302.00123 (cs)\n    \n\n\n\n\n  [Submitted on 31 Jan 2023]\nTitle:Design and Implementation of A Soccer Ball Detection System with Multiple Cameras\nAuthors:Lei Li, Tianfang Zhang, Zhongfeng Kang, Wenhan Zhang View a PDF of the paper titled Design and Implementation of A Soccer Ball Detection System with Multiple Cameras, by Lei Li and 3 other authors\nView PDF\n\nAbstract:The detection of small and medium-sized objects in three dimensions has always been a frontier exploration problem. This technology has a very wide application in sports analysis, games, virtual reality, human animation and other fields. The traditional three-dimensional small target detection technology has the disadvantages of high cost, low precision and inconvenience, so it is difficult to apply in practice. With the development of machine learning and deep learning, the technology of computer vision algorithms is becoming more mature. Creating an immersive media experience is considered to be a very important research work in sports.\nThe main work is to explore and solve the problem of football detection under the multiple cameras, aiming at the research and implementation of the live broadcast system of football matches. Using multi cameras detects a target ball and determines its position in three dimension with the occlusion, motion, low illumination of the target object.\nThis paper designed and implemented football detection system under multiple cameras for the detection and capture of targets in real-time matches. The main work mainly consists of three parts, football detector, single camera detection, and multi-cameras detection. The system used bundle adjustment to obtain the three-dimensional position of the target, and the GPU to accelerates data pre-processing and achieve accurate real-time capture of the target. By testing the system, it shows that the system can accurately detect and capture the moving targets in 3D.\nIn addition, the solution in this paper is reusable for large-scale competitions, like basketball and soccer. The system framework can be well transplanted into other similar engineering project systems. It has been put into the market.\n    \n\n\n \nComments:\n89 pages\n\n\nSubjects:\n\nComputer Vision and Pattern Recognition (cs.CV); Artificial Intelligence (cs.AI)\n\nCite as:\narXiv:2302.00123 [cs.CV]\n\n\n \n(or \narXiv:2302.00123v1 [cs.CV] for this version)\n          \n\n\n \n https://doi.org/10.48550/arXiv.2302.00123\n\n\nFocus to learn more\n\n\n\n                  arXiv-issued DOI via DataCite\n\n\n\n\n\n\n\nSubmission history From: Lei Li [view email]       [v1]\n        Tue, 31 Jan 2023 22:04:53 UTC (18,803 KB)\n\n\n\n \n\nFull-text links:\nAccess Paper:\n\n\nView a PDF of the paper titled Design and Implementation of A Soccer Ball Detection System with Multiple Cameras, by Lei Li and 3 other authorsView PDFTeX Source\n \n\n\nview license\n\n\n \n    Current browse context: cs.CV\n\n\n< prev\n\n  |   \nnext >\n\n\nnew\n | \nrecent\n | 2023-02\n\n    Change to browse by:\n    \ncs\ncs.AI\n\n\n\n\nReferences & Citations\n\nNASA ADSGoogle Scholar\nSemantic Scholar\n\n\n\n\nexport BibTeX citation\nLoading...\n\n\n\n\nBibTeX formatted citation\n×\n\n\nloading...\n\n\nData provided by: \n\n\n\n\nBookmark\n\n\n\n\n\n \n\n\n\n\nBibliographic Tools\n\nBibliographic and Citation Tools\n\n\n\n\n\n\nBibliographic Explorer Toggle\n\n\n\nBibliographic Explorer (What is the Explorer?)\n\n\n\n\n\n\n\nConnected Papers Toggle\n\n\n\nConnected Papers (What is Connected Papers?)\n\n\n\n\n\n\nLitmaps Toggle\n\n\n\nLitmaps (What is Litmaps?)\n\n\n\n\n\n\n\nscite.ai Toggle\n\n\n\nscite Smart Citations (What are Smart Citations?)\n\n\n\n\n\n\n\n\n\nCode, Data, Media\n\nCode, Data and Media Associated with this Article\n\n\n\n\n\n\nalphaXiv Toggle\n\n\n\nalphaXiv (What is alphaXiv?)\n\n\n\n\n\n\n\nLinks to Code Toggle\n\n\n\nCatalyzeX Code Finder for Papers (What is CatalyzeX?)\n\n\n\n\n\n\n\nDagsHub Toggle\n\n\n\nDagsHub (What is DagsHub?)\n\n\n\n\n\n\n\nGotitPub Toggle\n\n\n\nGotit.pub (What is GotitPub?)\n\n\n\n\n\n\n\nHuggingface Toggle\n\n\n\nHugging Face (What is Huggingface?)\n\n\n\n\n\n\n\nLinks to Code Toggle\n\n\n\nPapers with Code (What is Papers with Code?)\n\n\n\n\n\n\n\nScienceCast Toggle\n\n\n\nScienceCast (What is ScienceCast?)\n\n\n\n\n\n\n\n\n\n\n\n\n\nDemos\n\nDemos\n\n\n\n\n\n\nReplicate Toggle\n\n\n\nReplicate (What is Replicate?)\n\n\n\n\n\n\n\nSpaces Toggle\n\n\n\nHugging Face Spaces (What is Spaces?)\n\n\n\n\n\n\n\nSpaces Toggle\n\n\n\nTXYZ.AI (What is TXYZ.AI?)\n\n\n\n\n\n\n\n\nRelated Papers\n\nRecommenders and Search Tools\n\n\n\n\n\n\nLink to Influence Flower\n\n\n\nInfluence Flower (What are Influence Flowers?)\n\n\n\n\n\n\n\nCore recommender toggle\n\n\n\nCORE Recommender (What is CORE?)\n\n\n\n\n\nAuthor\nVenue\nInstitution\nTopic\n\n\n\n\n\n\n\n\n\n\n\n\n\n        About arXivLabs\n      \n\n\n\narXivLabs: experimental projects with community collaborators\narXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.\nBoth individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.\nHave an idea for a project that will add value for arXiv's community? Learn more about arXivLabs.\n\n\n\n\n\n\n\n\n\n\nWhich authors of this paper are endorsers? |\n    Disable MathJax (What is MathJax?)\n    \n\n\n\n\n\n\n\n\n\n\n\n\nAbout\nHelp\n\n\n\n\n\ncontact arXivClick here to contact arXiv\n Contact\n\n\nsubscribe to arXiv mailingsClick here to subscribe\n Subscribe\n\n\n\n\n\n\n\n\n\n\n\nCopyright\nPrivacy Policy\n\n\n\n\nWeb Accessibility Assistance\n\n\narXiv Operational Status",
+      "tag": "div",
+      "classes": [
+        "flex-wrap-footer"
+      ],
+      "text_length": 5943,
+      "word_count": 794,
+      "is_visible": true,
+      "dom_depth": 3,
+      "sibling_index": 0,
+      "link_density": 0.17059360730593606,
+      "label": "title"
+    },
+    {
+      "text": "We gratefully acknowledge support from the Simons Foundation, member institutions, and all contributors.\nDonate",
+      "tag": "div",
+      "classes": [
+        "columns",
+        "is-vcentered",
+        "is-hidden-mobile"
+      ],
+      "text_length": 111,
+      "word_count": 14,
+      "is_visible": true,
+      "dom_depth": 5,
+      "sibling_index": 0,
+      "link_density": 0.24107142857142858,
+      "label": "content"
+    },
+    {
+      "text": "We gratefully acknowledge support from the Simons Foundation, member institutions, and all contributors.\nDonate",
+      "tag": "div",
+      "classes": [
+        "column"
+      ],
+      "text_length": 111,
+      "word_count": 14,
+      "is_visible": true,
+      "dom_depth": 6,
+      "sibling_index": 1,
+      "link_density": 0.23214285714285715,
+      "label": "content"
+    },
+    {
+      "text": "We gratefully acknowledge support from the Simons Foundation, member institutions, and all contributors.",
+      "tag": "span",
+      "classes": [],
+      "text_length": 104,
+      "word_count": 13,
+      "is_visible": true,
+      "dom_depth": 7,
+      "sibling_index": 0,
+      "link_density": 0.18095238095238095,
+      "label": "content"
+    },
+    {
+      "text": "> cs > arXiv:2302.00123\n  \n\n\n\n\n\n\n\nHelp | Advanced Search\n\n\n\n\nAll fields\nTitle\nAuthor\nAbstract\nComments\nJournal reference\nACM classification\nMSC classification\nReport number\narXiv identifier\nDOI\nORCID\narXiv author ID\nHelp pages\nFull text\n\n\n\n\nSearch",
+      "tag": "div",
+      "classes": [
+        "is-hidden-mobile"
+      ],
+      "text_length": 247,
+      "word_count": 34,
+      "is_visible": true,
+      "dom_depth": 5,
+      "sibling_index": 1,
+      "link_density": 0.1091703056768559,
+      "label": "journal"
+    },
+    {
+      "text": "> cs > arXiv:2302.00123",
+      "tag": "div",
+      "classes": [
+        "header-breadcrumbs",
+        "is-hidden-mobile"
+      ],
+      "text_length": 23,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 6,
+      "sibling_index": 0,
+      "link_density": 0.13043478260869565,
+      "label": "journal"
+    },
+    {
+      "text": "Help | Advanced Search\n\n\n\n\nAll fields\nTitle\nAuthor\nAbstract\nComments\nJournal reference\nACM classification\nMSC classification\nReport number\narXiv identifier\nDOI\nORCID\narXiv author ID\nHelp pages\nFull text\n\n\n\n\nSearch",
+      "tag": "div",
+      "classes": [
+        "search-block",
+        "level-right"
+      ],
+      "text_length": 213,
+      "word_count": 30,
+      "is_visible": true,
+      "dom_depth": 6,
+      "sibling_index": 2,
+      "link_density": 0.0975609756097561,
+      "label": "journal"
+    },
+    {
+      "text": "Help | Advanced Search\n\n\n\n\nAll fields\nTitle\nAuthor\nAbstract\nComments\nJournal reference\nACM classification\nMSC classification\nReport number\narXiv identifier\nDOI\nORCID\narXiv author ID\nHelp pages\nFull text\n\n\n\n\nSearch",
+      "tag": "div",
+      "classes": [
+        "field",
+        "has-addons"
+      ],
+      "text_length": 213,
+      "word_count": 30,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 0,
+      "link_density": 0.0975609756097561,
+      "label": "journal"
+    },
+    {
+      "text": "Help | Advanced Search",
+      "tag": "div",
+      "classes": [
+        "control"
+      ],
+      "text_length": 22,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 0,
+      "link_density": 0.9090909090909091,
+      "label": "other"
+    },
+    {
+      "text": "Help | Advanced Search",
+      "tag": "p",
+      "classes": [
+        "help"
+      ],
+      "text_length": 22,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.9090909090909091,
+      "label": "other"
+    },
+    {
+      "text": "All fields\nTitle\nAuthor\nAbstract\nComments\nJournal reference\nACM classification\nMSC classification\nReport number\narXiv identifier\nDOI\nORCID\narXiv author ID\nHelp pages\nFull text",
+      "tag": "div",
+      "classes": [
+        "control"
+      ],
+      "text_length": 175,
+      "word_count": 25,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "journal"
+    },
+    {
+      "text": "All fields\nTitle\nAuthor\nAbstract\nComments\nJournal reference\nACM classification\nMSC classification\nReport number\narXiv identifier\nDOI\nORCID\narXiv author ID\nHelp pages\nFull text",
+      "tag": "div",
+      "classes": [
+        "select",
+        "is-small"
+      ],
+      "text_length": 175,
+      "word_count": 25,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "journal"
+    },
+    {
+      "text": "open search\n\n\n\n\n\n\nGO\n\n\n\nopen navigation menu\n\n\nquick links\n\nLogin\nHelp Pages\nAbout",
+      "tag": "div",
+      "classes": [
+        "mobile-header"
+      ],
+      "text_length": 82,
+      "word_count": 12,
+      "is_visible": true,
+      "dom_depth": 5,
+      "sibling_index": 2,
+      "link_density": 0.34285714285714286,
+      "label": "content"
+    },
+    {
+      "text": "open search\n\n\n\n\n\n\nGO\n\n\n\nopen navigation menu\n\n\nquick links\n\nLogin\nHelp Pages\nAbout",
+      "tag": "div",
+      "classes": [
+        "columns",
+        "is-mobile"
+      ],
+      "text_length": 82,
+      "word_count": 12,
+      "is_visible": true,
+      "dom_depth": 6,
+      "sibling_index": 0,
+      "link_density": 0.34285714285714286,
+      "label": "content"
+    },
+    {
+      "text": "open search\n\n\n\n\n\n\nGO\n\n\n\nopen navigation menu\n\n\nquick links\n\nLogin\nHelp Pages\nAbout",
+      "tag": "div",
+      "classes": [
+        "column",
+        "nav"
+      ],
+      "text_length": 82,
+      "word_count": 12,
+      "is_visible": true,
+      "dom_depth": 7,
+      "sibling_index": 2,
+      "link_density": 0.3142857142857143,
+      "label": "content"
+    },
+    {
+      "text": "quick links\n\nLogin\nHelp Pages\nAbout",
+      "tag": "div",
+      "classes": [
+        "mobile-toggle-block",
+        "toggle-target"
+      ],
+      "text_length": 35,
+      "word_count": 6,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 1,
+      "link_density": 0.6470588235294118,
+      "label": "other"
+    },
+    {
+      "text": "quick links",
+      "tag": "h2",
+      "classes": [],
+      "text_length": 11,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Login",
+      "tag": "li",
+      "classes": [],
+      "text_length": 5,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Help Pages",
+      "tag": "li",
+      "classes": [],
+      "text_length": 10,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "About",
+      "tag": "li",
+      "classes": [],
+      "text_length": 5,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 2,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Computer Science > Computer Vision and Pattern Recognition\n\n\narXiv:2302.00123 (cs)\n    \n\n\n\n\n  [Submitted on 31 Jan 2023]\nTitle:Design and Implementation of A Soccer Ball Detection System with Multiple Cameras\nAuthors:Lei Li, Tianfang Zhang, Zhongfeng Kang, Wenhan Zhang View a PDF of the paper titled Design and Implementation of A Soccer Ball Detection System with Multiple Cameras, by Lei Li and 3 other authors\nView PDF\n\nAbstract:The detection of small and medium-sized objects in three dimensions has always been a frontier exploration problem. This technology has a very wide application in sports analysis, games, virtual reality, human animation and other fields. The traditional three-dimensional small target detection technology has the disadvantages of high cost, low precision and inconvenience, so it is difficult to apply in practice. With the development of machine learning and deep learning, the technology of computer vision algorithms is becoming more mature. Creating an immersive media experience is considered to be a very important research work in sports.\nThe main work is to explore and solve the problem of football detection under the multiple cameras, aiming at the research and implementation of the live broadcast system of football matches. Using multi cameras detects a target ball and determines its position in three dimension with the occlusion, motion, low illumination of the target object.\nThis paper designed and implemented football detection system under multiple cameras for the detection and capture of targets in real-time matches. The main work mainly consists of three parts, football detector, single camera detection, and multi-cameras detection. The system used bundle adjustment to obtain the three-dimensional position of the target, and the GPU to accelerates data pre-processing and achieve accurate real-time capture of the target. By testing the system, it shows that the system can accurately detect and capture the moving targets in 3D.\nIn addition, the solution in this paper is reusable for large-scale competitions, like basketball and soccer. The system framework can be well transplanted into other similar engineering project systems. It has been put into the market.\n    \n\n\n \nComments:\n89 pages\n\n\nSubjects:\n\nComputer Vision and Pattern Recognition (cs.CV); Artificial Intelligence (cs.AI)\n\nCite as:\narXiv:2302.00123 [cs.CV]\n\n\n \n(or \narXiv:2302.00123v1 [cs.CV] for this version)\n          \n\n\n \n https://doi.org/10.48550/arXiv.2302.00123\n\n\nFocus to learn more\n\n\n\n                  arXiv-issued DOI via DataCite\n\n\n\n\n\n\n\nSubmission history From: Lei Li [view email]       [v1]\n        Tue, 31 Jan 2023 22:04:53 UTC (18,803 KB)\n\n\n\n \n\nFull-text links:\nAccess Paper:\n\n\nView a PDF of the paper titled Design and Implementation of A Soccer Ball Detection System with Multiple Cameras, by Lei Li and 3 other authorsView PDFTeX Source\n \n\n\nview license\n\n\n \n    Current browse context: cs.CV\n\n\n< prev\n\n  |   \nnext >\n\n\nnew\n | \nrecent\n | 2023-02\n\n    Change to browse by:\n    \ncs\ncs.AI\n\n\n\n\nReferences & Citations\n\nNASA ADSGoogle Scholar\nSemantic Scholar\n\n\n\n\nexport BibTeX citation\nLoading...\n\n\n\n\nBibTeX formatted citation\n×\n\n\nloading...\n\n\nData provided by: \n\n\n\n\nBookmark\n\n\n\n\n\n \n\n\n\n\nBibliographic Tools\n\nBibliographic and Citation Tools\n\n\n\n\n\n\nBibliographic Explorer Toggle\n\n\n\nBibliographic Explorer (What is the Explorer?)\n\n\n\n\n\n\n\nConnected Papers Toggle\n\n\n\nConnected Papers (What is Connected Papers?)\n\n\n\n\n\n\nLitmaps Toggle\n\n\n\nLitmaps (What is Litmaps?)\n\n\n\n\n\n\n\nscite.ai Toggle\n\n\n\nscite Smart Citations (What are Smart Citations?)\n\n\n\n\n\n\n\n\n\nCode, Data, Media\n\nCode, Data and Media Associated with this Article\n\n\n\n\n\n\nalphaXiv Toggle\n\n\n\nalphaXiv (What is alphaXiv?)\n\n\n\n\n\n\n\nLinks to Code Toggle\n\n\n\nCatalyzeX Code Finder for Papers (What is CatalyzeX?)\n\n\n\n\n\n\n\nDagsHub Toggle\n\n\n\nDagsHub (What is DagsHub?)\n\n\n\n\n\n\n\nGotitPub Toggle\n\n\n\nGotit.pub (What is GotitPub?)\n\n\n\n\n\n\n\nHuggingface Toggle\n\n\n\nHugging Face (What is Huggingface?)\n\n\n\n\n\n\n\nLinks to Code Toggle\n\n\n\nPapers with Code (What is Papers with Code?)\n\n\n\n\n\n\n\nScienceCast Toggle\n\n\n\nScienceCast (What is ScienceCast?)\n\n\n\n\n\n\n\n\n\n\n\n\n\nDemos\n\nDemos\n\n\n\n\n\n\nReplicate Toggle\n\n\n\nReplicate (What is Replicate?)\n\n\n\n\n\n\n\nSpaces Toggle\n\n\n\nHugging Face Spaces (What is Spaces?)\n\n\n\n\n\n\n\nSpaces Toggle\n\n\n\nTXYZ.AI (What is TXYZ.AI?)\n\n\n\n\n\n\n\n\nRelated Papers\n\nRecommenders and Search Tools\n\n\n\n\n\n\nLink to Influence Flower\n\n\n\nInfluence Flower (What are Influence Flowers?)\n\n\n\n\n\n\n\nCore recommender toggle\n\n\n\nCORE Recommender (What is CORE?)\n\n\n\n\n\nAuthor\nVenue\nInstitution\nTopic\n\n\n\n\n\n\n\n\n\n\n\n\n\n        About arXivLabs\n      \n\n\n\narXivLabs: experimental projects with community collaborators\narXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.\nBoth individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.\nHave an idea for a project that will add value for arXiv's community? Learn more about arXivLabs.\n\n\n\n\n\n\n\n\n\n\nWhich authors of this paper are endorsers? |\n    Disable MathJax (What is MathJax?)",
+      "tag": "div",
+      "classes": [],
+      "text_length": 5198,
+      "word_count": 704,
+      "is_visible": true,
+      "dom_depth": 5,
+      "sibling_index": 0,
+      "link_density": 0.15006200909466721,
+      "label": "title"
+    },
+    {
+      "text": "Computer Science > Computer Vision and Pattern Recognition\n\n\narXiv:2302.00123 (cs)\n    \n\n\n\n\n  [Submitted on 31 Jan 2023]\nTitle:Design and Implementation of A Soccer Ball Detection System with Multiple Cameras\nAuthors:Lei Li, Tianfang Zhang, Zhongfeng Kang, Wenhan Zhang View a PDF of the paper titled Design and Implementation of A Soccer Ball Detection System with Multiple Cameras, by Lei Li and 3 other authors\nView PDF\n\nAbstract:The detection of small and medium-sized objects in three dimensions has always been a frontier exploration problem. This technology has a very wide application in sports analysis, games, virtual reality, human animation and other fields. The traditional three-dimensional small target detection technology has the disadvantages of high cost, low precision and inconvenience, so it is difficult to apply in practice. With the development of machine learning and deep learning, the technology of computer vision algorithms is becoming more mature. Creating an immersive media experience is considered to be a very important research work in sports.\nThe main work is to explore and solve the problem of football detection under the multiple cameras, aiming at the research and implementation of the live broadcast system of football matches. Using multi cameras detects a target ball and determines its position in three dimension with the occlusion, motion, low illumination of the target object.\nThis paper designed and implemented football detection system under multiple cameras for the detection and capture of targets in real-time matches. The main work mainly consists of three parts, football detector, single camera detection, and multi-cameras detection. The system used bundle adjustment to obtain the three-dimensional position of the target, and the GPU to accelerates data pre-processing and achieve accurate real-time capture of the target. By testing the system, it shows that the system can accurately detect and capture the moving targets in 3D.\nIn addition, the solution in this paper is reusable for large-scale competitions, like basketball and soccer. The system framework can be well transplanted into other similar engineering project systems. It has been put into the market.\n    \n\n\n \nComments:\n89 pages\n\n\nSubjects:\n\nComputer Vision and Pattern Recognition (cs.CV); Artificial Intelligence (cs.AI)\n\nCite as:\narXiv:2302.00123 [cs.CV]\n\n\n \n(or \narXiv:2302.00123v1 [cs.CV] for this version)\n          \n\n\n \n https://doi.org/10.48550/arXiv.2302.00123\n\n\nFocus to learn more\n\n\n\n                  arXiv-issued DOI via DataCite\n\n\n\n\n\n\n\nSubmission history From: Lei Li [view email]       [v1]\n        Tue, 31 Jan 2023 22:04:53 UTC (18,803 KB)\n\n\n\n \n\nFull-text links:\nAccess Paper:\n\n\nView a PDF of the paper titled Design and Implementation of A Soccer Ball Detection System with Multiple Cameras, by Lei Li and 3 other authorsView PDFTeX Source\n \n\n\nview license\n\n\n \n    Current browse context: cs.CV\n\n\n< prev\n\n  |   \nnext >\n\n\nnew\n | \nrecent\n | 2023-02\n\n    Change to browse by:\n    \ncs\ncs.AI\n\n\n\n\nReferences & Citations\n\nNASA ADSGoogle Scholar\nSemantic Scholar\n\n\n\n\nexport BibTeX citation\nLoading...\n\n\n\n\nBibTeX formatted citation\n×\n\n\nloading...\n\n\nData provided by: \n\n\n\n\nBookmark\n\n\n\n\n\n \n\n\n\n\nBibliographic Tools\n\nBibliographic and Citation Tools\n\n\n\n\n\n\nBibliographic Explorer Toggle\n\n\n\nBibliographic Explorer (What is the Explorer?)\n\n\n\n\n\n\n\nConnected Papers Toggle\n\n\n\nConnected Papers (What is Connected Papers?)\n\n\n\n\n\n\nLitmaps Toggle\n\n\n\nLitmaps (What is Litmaps?)\n\n\n\n\n\n\n\nscite.ai Toggle\n\n\n\nscite Smart Citations (What are Smart Citations?)\n\n\n\n\n\n\n\n\n\nCode, Data, Media\n\nCode, Data and Media Associated with this Article\n\n\n\n\n\n\nalphaXiv Toggle\n\n\n\nalphaXiv (What is alphaXiv?)\n\n\n\n\n\n\n\nLinks to Code Toggle\n\n\n\nCatalyzeX Code Finder for Papers (What is CatalyzeX?)\n\n\n\n\n\n\n\nDagsHub Toggle\n\n\n\nDagsHub (What is DagsHub?)\n\n\n\n\n\n\n\nGotitPub Toggle\n\n\n\nGotit.pub (What is GotitPub?)\n\n\n\n\n\n\n\nHuggingface Toggle\n\n\n\nHugging Face (What is Huggingface?)\n\n\n\n\n\n\n\nLinks to Code Toggle\n\n\n\nPapers with Code (What is Papers with Code?)\n\n\n\n\n\n\n\nScienceCast Toggle\n\n\n\nScienceCast (What is ScienceCast?)\n\n\n\n\n\n\n\n\n\n\n\n\n\nDemos\n\nDemos\n\n\n\n\n\n\nReplicate Toggle\n\n\n\nReplicate (What is Replicate?)\n\n\n\n\n\n\n\nSpaces Toggle\n\n\n\nHugging Face Spaces (What is Spaces?)\n\n\n\n\n\n\n\nSpaces Toggle\n\n\n\nTXYZ.AI (What is TXYZ.AI?)\n\n\n\n\n\n\n\n\nRelated Papers\n\nRecommenders and Search Tools\n\n\n\n\n\n\nLink to Influence Flower\n\n\n\nInfluence Flower (What are Influence Flowers?)\n\n\n\n\n\n\n\nCore recommender toggle\n\n\n\nCORE Recommender (What is CORE?)\n\n\n\n\n\nAuthor\nVenue\nInstitution\nTopic\n\n\n\n\n\n\n\n\n\n\n\n\n\n        About arXivLabs\n      \n\n\n\narXivLabs: experimental projects with community collaborators\narXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.\nBoth individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.\nHave an idea for a project that will add value for arXiv's community? Learn more about arXivLabs.\n\n\n\n\n\n\n\n\n\n\nWhich authors of this paper are endorsers? |\n    Disable MathJax (What is MathJax?)",
+      "tag": "div",
+      "classes": [],
+      "text_length": 5198,
+      "word_count": 704,
+      "is_visible": true,
+      "dom_depth": 6,
+      "sibling_index": 0,
+      "link_density": 0.15006200909466721,
+      "label": "title"
+    },
+    {
+      "text": "Computer Science > Computer Vision and Pattern Recognition\n\n\narXiv:2302.00123 (cs)\n    \n\n\n\n\n  [Submitted on 31 Jan 2023]\nTitle:Design and Implementation of A Soccer Ball Detection System with Multiple Cameras\nAuthors:Lei Li, Tianfang Zhang, Zhongfeng Kang, Wenhan Zhang View a PDF of the paper titled Design and Implementation of A Soccer Ball Detection System with Multiple Cameras, by Lei Li and 3 other authors\nView PDF\n\nAbstract:The detection of small and medium-sized objects in three dimensions has always been a frontier exploration problem. This technology has a very wide application in sports analysis, games, virtual reality, human animation and other fields. The traditional three-dimensional small target detection technology has the disadvantages of high cost, low precision and inconvenience, so it is difficult to apply in practice. With the development of machine learning and deep learning, the technology of computer vision algorithms is becoming more mature. Creating an immersive media experience is considered to be a very important research work in sports.\nThe main work is to explore and solve the problem of football detection under the multiple cameras, aiming at the research and implementation of the live broadcast system of football matches. Using multi cameras detects a target ball and determines its position in three dimension with the occlusion, motion, low illumination of the target object.\nThis paper designed and implemented football detection system under multiple cameras for the detection and capture of targets in real-time matches. The main work mainly consists of three parts, football detector, single camera detection, and multi-cameras detection. The system used bundle adjustment to obtain the three-dimensional position of the target, and the GPU to accelerates data pre-processing and achieve accurate real-time capture of the target. By testing the system, it shows that the system can accurately detect and capture the moving targets in 3D.\nIn addition, the solution in this paper is reusable for large-scale competitions, like basketball and soccer. The system framework can be well transplanted into other similar engineering project systems. It has been put into the market.\n    \n\n\n \nComments:\n89 pages\n\n\nSubjects:\n\nComputer Vision and Pattern Recognition (cs.CV); Artificial Intelligence (cs.AI)\n\nCite as:\narXiv:2302.00123 [cs.CV]\n\n\n \n(or \narXiv:2302.00123v1 [cs.CV] for this version)\n          \n\n\n \n https://doi.org/10.48550/arXiv.2302.00123\n\n\nFocus to learn more\n\n\n\n                  arXiv-issued DOI via DataCite\n\n\n\n\n\n\n\nSubmission history From: Lei Li [view email]       [v1]\n        Tue, 31 Jan 2023 22:04:53 UTC (18,803 KB)",
+      "tag": "div",
+      "classes": [
+        "leftcolumn"
+      ],
+      "text_length": 2685,
+      "word_count": 381,
+      "is_visible": true,
+      "dom_depth": 7,
+      "sibling_index": 0,
+      "link_density": 0.05649500384319754,
+      "label": "title"
+    },
+    {
+      "text": "Computer Science > Computer Vision and Pattern Recognition",
+      "tag": "div",
+      "classes": [
+        "subheader"
+      ],
+      "text_length": 58,
+      "word_count": 8,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Computer Science > Computer Vision and Pattern Recognition",
+      "tag": "h1",
+      "classes": [],
+      "text_length": 58,
+      "word_count": 8,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "arXiv:2302.00123 (cs)",
+      "tag": "div",
+      "classes": [
+        "header-breadcrumbs-mobile"
+      ],
+      "text_length": 21,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "journal"
+    },
+    {
+      "text": "[Submitted on 31 Jan 2023]\nTitle:Design and Implementation of A Soccer Ball Detection System with Multiple Cameras\nAuthors:Lei Li, Tianfang Zhang, Zhongfeng Kang, Wenhan Zhang View a PDF of the paper titled Design and Implementation of A Soccer Ball Detection System with Multiple Cameras, by Lei Li and 3 other authors\nView PDF\n\nAbstract:The detection of small and medium-sized objects in three dimensions has always been a frontier exploration problem. This technology has a very wide application in sports analysis, games, virtual reality, human animation and other fields. The traditional three-dimensional small target detection technology has the disadvantages of high cost, low precision and inconvenience, so it is difficult to apply in practice. With the development of machine learning and deep learning, the technology of computer vision algorithms is becoming more mature. Creating an immersive media experience is considered to be a very important research work in sports.\nThe main work is to explore and solve the problem of football detection under the multiple cameras, aiming at the research and implementation of the live broadcast system of football matches. Using multi cameras detects a target ball and determines its position in three dimension with the occlusion, motion, low illumination of the target object.\nThis paper designed and implemented football detection system under multiple cameras for the detection and capture of targets in real-time matches. The main work mainly consists of three parts, football detector, single camera detection, and multi-cameras detection. The system used bundle adjustment to obtain the three-dimensional position of the target, and the GPU to accelerates data pre-processing and achieve accurate real-time capture of the target. By testing the system, it shows that the system can accurately detect and capture the moving targets in 3D.\nIn addition, the solution in this paper is reusable for large-scale competitions, like basketball and soccer. The system framework can be well transplanted into other similar engineering project systems. It has been put into the market.\n    \n\n\n \nComments:\n89 pages\n\n\nSubjects:\n\nComputer Vision and Pattern Recognition (cs.CV); Artificial Intelligence (cs.AI)\n\nCite as:\narXiv:2302.00123 [cs.CV]\n\n\n \n(or \narXiv:2302.00123v1 [cs.CV] for this version)\n          \n\n\n \n https://doi.org/10.48550/arXiv.2302.00123\n\n\nFocus to learn more\n\n\n\n                  arXiv-issued DOI via DataCite",
+      "tag": "div",
+      "classes": [],
+      "text_length": 2478,
+      "word_count": 355,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 2,
+      "link_density": 0.05603625875566543,
+      "label": "title"
+    },
+    {
+      "text": "[Submitted on 31 Jan 2023]\nTitle:Design and Implementation of A Soccer Ball Detection System with Multiple Cameras\nAuthors:Lei Li, Tianfang Zhang, Zhongfeng Kang, Wenhan Zhang View a PDF of the paper titled Design and Implementation of A Soccer Ball Detection System with Multiple Cameras, by Lei Li and 3 other authors\nView PDF\n\nAbstract:The detection of small and medium-sized objects in three dimensions has always been a frontier exploration problem. This technology has a very wide application in sports analysis, games, virtual reality, human animation and other fields. The traditional three-dimensional small target detection technology has the disadvantages of high cost, low precision and inconvenience, so it is difficult to apply in practice. With the development of machine learning and deep learning, the technology of computer vision algorithms is becoming more mature. Creating an immersive media experience is considered to be a very important research work in sports.\nThe main work is to explore and solve the problem of football detection under the multiple cameras, aiming at the research and implementation of the live broadcast system of football matches. Using multi cameras detects a target ball and determines its position in three dimension with the occlusion, motion, low illumination of the target object.\nThis paper designed and implemented football detection system under multiple cameras for the detection and capture of targets in real-time matches. The main work mainly consists of three parts, football detector, single camera detection, and multi-cameras detection. The system used bundle adjustment to obtain the three-dimensional position of the target, and the GPU to accelerates data pre-processing and achieve accurate real-time capture of the target. By testing the system, it shows that the system can accurately detect and capture the moving targets in 3D.\nIn addition, the solution in this paper is reusable for large-scale competitions, like basketball and soccer. The system framework can be well transplanted into other similar engineering project systems. It has been put into the market.\n    \n\n\n \nComments:\n89 pages\n\n\nSubjects:\n\nComputer Vision and Pattern Recognition (cs.CV); Artificial Intelligence (cs.AI)\n\nCite as:\narXiv:2302.00123 [cs.CV]\n\n\n \n(or \narXiv:2302.00123v1 [cs.CV] for this version)\n          \n\n\n \n https://doi.org/10.48550/arXiv.2302.00123\n\n\nFocus to learn more\n\n\n\n                  arXiv-issued DOI via DataCite",
+      "tag": "div",
+      "classes": [],
+      "text_length": 2478,
+      "word_count": 355,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 0,
+      "link_density": 0.05603625875566543,
+      "label": "title"
+    },
+    {
+      "text": "[Submitted on 31 Jan 2023]",
+      "tag": "div",
+      "classes": [
+        "dateline"
+      ],
+      "text_length": 26,
+      "word_count": 5,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "year_candidate"
+    },
+    {
+      "text": "Title:Design and Implementation of A Soccer Ball Detection System with Multiple Cameras",
+      "tag": "h1",
+      "classes": [
+        "title",
+        "mathjax"
+      ],
+      "text_length": 87,
+      "word_count": 12,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "title"
+    },
+    {
+      "text": "Title:",
+      "tag": "span",
+      "classes": [
+        "descriptor"
+      ],
+      "text_length": 6,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Authors:Lei Li, Tianfang Zhang, Zhongfeng Kang, Wenhan Zhang",
+      "tag": "div",
+      "classes": [
+        "authors"
+      ],
+      "text_length": 60,
+      "word_count": 8,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 1,
+      "link_density": 0.765625,
+      "label": "author_candidate"
+    },
+    {
+      "text": "Authors:",
+      "tag": "span",
+      "classes": [
+        "descriptor"
+      ],
+      "text_length": 8,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "author_candidate"
+    },
+    {
+      "text": "View a PDF of the paper titled Design and Implementation of A Soccer Ball Detection System with Multiple Cameras, by Lei Li and 3 other authors",
+      "tag": "div",
+      "classes": [],
+      "text_length": 143,
+      "word_count": 26,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 2,
+      "link_density": 0.0,
+      "label": "title"
+    },
+    {
+      "text": "Abstract:",
+      "tag": "span",
+      "classes": [
+        "descriptor"
+      ],
+      "text_length": 9,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "abstract"
+    },
+    {
+      "text": "Comments:\n89 pages\n\n\nSubjects:\n\nComputer Vision and Pattern Recognition (cs.CV); Artificial Intelligence (cs.AI)\n\nCite as:\narXiv:2302.00123 [cs.CV]\n\n\n \n(or \narXiv:2302.00123v1 [cs.CV] for this version)\n          \n\n\n \n https://doi.org/10.48550/arXiv.2302.00123\n\n\nFocus to learn more\n\n\n\n                  arXiv-issued DOI via DataCite",
+      "tag": "div",
+      "classes": [
+        "metatable"
+      ],
+      "text_length": 332,
+      "word_count": 32,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 3,
+      "link_density": 0.27017543859649124,
+      "label": "journal"
+    },
+    {
+      "text": "Comments:",
+      "tag": "td",
+      "classes": [
+        "tablecell",
+        "label"
+      ],
+      "text_length": 9,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "89 pages",
+      "tag": "td",
+      "classes": [
+        "tablecell",
+        "comments",
+        "mathjax"
+      ],
+      "text_length": 8,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Subjects:",
+      "tag": "td",
+      "classes": [
+        "tablecell",
+        "label"
+      ],
+      "text_length": 9,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Computer Vision and Pattern Recognition (cs.CV); Artificial Intelligence (cs.AI)",
+      "tag": "td",
+      "classes": [
+        "tablecell",
+        "subjects"
+      ],
+      "text_length": 80,
+      "word_count": 9,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "content"
+    },
+    {
+      "text": "Computer Vision and Pattern Recognition (cs.CV)",
+      "tag": "span",
+      "classes": [
+        "primary-subject"
+      ],
+      "text_length": 47,
+      "word_count": 6,
+      "is_visible": true,
+      "dom_depth": 14,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Cite as:",
+      "tag": "td",
+      "classes": [
+        "tablecell",
+        "label"
+      ],
+      "text_length": 8,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "arXiv:2302.00123 [cs.CV]",
+      "tag": "td",
+      "classes": [
+        "tablecell",
+        "arxivid"
+      ],
+      "text_length": 24,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 1,
+      "link_density": 0.6666666666666666,
+      "label": "journal"
+    },
+    {
+      "text": "arXiv:2302.00123 [cs.CV]",
+      "tag": "span",
+      "classes": [
+        "arxivid"
+      ],
+      "text_length": 24,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 14,
+      "sibling_index": 0,
+      "link_density": 0.6666666666666666,
+      "label": "journal"
+    },
+    {
+      "text": "(or \narXiv:2302.00123v1 [cs.CV] for this version)",
+      "tag": "td",
+      "classes": [
+        "tablecell",
+        "arxividv"
+      ],
+      "text_length": 49,
+      "word_count": 6,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 1,
+      "link_density": 0.375,
+      "label": "journal"
+    },
+    {
+      "text": "arXiv:2302.00123v1 [cs.CV]",
+      "tag": "span",
+      "classes": [
+        "arxivid"
+      ],
+      "text_length": 26,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 14,
+      "sibling_index": 0,
+      "link_density": 0.6923076923076923,
+      "label": "journal"
+    },
+    {
+      "text": "https://doi.org/10.48550/arXiv.2302.00123\n\n\nFocus to learn more\n\n\n\n                  arXiv-issued DOI via DataCite",
+      "tag": "td",
+      "classes": [
+        "tablecell",
+        "arxivdoi"
+      ],
+      "text_length": 114,
+      "word_count": 9,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 1,
+      "link_density": 0.45054945054945056,
+      "label": "journal"
+    },
+    {
+      "text": "Focus to learn more\n\n\n\n                  arXiv-issued DOI via DataCite",
+      "tag": "div",
+      "classes": [
+        "button-and-tooltip"
+      ],
+      "text_length": 70,
+      "word_count": 8,
+      "is_visible": true,
+      "dom_depth": 14,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "journal"
+    },
+    {
+      "text": "Focus to learn more",
+      "tag": "span",
+      "classes": [
+        "visually-hidden"
+      ],
+      "text_length": 19,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 16,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "arXiv-issued DOI via DataCite",
+      "tag": "div",
+      "classes": [],
+      "text_length": 29,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 15,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "journal"
+    },
+    {
+      "text": "Submission history From: Lei Li [view email]       [v1]\n        Tue, 31 Jan 2023 22:04:53 UTC (18,803 KB)",
+      "tag": "div",
+      "classes": [
+        "submission-history"
+      ],
+      "text_length": 105,
+      "word_count": 16,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 3,
+      "link_density": 0.10752688172043011,
+      "label": "year_candidate"
+    },
+    {
+      "text": "Submission history",
+      "tag": "h2",
+      "classes": [],
+      "text_length": 18,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Full-text links:\nAccess Paper:\n\n\nView a PDF of the paper titled Design and Implementation of A Soccer Ball Detection System with Multiple Cameras, by Lei Li and 3 other authorsView PDFTeX Source\n \n\n\nview license\n\n\n \n    Current browse context: cs.CV\n\n\n< prev\n\n  |   \nnext >\n\n\nnew\n | \nrecent\n | 2023-02\n\n    Change to browse by:\n    \ncs\ncs.AI\n\n\n\n\nReferences & Citations\n\nNASA ADSGoogle Scholar\nSemantic Scholar\n\n\n\n\nexport BibTeX citation\nLoading...\n\n\n\n\nBibTeX formatted citation\n×\n\n\nloading...\n\n\nData provided by: \n\n\n\n\nBookmark",
+      "tag": "div",
+      "classes": [
+        "extra-services"
+      ],
+      "text_length": 526,
+      "word_count": 75,
+      "is_visible": true,
+      "dom_depth": 7,
+      "sibling_index": 1,
+      "link_density": 0.2531914893617021,
+      "label": "title"
+    },
+    {
+      "text": "Full-text links:\nAccess Paper:\n\n\nView a PDF of the paper titled Design and Implementation of A Soccer Ball Detection System with Multiple Cameras, by Lei Li and 3 other authorsView PDFTeX Source\n \n\n\nview license",
+      "tag": "div",
+      "classes": [
+        "full-text"
+      ],
+      "text_length": 211,
+      "word_count": 34,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 0,
+      "link_density": 0.15942028985507245,
+      "label": "title"
+    },
+    {
+      "text": "Full-text links:",
+      "tag": "span",
+      "classes": [
+        "descriptor"
+      ],
+      "text_length": 16,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Access Paper:",
+      "tag": "h2",
+      "classes": [],
+      "text_length": 13,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "View a PDF of the paper titled Design and Implementation of A Soccer Ball Detection System with Multiple Cameras, by Lei Li and 3 other authors",
+      "tag": "div",
+      "classes": [],
+      "text_length": 143,
+      "word_count": 26,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "title"
+    },
+    {
+      "text": "View PDF",
+      "tag": "li",
+      "classes": [],
+      "text_length": 8,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "TeX Source",
+      "tag": "li",
+      "classes": [],
+      "text_length": 10,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "view license",
+      "tag": "div",
+      "classes": [
+        "abs-license"
+      ],
+      "text_length": 12,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "view license",
+      "tag": "span",
+      "classes": [],
+      "text_length": 12,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Current browse context: cs.CV\n\n\n< prev\n\n  |   \nnext >\n\n\nnew\n | \nrecent\n | 2023-02\n\n    Change to browse by:\n    \ncs\ncs.AI",
+      "tag": "div",
+      "classes": [
+        "browse"
+      ],
+      "text_length": 121,
+      "word_count": 20,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 1,
+      "link_density": 0.41836734693877553,
+      "label": "year_candidate"
+    },
+    {
+      "text": "cs.CV",
+      "tag": "div",
+      "classes": [
+        "current"
+      ],
+      "text_length": 5,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "< prev\n\n  |   \nnext >",
+      "tag": "div",
+      "classes": [
+        "prevnext"
+      ],
+      "text_length": 21,
+      "word_count": 5,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 1,
+      "link_density": 0.8666666666666667,
+      "label": "other"
+    },
+    {
+      "text": "< prev",
+      "tag": "span",
+      "classes": [
+        "arrow"
+      ],
+      "text_length": 6,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "next >",
+      "tag": "span",
+      "classes": [
+        "arrow"
+      ],
+      "text_length": 6,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 2,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "new\n | \nrecent\n | 2023-02",
+      "tag": "div",
+      "classes": [
+        "list"
+      ],
+      "text_length": 25,
+      "word_count": 5,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 2,
+      "link_density": 0.8181818181818182,
+      "label": "year_candidate"
+    },
+    {
+      "text": "Change to browse by:\n    \ncs\ncs.AI",
+      "tag": "div",
+      "classes": [
+        "abs-switch-cat"
+      ],
+      "text_length": 34,
+      "word_count": 6,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 3,
+      "link_density": 0.27586206896551724,
+      "label": "other"
+    },
+    {
+      "text": "cs\ncs.AI",
+      "tag": "div",
+      "classes": [
+        "switch",
+        "context-change"
+      ],
+      "text_length": 8,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "References & Citations\n\nNASA ADSGoogle Scholar\nSemantic Scholar",
+      "tag": "div",
+      "classes": [
+        "extra-ref-cite"
+      ],
+      "text_length": 63,
+      "word_count": 8,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 2,
+      "link_density": 0.6349206349206349,
+      "label": "other"
+    },
+    {
+      "text": "References & Citations",
+      "tag": "h3",
+      "classes": [],
+      "text_length": 22,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "NASA ADS",
+      "tag": "li",
+      "classes": [],
+      "text_length": 8,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Google Scholar",
+      "tag": "li",
+      "classes": [],
+      "text_length": 14,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Semantic Scholar",
+      "tag": "li",
+      "classes": [],
+      "text_length": 16,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 2,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "export BibTeX citation\nLoading...",
+      "tag": "div",
+      "classes": [
+        "extra-ref-cite"
+      ],
+      "text_length": 33,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 3,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "export BibTeX citation",
+      "tag": "span",
+      "classes": [
+        "bib-cite-button",
+        "abs-button"
+      ],
+      "text_length": 22,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Loading...",
+      "tag": "span",
+      "classes": [],
+      "text_length": 10,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "BibTeX formatted citation\n×\n\n\nloading...\n\n\nData provided by:",
+      "tag": "div",
+      "classes": [
+        "bib-modal"
+      ],
+      "text_length": 60,
+      "word_count": 8,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 4,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "BibTeX formatted citation\n×\n\n\nloading...\n\n\nData provided by:",
+      "tag": "div",
+      "classes": [
+        "bib-modal-content"
+      ],
+      "text_length": 60,
+      "word_count": 8,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "BibTeX formatted citation\n×",
+      "tag": "div",
+      "classes": [
+        "bib-modal-title"
+      ],
+      "text_length": 27,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "BibTeX formatted citation",
+      "tag": "h2",
+      "classes": [],
+      "text_length": 25,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "loading...",
+      "tag": "div",
+      "classes": [],
+      "text_length": 10,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Data provided by:",
+      "tag": "div",
+      "classes": [],
+      "text_length": 17,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 2,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Data provided by:",
+      "tag": "span",
+      "classes": [],
+      "text_length": 17,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Bookmark",
+      "tag": "div",
+      "classes": [
+        "bookmarks"
+      ],
+      "text_length": 8,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 5,
+      "link_density": 0.125,
+      "label": "other"
+    },
+    {
+      "text": "Bookmark",
+      "tag": "div",
+      "classes": [],
+      "text_length": 8,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Bookmark",
+      "tag": "h3",
+      "classes": [],
+      "text_length": 8,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Bibliographic Tools\n\nBibliographic and Citation Tools\n\n\n\n\n\n\nBibliographic Explorer Toggle\n\n\n\nBibliographic Explorer (What is the Explorer?)\n\n\n\n\n\n\n\nConnected Papers Toggle\n\n\n\nConnected Papers (What is Connected Papers?)\n\n\n\n\n\n\nLitmaps Toggle\n\n\n\nLitmaps (What is Litmaps?)\n\n\n\n\n\n\n\nscite.ai Toggle\n\n\n\nscite Smart Citations (What are Smart Citations?)\n\n\n\n\n\n\n\n\n\nCode, Data, Media\n\nCode, Data and Media Associated with this Article\n\n\n\n\n\n\nalphaXiv Toggle\n\n\n\nalphaXiv (What is alphaXiv?)\n\n\n\n\n\n\n\nLinks to Code Toggle\n\n\n\nCatalyzeX Code Finder for Papers (What is CatalyzeX?)\n\n\n\n\n\n\n\nDagsHub Toggle\n\n\n\nDagsHub (What is DagsHub?)\n\n\n\n\n\n\n\nGotitPub Toggle\n\n\n\nGotit.pub (What is GotitPub?)\n\n\n\n\n\n\n\nHuggingface Toggle\n\n\n\nHugging Face (What is Huggingface?)\n\n\n\n\n\n\n\nLinks to Code Toggle\n\n\n\nPapers with Code (What is Papers with Code?)\n\n\n\n\n\n\n\nScienceCast Toggle\n\n\n\nScienceCast (What is ScienceCast?)\n\n\n\n\n\n\n\n\n\n\n\n\n\nDemos\n\nDemos\n\n\n\n\n\n\nReplicate Toggle\n\n\n\nReplicate (What is Replicate?)\n\n\n\n\n\n\n\nSpaces Toggle\n\n\n\nHugging Face Spaces (What is Spaces?)\n\n\n\n\n\n\n\nSpaces Toggle\n\n\n\nTXYZ.AI (What is TXYZ.AI?)\n\n\n\n\n\n\n\n\nRelated Papers\n\nRecommenders and Search Tools\n\n\n\n\n\n\nLink to Influence Flower\n\n\n\nInfluence Flower (What are Influence Flowers?)\n\n\n\n\n\n\n\nCore recommender toggle\n\n\n\nCORE Recommender (What is CORE?)\n\n\n\n\n\nAuthor\nVenue\nInstitution\nTopic\n\n\n\n\n\n\n\n\n\n\n\n\n\n        About arXivLabs\n      \n\n\n\narXivLabs: experimental projects with community collaborators\narXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.\nBoth individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.\nHave an idea for a project that will add value for arXiv's community? Learn more about arXivLabs.",
+      "tag": "div",
+      "classes": [],
+      "text_length": 1874,
+      "word_count": 235,
+      "is_visible": true,
+      "dom_depth": 7,
+      "sibling_index": 2,
+      "link_density": 0.22711058263971462,
+      "label": "title"
+    },
+    {
+      "text": "Bibliographic Tools\n\nBibliographic and Citation Tools\n\n\n\n\n\n\nBibliographic Explorer Toggle\n\n\n\nBibliographic Explorer (What is the Explorer?)\n\n\n\n\n\n\n\nConnected Papers Toggle\n\n\n\nConnected Papers (What is Connected Papers?)\n\n\n\n\n\n\nLitmaps Toggle\n\n\n\nLitmaps (What is Litmaps?)\n\n\n\n\n\n\n\nscite.ai Toggle\n\n\n\nscite Smart Citations (What are Smart Citations?)\n\n\n\n\n\n\n\n\n\nCode, Data, Media\n\nCode, Data and Media Associated with this Article\n\n\n\n\n\n\nalphaXiv Toggle\n\n\n\nalphaXiv (What is alphaXiv?)\n\n\n\n\n\n\n\nLinks to Code Toggle\n\n\n\nCatalyzeX Code Finder for Papers (What is CatalyzeX?)\n\n\n\n\n\n\n\nDagsHub Toggle\n\n\n\nDagsHub (What is DagsHub?)\n\n\n\n\n\n\n\nGotitPub Toggle\n\n\n\nGotit.pub (What is GotitPub?)\n\n\n\n\n\n\n\nHuggingface Toggle\n\n\n\nHugging Face (What is Huggingface?)\n\n\n\n\n\n\n\nLinks to Code Toggle\n\n\n\nPapers with Code (What is Papers with Code?)\n\n\n\n\n\n\n\nScienceCast Toggle\n\n\n\nScienceCast (What is ScienceCast?)\n\n\n\n\n\n\n\n\n\n\n\n\n\nDemos\n\nDemos\n\n\n\n\n\n\nReplicate Toggle\n\n\n\nReplicate (What is Replicate?)\n\n\n\n\n\n\n\nSpaces Toggle\n\n\n\nHugging Face Spaces (What is Spaces?)\n\n\n\n\n\n\n\nSpaces Toggle\n\n\n\nTXYZ.AI (What is TXYZ.AI?)\n\n\n\n\n\n\n\n\nRelated Papers\n\nRecommenders and Search Tools\n\n\n\n\n\n\nLink to Influence Flower\n\n\n\nInfluence Flower (What are Influence Flowers?)\n\n\n\n\n\n\n\nCore recommender toggle\n\n\n\nCORE Recommender (What is CORE?)\n\n\n\n\n\nAuthor\nVenue\nInstitution\nTopic\n\n\n\n\n\n\n\n\n\n\n\n\n\n        About arXivLabs\n      \n\n\n\narXivLabs: experimental projects with community collaborators\narXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.\nBoth individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.\nHave an idea for a project that will add value for arXiv's community? Learn more about arXivLabs.",
+      "tag": "div",
+      "classes": [
+        "labstabs"
+      ],
+      "text_length": 1874,
+      "word_count": 235,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 0,
+      "link_density": 0.22711058263971462,
+      "label": "title"
+    },
+    {
+      "text": "Bibliographic and Citation Tools\n\n\n\n\n\n\nBibliographic Explorer Toggle\n\n\n\nBibliographic Explorer (What is the Explorer?)\n\n\n\n\n\n\n\nConnected Papers Toggle\n\n\n\nConnected Papers (What is Connected Papers?)\n\n\n\n\n\n\nLitmaps Toggle\n\n\n\nLitmaps (What is Litmaps?)\n\n\n\n\n\n\n\nscite.ai Toggle\n\n\n\nscite Smart Citations (What are Smart Citations?)",
+      "tag": "div",
+      "classes": [
+        "tab",
+        "labs-display-bib"
+      ],
+      "text_length": 324,
+      "word_count": 37,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 0,
+      "link_density": 0.30612244897959184,
+      "label": "content"
+    },
+    {
+      "text": "Bibliographic and Citation Tools",
+      "tag": "h1",
+      "classes": [],
+      "text_length": 32,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Bibliographic Explorer Toggle\n\n\n\nBibliographic Explorer (What is the Explorer?)\n\n\n\n\n\n\n\nConnected Papers Toggle\n\n\n\nConnected Papers (What is Connected Papers?)\n\n\n\n\n\n\nLitmaps Toggle\n\n\n\nLitmaps (What is Litmaps?)\n\n\n\n\n\n\n\nscite.ai Toggle\n\n\n\nscite Smart Citations (What are Smart Citations?)",
+      "tag": "div",
+      "classes": [
+        "toggle"
+      ],
+      "text_length": 285,
+      "word_count": 33,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.3448275862068966,
+      "label": "content"
+    },
+    {
+      "text": "Bibliographic Explorer Toggle\n\n\n\nBibliographic Explorer (What is the Explorer?)",
+      "tag": "div",
+      "classes": [
+        "columns",
+        "is-mobile",
+        "lab-row"
+      ],
+      "text_length": 79,
+      "word_count": 9,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.2692307692307692,
+      "label": "content"
+    },
+    {
+      "text": "Bibliographic Explorer Toggle",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-switch"
+      ],
+      "text_length": 29,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Bibliographic Explorer Toggle",
+      "tag": "span",
+      "classes": [
+        "is-sr-only"
+      ],
+      "text_length": 29,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 14,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Bibliographic Explorer (What is the Explorer?)",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-name"
+      ],
+      "text_length": 46,
+      "word_count": 6,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 1,
+      "link_density": 0.4375,
+      "label": "other"
+    },
+    {
+      "text": "Bibliographic Explorer",
+      "tag": "span",
+      "classes": [],
+      "text_length": 22,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Connected Papers Toggle\n\n\n\nConnected Papers (What is Connected Papers?)",
+      "tag": "div",
+      "classes": [
+        "columns",
+        "is-mobile",
+        "lab-row"
+      ],
+      "text_length": 71,
+      "word_count": 9,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 1,
+      "link_density": 0.35714285714285715,
+      "label": "content"
+    },
+    {
+      "text": "Connected Papers Toggle",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-switch"
+      ],
+      "text_length": 23,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Connected Papers Toggle",
+      "tag": "span",
+      "classes": [
+        "is-sr-only"
+      ],
+      "text_length": 23,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 14,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Connected Papers (What is Connected Papers?)",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-name"
+      ],
+      "text_length": 44,
+      "word_count": 6,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 1,
+      "link_density": 0.5434782608695652,
+      "label": "other"
+    },
+    {
+      "text": "Connected Papers",
+      "tag": "span",
+      "classes": [],
+      "text_length": 16,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Litmaps Toggle\n\n\n\nLitmaps (What is Litmaps?)",
+      "tag": "div",
+      "classes": [
+        "columns",
+        "is-mobile",
+        "lab-row"
+      ],
+      "text_length": 44,
+      "word_count": 6,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 2,
+      "link_density": 0.37209302325581395,
+      "label": "other"
+    },
+    {
+      "text": "Litmaps Toggle",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-switch"
+      ],
+      "text_length": 14,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Litmaps Toggle",
+      "tag": "span",
+      "classes": [
+        "is-sr-only"
+      ],
+      "text_length": 14,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 14,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Litmaps (What is Litmaps?)",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-name"
+      ],
+      "text_length": 26,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 1,
+      "link_density": 0.5714285714285714,
+      "label": "other"
+    },
+    {
+      "text": "Litmaps",
+      "tag": "span",
+      "classes": [],
+      "text_length": 7,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "scite.ai Toggle\n\n\n\nscite Smart Citations (What are Smart Citations?)",
+      "tag": "div",
+      "classes": [
+        "columns",
+        "is-mobile",
+        "lab-row"
+      ],
+      "text_length": 68,
+      "word_count": 9,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 3,
+      "link_density": 0.373134328358209,
+      "label": "content"
+    },
+    {
+      "text": "scite.ai Toggle",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-switch"
+      ],
+      "text_length": 15,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "scite.ai Toggle",
+      "tag": "span",
+      "classes": [
+        "is-sr-only"
+      ],
+      "text_length": 15,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 14,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "scite Smart Citations (What are Smart Citations?)",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-name"
+      ],
+      "text_length": 49,
+      "word_count": 7,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 1,
+      "link_density": 0.49019607843137253,
+      "label": "other"
+    },
+    {
+      "text": "scite Smart Citations",
+      "tag": "span",
+      "classes": [],
+      "text_length": 21,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Code, Data and Media Associated with this Article\n\n\n\n\n\n\nalphaXiv Toggle\n\n\n\nalphaXiv (What is alphaXiv?)\n\n\n\n\n\n\n\nLinks to Code Toggle\n\n\n\nCatalyzeX Code Finder for Papers (What is CatalyzeX?)\n\n\n\n\n\n\n\nDagsHub Toggle\n\n\n\nDagsHub (What is DagsHub?)\n\n\n\n\n\n\n\nGotitPub Toggle\n\n\n\nGotit.pub (What is GotitPub?)\n\n\n\n\n\n\n\nHuggingface Toggle\n\n\n\nHugging Face (What is Huggingface?)\n\n\n\n\n\n\n\nLinks to Code Toggle\n\n\n\nPapers with Code (What is Papers with Code?)\n\n\n\n\n\n\n\nScienceCast Toggle\n\n\n\nScienceCast (What is ScienceCast?)",
+      "tag": "div",
+      "classes": [
+        "tab"
+      ],
+      "text_length": 501,
+      "word_count": 63,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 1,
+      "link_density": 0.3116591928251121,
+      "label": "content"
+    },
+    {
+      "text": "Code, Data and Media Associated with this Article",
+      "tag": "h1",
+      "classes": [],
+      "text_length": 49,
+      "word_count": 8,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "alphaXiv Toggle\n\n\n\nalphaXiv (What is alphaXiv?)\n\n\n\n\n\n\n\nLinks to Code Toggle\n\n\n\nCatalyzeX Code Finder for Papers (What is CatalyzeX?)\n\n\n\n\n\n\n\nDagsHub Toggle\n\n\n\nDagsHub (What is DagsHub?)\n\n\n\n\n\n\n\nGotitPub Toggle\n\n\n\nGotit.pub (What is GotitPub?)\n\n\n\n\n\n\n\nHuggingface Toggle\n\n\n\nHugging Face (What is Huggingface?)\n\n\n\n\n\n\n\nLinks to Code Toggle\n\n\n\nPapers with Code (What is Papers with Code?)\n\n\n\n\n\n\n\nScienceCast Toggle\n\n\n\nScienceCast (What is ScienceCast?)",
+      "tag": "div",
+      "classes": [
+        "toggle"
+      ],
+      "text_length": 445,
+      "word_count": 55,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.351010101010101,
+      "label": "content"
+    },
+    {
+      "text": "alphaXiv Toggle\n\n\n\nalphaXiv (What is alphaXiv?)",
+      "tag": "div",
+      "classes": [
+        "columns",
+        "is-mobile",
+        "lab-row"
+      ],
+      "text_length": 47,
+      "word_count": 6,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.3695652173913043,
+      "label": "other"
+    },
+    {
+      "text": "alphaXiv Toggle",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-switch"
+      ],
+      "text_length": 15,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "alphaXiv Toggle",
+      "tag": "span",
+      "classes": [
+        "is-sr-only"
+      ],
+      "text_length": 15,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 14,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "alphaXiv (What is alphaXiv?)",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-name"
+      ],
+      "text_length": 28,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 1,
+      "link_density": 0.5666666666666667,
+      "label": "other"
+    },
+    {
+      "text": "alphaXiv",
+      "tag": "span",
+      "classes": [],
+      "text_length": 8,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Links to Code Toggle\n\n\n\nCatalyzeX Code Finder for Papers (What is CatalyzeX?)",
+      "tag": "div",
+      "classes": [
+        "columns",
+        "is-mobile",
+        "lab-row"
+      ],
+      "text_length": 77,
+      "word_count": 12,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 1,
+      "link_density": 0.23684210526315788,
+      "label": "content"
+    },
+    {
+      "text": "Links to Code Toggle",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-switch"
+      ],
+      "text_length": 20,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Links to Code Toggle",
+      "tag": "span",
+      "classes": [
+        "is-sr-only"
+      ],
+      "text_length": 20,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 14,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "CatalyzeX Code Finder for Papers (What is CatalyzeX?)",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-name"
+      ],
+      "text_length": 53,
+      "word_count": 8,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 1,
+      "link_density": 0.32727272727272727,
+      "label": "other"
+    },
+    {
+      "text": "CatalyzeX Code Finder for Papers",
+      "tag": "span",
+      "classes": [],
+      "text_length": 32,
+      "word_count": 5,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "DagsHub Toggle\n\n\n\nDagsHub (What is DagsHub?)",
+      "tag": "div",
+      "classes": [
+        "columns",
+        "is-mobile",
+        "lab-row"
+      ],
+      "text_length": 44,
+      "word_count": 6,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 2,
+      "link_density": 0.37209302325581395,
+      "label": "other"
+    },
+    {
+      "text": "DagsHub Toggle",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-switch"
+      ],
+      "text_length": 14,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "DagsHub Toggle",
+      "tag": "span",
+      "classes": [
+        "is-sr-only"
+      ],
+      "text_length": 14,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 14,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "DagsHub (What is DagsHub?)",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-name"
+      ],
+      "text_length": 26,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 1,
+      "link_density": 0.5714285714285714,
+      "label": "other"
+    },
+    {
+      "text": "DagsHub",
+      "tag": "span",
+      "classes": [],
+      "text_length": 7,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "GotitPub Toggle\n\n\n\nGotit.pub (What is GotitPub?)",
+      "tag": "div",
+      "classes": [
+        "columns",
+        "is-mobile",
+        "lab-row"
+      ],
+      "text_length": 48,
+      "word_count": 6,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 3,
+      "link_density": 0.3617021276595745,
+      "label": "other"
+    },
+    {
+      "text": "GotitPub Toggle",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-switch"
+      ],
+      "text_length": 15,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "GotitPub Toggle",
+      "tag": "span",
+      "classes": [
+        "is-sr-only"
+      ],
+      "text_length": 15,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 14,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Gotit.pub (What is GotitPub?)",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-name"
+      ],
+      "text_length": 29,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 1,
+      "link_density": 0.5483870967741935,
+      "label": "other"
+    },
+    {
+      "text": "Gotit.pub",
+      "tag": "span",
+      "classes": [],
+      "text_length": 9,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Huggingface Toggle\n\n\n\nHugging Face (What is Huggingface?)",
+      "tag": "div",
+      "classes": [
+        "columns",
+        "is-mobile",
+        "lab-row"
+      ],
+      "text_length": 57,
+      "word_count": 7,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 4,
+      "link_density": 0.35714285714285715,
+      "label": "other"
+    },
+    {
+      "text": "Huggingface Toggle",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-switch"
+      ],
+      "text_length": 18,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Huggingface Toggle",
+      "tag": "span",
+      "classes": [
+        "is-sr-only"
+      ],
+      "text_length": 18,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 14,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Hugging Face (What is Huggingface?)",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-name"
+      ],
+      "text_length": 35,
+      "word_count": 5,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 1,
+      "link_density": 0.5405405405405406,
+      "label": "other"
+    },
+    {
+      "text": "Hugging Face",
+      "tag": "span",
+      "classes": [],
+      "text_length": 12,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Links to Code Toggle\n\n\n\nPapers with Code (What is Papers with Code?)",
+      "tag": "div",
+      "classes": [
+        "columns",
+        "is-mobile",
+        "lab-row"
+      ],
+      "text_length": 68,
+      "word_count": 12,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 5,
+      "link_density": 0.373134328358209,
+      "label": "content"
+    },
+    {
+      "text": "Links to Code Toggle",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-switch"
+      ],
+      "text_length": 20,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Links to Code Toggle",
+      "tag": "span",
+      "classes": [
+        "is-sr-only"
+      ],
+      "text_length": 20,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 14,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Papers with Code (What is Papers with Code?)",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-name"
+      ],
+      "text_length": 44,
+      "word_count": 8,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 1,
+      "link_density": 0.5434782608695652,
+      "label": "other"
+    },
+    {
+      "text": "Papers with Code",
+      "tag": "span",
+      "classes": [],
+      "text_length": 16,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "ScienceCast Toggle\n\n\n\nScienceCast (What is ScienceCast?)",
+      "tag": "div",
+      "classes": [
+        "columns",
+        "is-mobile",
+        "lab-row"
+      ],
+      "text_length": 56,
+      "word_count": 6,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 6,
+      "link_density": 0.36363636363636365,
+      "label": "other"
+    },
+    {
+      "text": "ScienceCast Toggle",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-switch"
+      ],
+      "text_length": 18,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "ScienceCast Toggle",
+      "tag": "span",
+      "classes": [
+        "is-sr-only"
+      ],
+      "text_length": 18,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 14,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "ScienceCast (What is ScienceCast?)",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-name"
+      ],
+      "text_length": 34,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 1,
+      "link_density": 0.5555555555555556,
+      "label": "other"
+    },
+    {
+      "text": "ScienceCast",
+      "tag": "span",
+      "classes": [],
+      "text_length": 11,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Demos\n\n\n\n\n\n\nReplicate Toggle\n\n\n\nReplicate (What is Replicate?)\n\n\n\n\n\n\n\nSpaces Toggle\n\n\n\nHugging Face Spaces (What is Spaces?)\n\n\n\n\n\n\n\nSpaces Toggle\n\n\n\nTXYZ.AI (What is TXYZ.AI?)",
+      "tag": "div",
+      "classes": [
+        "tab"
+      ],
+      "text_length": 175,
+      "word_count": 21,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 2,
+      "link_density": 0.3355263157894737,
+      "label": "content"
+    },
+    {
+      "text": "Demos",
+      "tag": "h1",
+      "classes": [],
+      "text_length": 5,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Replicate Toggle\n\n\n\nReplicate (What is Replicate?)\n\n\n\n\n\n\n\nSpaces Toggle\n\n\n\nHugging Face Spaces (What is Spaces?)\n\n\n\n\n\n\n\nSpaces Toggle\n\n\n\nTXYZ.AI (What is TXYZ.AI?)",
+      "tag": "div",
+      "classes": [
+        "toggle"
+      ],
+      "text_length": 163,
+      "word_count": 20,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.3493150684931507,
+      "label": "content"
+    },
+    {
+      "text": "Replicate Toggle\n\n\n\nReplicate (What is Replicate?)",
+      "tag": "div",
+      "classes": [
+        "columns",
+        "is-mobile",
+        "lab-row"
+      ],
+      "text_length": 50,
+      "word_count": 6,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.3673469387755102,
+      "label": "other"
+    },
+    {
+      "text": "Replicate Toggle",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-switch"
+      ],
+      "text_length": 16,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Replicate Toggle",
+      "tag": "span",
+      "classes": [
+        "is-sr-only"
+      ],
+      "text_length": 16,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 14,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Replicate (What is Replicate?)",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-name"
+      ],
+      "text_length": 30,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 1,
+      "link_density": 0.5625,
+      "label": "other"
+    },
+    {
+      "text": "Replicate",
+      "tag": "span",
+      "classes": [],
+      "text_length": 9,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Spaces Toggle\n\n\n\nHugging Face Spaces (What is Spaces?)",
+      "tag": "div",
+      "classes": [
+        "columns",
+        "is-mobile",
+        "lab-row"
+      ],
+      "text_length": 54,
+      "word_count": 8,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 1,
+      "link_density": 0.2830188679245283,
+      "label": "other"
+    },
+    {
+      "text": "Spaces Toggle",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-switch"
+      ],
+      "text_length": 13,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Spaces Toggle",
+      "tag": "span",
+      "classes": [
+        "is-sr-only"
+      ],
+      "text_length": 13,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 14,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Hugging Face Spaces (What is Spaces?)",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-name"
+      ],
+      "text_length": 37,
+      "word_count": 6,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 1,
+      "link_density": 0.38461538461538464,
+      "label": "other"
+    },
+    {
+      "text": "Hugging Face Spaces",
+      "tag": "span",
+      "classes": [],
+      "text_length": 19,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Spaces Toggle\n\n\n\nTXYZ.AI (What is TXYZ.AI?)",
+      "tag": "div",
+      "classes": [
+        "columns",
+        "is-mobile",
+        "lab-row"
+      ],
+      "text_length": 43,
+      "word_count": 6,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 2,
+      "link_density": 0.38095238095238093,
+      "label": "other"
+    },
+    {
+      "text": "Spaces Toggle",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-switch"
+      ],
+      "text_length": 13,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Spaces Toggle",
+      "tag": "span",
+      "classes": [
+        "is-sr-only"
+      ],
+      "text_length": 13,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 14,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "TXYZ.AI (What is TXYZ.AI?)",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-name"
+      ],
+      "text_length": 26,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 1,
+      "link_density": 0.5714285714285714,
+      "label": "other"
+    },
+    {
+      "text": "TXYZ.AI",
+      "tag": "span",
+      "classes": [],
+      "text_length": 7,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Recommenders and Search Tools\n\n\n\n\n\n\nLink to Influence Flower\n\n\n\nInfluence Flower (What are Influence Flowers?)\n\n\n\n\n\n\n\nCore recommender toggle\n\n\n\nCORE Recommender (What is CORE?)\n\n\n\n\n\nAuthor\nVenue\nInstitution\nTopic",
+      "tag": "div",
+      "classes": [
+        "tab"
+      ],
+      "text_length": 213,
+      "word_count": 26,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 3,
+      "link_density": 0.37305699481865284,
+      "label": "author_candidate"
+    },
+    {
+      "text": "Recommenders and Search Tools",
+      "tag": "h1",
+      "classes": [],
+      "text_length": 29,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Link to Influence Flower\n\n\n\nInfluence Flower (What are Influence Flowers?)\n\n\n\n\n\n\n\nCore recommender toggle\n\n\n\nCORE Recommender (What is CORE?)",
+      "tag": "div",
+      "classes": [
+        "toggle"
+      ],
+      "text_length": 141,
+      "word_count": 18,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.3106060606060606,
+      "label": "content"
+    },
+    {
+      "text": "Link to Influence Flower\n\n\n\nInfluence Flower (What are Influence Flowers?)",
+      "tag": "div",
+      "classes": [
+        "columns",
+        "is-mobile",
+        "lab-row"
+      ],
+      "text_length": 74,
+      "word_count": 10,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.3698630136986301,
+      "label": "content"
+    },
+    {
+      "text": "Link to Influence Flower",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-switch"
+      ],
+      "text_length": 24,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Link to Influence Flower",
+      "tag": "span",
+      "classes": [
+        "is-sr-only"
+      ],
+      "text_length": 24,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 14,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Influence Flower (What are Influence Flowers?)",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-name"
+      ],
+      "text_length": 46,
+      "word_count": 6,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 1,
+      "link_density": 0.5625,
+      "label": "other"
+    },
+    {
+      "text": "Influence Flower",
+      "tag": "span",
+      "classes": [],
+      "text_length": 16,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Core recommender toggle\n\n\n\nCORE Recommender (What is CORE?)",
+      "tag": "div",
+      "classes": [
+        "columns",
+        "is-mobile",
+        "lab-row"
+      ],
+      "text_length": 59,
+      "word_count": 8,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 1,
+      "link_density": 0.22413793103448276,
+      "label": "other"
+    },
+    {
+      "text": "Core recommender toggle",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-switch"
+      ],
+      "text_length": 23,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Core recommender toggle",
+      "tag": "span",
+      "classes": [
+        "is-sr-only"
+      ],
+      "text_length": 23,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 14,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "CORE Recommender (What is CORE?)",
+      "tag": "div",
+      "classes": [
+        "column",
+        "lab-name"
+      ],
+      "text_length": 32,
+      "word_count": 5,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 1,
+      "link_density": 0.38235294117647056,
+      "label": "other"
+    },
+    {
+      "text": "CORE Recommender",
+      "tag": "span",
+      "classes": [],
+      "text_length": 16,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Author\nVenue\nInstitution\nTopic",
+      "tag": "div",
+      "classes": [],
+      "text_length": 30,
+      "word_count": 4,
+      "is_visible": false,
+      "dom_depth": 10,
+      "sibling_index": 2,
+      "link_density": 1.0,
+      "label": "author_candidate"
+    },
+    {
+      "text": "Author",
+      "tag": "li",
+      "classes": [
+        "active"
+      ],
+      "text_length": 6,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "author_candidate"
+    },
+    {
+      "text": "Venue",
+      "tag": "li",
+      "classes": [],
+      "text_length": 5,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Institution",
+      "tag": "li",
+      "classes": [],
+      "text_length": 11,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 2,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Topic",
+      "tag": "li",
+      "classes": [],
+      "text_length": 5,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 3,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "arXivLabs: experimental projects with community collaborators\narXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.\nBoth individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.\nHave an idea for a project that will add value for arXiv's community? Learn more about arXivLabs.",
+      "tag": "div",
+      "classes": [
+        "tab"
+      ],
+      "text_length": 517,
+      "word_count": 78,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 4,
+      "link_density": 0.05019305019305019,
+      "label": "title"
+    },
+    {
+      "text": "arXivLabs: experimental projects with community collaborators\narXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.\nBoth individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.\nHave an idea for a project that will add value for arXiv's community? Learn more about arXivLabs.",
+      "tag": "div",
+      "classes": [
+        "columns"
+      ],
+      "text_length": 517,
+      "word_count": 78,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.05019305019305019,
+      "label": "title"
+    },
+    {
+      "text": "arXivLabs: experimental projects with community collaborators\narXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.\nBoth individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.\nHave an idea for a project that will add value for arXiv's community? Learn more about arXivLabs.",
+      "tag": "div",
+      "classes": [
+        "column"
+      ],
+      "text_length": 517,
+      "word_count": 78,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.05019305019305019,
+      "label": "title"
+    },
+    {
+      "text": "arXivLabs: experimental projects with community collaborators",
+      "tag": "h1",
+      "classes": [],
+      "text_length": 61,
+      "word_count": 6,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "journal"
+    },
+    {
+      "text": "arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.",
+      "tag": "p",
+      "classes": [],
+      "text_length": 115,
+      "word_count": 18,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "journal"
+    },
+    {
+      "text": "Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.",
+      "tag": "p",
+      "classes": [],
+      "text_length": 241,
+      "word_count": 37,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "title"
+    },
+    {
+      "text": "Have an idea for a project that will add value for arXiv's community? Learn more about arXivLabs.",
+      "tag": "p",
+      "classes": [],
+      "text_length": 97,
+      "word_count": 17,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 2,
+      "link_density": 0.2653061224489796,
+      "label": "journal"
+    },
+    {
+      "text": "Which authors of this paper are endorsers? |\n    Disable MathJax (What is MathJax?)",
+      "tag": "div",
+      "classes": [
+        "endorsers"
+      ],
+      "text_length": 83,
+      "word_count": 13,
+      "is_visible": true,
+      "dom_depth": 7,
+      "sibling_index": 3,
+      "link_density": 0.9259259259259259,
+      "label": "author_candidate"
+    },
+    {
+      "text": "About\nHelp\n\n\n\n\n\ncontact arXivClick here to contact arXiv\n Contact\n\n\nsubscribe to arXiv mailingsClick here to subscribe\n Subscribe\n\n\n\n\n\n\n\n\n\n\n\nCopyright\nPrivacy Policy\n\n\n\n\nWeb Accessibility Assistance\n\n\narXiv Operational Status",
+      "tag": "div",
+      "classes": [
+        "columns",
+        "is-desktop"
+      ],
+      "text_length": 225,
+      "word_count": 26,
+      "is_visible": true,
+      "dom_depth": 5,
+      "sibling_index": 0,
+      "link_density": 0.5323383084577115,
+      "label": "journal"
+    },
+    {
+      "text": "About\nHelp\n\n\n\n\n\ncontact arXivClick here to contact arXiv\n Contact\n\n\nsubscribe to arXiv mailingsClick here to subscribe\n Subscribe",
+      "tag": "div",
+      "classes": [
+        "column"
+      ],
+      "text_length": 129,
+      "word_count": 17,
+      "is_visible": true,
+      "dom_depth": 6,
+      "sibling_index": 0,
+      "link_density": 0.22950819672131148,
+      "label": "journal"
+    },
+    {
+      "text": "About\nHelp\n\n\n\n\n\ncontact arXivClick here to contact arXiv\n Contact\n\n\nsubscribe to arXiv mailingsClick here to subscribe\n Subscribe",
+      "tag": "div",
+      "classes": [
+        "columns"
+      ],
+      "text_length": 129,
+      "word_count": 17,
+      "is_visible": true,
+      "dom_depth": 7,
+      "sibling_index": 0,
+      "link_density": 0.22950819672131148,
+      "label": "journal"
+    },
+    {
+      "text": "About\nHelp",
+      "tag": "div",
+      "classes": [
+        "column"
+      ],
+      "text_length": 10,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "About",
+      "tag": "li",
+      "classes": [],
+      "text_length": 5,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Help",
+      "tag": "li",
+      "classes": [],
+      "text_length": 4,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "contact arXivClick here to contact arXiv\n Contact\n\n\nsubscribe to arXiv mailingsClick here to subscribe\n Subscribe",
+      "tag": "div",
+      "classes": [
+        "column"
+      ],
+      "text_length": 113,
+      "word_count": 15,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 1,
+      "link_density": 0.15315315315315314,
+      "label": "journal"
+    },
+    {
+      "text": "contact arXivClick here to contact arXiv\n Contact",
+      "tag": "li",
+      "classes": [],
+      "text_length": 49,
+      "word_count": 7,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.14285714285714285,
+      "label": "journal"
+    },
+    {
+      "text": "subscribe to arXiv mailingsClick here to subscribe\n Subscribe",
+      "tag": "li",
+      "classes": [],
+      "text_length": 61,
+      "word_count": 8,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 1,
+      "link_density": 0.14754098360655737,
+      "label": "journal"
+    },
+    {
+      "text": "Copyright\nPrivacy Policy\n\n\n\n\nWeb Accessibility Assistance\n\n\narXiv Operational Status",
+      "tag": "div",
+      "classes": [
+        "column"
+      ],
+      "text_length": 84,
+      "word_count": 9,
+      "is_visible": true,
+      "dom_depth": 6,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "journal"
+    },
+    {
+      "text": "Copyright\nPrivacy Policy\n\n\n\n\nWeb Accessibility Assistance\n\n\narXiv Operational Status",
+      "tag": "div",
+      "classes": [
+        "columns"
+      ],
+      "text_length": 84,
+      "word_count": 9,
+      "is_visible": true,
+      "dom_depth": 7,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "journal"
+    },
+    {
+      "text": "Copyright\nPrivacy Policy",
+      "tag": "div",
+      "classes": [
+        "column"
+      ],
+      "text_length": 24,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Copyright",
+      "tag": "li",
+      "classes": [],
+      "text_length": 9,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Privacy Policy",
+      "tag": "li",
+      "classes": [],
+      "text_length": 14,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Web Accessibility Assistance\n\n\narXiv Operational Status",
+      "tag": "div",
+      "classes": [
+        "column",
+        "sorry-app-links"
+      ],
+      "text_length": 55,
+      "word_count": 6,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "journal"
+    },
+    {
+      "text": "Web Accessibility Assistance",
+      "tag": "li",
+      "classes": [],
+      "text_length": 28,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "arXiv Operational Status",
+      "tag": "li",
+      "classes": [],
+      "text_length": 24,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "journal"
+    },
+    {
+      "text": "arXiv Operational Status",
+      "tag": "p",
+      "classes": [
+        "help"
+      ],
+      "text_length": 24,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "journal"
+    }
+  ],
+  "ground_truth": {
+    "title": "Design and Implementation of A Soccer Ball Detection System with Multiple Cameras",
+    "authors": [
+      "Li, Lei",
+      "Zhang, Tianfang",
+      "Kang, Zhongfeng",
+      "Zhang, Wenhan"
+    ],
+    "year": null,
+    "doi": null,
+    "journal": "arXiv",
+    "extraction_method": "rule_based"
+  },
+  "has_cite_button": true,
+  "has_structured_metadata": true,
+  "total_blocks": 212,
+  "labeled_blocks": 77
+}

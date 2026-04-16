@@ -1,0 +1,1446 @@
+{
+  "id": "university_repo_2",
+  "url": "https://researchrepository.wvu.edu/etd/11345/",
+  "source_type": "university_repo",
+  "complexity": {
+    "score": 3,
+    "level": "high",
+    "text_blocks_count": 108
+  },
+  "text_blocks": [
+    {
+      "text": "Home",
+      "tag": "li",
+      "classes": [
+        "menu-item",
+        "active",
+        "device-fixed-width"
+      ],
+      "text_length": 4,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 6,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Search",
+      "tag": "li",
+      "classes": [
+        "menu-item",
+        "device-fixed-width"
+      ],
+      "text_length": 6,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 6,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Browse Collections",
+      "tag": "li",
+      "classes": [
+        "menu-item",
+        "device-fixed-width"
+      ],
+      "text_length": 18,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 6,
+      "sibling_index": 2,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "My Account",
+      "tag": "li",
+      "classes": [
+        "menu-item",
+        "device-fixed-width"
+      ],
+      "text_length": 10,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 6,
+      "sibling_index": 3,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "About",
+      "tag": "li",
+      "classes": [
+        "menu-item",
+        "device-fixed-width"
+      ],
+      "text_length": 5,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 6,
+      "sibling_index": 4,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Digital Commons Network™",
+      "tag": "li",
+      "classes": [
+        "menu-item",
+        "device-fixed-width"
+      ],
+      "text_length": 24,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 6,
+      "sibling_index": 5,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Skip to main content\n\n\n\n\n\n\nHomeAboutPoliciesFAQMy Account\nContact Us\n\n\n\n\n\n\n\n\n< Previous\nNext >\n \n\n\n\nHome\n\n>\n\nGraduate Theses, Dissertations, and Problem Reports\n\n>\n\n11345\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAir-Assisted Communications Using Line-of-Sight Links\n\n\n\nAuthor\nShaikha A. AlkandariFollow\n\n\n\nSemester\nSummer\n\n\n\nDate of Graduation\n2022\n\n\n\nDocument Type\nThesis\n\n\n\nDegree Type\nMS\n\n\n\nCollege\nStatler College of Engineering and Mineral Resources\n\n\n\nDepartment\nLane Department of Computer Science and Electrical Engineering\n\n\n\nCommittee Chair\nMatthew Valenti\n\n\n\nCommittee Co-Chair\nXi Yu\n\n\n\nCommittee Member\nXi Yu\n\n\n\nCommittee Member\nXin Li\n\n\n\nAbstract\nRecently, there has been a rapid increase in the use of air-assisted communications involv-ing the use of airborne platforms such as unmanned aerial vehicles (UAVs). In air-assistednetworks, the UAVs can act like base stations in a traditional cellular network as long as anappropriate backhaul is available. Alternatively, the UAVs could serve as relays, for instance,connecting two ground-based users who are within range of the UAV. UAVs have the benefitof being deployed and reconfigured rapidly and on demand.Meanwhile, there has been a trend towards the use of higher and higher frequencies,including those in millimeter-wave and terahertz bands or even free-space optical communi-cations. Such bands have the benefits of large available bandwidths, relatively little inter-ference, and enhanced security due to spatial isolation. However, such bands are also proneto blocking in the environment, with even relatively small obstacles causing the signal tobe blocked and the link unable to be closed. For such systems, successful communicationrequires a reliable line-of-sight (LoS) link.When using LoS based communications, air-assisted communications is a good solutionbecause the UAVs can be deployed sufficiently high that the ground user will likely have aline of sight or can be maneuvered to create LoS links as needed. This thesis explores theuse of air-assisted communications in cluttered environments with randomized obstructionsthat may block the LoS between the ground user and the air platform. The key challengeis identifying blockages that are taller than a position-dependent critical height that couldblock the LoS of the ground-to-air link. The approach taken is to leverage tools from stochas-tic geometry in general, and Poisson point processes in particular, to derive a closed-formanalytical expression for the probability of obtaining a LoS path in certain environmentscharacterized as Poisson forests. An inhomogeneous Poisson point Process is used to ac-count for the distance-dependence of the critical height, and the LoS probability is the voidprobability of this process. The UAV is assumed to be located at a fixed height, and itshorizontal distance to the ground user could either be fixed or random. Results are verifiedthrough simulation.\n\n\n\nRecommended Citation\n\n    Alkandari, Shaikha A., \"Air-Assisted Communications Using Line-of-Sight Links\" (2022). Graduate Theses, Dissertations, and Problem Reports.  11345.\n    \n    \n    \n        https://researchrepository.wvu.edu/etd/11345\n    \n\n\n\n\n\n\n\n\n\n\n\n\n\n        Download\n      \n\n\n\n\n\n\n\n\n\n\n DOWNLOADS\nSince August 17, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIncluded in\n\nElectrical and Computer Engineering Commons\n\n\n\n\n\nShare\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCOinS\n\n\n\n\n \n\n\n\nDOI\nhttps://www.doi.org/10.33915/etd.11345\n\n\n\n\n \n \n\n\n\n\n\nBrowse\n\nCollections\nDisciplines\nAuthors\n\n\n\n\nResources\n\n\n\n\t\t\t\t\tWVU Libraries\n\t\t\t\t\n\n\n\n\t\t\t\t\tWVU Research Office\n\t\t\t\t\n\n\n\n\t\t\t\t\tWVU Research Commons\n\t\t\t\t\n\n\n\n\t\t\t\t\tOpen Access @ WVU\n\t\t\t\t\n\n\n\n\t\t\t\t\tDigital Publishing Institute\n\t\t\t\t\n\n\n\n\nSearch\n\n\r\n\t\tEnter search terms:\r\n\t\n\n\n\n\n\n\n\r\n\t\tSelect context to search:\r\n\t\n\n\n\nin this series\nin this repository\nacross all repositories\n\n\n\n\n\n\r\n\t\t\tAdvanced Search\r\n\t\t\n\n\n\n\n\n\r\n\t\t\t\tNotify me via email or RSS\n\n\n\n\n\n\nAuthor Corner\n\n\n\r\n\t\t\t\tAuthor FAQ\r\n\t\t\t\n\n\n\r\n\t\t\t\t\tSubmit Research\r\n\t\t\t\t\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\nElsevier - Digital Commons\n\n\n\n\nHome | \n\t\tAbout | \n\t\tFAQ | \n\t\tMy Account | \n\t\tAccessibility Statement\n\n\nPrivacy\nCopyright",
+      "tag": "div",
+      "classes": [],
+      "text_length": 4055,
+      "word_count": 512,
+      "is_visible": true,
+      "dom_depth": 3,
+      "sibling_index": 0,
+      "link_density": 0.16910966340933767,
+      "label": "title"
+    },
+    {
+      "text": "Skip to main content\n\n\n\n\n\n\nHomeAboutPoliciesFAQMy Account\nContact Us\n\n\n\n\n\n\n\n\n< Previous\nNext >\n \n\n\n\nHome\n\n>\n\nGraduate Theses, Dissertations, and Problem Reports\n\n>\n\n11345\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAir-Assisted Communications Using Line-of-Sight Links\n\n\n\nAuthor\nShaikha A. AlkandariFollow\n\n\n\nSemester\nSummer\n\n\n\nDate of Graduation\n2022\n\n\n\nDocument Type\nThesis\n\n\n\nDegree Type\nMS\n\n\n\nCollege\nStatler College of Engineering and Mineral Resources\n\n\n\nDepartment\nLane Department of Computer Science and Electrical Engineering\n\n\n\nCommittee Chair\nMatthew Valenti\n\n\n\nCommittee Co-Chair\nXi Yu\n\n\n\nCommittee Member\nXi Yu\n\n\n\nCommittee Member\nXin Li\n\n\n\nAbstract\nRecently, there has been a rapid increase in the use of air-assisted communications involv-ing the use of airborne platforms such as unmanned aerial vehicles (UAVs). In air-assistednetworks, the UAVs can act like base stations in a traditional cellular network as long as anappropriate backhaul is available. Alternatively, the UAVs could serve as relays, for instance,connecting two ground-based users who are within range of the UAV. UAVs have the benefitof being deployed and reconfigured rapidly and on demand.Meanwhile, there has been a trend towards the use of higher and higher frequencies,including those in millimeter-wave and terahertz bands or even free-space optical communi-cations. Such bands have the benefits of large available bandwidths, relatively little inter-ference, and enhanced security due to spatial isolation. However, such bands are also proneto blocking in the environment, with even relatively small obstacles causing the signal tobe blocked and the link unable to be closed. For such systems, successful communicationrequires a reliable line-of-sight (LoS) link.When using LoS based communications, air-assisted communications is a good solutionbecause the UAVs can be deployed sufficiently high that the ground user will likely have aline of sight or can be maneuvered to create LoS links as needed. This thesis explores theuse of air-assisted communications in cluttered environments with randomized obstructionsthat may block the LoS between the ground user and the air platform. The key challengeis identifying blockages that are taller than a position-dependent critical height that couldblock the LoS of the ground-to-air link. The approach taken is to leverage tools from stochas-tic geometry in general, and Poisson point processes in particular, to derive a closed-formanalytical expression for the probability of obtaining a LoS path in certain environmentscharacterized as Poisson forests. An inhomogeneous Poisson point Process is used to ac-count for the distance-dependence of the critical height, and the LoS probability is the voidprobability of this process. The UAV is assumed to be located at a fixed height, and itshorizontal distance to the ground user could either be fixed or random. Results are verifiedthrough simulation.\n\n\n\nRecommended Citation\n\n    Alkandari, Shaikha A., \"Air-Assisted Communications Using Line-of-Sight Links\" (2022). Graduate Theses, Dissertations, and Problem Reports.  11345.\n    \n    \n    \n        https://researchrepository.wvu.edu/etd/11345\n    \n\n\n\n\n\n\n\n\n\n\n\n\n\n        Download\n      \n\n\n\n\n\n\n\n\n\n\n DOWNLOADS\nSince August 17, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIncluded in\n\nElectrical and Computer Engineering Commons\n\n\n\n\n\nShare\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCOinS\n\n\n\n\n \n\n\n\nDOI\nhttps://www.doi.org/10.33915/etd.11345\n\n\n\n\n \n \n\n\n\n\n\nBrowse\n\nCollections\nDisciplines\nAuthors\n\n\n\n\nResources\n\n\n\n\t\t\t\t\tWVU Libraries\n\t\t\t\t\n\n\n\n\t\t\t\t\tWVU Research Office\n\t\t\t\t\n\n\n\n\t\t\t\t\tWVU Research Commons\n\t\t\t\t\n\n\n\n\t\t\t\t\tOpen Access @ WVU\n\t\t\t\t\n\n\n\n\t\t\t\t\tDigital Publishing Institute\n\t\t\t\t\n\n\n\n\nSearch\n\n\r\n\t\tEnter search terms:\r\n\t\n\n\n\n\n\n\n\r\n\t\tSelect context to search:\r\n\t\n\n\n\nin this series\nin this repository\nacross all repositories\n\n\n\n\n\n\r\n\t\t\tAdvanced Search\r\n\t\t\n\n\n\n\n\n\r\n\t\t\t\tNotify me via email or RSS\n\n\n\n\n\n\nAuthor Corner\n\n\n\r\n\t\t\t\tAuthor FAQ\r\n\t\t\t\n\n\n\r\n\t\t\t\t\tSubmit Research\r\n\t\t\t\t\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\nElsevier - Digital Commons\n\n\n\n\nHome | \n\t\tAbout | \n\t\tFAQ | \n\t\tMy Account | \n\t\tAccessibility Statement\n\n\nPrivacy\nCopyright",
+      "tag": "div",
+      "classes": [],
+      "text_length": 4055,
+      "word_count": 512,
+      "is_visible": true,
+      "dom_depth": 4,
+      "sibling_index": 0,
+      "link_density": 0.16910966340933767,
+      "label": "title"
+    },
+    {
+      "text": "HomeAboutPoliciesFAQMy Account\nContact Us",
+      "tag": "div",
+      "classes": [],
+      "text_length": 41,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 5,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "HomeAboutPoliciesFAQMy Account\nContact Us",
+      "tag": "div",
+      "classes": [],
+      "text_length": 41,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 6,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Home",
+      "tag": "li",
+      "classes": [],
+      "text_length": 4,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Home",
+      "tag": "span",
+      "classes": [],
+      "text_length": 4,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "About",
+      "tag": "li",
+      "classes": [],
+      "text_length": 5,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "About",
+      "tag": "span",
+      "classes": [],
+      "text_length": 5,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Policies",
+      "tag": "li",
+      "classes": [],
+      "text_length": 8,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 2,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Policies",
+      "tag": "span",
+      "classes": [],
+      "text_length": 8,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "My Account",
+      "tag": "li",
+      "classes": [],
+      "text_length": 10,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 4,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "My Account",
+      "tag": "span",
+      "classes": [],
+      "text_length": 10,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Contact Us",
+      "tag": "li",
+      "classes": [],
+      "text_length": 10,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 5,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Contact Us",
+      "tag": "span",
+      "classes": [],
+      "text_length": 10,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "< Previous\nNext >\n \n\n\n\nHome\n\n>\n\nGraduate Theses, Dissertations, and Problem Reports\n\n>\n\n11345\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAir-Assisted Communications Using Line-of-Sight Links\n\n\n\nAuthor\nShaikha A. AlkandariFollow\n\n\n\nSemester\nSummer\n\n\n\nDate of Graduation\n2022\n\n\n\nDocument Type\nThesis\n\n\n\nDegree Type\nMS\n\n\n\nCollege\nStatler College of Engineering and Mineral Resources\n\n\n\nDepartment\nLane Department of Computer Science and Electrical Engineering\n\n\n\nCommittee Chair\nMatthew Valenti\n\n\n\nCommittee Co-Chair\nXi Yu\n\n\n\nCommittee Member\nXi Yu\n\n\n\nCommittee Member\nXin Li\n\n\n\nAbstract\nRecently, there has been a rapid increase in the use of air-assisted communications involv-ing the use of airborne platforms such as unmanned aerial vehicles (UAVs). In air-assistednetworks, the UAVs can act like base stations in a traditional cellular network as long as anappropriate backhaul is available. Alternatively, the UAVs could serve as relays, for instance,connecting two ground-based users who are within range of the UAV. UAVs have the benefitof being deployed and reconfigured rapidly and on demand.Meanwhile, there has been a trend towards the use of higher and higher frequencies,including those in millimeter-wave and terahertz bands or even free-space optical communi-cations. Such bands have the benefits of large available bandwidths, relatively little inter-ference, and enhanced security due to spatial isolation. However, such bands are also proneto blocking in the environment, with even relatively small obstacles causing the signal tobe blocked and the link unable to be closed. For such systems, successful communicationrequires a reliable line-of-sight (LoS) link.When using LoS based communications, air-assisted communications is a good solutionbecause the UAVs can be deployed sufficiently high that the ground user will likely have aline of sight or can be maneuvered to create LoS links as needed. This thesis explores theuse of air-assisted communications in cluttered environments with randomized obstructionsthat may block the LoS between the ground user and the air platform. The key challengeis identifying blockages that are taller than a position-dependent critical height that couldblock the LoS of the ground-to-air link. The approach taken is to leverage tools from stochas-tic geometry in general, and Poisson point processes in particular, to derive a closed-formanalytical expression for the probability of obtaining a LoS path in certain environmentscharacterized as Poisson forests. An inhomogeneous Poisson point Process is used to ac-count for the distance-dependence of the critical height, and the LoS probability is the voidprobability of this process. The UAV is assumed to be located at a fixed height, and itshorizontal distance to the ground user could either be fixed or random. Results are verifiedthrough simulation.\n\n\n\nRecommended Citation\n\n    Alkandari, Shaikha A., \"Air-Assisted Communications Using Line-of-Sight Links\" (2022). Graduate Theses, Dissertations, and Problem Reports.  11345.\n    \n    \n    \n        https://researchrepository.wvu.edu/etd/11345\n    \n\n\n\n\n\n\n\n\n\n\n\n\n\n        Download\n      \n\n\n\n\n\n\n\n\n\n\n DOWNLOADS\nSince August 17, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIncluded in\n\nElectrical and Computer Engineering Commons\n\n\n\n\n\nShare\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCOinS\n\n\n\n\n \n\n\n\nDOI\nhttps://www.doi.org/10.33915/etd.11345\n\n\n\n\n \n \n\n\n\n\n\nBrowse\n\nCollections\nDisciplines\nAuthors\n\n\n\n\nResources\n\n\n\n\t\t\t\t\tWVU Libraries\n\t\t\t\t\n\n\n\n\t\t\t\t\tWVU Research Office\n\t\t\t\t\n\n\n\n\t\t\t\t\tWVU Research Commons\n\t\t\t\t\n\n\n\n\t\t\t\t\tOpen Access @ WVU\n\t\t\t\t\n\n\n\n\t\t\t\t\tDigital Publishing Institute\n\t\t\t\t\n\n\n\n\nSearch\n\n\r\n\t\tEnter search terms:\r\n\t\n\n\n\n\n\n\n\r\n\t\tSelect context to search:\r\n\t\n\n\n\nin this series\nin this repository\nacross all repositories\n\n\n\n\n\n\r\n\t\t\tAdvanced Search\r\n\t\t\n\n\n\n\n\n\r\n\t\t\t\tNotify me via email or RSS\n\n\n\n\n\n\nAuthor Corner\n\n\n\r\n\t\t\t\tAuthor FAQ\r\n\t\t\t\n\n\n\r\n\t\t\t\t\tSubmit Research",
+      "tag": "div",
+      "classes": [],
+      "text_length": 3829,
+      "word_count": 487,
+      "is_visible": true,
+      "dom_depth": 5,
+      "sibling_index": 2,
+      "link_density": 0.1309049516220831,
+      "label": "title"
+    },
+    {
+      "text": "< Previous\nNext >\n \n\n\n\nHome\n\n>\n\nGraduate Theses, Dissertations, and Problem Reports\n\n>\n\n11345\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAir-Assisted Communications Using Line-of-Sight Links\n\n\n\nAuthor\nShaikha A. AlkandariFollow\n\n\n\nSemester\nSummer\n\n\n\nDate of Graduation\n2022\n\n\n\nDocument Type\nThesis\n\n\n\nDegree Type\nMS\n\n\n\nCollege\nStatler College of Engineering and Mineral Resources\n\n\n\nDepartment\nLane Department of Computer Science and Electrical Engineering\n\n\n\nCommittee Chair\nMatthew Valenti\n\n\n\nCommittee Co-Chair\nXi Yu\n\n\n\nCommittee Member\nXi Yu\n\n\n\nCommittee Member\nXin Li\n\n\n\nAbstract\nRecently, there has been a rapid increase in the use of air-assisted communications involv-ing the use of airborne platforms such as unmanned aerial vehicles (UAVs). In air-assistednetworks, the UAVs can act like base stations in a traditional cellular network as long as anappropriate backhaul is available. Alternatively, the UAVs could serve as relays, for instance,connecting two ground-based users who are within range of the UAV. UAVs have the benefitof being deployed and reconfigured rapidly and on demand.Meanwhile, there has been a trend towards the use of higher and higher frequencies,including those in millimeter-wave and terahertz bands or even free-space optical communi-cations. Such bands have the benefits of large available bandwidths, relatively little inter-ference, and enhanced security due to spatial isolation. However, such bands are also proneto blocking in the environment, with even relatively small obstacles causing the signal tobe blocked and the link unable to be closed. For such systems, successful communicationrequires a reliable line-of-sight (LoS) link.When using LoS based communications, air-assisted communications is a good solutionbecause the UAVs can be deployed sufficiently high that the ground user will likely have aline of sight or can be maneuvered to create LoS links as needed. This thesis explores theuse of air-assisted communications in cluttered environments with randomized obstructionsthat may block the LoS between the ground user and the air platform. The key challengeis identifying blockages that are taller than a position-dependent critical height that couldblock the LoS of the ground-to-air link. The approach taken is to leverage tools from stochas-tic geometry in general, and Poisson point processes in particular, to derive a closed-formanalytical expression for the probability of obtaining a LoS path in certain environmentscharacterized as Poisson forests. An inhomogeneous Poisson point Process is used to ac-count for the distance-dependence of the critical height, and the LoS probability is the voidprobability of this process. The UAV is assumed to be located at a fixed height, and itshorizontal distance to the ground user could either be fixed or random. Results are verifiedthrough simulation.\n\n\n\nRecommended Citation\n\n    Alkandari, Shaikha A., \"Air-Assisted Communications Using Line-of-Sight Links\" (2022). Graduate Theses, Dissertations, and Problem Reports.  11345.\n    \n    \n    \n        https://researchrepository.wvu.edu/etd/11345\n    \n\n\n\n\n\n\n\n\n\n\n\n\n\n        Download\n      \n\n\n\n\n\n\n\n\n\n\n DOWNLOADS\nSince August 17, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIncluded in\n\nElectrical and Computer Engineering Commons\n\n\n\n\n\nShare\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCOinS\n\n\n\n\n \n\n\n\nDOI\nhttps://www.doi.org/10.33915/etd.11345",
+      "tag": "div",
+      "classes": [],
+      "text_length": 3319,
+      "word_count": 436,
+      "is_visible": true,
+      "dom_depth": 6,
+      "sibling_index": 0,
+      "link_density": 0.08080808080808081,
+      "label": "title"
+    },
+    {
+      "text": "< Previous\nNext >\n \n\n\n\nHome\n\n>\n\nGraduate Theses, Dissertations, and Problem Reports\n\n>\n\n11345\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAir-Assisted Communications Using Line-of-Sight Links\n\n\n\nAuthor\nShaikha A. AlkandariFollow\n\n\n\nSemester\nSummer\n\n\n\nDate of Graduation\n2022\n\n\n\nDocument Type\nThesis\n\n\n\nDegree Type\nMS\n\n\n\nCollege\nStatler College of Engineering and Mineral Resources\n\n\n\nDepartment\nLane Department of Computer Science and Electrical Engineering\n\n\n\nCommittee Chair\nMatthew Valenti\n\n\n\nCommittee Co-Chair\nXi Yu\n\n\n\nCommittee Member\nXi Yu\n\n\n\nCommittee Member\nXin Li\n\n\n\nAbstract\nRecently, there has been a rapid increase in the use of air-assisted communications involv-ing the use of airborne platforms such as unmanned aerial vehicles (UAVs). In air-assistednetworks, the UAVs can act like base stations in a traditional cellular network as long as anappropriate backhaul is available. Alternatively, the UAVs could serve as relays, for instance,connecting two ground-based users who are within range of the UAV. UAVs have the benefitof being deployed and reconfigured rapidly and on demand.Meanwhile, there has been a trend towards the use of higher and higher frequencies,including those in millimeter-wave and terahertz bands or even free-space optical communi-cations. Such bands have the benefits of large available bandwidths, relatively little inter-ference, and enhanced security due to spatial isolation. However, such bands are also proneto blocking in the environment, with even relatively small obstacles causing the signal tobe blocked and the link unable to be closed. For such systems, successful communicationrequires a reliable line-of-sight (LoS) link.When using LoS based communications, air-assisted communications is a good solutionbecause the UAVs can be deployed sufficiently high that the ground user will likely have aline of sight or can be maneuvered to create LoS links as needed. This thesis explores theuse of air-assisted communications in cluttered environments with randomized obstructionsthat may block the LoS between the ground user and the air platform. The key challengeis identifying blockages that are taller than a position-dependent critical height that couldblock the LoS of the ground-to-air link. The approach taken is to leverage tools from stochas-tic geometry in general, and Poisson point processes in particular, to derive a closed-formanalytical expression for the probability of obtaining a LoS path in certain environmentscharacterized as Poisson forests. An inhomogeneous Poisson point Process is used to ac-count for the distance-dependence of the critical height, and the LoS probability is the voidprobability of this process. The UAV is assumed to be located at a fixed height, and itshorizontal distance to the ground user could either be fixed or random. Results are verifiedthrough simulation.\n\n\n\nRecommended Citation\n\n    Alkandari, Shaikha A., \"Air-Assisted Communications Using Line-of-Sight Links\" (2022). Graduate Theses, Dissertations, and Problem Reports.  11345.\n    \n    \n    \n        https://researchrepository.wvu.edu/etd/11345\n    \n\n\n\n\n\n\n\n\n\n\n\n\n\n        Download\n      \n\n\n\n\n\n\n\n\n\n\n DOWNLOADS\nSince August 17, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIncluded in\n\nElectrical and Computer Engineering Commons\n\n\n\n\n\nShare\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCOinS\n\n\n\n\n \n\n\n\nDOI\nhttps://www.doi.org/10.33915/etd.11345",
+      "tag": "div",
+      "classes": [
+        "text"
+      ],
+      "text_length": 3319,
+      "word_count": 436,
+      "is_visible": true,
+      "dom_depth": 7,
+      "sibling_index": 0,
+      "link_density": 0.08080808080808081,
+      "label": "title"
+    },
+    {
+      "text": "< Previous\nNext >\n \n\n\n\nHome\n\n>\n\nGraduate Theses, Dissertations, and Problem Reports\n\n>\n\n11345",
+      "tag": "div",
+      "classes": [],
+      "text_length": 93,
+      "word_count": 14,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 0,
+      "link_density": 0.9047619047619048,
+      "label": "content"
+    },
+    {
+      "text": "< Previous",
+      "tag": "li",
+      "classes": [],
+      "text_length": 10,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.8,
+      "label": "other"
+    },
+    {
+      "text": "Next >",
+      "tag": "li",
+      "classes": [],
+      "text_length": 6,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 1,
+      "link_density": 0.6666666666666666,
+      "label": "other"
+    },
+    {
+      "text": "Home\n\n>\n\nGraduate Theses, Dissertations, and Problem Reports\n\n>\n\n11345",
+      "tag": "div",
+      "classes": [
+        "crumbs"
+      ],
+      "text_length": 70,
+      "word_count": 10,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 0,
+      "link_density": 0.9393939393939394,
+      "label": "content"
+    },
+    {
+      "text": "Home\n\n>\n\nGraduate Theses, Dissertations, and Problem Reports\n\n>\n\n11345",
+      "tag": "div",
+      "classes": [
+        "crumbs"
+      ],
+      "text_length": 70,
+      "word_count": 10,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.9393939393939394,
+      "label": "content"
+    },
+    {
+      "text": "Home",
+      "tag": "li",
+      "classes": [],
+      "text_length": 4,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Graduate Theses, Dissertations, and Problem Reports",
+      "tag": "li",
+      "classes": [],
+      "text_length": 51,
+      "word_count": 6,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Air-Assisted Communications Using Line-of-Sight Links\n\n\n\nAuthor\nShaikha A. AlkandariFollow\n\n\n\nSemester\nSummer\n\n\n\nDate of Graduation\n2022\n\n\n\nDocument Type\nThesis\n\n\n\nDegree Type\nMS\n\n\n\nCollege\nStatler College of Engineering and Mineral Resources\n\n\n\nDepartment\nLane Department of Computer Science and Electrical Engineering\n\n\n\nCommittee Chair\nMatthew Valenti\n\n\n\nCommittee Co-Chair\nXi Yu\n\n\n\nCommittee Member\nXi Yu\n\n\n\nCommittee Member\nXin Li\n\n\n\nAbstract\nRecently, there has been a rapid increase in the use of air-assisted communications involv-ing the use of airborne platforms such as unmanned aerial vehicles (UAVs). In air-assistednetworks, the UAVs can act like base stations in a traditional cellular network as long as anappropriate backhaul is available. Alternatively, the UAVs could serve as relays, for instance,connecting two ground-based users who are within range of the UAV. UAVs have the benefitof being deployed and reconfigured rapidly and on demand.Meanwhile, there has been a trend towards the use of higher and higher frequencies,including those in millimeter-wave and terahertz bands or even free-space optical communi-cations. Such bands have the benefits of large available bandwidths, relatively little inter-ference, and enhanced security due to spatial isolation. However, such bands are also proneto blocking in the environment, with even relatively small obstacles causing the signal tobe blocked and the link unable to be closed. For such systems, successful communicationrequires a reliable line-of-sight (LoS) link.When using LoS based communications, air-assisted communications is a good solutionbecause the UAVs can be deployed sufficiently high that the ground user will likely have aline of sight or can be maneuvered to create LoS links as needed. This thesis explores theuse of air-assisted communications in cluttered environments with randomized obstructionsthat may block the LoS between the ground user and the air platform. The key challengeis identifying blockages that are taller than a position-dependent critical height that couldblock the LoS of the ground-to-air link. The approach taken is to leverage tools from stochas-tic geometry in general, and Poisson point processes in particular, to derive a closed-formanalytical expression for the probability of obtaining a LoS path in certain environmentscharacterized as Poisson forests. An inhomogeneous Poisson point Process is used to ac-count for the distance-dependence of the critical height, and the LoS probability is the voidprobability of this process. The UAV is assumed to be located at a fixed height, and itshorizontal distance to the ground user could either be fixed or random. Results are verifiedthrough simulation.\n\n\n\nRecommended Citation\n\n    Alkandari, Shaikha A., \"Air-Assisted Communications Using Line-of-Sight Links\" (2022). Graduate Theses, Dissertations, and Problem Reports.  11345.\n    \n    \n    \n        https://researchrepository.wvu.edu/etd/11345",
+      "tag": "div",
+      "classes": [],
+      "text_length": 2970,
+      "word_count": 405,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 3,
+      "link_density": 0.027635619242579325,
+      "label": "title"
+    },
+    {
+      "text": "Air-Assisted Communications Using Line-of-Sight Links\n\n\n\nAuthor\nShaikha A. AlkandariFollow\n\n\n\nSemester\nSummer\n\n\n\nDate of Graduation\n2022\n\n\n\nDocument Type\nThesis\n\n\n\nDegree Type\nMS\n\n\n\nCollege\nStatler College of Engineering and Mineral Resources\n\n\n\nDepartment\nLane Department of Computer Science and Electrical Engineering\n\n\n\nCommittee Chair\nMatthew Valenti\n\n\n\nCommittee Co-Chair\nXi Yu\n\n\n\nCommittee Member\nXi Yu\n\n\n\nCommittee Member\nXin Li\n\n\n\nAbstract\nRecently, there has been a rapid increase in the use of air-assisted communications involv-ing the use of airborne platforms such as unmanned aerial vehicles (UAVs). In air-assistednetworks, the UAVs can act like base stations in a traditional cellular network as long as anappropriate backhaul is available. Alternatively, the UAVs could serve as relays, for instance,connecting two ground-based users who are within range of the UAV. UAVs have the benefitof being deployed and reconfigured rapidly and on demand.Meanwhile, there has been a trend towards the use of higher and higher frequencies,including those in millimeter-wave and terahertz bands or even free-space optical communi-cations. Such bands have the benefits of large available bandwidths, relatively little inter-ference, and enhanced security due to spatial isolation. However, such bands are also proneto blocking in the environment, with even relatively small obstacles causing the signal tobe blocked and the link unable to be closed. For such systems, successful communicationrequires a reliable line-of-sight (LoS) link.When using LoS based communications, air-assisted communications is a good solutionbecause the UAVs can be deployed sufficiently high that the ground user will likely have aline of sight or can be maneuvered to create LoS links as needed. This thesis explores theuse of air-assisted communications in cluttered environments with randomized obstructionsthat may block the LoS between the ground user and the air platform. The key challengeis identifying blockages that are taller than a position-dependent critical height that couldblock the LoS of the ground-to-air link. The approach taken is to leverage tools from stochas-tic geometry in general, and Poisson point processes in particular, to derive a closed-formanalytical expression for the probability of obtaining a LoS path in certain environmentscharacterized as Poisson forests. An inhomogeneous Poisson point Process is used to ac-count for the distance-dependence of the critical height, and the LoS probability is the voidprobability of this process. The UAV is assumed to be located at a fixed height, and itshorizontal distance to the ground user could either be fixed or random. Results are verifiedthrough simulation.\n\n\n\nRecommended Citation\n\n    Alkandari, Shaikha A., \"Air-Assisted Communications Using Line-of-Sight Links\" (2022). Graduate Theses, Dissertations, and Problem Reports.  11345.\n    \n    \n    \n        https://researchrepository.wvu.edu/etd/11345",
+      "tag": "div",
+      "classes": [],
+      "text_length": 2970,
+      "word_count": 405,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 0,
+      "link_density": 0.027635619242579325,
+      "label": "title"
+    },
+    {
+      "text": "Air-Assisted Communications Using Line-of-Sight Links",
+      "tag": "div",
+      "classes": [
+        "element"
+      ],
+      "text_length": 53,
+      "word_count": 5,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "title"
+    },
+    {
+      "text": "Air-Assisted Communications Using Line-of-Sight Links",
+      "tag": "h1",
+      "classes": [],
+      "text_length": 53,
+      "word_count": 5,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "title"
+    },
+    {
+      "text": "Author\nShaikha A. AlkandariFollow",
+      "tag": "div",
+      "classes": [
+        "element"
+      ],
+      "text_length": 33,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 2,
+      "link_density": 0.7941176470588235,
+      "label": "author_candidate"
+    },
+    {
+      "text": "Author",
+      "tag": "h2",
+      "classes": [
+        "visually-hidden"
+      ],
+      "text_length": 6,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "author_candidate"
+    },
+    {
+      "text": "Shaikha A. AlkandariFollow",
+      "tag": "p",
+      "classes": [
+        "author"
+      ],
+      "text_length": 26,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Semester\nSummer",
+      "tag": "div",
+      "classes": [
+        "element"
+      ],
+      "text_length": 15,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 4,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Semester",
+      "tag": "h2",
+      "classes": [
+        "field-heading"
+      ],
+      "text_length": 8,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Summer",
+      "tag": "p",
+      "classes": [],
+      "text_length": 6,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Date of Graduation\n2022",
+      "tag": "div",
+      "classes": [
+        "element"
+      ],
+      "text_length": 23,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 6,
+      "link_density": 0.0,
+      "label": "year_candidate"
+    },
+    {
+      "text": "Date of Graduation",
+      "tag": "h2",
+      "classes": [
+        "field-heading"
+      ],
+      "text_length": 18,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Document Type\nThesis",
+      "tag": "div",
+      "classes": [
+        "element"
+      ],
+      "text_length": 20,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 8,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Document Type",
+      "tag": "h2",
+      "classes": [
+        "field-heading"
+      ],
+      "text_length": 13,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Thesis",
+      "tag": "p",
+      "classes": [],
+      "text_length": 6,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Degree Type\nMS",
+      "tag": "div",
+      "classes": [
+        "element"
+      ],
+      "text_length": 14,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 10,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Degree Type",
+      "tag": "h2",
+      "classes": [
+        "field-heading"
+      ],
+      "text_length": 11,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "College\nStatler College of Engineering and Mineral Resources",
+      "tag": "div",
+      "classes": [
+        "element"
+      ],
+      "text_length": 60,
+      "word_count": 8,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 12,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "College",
+      "tag": "h2",
+      "classes": [
+        "field-heading"
+      ],
+      "text_length": 7,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Statler College of Engineering and Mineral Resources",
+      "tag": "p",
+      "classes": [],
+      "text_length": 52,
+      "word_count": 7,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Department\nLane Department of Computer Science and Electrical Engineering",
+      "tag": "div",
+      "classes": [
+        "element"
+      ],
+      "text_length": 73,
+      "word_count": 9,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 14,
+      "link_density": 0.0,
+      "label": "content"
+    },
+    {
+      "text": "Department",
+      "tag": "h2",
+      "classes": [
+        "field-heading"
+      ],
+      "text_length": 10,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Lane Department of Computer Science and Electrical Engineering",
+      "tag": "p",
+      "classes": [],
+      "text_length": 62,
+      "word_count": 8,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Committee Chair\nMatthew Valenti",
+      "tag": "div",
+      "classes": [
+        "element"
+      ],
+      "text_length": 31,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 16,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Committee Chair",
+      "tag": "h2",
+      "classes": [
+        "field-heading"
+      ],
+      "text_length": 15,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Matthew Valenti",
+      "tag": "p",
+      "classes": [],
+      "text_length": 15,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Committee Co-Chair\nXi Yu",
+      "tag": "div",
+      "classes": [
+        "element"
+      ],
+      "text_length": 24,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 18,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Committee Co-Chair",
+      "tag": "h2",
+      "classes": [
+        "field-heading"
+      ],
+      "text_length": 18,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Xi Yu",
+      "tag": "p",
+      "classes": [],
+      "text_length": 5,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Committee Member\nXi Yu",
+      "tag": "div",
+      "classes": [
+        "element"
+      ],
+      "text_length": 22,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 20,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Committee Member",
+      "tag": "h2",
+      "classes": [
+        "field-heading"
+      ],
+      "text_length": 16,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Xi Yu",
+      "tag": "p",
+      "classes": [],
+      "text_length": 5,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Committee Member\nXin Li",
+      "tag": "div",
+      "classes": [
+        "element"
+      ],
+      "text_length": 23,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 22,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Committee Member",
+      "tag": "h2",
+      "classes": [
+        "field-heading"
+      ],
+      "text_length": 16,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Xin Li",
+      "tag": "p",
+      "classes": [],
+      "text_length": 6,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Abstract\nRecently, there has been a rapid increase in the use of air-assisted communications involv-ing the use of airborne platforms such as unmanned aerial vehicles (UAVs). In air-assistednetworks, the UAVs can act like base stations in a traditional cellular network as long as anappropriate backhaul is available. Alternatively, the UAVs could serve as relays, for instance,connecting two ground-based users who are within range of the UAV. UAVs have the benefitof being deployed and reconfigured rapidly and on demand.Meanwhile, there has been a trend towards the use of higher and higher frequencies,including those in millimeter-wave and terahertz bands or even free-space optical communi-cations. Such bands have the benefits of large available bandwidths, relatively little inter-ference, and enhanced security due to spatial isolation. However, such bands are also proneto blocking in the environment, with even relatively small obstacles causing the signal tobe blocked and the link unable to be closed. For such systems, successful communicationrequires a reliable line-of-sight (LoS) link.When using LoS based communications, air-assisted communications is a good solutionbecause the UAVs can be deployed sufficiently high that the ground user will likely have aline of sight or can be maneuvered to create LoS links as needed. This thesis explores theuse of air-assisted communications in cluttered environments with randomized obstructionsthat may block the LoS between the ground user and the air platform. The key challengeis identifying blockages that are taller than a position-dependent critical height that couldblock the LoS of the ground-to-air link. The approach taken is to leverage tools from stochas-tic geometry in general, and Poisson point processes in particular, to derive a closed-formanalytical expression for the probability of obtaining a LoS path in certain environmentscharacterized as Poisson forests. An inhomogeneous Poisson point Process is used to ac-count for the distance-dependence of the critical height, and the LoS probability is the voidprobability of this process. The UAV is assumed to be located at a fixed height, and itshorizontal distance to the ground user could either be fixed or random. Results are verifiedthrough simulation.",
+      "tag": "div",
+      "classes": [
+        "element"
+      ],
+      "text_length": 2286,
+      "word_count": 332,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 24,
+      "link_density": 0.0,
+      "label": "title"
+    },
+    {
+      "text": "Abstract",
+      "tag": "h2",
+      "classes": [
+        "field-heading"
+      ],
+      "text_length": 8,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "abstract"
+    },
+    {
+      "text": "Recently, there has been a rapid increase in the use of air-assisted communications involv-ing the use of airborne platforms such as unmanned aerial vehicles (UAVs). In air-assistednetworks, the UAVs can act like base stations in a traditional cellular network as long as anappropriate backhaul is available. Alternatively, the UAVs could serve as relays, for instance,connecting two ground-based users who are within range of the UAV. UAVs have the benefitof being deployed and reconfigured rapidly and on demand.Meanwhile, there has been a trend towards the use of higher and higher frequencies,including those in millimeter-wave and terahertz bands or even free-space optical communi-cations. Such bands have the benefits of large available bandwidths, relatively little inter-ference, and enhanced security due to spatial isolation. However, such bands are also proneto blocking in the environment, with even relatively small obstacles causing the signal tobe blocked and the link unable to be closed. For such systems, successful communicationrequires a reliable line-of-sight (LoS) link.When using LoS based communications, air-assisted communications is a good solutionbecause the UAVs can be deployed sufficiently high that the ground user will likely have aline of sight or can be maneuvered to create LoS links as needed. This thesis explores theuse of air-assisted communications in cluttered environments with randomized obstructionsthat may block the LoS between the ground user and the air platform. The key challengeis identifying blockages that are taller than a position-dependent critical height that couldblock the LoS of the ground-to-air link. The approach taken is to leverage tools from stochas-tic geometry in general, and Poisson point processes in particular, to derive a closed-formanalytical expression for the probability of obtaining a LoS path in certain environmentscharacterized as Poisson forests. An inhomogeneous Poisson point Process is used to ac-count for the distance-dependence of the critical height, and the LoS probability is the voidprobability of this process. The UAV is assumed to be located at a fixed height, and itshorizontal distance to the ground user could either be fixed or random. Results are verifiedthrough simulation.",
+      "tag": "p",
+      "classes": [],
+      "text_length": 2277,
+      "word_count": 331,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "title"
+    },
+    {
+      "text": "Recommended Citation\n\n    Alkandari, Shaikha A., \"Air-Assisted Communications Using Line-of-Sight Links\" (2022). Graduate Theses, Dissertations, and Problem Reports.  11345.\n    \n    \n    \n        https://researchrepository.wvu.edu/etd/11345",
+      "tag": "div",
+      "classes": [
+        "element"
+      ],
+      "text_length": 241,
+      "word_count": 19,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 26,
+      "link_density": 0.0,
+      "label": "title"
+    },
+    {
+      "text": "Recommended Citation",
+      "tag": "h2",
+      "classes": [
+        "field-heading"
+      ],
+      "text_length": 20,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Alkandari, Shaikha A., \"Air-Assisted Communications Using Line-of-Sight Links\" (2022). Graduate Theses, Dissertations, and Problem Reports.  11345.\n    \n    \n    \n        https://researchrepository.wvu.edu/etd/11345",
+      "tag": "p",
+      "classes": [],
+      "text_length": 215,
+      "word_count": 17,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "title"
+    },
+    {
+      "text": "Download\n      \n\n\n\n\n\n\n\n\n\n\n DOWNLOADS\nSince August 17, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIncluded in\n\nElectrical and Computer Engineering Commons\n\n\n\n\n\nShare\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCOinS",
+      "tag": "div",
+      "classes": [],
+      "text_length": 161,
+      "word_count": 15,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 4,
+      "link_density": 0.5370370370370371,
+      "label": "year_candidate"
+    },
+    {
+      "text": "Download",
+      "tag": "div",
+      "classes": [
+        "aside",
+        "download-button"
+      ],
+      "text_length": 8,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "DOWNLOADS\nSince August 17, 2022",
+      "tag": "div",
+      "classes": [
+        "aside",
+        "hidden"
+      ],
+      "text_length": 31,
+      "word_count": 5,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "year_candidate"
+    },
+    {
+      "text": "Since August 17, 2022",
+      "tag": "p",
+      "classes": [
+        "article-stats-date",
+        "hidden"
+      ],
+      "text_length": 21,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "year_candidate"
+    },
+    {
+      "text": "Included in\n\nElectrical and Computer Engineering Commons",
+      "tag": "div",
+      "classes": [
+        "aside"
+      ],
+      "text_length": 56,
+      "word_count": 7,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 2,
+      "link_density": 0.7818181818181819,
+      "label": "other"
+    },
+    {
+      "text": "Included in",
+      "tag": "h3",
+      "classes": [],
+      "text_length": 11,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Electrical and Computer Engineering Commons",
+      "tag": "p",
+      "classes": [],
+      "text_length": 43,
+      "word_count": 5,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Share",
+      "tag": "div",
+      "classes": [
+        "aside"
+      ],
+      "text_length": 5,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 3,
+      "link_density": 0.8,
+      "label": "other"
+    },
+    {
+      "text": "Share",
+      "tag": "h2",
+      "classes": [],
+      "text_length": 5,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "COinS",
+      "tag": "span",
+      "classes": [
+        "Z3988"
+      ],
+      "text_length": 5,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "DOI\nhttps://www.doi.org/10.33915/etd.11345",
+      "tag": "div",
+      "classes": [],
+      "text_length": 42,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 6,
+      "link_density": 0.9047619047619048,
+      "label": "other"
+    },
+    {
+      "text": "DOI\nhttps://www.doi.org/10.33915/etd.11345",
+      "tag": "div",
+      "classes": [
+        "element"
+      ],
+      "text_length": 42,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 0,
+      "link_density": 0.9047619047619048,
+      "label": "other"
+    },
+    {
+      "text": "https://www.doi.org/10.33915/etd.11345",
+      "tag": "p",
+      "classes": [],
+      "text_length": 38,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Browse\n\nCollections\nDisciplines\nAuthors\n\n\n\n\nResources\n\n\n\n\t\t\t\t\tWVU Libraries\n\t\t\t\t\n\n\n\n\t\t\t\t\tWVU Research Office\n\t\t\t\t\n\n\n\n\t\t\t\t\tWVU Research Commons\n\t\t\t\t\n\n\n\n\t\t\t\t\tOpen Access @ WVU\n\t\t\t\t\n\n\n\n\t\t\t\t\tDigital Publishing Institute\n\t\t\t\t\n\n\n\n\nSearch\n\n\r\n\t\tEnter search terms:\r\n\t\n\n\n\n\n\n\n\r\n\t\tSelect context to search:\r\n\t\n\n\n\nin this series\nin this repository\nacross all repositories\n\n\n\n\n\n\r\n\t\t\tAdvanced Search\r\n\t\t\n\n\n\n\n\n\r\n\t\t\t\tNotify me via email or RSS\n\n\n\n\n\n\nAuthor Corner\n\n\n\r\n\t\t\t\tAuthor FAQ\r\n\t\t\t\n\n\n\r\n\t\t\t\t\tSubmit Research",
+      "tag": "div",
+      "classes": [],
+      "text_length": 496,
+      "word_count": 51,
+      "is_visible": true,
+      "dom_depth": 6,
+      "sibling_index": 1,
+      "link_density": 0.5884057971014492,
+      "label": "author_candidate"
+    },
+    {
+      "text": "Browse",
+      "tag": "h2",
+      "classes": [],
+      "text_length": 6,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 7,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Collections",
+      "tag": "li",
+      "classes": [
+        "collections"
+      ],
+      "text_length": 11,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Disciplines",
+      "tag": "li",
+      "classes": [
+        "discipline-browser"
+      ],
+      "text_length": 11,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Authors",
+      "tag": "li",
+      "classes": [
+        "author"
+      ],
+      "text_length": 7,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 2,
+      "link_density": 1.0,
+      "label": "author_candidate"
+    },
+    {
+      "text": "Resources\n\n\n\n\t\t\t\t\tWVU Libraries\n\t\t\t\t\n\n\n\n\t\t\t\t\tWVU Research Office\n\t\t\t\t\n\n\n\n\t\t\t\t\tWVU Research Commons\n\t\t\t\t\n\n\n\n\t\t\t\t\tOpen Access @ WVU\n\t\t\t\t\n\n\n\n\t\t\t\t\tDigital Publishing Institute",
+      "tag": "div",
+      "classes": [],
+      "text_length": 171,
+      "word_count": 16,
+      "is_visible": true,
+      "dom_depth": 7,
+      "sibling_index": 0,
+      "link_density": 0.9099099099099099,
+      "label": "content"
+    },
+    {
+      "text": "Resources",
+      "tag": "h2",
+      "classes": [
+        "sb-custom-title"
+      ],
+      "text_length": 9,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "WVU Libraries",
+      "tag": "li",
+      "classes": [
+        "sb-custom-li"
+      ],
+      "text_length": 13,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "WVU Research Office",
+      "tag": "li",
+      "classes": [
+        "sb-custom-li"
+      ],
+      "text_length": 19,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "WVU Research Commons",
+      "tag": "li",
+      "classes": [
+        "sb-custom-li"
+      ],
+      "text_length": 20,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 2,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Open Access @ WVU",
+      "tag": "li",
+      "classes": [
+        "sb-custom-li"
+      ],
+      "text_length": 17,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 3,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Digital Publishing Institute",
+      "tag": "li",
+      "classes": [
+        "sb-custom-li"
+      ],
+      "text_length": 28,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 4,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Search",
+      "tag": "h2",
+      "classes": [],
+      "text_length": 6,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 7,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "in this series\nin this repository\nacross all repositories",
+      "tag": "div",
+      "classes": [],
+      "text_length": 57,
+      "word_count": 9,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "content"
+    },
+    {
+      "text": "in this series\nin this repository\nacross all repositories",
+      "tag": "span",
+      "classes": [
+        "border"
+      ],
+      "text_length": 57,
+      "word_count": 9,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "content"
+    },
+    {
+      "text": "Advanced Search",
+      "tag": "p",
+      "classes": [
+        "advanced"
+      ],
+      "text_length": 15,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 7,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Notify me via email or RSS",
+      "tag": "li",
+      "classes": [
+        "notify"
+      ],
+      "text_length": 26,
+      "word_count": 6,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Author Corner",
+      "tag": "h2",
+      "classes": [],
+      "text_length": 13,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 7,
+      "sibling_index": 2,
+      "link_density": 0.0,
+      "label": "author_candidate"
+    },
+    {
+      "text": "Author FAQ",
+      "tag": "li",
+      "classes": [
+        "faq"
+      ],
+      "text_length": 10,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "author_candidate"
+    },
+    {
+      "text": "Submit Research",
+      "tag": "li",
+      "classes": [
+        "submit"
+      ],
+      "text_length": 15,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Elsevier - Digital Commons\n\n\n\n\nHome | \n\t\tAbout | \n\t\tFAQ | \n\t\tMy Account | \n\t\tAccessibility Statement\n\n\nPrivacy\nCopyright",
+      "tag": "div",
+      "classes": [],
+      "text_length": 120,
+      "word_count": 17,
+      "is_visible": true,
+      "dom_depth": 5,
+      "sibling_index": 3,
+      "link_density": 0.9215686274509803,
+      "label": "content"
+    },
+    {
+      "text": "Elsevier - Digital Commons",
+      "tag": "div",
+      "classes": [],
+      "text_length": 26,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 6,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Home | \n\t\tAbout | \n\t\tFAQ | \n\t\tMy Account | \n\t\tAccessibility Statement",
+      "tag": "p",
+      "classes": [],
+      "text_length": 69,
+      "word_count": 11,
+      "is_visible": true,
+      "dom_depth": 6,
+      "sibling_index": 0,
+      "link_density": 0.8596491228070176,
+      "label": "content"
+    },
+    {
+      "text": "Privacy\nCopyright",
+      "tag": "p",
+      "classes": [],
+      "text_length": 17,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 6,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "other"
+    }
+  ],
+  "ground_truth": {
+    "title": "Air-Assisted Communications Using Line-of-Sight Links",
+    "authors": null,
+    "year": null,
+    "doi": null,
+    "journal": "WVU Repository",
+    "extraction_method": "rule_based"
+  },
+  "has_cite_button": true,
+  "has_structured_metadata": false,
+  "total_blocks": 108,
+  "labeled_blocks": 33
+}

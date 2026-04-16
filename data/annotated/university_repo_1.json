@@ -1,0 +1,1264 @@
+{
+  "id": "university_repo_1",
+  "url": "https://dspace.mit.edu/handle/1721.1/151312",
+  "source_type": "university_repo",
+  "complexity": {
+    "score": 2,
+    "level": "medium",
+    "text_blocks_count": 88
+  },
+  "text_blocks": [
+    {
+      "text": "DSpace@MIT",
+      "tag": "div",
+      "classes": [
+        "wrap-outer-header",
+        "layout-band"
+      ],
+      "text_length": 10,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 3,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "DSpace@MIT",
+      "tag": "div",
+      "classes": [
+        "wrap-header"
+      ],
+      "text_length": 10,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 4,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "DSpace@MIT",
+      "tag": "div",
+      "classes": [
+        "wrap-header-core"
+      ],
+      "text_length": 10,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 6,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "DSpace@MIT",
+      "tag": "h1",
+      "classes": [
+        "name-site",
+        "group",
+        "nav-logo"
+      ],
+      "text_length": 10,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 7,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "View Item \n\n\nDSpace@MIT Home\n\n\nMIT Libraries\n\n\nMIT Theses\n\n\nUndergraduate Theses\n\n\nView Item\n\n\n\n\n\nDSpace@MIT Home\n\n\nMIT Libraries\n\n\nMIT Theses\n\n\nUndergraduate Theses\n\nView Item",
+      "tag": "div",
+      "classes": [
+        "trail-wrapper",
+        "hidden-print"
+      ],
+      "text_length": 176,
+      "word_count": 22,
+      "is_visible": true,
+      "dom_depth": 3,
+      "sibling_index": 1,
+      "link_density": 0.934640522875817,
+      "label": "content"
+    },
+    {
+      "text": "View Item \n\n\nDSpace@MIT Home\n\n\nMIT Libraries\n\n\nMIT Theses\n\n\nUndergraduate Theses\n\n\nView Item\n\n\n\n\n\nDSpace@MIT Home\n\n\nMIT Libraries\n\n\nMIT Theses\n\n\nUndergraduate Theses\n\nView Item",
+      "tag": "div",
+      "classes": [],
+      "text_length": 176,
+      "word_count": 22,
+      "is_visible": true,
+      "dom_depth": 4,
+      "sibling_index": 0,
+      "link_density": 0.934640522875817,
+      "label": "content"
+    },
+    {
+      "text": "View Item \n\n\nDSpace@MIT Home\n\n\nMIT Libraries\n\n\nMIT Theses\n\n\nUndergraduate Theses\n\n\nView Item\n\n\n\n\n\nDSpace@MIT Home\n\n\nMIT Libraries\n\n\nMIT Theses\n\n\nUndergraduate Theses\n\nView Item",
+      "tag": "div",
+      "classes": [],
+      "text_length": 176,
+      "word_count": 22,
+      "is_visible": true,
+      "dom_depth": 5,
+      "sibling_index": 0,
+      "link_density": 0.934640522875817,
+      "label": "content"
+    },
+    {
+      "text": "View Item \n\n\nDSpace@MIT Home\n\n\nMIT Libraries\n\n\nMIT Theses\n\n\nUndergraduate Theses\n\n\nView Item\n\n\n\n\n\nDSpace@MIT Home\n\n\nMIT Libraries\n\n\nMIT Theses\n\n\nUndergraduate Theses\n\nView Item",
+      "tag": "div",
+      "classes": [],
+      "text_length": 176,
+      "word_count": 22,
+      "is_visible": true,
+      "dom_depth": 6,
+      "sibling_index": 0,
+      "link_density": 0.934640522875817,
+      "label": "content"
+    },
+    {
+      "text": "View Item \n\n\nDSpace@MIT Home\n\n\nMIT Libraries\n\n\nMIT Theses\n\n\nUndergraduate Theses\n\n\nView Item",
+      "tag": "div",
+      "classes": [
+        "breadcrumb",
+        "dropdown",
+        "visible-xs"
+      ],
+      "text_length": 92,
+      "word_count": 12,
+      "is_visible": true,
+      "dom_depth": 7,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "content"
+    },
+    {
+      "text": "DSpace@MIT Home",
+      "tag": "li",
+      "classes": [],
+      "text_length": 15,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "MIT Libraries",
+      "tag": "li",
+      "classes": [],
+      "text_length": 13,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "MIT Theses",
+      "tag": "li",
+      "classes": [],
+      "text_length": 10,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 2,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Undergraduate Theses",
+      "tag": "li",
+      "classes": [],
+      "text_length": 20,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 3,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "View Item",
+      "tag": "li",
+      "classes": [
+        "disabled"
+      ],
+      "text_length": 9,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 4,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "DSpace@MIT Home",
+      "tag": "li",
+      "classes": [],
+      "text_length": 15,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "MIT Libraries",
+      "tag": "li",
+      "classes": [],
+      "text_length": 13,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "MIT Theses",
+      "tag": "li",
+      "classes": [],
+      "text_length": 10,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 2,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Undergraduate Theses",
+      "tag": "li",
+      "classes": [],
+      "text_length": 20,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 3,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "View Item",
+      "tag": "li",
+      "classes": [
+        "active"
+      ],
+      "text_length": 9,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 4,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "JavaScript is disabled for your browser. Some features of this site may not work without it.",
+      "tag": "div",
+      "classes": [
+        "hidden"
+      ],
+      "text_length": 92,
+      "word_count": 16,
+      "is_visible": true,
+      "dom_depth": 3,
+      "sibling_index": 2,
+      "link_density": 0.0,
+      "label": "content"
+    },
+    {
+      "text": "JavaScript is disabled for your browser. Some features of this site may not work without it.",
+      "tag": "div",
+      "classes": [],
+      "text_length": 92,
+      "word_count": 16,
+      "is_visible": true,
+      "dom_depth": 4,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "content"
+    },
+    {
+      "text": "JavaScript is disabled for your browser. Some features of this site may not work without it.",
+      "tag": "div",
+      "classes": [
+        "notice",
+        "failure"
+      ],
+      "text_length": 92,
+      "word_count": 16,
+      "is_visible": true,
+      "dom_depth": 5,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "content"
+    },
+    {
+      "text": "Toggle navigation\n\n\n\n\n\n\n\n\nNear-Infrared Spectroscopy of Near-Earth Asteroids: 3122 Florence, (357439) 2004 BL86, 1036 Ganymed, and 4055 Magellan\n\nAuthor(s)\nLarsen, Skylar S.\n\n\n\n\n\n\n\n\n\n\n\nDownloadThesis PDF (7.316Mb)\n\n\n\n\n\nAdvisor\nBinzel, Richard P.\nTakir, Driss\n\n\nTerms of use\n\nIn Copyright - Educational Use Permitted\nCopyright retained by author(s)\n\nhttps://rightsstatements.org/page/InC-EDU/1.0/\n\n\n\n\nMetadata\nShow full item record\n\n\n\n\nAbstract\nThe near-infrared spectra of four near-Earth asteroids, 3122 Florence, (357439) 2004 BL86, 1036 Ganymed, and 4055 Magellan, were analyzed for traces of surface water. NEAs are widely thought to be the source of water and organics delivered to early Earth. Additionally, some NEAs are considered potentially hazardous objects (PHOs), and they could make threateningly close approaches to our planet. The Infrared Telescope Facility (IRTF), located at Mauna Kea, Hawaii, was used to measure long wavelength cross-dispersed (LXD) spectra of these four asteroids with SpeX mode. The measured spectra wavelength ranged from 1.67-4.2 μm, which includes the 3-μm feature attributed to water/hydroxyl. The 3μm spectral feature was found on Florence, but not on 2004 BL86; meanwhile, the Ganymed and Magellan results were inconclusive. Discovering water on a celestial body such as Florence, an S-type asteroid, is highly unusual and warrants further study.\n\n\nDate issued2023-06\n\nURI\nhttps://hdl.handle.net/1721.1/151312\n\n\nDepartment\nMassachusetts Institute of Technology. Department of Earth, Atmospheric, and Planetary Sciences\n\n\nPublisher\nMassachusetts Institute of Technology\n\n\n\nCollections\n\n\n\nUndergraduate Theses\n\n\n\n\n\n\n\n\n\nShow Statistical Information\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSearch DSpace\n\n\nThis Collection\n\n\n\n\nBrowse\n\nAll of DSpaceCommunities & CollectionsBy Issue DateAuthorsTitlesSubjectsThis CollectionBy Issue DateAuthorsTitlesSubjects\n\nMy Account\n\nLogin\n\n\n\n\nStatistics\n\nOA StatisticsStatistics by CountryStatistics by Department",
+      "tag": "div",
+      "classes": [
+        "wrap-content"
+      ],
+      "text_length": 1985,
+      "word_count": 243,
+      "is_visible": true,
+      "dom_depth": 3,
+      "sibling_index": 3,
+      "link_density": 0.19186046511627908,
+      "label": "title"
+    },
+    {
+      "text": "Toggle navigation",
+      "tag": "div",
+      "classes": [
+        "starter"
+      ],
+      "text_length": 17,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 4,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Toggle navigation",
+      "tag": "span",
+      "classes": [
+        "sr-only"
+      ],
+      "text_length": 17,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 6,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Near-Infrared Spectroscopy of Near-Earth Asteroids: 3122 Florence, (357439) 2004 BL86, 1036 Ganymed, and 4055 Magellan\n\nAuthor(s)\nLarsen, Skylar S.\n\n\n\n\n\n\n\n\n\n\n\nDownloadThesis PDF (7.316Mb)\n\n\n\n\n\nAdvisor\nBinzel, Richard P.\nTakir, Driss\n\n\nTerms of use\n\nIn Copyright - Educational Use Permitted\nCopyright retained by author(s)\n\nhttps://rightsstatements.org/page/InC-EDU/1.0/\n\n\n\n\nMetadata\nShow full item record\n\n\n\n\nAbstract\nThe near-infrared spectra of four near-Earth asteroids, 3122 Florence, (357439) 2004 BL86, 1036 Ganymed, and 4055 Magellan, were analyzed for traces of surface water. NEAs are widely thought to be the source of water and organics delivered to early Earth. Additionally, some NEAs are considered potentially hazardous objects (PHOs), and they could make threateningly close approaches to our planet. The Infrared Telescope Facility (IRTF), located at Mauna Kea, Hawaii, was used to measure long wavelength cross-dispersed (LXD) spectra of these four asteroids with SpeX mode. The measured spectra wavelength ranged from 1.67-4.2 μm, which includes the 3-μm feature attributed to water/hydroxyl. The 3μm spectral feature was found on Florence, but not on 2004 BL86; meanwhile, the Ganymed and Magellan results were inconclusive. Discovering water on a celestial body such as Florence, an S-type asteroid, is highly unusual and warrants further study.\n\n\nDate issued2023-06\n\nURI\nhttps://hdl.handle.net/1721.1/151312\n\n\nDepartment\nMassachusetts Institute of Technology. Department of Earth, Atmospheric, and Planetary Sciences\n\n\nPublisher\nMassachusetts Institute of Technology\n\n\n\nCollections\n\n\n\nUndergraduate Theses\n\n\n\n\n\n\n\n\n\nShow Statistical Information\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSearch DSpace\n\n\nThis Collection\n\n\n\n\nBrowse\n\nAll of DSpaceCommunities & CollectionsBy Issue DateAuthorsTitlesSubjectsThis CollectionBy Issue DateAuthorsTitlesSubjects\n\nMy Account\n\nLogin\n\n\n\n\nStatistics\n\nOA StatisticsStatistics by CountryStatistics by Department",
+      "tag": "div",
+      "classes": [
+        "row",
+        "row-offcanvas",
+        "row-offcanvas-right"
+      ],
+      "text_length": 1959,
+      "word_count": 241,
+      "is_visible": true,
+      "dom_depth": 4,
+      "sibling_index": 1,
+      "link_density": 0.1937033084311633,
+      "label": "title"
+    },
+    {
+      "text": "Near-Infrared Spectroscopy of Near-Earth Asteroids: 3122 Florence, (357439) 2004 BL86, 1036 Ganymed, and 4055 Magellan\n\nAuthor(s)\nLarsen, Skylar S.\n\n\n\n\n\n\n\n\n\n\n\nDownloadThesis PDF (7.316Mb)\n\n\n\n\n\nAdvisor\nBinzel, Richard P.\nTakir, Driss\n\n\nTerms of use\n\nIn Copyright - Educational Use Permitted\nCopyright retained by author(s)\n\nhttps://rightsstatements.org/page/InC-EDU/1.0/\n\n\n\n\nMetadata\nShow full item record\n\n\n\n\nAbstract\nThe near-infrared spectra of four near-Earth asteroids, 3122 Florence, (357439) 2004 BL86, 1036 Ganymed, and 4055 Magellan, were analyzed for traces of surface water. NEAs are widely thought to be the source of water and organics delivered to early Earth. Additionally, some NEAs are considered potentially hazardous objects (PHOs), and they could make threateningly close approaches to our planet. The Infrared Telescope Facility (IRTF), located at Mauna Kea, Hawaii, was used to measure long wavelength cross-dispersed (LXD) spectra of these four asteroids with SpeX mode. The measured spectra wavelength ranged from 1.67-4.2 μm, which includes the 3-μm feature attributed to water/hydroxyl. The 3μm spectral feature was found on Florence, but not on 2004 BL86; meanwhile, the Ganymed and Magellan results were inconclusive. Discovering water on a celestial body such as Florence, an S-type asteroid, is highly unusual and warrants further study.\n\n\nDate issued2023-06\n\nURI\nhttps://hdl.handle.net/1721.1/151312\n\n\nDepartment\nMassachusetts Institute of Technology. Department of Earth, Atmospheric, and Planetary Sciences\n\n\nPublisher\nMassachusetts Institute of Technology\n\n\n\nCollections\n\n\n\nUndergraduate Theses\n\n\n\n\n\n\n\n\n\nShow Statistical Information\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSearch DSpace\n\n\nThis Collection\n\n\n\n\nBrowse\n\nAll of DSpaceCommunities & CollectionsBy Issue DateAuthorsTitlesSubjectsThis CollectionBy Issue DateAuthorsTitlesSubjects\n\nMy Account\n\nLogin\n\n\n\n\nStatistics\n\nOA StatisticsStatistics by CountryStatistics by Department",
+      "tag": "div",
+      "classes": [
+        "horizontal-slider",
+        "clearfix"
+      ],
+      "text_length": 1959,
+      "word_count": 241,
+      "is_visible": true,
+      "dom_depth": 5,
+      "sibling_index": 0,
+      "link_density": 0.1937033084311633,
+      "label": "title"
+    },
+    {
+      "text": "Near-Infrared Spectroscopy of Near-Earth Asteroids: 3122 Florence, (357439) 2004 BL86, 1036 Ganymed, and 4055 Magellan\n\nAuthor(s)\nLarsen, Skylar S.\n\n\n\n\n\n\n\n\n\n\n\nDownloadThesis PDF (7.316Mb)\n\n\n\n\n\nAdvisor\nBinzel, Richard P.\nTakir, Driss\n\n\nTerms of use\n\nIn Copyright - Educational Use Permitted\nCopyright retained by author(s)\n\nhttps://rightsstatements.org/page/InC-EDU/1.0/\n\n\n\n\nMetadata\nShow full item record\n\n\n\n\nAbstract\nThe near-infrared spectra of four near-Earth asteroids, 3122 Florence, (357439) 2004 BL86, 1036 Ganymed, and 4055 Magellan, were analyzed for traces of surface water. NEAs are widely thought to be the source of water and organics delivered to early Earth. Additionally, some NEAs are considered potentially hazardous objects (PHOs), and they could make threateningly close approaches to our planet. The Infrared Telescope Facility (IRTF), located at Mauna Kea, Hawaii, was used to measure long wavelength cross-dispersed (LXD) spectra of these four asteroids with SpeX mode. The measured spectra wavelength ranged from 1.67-4.2 μm, which includes the 3-μm feature attributed to water/hydroxyl. The 3μm spectral feature was found on Florence, but not on 2004 BL86; meanwhile, the Ganymed and Magellan results were inconclusive. Discovering water on a celestial body such as Florence, an S-type asteroid, is highly unusual and warrants further study.\n\n\nDate issued2023-06\n\nURI\nhttps://hdl.handle.net/1721.1/151312\n\n\nDepartment\nMassachusetts Institute of Technology. Department of Earth, Atmospheric, and Planetary Sciences\n\n\nPublisher\nMassachusetts Institute of Technology\n\n\n\nCollections\n\n\n\nUndergraduate Theses\n\n\n\n\n\n\n\n\n\nShow Statistical Information",
+      "tag": "div",
+      "classes": [
+        "col-xs-12",
+        "col-sm-12",
+        "col-md-9",
+        "main-content"
+      ],
+      "text_length": 1665,
+      "word_count": 216,
+      "is_visible": true,
+      "dom_depth": 6,
+      "sibling_index": 0,
+      "link_density": 0.10148514851485149,
+      "label": "title"
+    },
+    {
+      "text": "Near-Infrared Spectroscopy of Near-Earth Asteroids: 3122 Florence, (357439) 2004 BL86, 1036 Ganymed, and 4055 Magellan\n\nAuthor(s)\nLarsen, Skylar S.\n\n\n\n\n\n\n\n\n\n\n\nDownloadThesis PDF (7.316Mb)\n\n\n\n\n\nAdvisor\nBinzel, Richard P.\nTakir, Driss\n\n\nTerms of use\n\nIn Copyright - Educational Use Permitted\nCopyright retained by author(s)\n\nhttps://rightsstatements.org/page/InC-EDU/1.0/\n\n\n\n\nMetadata\nShow full item record\n\n\n\n\nAbstract\nThe near-infrared spectra of four near-Earth asteroids, 3122 Florence, (357439) 2004 BL86, 1036 Ganymed, and 4055 Magellan, were analyzed for traces of surface water. NEAs are widely thought to be the source of water and organics delivered to early Earth. Additionally, some NEAs are considered potentially hazardous objects (PHOs), and they could make threateningly close approaches to our planet. The Infrared Telescope Facility (IRTF), located at Mauna Kea, Hawaii, was used to measure long wavelength cross-dispersed (LXD) spectra of these four asteroids with SpeX mode. The measured spectra wavelength ranged from 1.67-4.2 μm, which includes the 3-μm feature attributed to water/hydroxyl. The 3μm spectral feature was found on Florence, but not on 2004 BL86; meanwhile, the Ganymed and Magellan results were inconclusive. Discovering water on a celestial body such as Florence, an S-type asteroid, is highly unusual and warrants further study.\n\n\nDate issued2023-06\n\nURI\nhttps://hdl.handle.net/1721.1/151312\n\n\nDepartment\nMassachusetts Institute of Technology. Department of Earth, Atmospheric, and Planetary Sciences\n\n\nPublisher\nMassachusetts Institute of Technology\n\n\n\nCollections\n\n\n\nUndergraduate Theses\n\n\n\n\n\n\n\n\n\nShow Statistical Information",
+      "tag": "div",
+      "classes": [],
+      "text_length": 1665,
+      "word_count": 216,
+      "is_visible": true,
+      "dom_depth": 7,
+      "sibling_index": 0,
+      "link_density": 0.10148514851485149,
+      "label": "title"
+    },
+    {
+      "text": "Near-Infrared Spectroscopy of Near-Earth Asteroids: 3122 Florence, (357439) 2004 BL86, 1036 Ganymed, and 4055 Magellan\n\nAuthor(s)\nLarsen, Skylar S.\n\n\n\n\n\n\n\n\n\n\n\nDownloadThesis PDF (7.316Mb)\n\n\n\n\n\nAdvisor\nBinzel, Richard P.\nTakir, Driss\n\n\nTerms of use\n\nIn Copyright - Educational Use Permitted\nCopyright retained by author(s)\n\nhttps://rightsstatements.org/page/InC-EDU/1.0/\n\n\n\n\nMetadata\nShow full item record\n\n\n\n\nAbstract\nThe near-infrared spectra of four near-Earth asteroids, 3122 Florence, (357439) 2004 BL86, 1036 Ganymed, and 4055 Magellan, were analyzed for traces of surface water. NEAs are widely thought to be the source of water and organics delivered to early Earth. Additionally, some NEAs are considered potentially hazardous objects (PHOs), and they could make threateningly close approaches to our planet. The Infrared Telescope Facility (IRTF), located at Mauna Kea, Hawaii, was used to measure long wavelength cross-dispersed (LXD) spectra of these four asteroids with SpeX mode. The measured spectra wavelength ranged from 1.67-4.2 μm, which includes the 3-μm feature attributed to water/hydroxyl. The 3μm spectral feature was found on Florence, but not on 2004 BL86; meanwhile, the Ganymed and Magellan results were inconclusive. Discovering water on a celestial body such as Florence, an S-type asteroid, is highly unusual and warrants further study.\n\n\nDate issued2023-06\n\nURI\nhttps://hdl.handle.net/1721.1/151312\n\n\nDepartment\nMassachusetts Institute of Technology. Department of Earth, Atmospheric, and Planetary Sciences\n\n\nPublisher\nMassachusetts Institute of Technology\n\n\n\nCollections\n\n\n\nUndergraduate Theses",
+      "tag": "div",
+      "classes": [
+        "ds-static-div",
+        "primary"
+      ],
+      "text_length": 1627,
+      "word_count": 213,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 0,
+      "link_density": 0.08506616257088846,
+      "label": "title"
+    },
+    {
+      "text": "Near-Infrared Spectroscopy of Near-Earth Asteroids: 3122 Florence, (357439) 2004 BL86, 1036 Ganymed, and 4055 Magellan\n\nAuthor(s)\nLarsen, Skylar S.\n\n\n\n\n\n\n\n\n\n\n\nDownloadThesis PDF (7.316Mb)\n\n\n\n\n\nAdvisor\nBinzel, Richard P.\nTakir, Driss\n\n\nTerms of use\n\nIn Copyright - Educational Use Permitted\nCopyright retained by author(s)\n\nhttps://rightsstatements.org/page/InC-EDU/1.0/\n\n\n\n\nMetadata\nShow full item record\n\n\n\n\nAbstract\nThe near-infrared spectra of four near-Earth asteroids, 3122 Florence, (357439) 2004 BL86, 1036 Ganymed, and 4055 Magellan, were analyzed for traces of surface water. NEAs are widely thought to be the source of water and organics delivered to early Earth. Additionally, some NEAs are considered potentially hazardous objects (PHOs), and they could make threateningly close approaches to our planet. The Infrared Telescope Facility (IRTF), located at Mauna Kea, Hawaii, was used to measure long wavelength cross-dispersed (LXD) spectra of these four asteroids with SpeX mode. The measured spectra wavelength ranged from 1.67-4.2 μm, which includes the 3-μm feature attributed to water/hydroxyl. The 3μm spectral feature was found on Florence, but not on 2004 BL86; meanwhile, the Ganymed and Magellan results were inconclusive. Discovering water on a celestial body such as Florence, an S-type asteroid, is highly unusual and warrants further study.\n\n\nDate issued2023-06\n\nURI\nhttps://hdl.handle.net/1721.1/151312\n\n\nDepartment\nMassachusetts Institute of Technology. Department of Earth, Atmospheric, and Planetary Sciences\n\n\nPublisher\nMassachusetts Institute of Technology\n\n\n\nCollections\n\n\n\nUndergraduate Theses",
+      "tag": "div",
+      "classes": [
+        "item-summary-view-metadata"
+      ],
+      "text_length": 1627,
+      "word_count": 213,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 0,
+      "link_density": 0.08506616257088846,
+      "label": "title"
+    },
+    {
+      "text": "Near-Infrared Spectroscopy of Near-Earth Asteroids: 3122 Florence, (357439) 2004 BL86, 1036 Ganymed, and 4055 Magellan",
+      "tag": "h2",
+      "classes": [
+        "page-header",
+        "first-page-header"
+      ],
+      "text_length": 118,
+      "word_count": 15,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "title"
+    },
+    {
+      "text": "Author(s)\nLarsen, Skylar S.",
+      "tag": "div",
+      "classes": [
+        "simple-item-view-authors",
+        "item-page-field-wrapper",
+        "table"
+      ],
+      "text_length": 27,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "author"
+    },
+    {
+      "text": "Larsen, Skylar S.",
+      "tag": "span",
+      "classes": [
+        "ds-dc_contributor_author-authority"
+      ],
+      "text_length": 17,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "author"
+    },
+    {
+      "text": "Larsen, Skylar S.",
+      "tag": "span",
+      "classes": [
+        "author-list-1"
+      ],
+      "text_length": 17,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "author"
+    },
+    {
+      "text": "DownloadThesis PDF (7.316Mb)\n\n\n\n\n\nAdvisor\nBinzel, Richard P.\nTakir, Driss\n\n\nTerms of use\n\nIn Copyright - Educational Use Permitted\nCopyright retained by author(s)\n\nhttps://rightsstatements.org/page/InC-EDU/1.0/\n\n\n\n\nMetadata\nShow full item record\n\n\n\n\nAbstract\nThe near-infrared spectra of four near-Earth asteroids, 3122 Florence, (357439) 2004 BL86, 1036 Ganymed, and 4055 Magellan, were analyzed for traces of surface water. NEAs are widely thought to be the source of water and organics delivered to early Earth. Additionally, some NEAs are considered potentially hazardous objects (PHOs), and they could make threateningly close approaches to our planet. The Infrared Telescope Facility (IRTF), located at Mauna Kea, Hawaii, was used to measure long wavelength cross-dispersed (LXD) spectra of these four asteroids with SpeX mode. The measured spectra wavelength ranged from 1.67-4.2 μm, which includes the 3-μm feature attributed to water/hydroxyl. The 3μm spectral feature was found on Florence, but not on 2004 BL86; meanwhile, the Ganymed and Magellan results were inconclusive. Discovering water on a celestial body such as Florence, an S-type asteroid, is highly unusual and warrants further study.\n\n\nDate issued2023-06\n\nURI\nhttps://hdl.handle.net/1721.1/151312\n\n\nDepartment\nMassachusetts Institute of Technology. Department of Earth, Atmospheric, and Planetary Sciences\n\n\nPublisher\nMassachusetts Institute of Technology\n\n\n\nCollections\n\n\n\nUndergraduate Theses",
+      "tag": "div",
+      "classes": [
+        "row"
+      ],
+      "text_length": 1468,
+      "word_count": 194,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 1,
+      "link_density": 0.09375,
+      "label": "title"
+    },
+    {
+      "text": "DownloadThesis PDF (7.316Mb)\n\n\n\n\n\nAdvisor\nBinzel, Richard P.\nTakir, Driss\n\n\nTerms of use\n\nIn Copyright - Educational Use Permitted\nCopyright retained by author(s)\n\nhttps://rightsstatements.org/page/InC-EDU/1.0/\n\n\n\n\nMetadata\nShow full item record",
+      "tag": "div",
+      "classes": [
+        "col-sm-4",
+        "smaller-font"
+      ],
+      "text_length": 245,
+      "word_count": 28,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.33047210300429186,
+      "label": "author_candidate"
+    },
+    {
+      "text": "DownloadThesis PDF (7.316Mb)",
+      "tag": "div",
+      "classes": [
+        "row"
+      ],
+      "text_length": 28,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 0,
+      "link_density": 0.27586206896551724,
+      "label": "other"
+    },
+    {
+      "text": "DownloadThesis PDF (7.316Mb)",
+      "tag": "div",
+      "classes": [
+        "col-xs-6",
+        "col-sm-12"
+      ],
+      "text_length": 28,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 1,
+      "link_density": 0.27586206896551724,
+      "label": "other"
+    },
+    {
+      "text": "DownloadThesis PDF (7.316Mb)",
+      "tag": "div",
+      "classes": [
+        "item-page-field-wrapper",
+        "table",
+        "word-break"
+      ],
+      "text_length": 28,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 14,
+      "sibling_index": 0,
+      "link_density": 0.27586206896551724,
+      "label": "other"
+    },
+    {
+      "text": "DownloadThesis PDF (7.316Mb)",
+      "tag": "div",
+      "classes": [],
+      "text_length": 28,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 15,
+      "sibling_index": 0,
+      "link_density": 0.27586206896551724,
+      "label": "other"
+    },
+    {
+      "text": "Advisor\nBinzel, Richard P.\nTakir, Driss",
+      "tag": "div",
+      "classes": [
+        "simple-item-view-advisor",
+        "item-page-field-wrapper"
+      ],
+      "text_length": 39,
+      "word_count": 6,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Binzel, Richard P.",
+      "tag": "div",
+      "classes": [],
+      "text_length": 18,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Takir, Driss",
+      "tag": "div",
+      "classes": [],
+      "text_length": 12,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Terms of use\n\nIn Copyright - Educational Use Permitted\nCopyright retained by author(s)\n\nhttps://rightsstatements.org/page/InC-EDU/1.0/",
+      "tag": "div",
+      "classes": [
+        "simple-item-view-terms",
+        "item-page-field-wrapper"
+      ],
+      "text_length": 134,
+      "word_count": 14,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 2,
+      "link_density": 0.3484848484848485,
+      "label": "author_candidate"
+    },
+    {
+      "text": "In Copyright - Educational Use Permitted\nCopyright retained by author(s)\n\nhttps://rightsstatements.org/page/InC-EDU/1.0/",
+      "tag": "div",
+      "classes": [],
+      "text_length": 120,
+      "word_count": 11,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 0,
+      "link_density": 0.3865546218487395,
+      "label": "author_candidate"
+    },
+    {
+      "text": "Metadata\nShow full item record",
+      "tag": "div",
+      "classes": [
+        "simple-item-view-show-full",
+        "item-page-field-wrapper",
+        "table"
+      ],
+      "text_length": 30,
+      "word_count": 5,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 3,
+      "link_density": 0.7,
+      "label": "other"
+    },
+    {
+      "text": "Abstract\nThe near-infrared spectra of four near-Earth asteroids, 3122 Florence, (357439) 2004 BL86, 1036 Ganymed, and 4055 Magellan, were analyzed for traces of surface water. NEAs are widely thought to be the source of water and organics delivered to early Earth. Additionally, some NEAs are considered potentially hazardous objects (PHOs), and they could make threateningly close approaches to our planet. The Infrared Telescope Facility (IRTF), located at Mauna Kea, Hawaii, was used to measure long wavelength cross-dispersed (LXD) spectra of these four asteroids with SpeX mode. The measured spectra wavelength ranged from 1.67-4.2 μm, which includes the 3-μm feature attributed to water/hydroxyl. The 3μm spectral feature was found on Florence, but not on 2004 BL86; meanwhile, the Ganymed and Magellan results were inconclusive. Discovering water on a celestial body such as Florence, an S-type asteroid, is highly unusual and warrants further study.\n\n\nDate issued2023-06\n\nURI\nhttps://hdl.handle.net/1721.1/151312\n\n\nDepartment\nMassachusetts Institute of Technology. Department of Earth, Atmospheric, and Planetary Sciences\n\n\nPublisher\nMassachusetts Institute of Technology\n\n\n\nCollections\n\n\n\nUndergraduate Theses",
+      "tag": "div",
+      "classes": [
+        "col-sm-8"
+      ],
+      "text_length": 1218,
+      "word_count": 166,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 1,
+      "link_density": 0.0472636815920398,
+      "label": "title"
+    },
+    {
+      "text": "Abstract\nThe near-infrared spectra of four near-Earth asteroids, 3122 Florence, (357439) 2004 BL86, 1036 Ganymed, and 4055 Magellan, were analyzed for traces of surface water. NEAs are widely thought to be the source of water and organics delivered to early Earth. Additionally, some NEAs are considered potentially hazardous objects (PHOs), and they could make threateningly close approaches to our planet. The Infrared Telescope Facility (IRTF), located at Mauna Kea, Hawaii, was used to measure long wavelength cross-dispersed (LXD) spectra of these four asteroids with SpeX mode. The measured spectra wavelength ranged from 1.67-4.2 μm, which includes the 3-μm feature attributed to water/hydroxyl. The 3μm spectral feature was found on Florence, but not on 2004 BL86; meanwhile, the Ganymed and Magellan results were inconclusive. Discovering water on a celestial body such as Florence, an S-type asteroid, is highly unusual and warrants further study.",
+      "tag": "div",
+      "classes": [
+        "simple-item-view-description",
+        "item-page-field-wrapper",
+        "table"
+      ],
+      "text_length": 957,
+      "word_count": 142,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "title"
+    },
+    {
+      "text": "The near-infrared spectra of four near-Earth asteroids, 3122 Florence, (357439) 2004 BL86, 1036 Ganymed, and 4055 Magellan, were analyzed for traces of surface water. NEAs are widely thought to be the source of water and organics delivered to early Earth. Additionally, some NEAs are considered potentially hazardous objects (PHOs), and they could make threateningly close approaches to our planet. The Infrared Telescope Facility (IRTF), located at Mauna Kea, Hawaii, was used to measure long wavelength cross-dispersed (LXD) spectra of these four asteroids with SpeX mode. The measured spectra wavelength ranged from 1.67-4.2 μm, which includes the 3-μm feature attributed to water/hydroxyl. The 3μm spectral feature was found on Florence, but not on 2004 BL86; meanwhile, the Ganymed and Magellan results were inconclusive. Discovering water on a celestial body such as Florence, an S-type asteroid, is highly unusual and warrants further study.",
+      "tag": "div",
+      "classes": [],
+      "text_length": 948,
+      "word_count": 141,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "title"
+    },
+    {
+      "text": "Date issued2023-06",
+      "tag": "div",
+      "classes": [
+        "simple-item-view-date",
+        "word-break",
+        "item-page-field-wrapper",
+        "table"
+      ],
+      "text_length": 18,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "journal_info"
+    },
+    {
+      "text": "URI\nhttps://hdl.handle.net/1721.1/151312",
+      "tag": "div",
+      "classes": [
+        "simple-item-view-uri",
+        "item-page-field-wrapper",
+        "table"
+      ],
+      "text_length": 40,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 2,
+      "link_density": 0.9,
+      "label": "other"
+    },
+    {
+      "text": "https://hdl.handle.net/1721.1/151312",
+      "tag": "span",
+      "classes": [],
+      "text_length": 36,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Department\nMassachusetts Institute of Technology. Department of Earth, Atmospheric, and Planetary Sciences",
+      "tag": "div",
+      "classes": [
+        "simple-item-view-department",
+        "item-page-field-wrapper"
+      ],
+      "text_length": 106,
+      "word_count": 12,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 3,
+      "link_density": 0.0,
+      "label": "content"
+    },
+    {
+      "text": "Massachusetts Institute of Technology. Department of Earth, Atmospheric, and Planetary Sciences",
+      "tag": "span",
+      "classes": [],
+      "text_length": 95,
+      "word_count": 11,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "content"
+    },
+    {
+      "text": "Publisher\nMassachusetts Institute of Technology",
+      "tag": "div",
+      "classes": [
+        "simple-item-view-journal",
+        "item-page-field-wrapper"
+      ],
+      "text_length": 47,
+      "word_count": 5,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 4,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Massachusetts Institute of Technology",
+      "tag": "div",
+      "classes": [],
+      "text_length": 37,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Collections\n\n\n\nUndergraduate Theses",
+      "tag": "div",
+      "classes": [
+        "simple-item-view-collections",
+        "item-page-field-wrapper",
+        "table"
+      ],
+      "text_length": 35,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 5,
+      "link_density": 0.625,
+      "label": "other"
+    },
+    {
+      "text": "Undergraduate Theses",
+      "tag": "li",
+      "classes": [],
+      "text_length": 20,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 14,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Show Statistical Information",
+      "tag": "div",
+      "classes": [
+        "ds-static-div"
+      ],
+      "text_length": 28,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Show Statistical Information",
+      "tag": "p",
+      "classes": [
+        "ds-paragraph"
+      ],
+      "text_length": 28,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Search DSpace\n\n\nThis Collection\n\n\n\n\nBrowse\n\nAll of DSpaceCommunities & CollectionsBy Issue DateAuthorsTitlesSubjectsThis CollectionBy Issue DateAuthorsTitlesSubjects\n\nMy Account\n\nLogin\n\n\n\n\nStatistics\n\nOA StatisticsStatistics by CountryStatistics by Department",
+      "tag": "div",
+      "classes": [
+        "col-xs-6",
+        "col-sm-3",
+        "sidebar-offcanvas"
+      ],
+      "text_length": 259,
+      "word_count": 25,
+      "is_visible": true,
+      "dom_depth": 6,
+      "sibling_index": 1,
+      "link_density": 0.7704280155642024,
+      "label": "author_candidate"
+    },
+    {
+      "text": "Search DSpace\n\n\nThis Collection\n\n\n\n\nBrowse\n\nAll of DSpaceCommunities & CollectionsBy Issue DateAuthorsTitlesSubjectsThis CollectionBy Issue DateAuthorsTitlesSubjects\n\nMy Account\n\nLogin\n\n\n\n\nStatistics\n\nOA StatisticsStatistics by CountryStatistics by Department",
+      "tag": "div",
+      "classes": [
+        "word-break",
+        "hidden-print"
+      ],
+      "text_length": 259,
+      "word_count": 25,
+      "is_visible": true,
+      "dom_depth": 7,
+      "sibling_index": 0,
+      "link_density": 0.7704280155642024,
+      "label": "author_candidate"
+    },
+    {
+      "text": "Search DSpace\n\n\nThis Collection",
+      "tag": "div",
+      "classes": [
+        "ds-option-set"
+      ],
+      "text_length": 31,
+      "word_count": 4,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Search DSpace",
+      "tag": "div",
+      "classes": [
+        "radio"
+      ],
+      "text_length": 13,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "This Collection",
+      "tag": "div",
+      "classes": [
+        "radio"
+      ],
+      "text_length": 15,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 2,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Browse",
+      "tag": "h2",
+      "classes": [
+        "ds-option-set-head",
+        "h6"
+      ],
+      "text_length": 6,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "All of DSpaceCommunities & CollectionsBy Issue DateAuthorsTitlesSubjectsThis CollectionBy Issue DateAuthorsTitlesSubjects",
+      "tag": "div",
+      "classes": [
+        "list-group"
+      ],
+      "text_length": 121,
+      "word_count": 10,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "author_candidate"
+    },
+    {
+      "text": "All of DSpace",
+      "tag": "span",
+      "classes": [
+        "h5",
+        "list-group-item-heading",
+        "h5"
+      ],
+      "text_length": 13,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "This Collection",
+      "tag": "span",
+      "classes": [
+        "h5",
+        "list-group-item-heading",
+        "h5"
+      ],
+      "text_length": 15,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "My Account",
+      "tag": "h2",
+      "classes": [
+        "ds-option-set-head",
+        "h6"
+      ],
+      "text_length": 10,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Login",
+      "tag": "div",
+      "classes": [
+        "list-group"
+      ],
+      "text_length": 5,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 2,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Statistics",
+      "tag": "h2",
+      "classes": [
+        "ds-option-set-head",
+        "h6"
+      ],
+      "text_length": 10,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 2,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "OA StatisticsStatistics by CountryStatistics by Department",
+      "tag": "div",
+      "classes": [
+        "list-group",
+        "atmire-module"
+      ],
+      "text_length": 58,
+      "word_count": 6,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 6,
+      "link_density": 1.0,
+      "label": "author_candidate"
+    },
+    {
+      "text": "PrivacyPermissionsAccessibilityContact us",
+      "tag": "div",
+      "classes": [
+        "wrap-outer-footer",
+        "layout-band"
+      ],
+      "text_length": 41,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 4,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "PrivacyPermissionsAccessibilityContact us",
+      "tag": "div",
+      "classes": [
+        "wrap-footer",
+        "footer-slim"
+      ],
+      "text_length": 41,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 5,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "PrivacyPermissionsAccessibilityContact us",
+      "tag": "div",
+      "classes": [
+        "footer-main"
+      ],
+      "text_length": 41,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 6,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "PrivacyPermissionsAccessibilityContact us",
+      "tag": "div",
+      "classes": [
+        "identity"
+      ],
+      "text_length": 41,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 7,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "PrivacyPermissionsAccessibilityContact us",
+      "tag": "div",
+      "classes": [
+        "wrap-middle"
+      ],
+      "text_length": 41,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "PrivacyPermissionsAccessibilityContact us",
+      "tag": "div",
+      "classes": [
+        "wrap-policies"
+      ],
+      "text_length": 41,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Privacy",
+      "tag": "span",
+      "classes": [
+        "item"
+      ],
+      "text_length": 7,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Permissions",
+      "tag": "span",
+      "classes": [
+        "item"
+      ],
+      "text_length": 11,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Accessibility",
+      "tag": "span",
+      "classes": [
+        "item"
+      ],
+      "text_length": 13,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 2,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Contact us",
+      "tag": "span",
+      "classes": [
+        "item"
+      ],
+      "text_length": 10,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 3,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Content created by the MIT Libraries, CC BY-NC unless otherwise noted. Notify us about copyright concerns.",
+      "tag": "div",
+      "classes": [
+        "wrap-outer-footer-institute",
+        "layout-band"
+      ],
+      "text_length": 106,
+      "word_count": 16,
+      "is_visible": true,
+      "dom_depth": 4,
+      "sibling_index": 1,
+      "link_density": 0.411214953271028,
+      "label": "author_candidate"
+    },
+    {
+      "text": "Content created by the MIT Libraries, CC BY-NC unless otherwise noted. Notify us about copyright concerns.",
+      "tag": "div",
+      "classes": [
+        "wrap-footer-institute"
+      ],
+      "text_length": 106,
+      "word_count": 16,
+      "is_visible": true,
+      "dom_depth": 5,
+      "sibling_index": 0,
+      "link_density": 0.411214953271028,
+      "label": "author_candidate"
+    },
+    {
+      "text": "Content created by the MIT Libraries, CC BY-NC unless otherwise noted. Notify us about copyright concerns.",
+      "tag": "div",
+      "classes": [
+        "footer-info-institute"
+      ],
+      "text_length": 106,
+      "word_count": 16,
+      "is_visible": true,
+      "dom_depth": 6,
+      "sibling_index": 0,
+      "link_density": 0.411214953271028,
+      "label": "author_candidate"
+    },
+    {
+      "text": "Content created by the MIT Libraries, CC BY-NC unless otherwise noted. Notify us about copyright concerns.",
+      "tag": "div",
+      "classes": [
+        "license"
+      ],
+      "text_length": 106,
+      "word_count": 16,
+      "is_visible": true,
+      "dom_depth": 7,
+      "sibling_index": 0,
+      "link_density": 0.40186915887850466,
+      "label": "author_candidate"
+    }
+  ],
+  "ground_truth": {
+    "title": "Near-Infrared Spectroscopy of Near-Earth Asteroids: 3122 Florence, (357439) 2004 BL86, 1036 Ganymed, and 4055 Magellan",
+    "authors": [
+      "Larsen, Skylar S."
+    ],
+    "year": null,
+    "doi": null,
+    "journal": "MIT Repository",
+    "extraction_method": "rule_based"
+  },
+  "has_cite_button": false,
+  "has_structured_metadata": true,
+  "total_blocks": 88,
+  "labeled_blocks": 37
+}

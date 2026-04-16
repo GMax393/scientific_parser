@@ -1,0 +1,523 @@
+{
+  "id": "ieee_conference_1",
+  "url": "https://ieeexplore.ieee.org/document/10288894",
+  "source_type": "ieee_conference",
+  "complexity": {
+    "score": 2,
+    "level": "medium",
+    "text_blocks_count": 37
+  },
+  "text_blocks": [
+    {
+      "text": "IEEE Account\n\nChange Username/Password\nUpdate Address\n\n\n\nPurchase Details\n\nPayment Options\nOrder History\nView Purchased Documents\n\n\n\nProfile Information\n\nCommunications Preferences\nProfession and Education\nTechnical Interests\n\n\n\nNeed Help?\n\nUS & Canada: +1 800 678 4333\nWorldwide:  +1 732 981 0060\n\nContact & Support\n\n\n\n\n\n\n\n\nAbout IEEE Xplore\nContact Us\nHelp\nAccessibility\nTerms of Use\nNondiscrimination Policy\nSitemap\nPrivacy & Opting Out of Cookies\n\n\n\t\t\t\t\t\t\tA not-for-profit organization, IEEE is the world's largest technical professional organization dedicated to advancing technology for the benefit of humanity.© Copyright 2026 IEEE - All rights reserved. Use of this web site signifies your agreement to the terms and conditions.",
+      "tag": "div",
+      "classes": [],
+      "text_length": 736,
+      "word_count": 100,
+      "is_visible": true,
+      "dom_depth": 3,
+      "sibling_index": 1,
+      "link_density": 0.44113475177304967,
+      "label": "journal"
+    },
+    {
+      "text": "IEEE Account\n\nChange Username/Password\nUpdate Address\n\n\n\nPurchase Details\n\nPayment Options\nOrder History\nView Purchased Documents\n\n\n\nProfile Information\n\nCommunications Preferences\nProfession and Education\nTechnical Interests\n\n\n\nNeed Help?\n\nUS & Canada: +1 800 678 4333\nWorldwide:  +1 732 981 0060\n\nContact & Support\n\n\n\n\n\n\n\n\nAbout IEEE Xplore\nContact Us\nHelp\nAccessibility\nTerms of Use\nNondiscrimination Policy\nSitemap\nPrivacy & Opting Out of Cookies\n\n\n\t\t\t\t\t\t\tA not-for-profit organization, IEEE is the world's largest technical professional organization dedicated to advancing technology for the benefit of humanity.© Copyright 2026 IEEE - All rights reserved. Use of this web site signifies your agreement to the terms and conditions.",
+      "tag": "div",
+      "classes": [
+        "row"
+      ],
+      "text_length": 736,
+      "word_count": 100,
+      "is_visible": true,
+      "dom_depth": 4,
+      "sibling_index": 0,
+      "link_density": 0.44113475177304967,
+      "label": "journal"
+    },
+    {
+      "text": "IEEE Account\n\nChange Username/Password\nUpdate Address\n\n\n\nPurchase Details\n\nPayment Options\nOrder History\nView Purchased Documents\n\n\n\nProfile Information\n\nCommunications Preferences\nProfession and Education\nTechnical Interests\n\n\n\nNeed Help?\n\nUS & Canada: +1 800 678 4333\nWorldwide:  +1 732 981 0060\n\nContact & Support\n\n\n\n\n\n\n\n\nAbout IEEE Xplore\nContact Us\nHelp\nAccessibility\nTerms of Use\nNondiscrimination Policy\nSitemap\nPrivacy & Opting Out of Cookies\n\n\n\t\t\t\t\t\t\tA not-for-profit organization, IEEE is the world's largest technical professional organization dedicated to advancing technology for the benefit of humanity.© Copyright 2026 IEEE - All rights reserved. Use of this web site signifies your agreement to the terms and conditions.",
+      "tag": "div",
+      "classes": [
+        "col"
+      ],
+      "text_length": 736,
+      "word_count": 100,
+      "is_visible": true,
+      "dom_depth": 5,
+      "sibling_index": 0,
+      "link_density": 0.44113475177304967,
+      "label": "journal"
+    },
+    {
+      "text": "IEEE Account\n\nChange Username/Password\nUpdate Address\n\n\n\nPurchase Details\n\nPayment Options\nOrder History\nView Purchased Documents\n\n\n\nProfile Information\n\nCommunications Preferences\nProfession and Education\nTechnical Interests\n\n\n\nNeed Help?\n\nUS & Canada: +1 800 678 4333\nWorldwide:  +1 732 981 0060\n\nContact & Support\n\n\n\n\n\n\n\n\nAbout IEEE Xplore\nContact Us\nHelp\nAccessibility\nTerms of Use\nNondiscrimination Policy\nSitemap\nPrivacy & Opting Out of Cookies\n\n\n\t\t\t\t\t\t\tA not-for-profit organization, IEEE is the world's largest technical professional organization dedicated to advancing technology for the benefit of humanity.© Copyright 2026 IEEE - All rights reserved. Use of this web site signifies your agreement to the terms and conditions.",
+      "tag": "div",
+      "classes": [
+        "Footer",
+        "stats-footer",
+        "hide-mobile"
+      ],
+      "text_length": 736,
+      "word_count": 100,
+      "is_visible": true,
+      "dom_depth": 7,
+      "sibling_index": 0,
+      "link_density": 0.4397163120567376,
+      "label": "journal"
+    },
+    {
+      "text": "IEEE Account\n\nChange Username/Password\nUpdate Address\n\n\n\nPurchase Details\n\nPayment Options\nOrder History\nView Purchased Documents\n\n\n\nProfile Information\n\nCommunications Preferences\nProfession and Education\nTechnical Interests\n\n\n\nNeed Help?\n\nUS & Canada: +1 800 678 4333\nWorldwide:  +1 732 981 0060\n\nContact & Support",
+      "tag": "div",
+      "classes": [
+        "pure-g",
+        "Footer-sections"
+      ],
+      "text_length": 316,
+      "word_count": 41,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 0,
+      "link_density": 0.6112956810631229,
+      "label": "journal"
+    },
+    {
+      "text": "IEEE Account\n\nChange Username/Password\nUpdate Address",
+      "tag": "div",
+      "classes": [
+        "pure-u-1-4"
+      ],
+      "text_length": 53,
+      "word_count": 6,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 0,
+      "link_density": 0.75,
+      "label": "journal"
+    },
+    {
+      "text": "IEEE Account",
+      "tag": "h3",
+      "classes": [
+        "Footer-header"
+      ],
+      "text_length": 12,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "journal"
+    },
+    {
+      "text": "Change Username/Password",
+      "tag": "li",
+      "classes": [],
+      "text_length": 24,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Update Address",
+      "tag": "li",
+      "classes": [],
+      "text_length": 14,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Purchase Details\n\nPayment Options\nOrder History\nView Purchased Documents",
+      "tag": "div",
+      "classes": [
+        "pure-u-1-4"
+      ],
+      "text_length": 72,
+      "word_count": 9,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 1,
+      "link_density": 0.7605633802816901,
+      "label": "content"
+    },
+    {
+      "text": "Purchase Details",
+      "tag": "h3",
+      "classes": [
+        "Footer-header"
+      ],
+      "text_length": 16,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Payment Options",
+      "tag": "li",
+      "classes": [],
+      "text_length": 15,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Order History",
+      "tag": "li",
+      "classes": [],
+      "text_length": 13,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "View Purchased Documents",
+      "tag": "li",
+      "classes": [],
+      "text_length": 24,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 2,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Profile Information\n\nCommunications Preferences\nProfession and Education\nTechnical Interests",
+      "tag": "div",
+      "classes": [
+        "pure-u-1-4"
+      ],
+      "text_length": 92,
+      "word_count": 9,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 2,
+      "link_density": 0.7802197802197802,
+      "label": "content"
+    },
+    {
+      "text": "Profile Information",
+      "tag": "h3",
+      "classes": [
+        "Footer-header"
+      ],
+      "text_length": 19,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Communications Preferences",
+      "tag": "li",
+      "classes": [],
+      "text_length": 26,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Profession and Education",
+      "tag": "li",
+      "classes": [],
+      "text_length": 24,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Technical Interests",
+      "tag": "li",
+      "classes": [],
+      "text_length": 19,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 2,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Need Help?\n\nUS & Canada: +1 800 678 4333\nWorldwide:  +1 732 981 0060\n\nContact & Support",
+      "tag": "div",
+      "classes": [
+        "pure-u-1-4"
+      ],
+      "text_length": 87,
+      "word_count": 17,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 3,
+      "link_density": 0.20238095238095238,
+      "label": "content"
+    },
+    {
+      "text": "Need Help?",
+      "tag": "h3",
+      "classes": [
+        "Footer-header"
+      ],
+      "text_length": 10,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "US & Canada: +1 800 678 4333",
+      "tag": "li",
+      "classes": [],
+      "text_length": 28,
+      "word_count": 7,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Worldwide:  +1 732 981 0060",
+      "tag": "li",
+      "classes": [],
+      "text_length": 27,
+      "word_count": 5,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 1,
+      "link_density": 0.0,
+      "label": "other"
+    },
+    {
+      "text": "Contact & Support",
+      "tag": "li",
+      "classes": [],
+      "text_length": 17,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 2,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "About IEEE Xplore\nContact Us\nHelp\nAccessibility\nTerms of Use\nNondiscrimination Policy\nSitemap\nPrivacy & Opting Out of Cookies\n\n\n\t\t\t\t\t\t\tA not-for-profit organization, IEEE is the world's largest technical professional organization dedicated to advancing technology for the benefit of humanity.© Copyright 2026 IEEE - All rights reserved. Use of this web site signifies your agreement to the terms and conditions.",
+      "tag": "div",
+      "classes": [
+        "row"
+      ],
+      "text_length": 411,
+      "word_count": 59,
+      "is_visible": true,
+      "dom_depth": 8,
+      "sibling_index": 1,
+      "link_density": 0.31017369727047145,
+      "label": "journal"
+    },
+    {
+      "text": "About IEEE Xplore\nContact Us\nHelp\nAccessibility\nTerms of Use\nNondiscrimination Policy\nSitemap\nPrivacy & Opting Out of Cookies\n\n\n\t\t\t\t\t\t\tA not-for-profit organization, IEEE is the world's largest technical professional organization dedicated to advancing technology for the benefit of humanity.© Copyright 2026 IEEE - All rights reserved. Use of this web site signifies your agreement to the terms and conditions.",
+      "tag": "div",
+      "classes": [
+        "col-12",
+        "Footer-bottom"
+      ],
+      "text_length": 411,
+      "word_count": 59,
+      "is_visible": true,
+      "dom_depth": 9,
+      "sibling_index": 0,
+      "link_density": 0.31017369727047145,
+      "label": "journal"
+    },
+    {
+      "text": "About IEEE Xplore\nContact Us\nHelp\nAccessibility\nTerms of Use\nNondiscrimination Policy\nSitemap\nPrivacy & Opting Out of Cookies\n\n\n\t\t\t\t\t\t\tA not-for-profit organization, IEEE is the world's largest technical professional organization dedicated to advancing technology for the benefit of humanity.© Copyright 2026 IEEE - All rights reserved. Use of this web site signifies your agreement to the terms and conditions.",
+      "tag": "div",
+      "classes": [
+        "Footer-bottom-inner-div",
+        "row"
+      ],
+      "text_length": 411,
+      "word_count": 59,
+      "is_visible": true,
+      "dom_depth": 10,
+      "sibling_index": 0,
+      "link_density": 0.31017369727047145,
+      "label": "journal"
+    },
+    {
+      "text": "About IEEE Xplore\nContact Us\nHelp\nAccessibility\nTerms of Use\nNondiscrimination Policy\nSitemap\nPrivacy & Opting Out of Cookies\n\n\n\t\t\t\t\t\t\tA not-for-profit organization, IEEE is the world's largest technical professional organization dedicated to advancing technology for the benefit of humanity.© Copyright 2026 IEEE - All rights reserved. Use of this web site signifies your agreement to the terms and conditions.",
+      "tag": "div",
+      "classes": [
+        "col"
+      ],
+      "text_length": 411,
+      "word_count": 59,
+      "is_visible": true,
+      "dom_depth": 11,
+      "sibling_index": 0,
+      "link_density": 0.31017369727047145,
+      "label": "journal"
+    },
+    {
+      "text": "About IEEE Xplore",
+      "tag": "li",
+      "classes": [
+        "Menu-item"
+      ],
+      "text_length": 17,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 0,
+      "link_density": 1.0,
+      "label": "journal"
+    },
+    {
+      "text": "Contact Us",
+      "tag": "li",
+      "classes": [
+        "Menu-item"
+      ],
+      "text_length": 10,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 1,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Help",
+      "tag": "li",
+      "classes": [
+        "Menu-item"
+      ],
+      "text_length": 4,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 2,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Accessibility",
+      "tag": "li",
+      "classes": [
+        "Menu-item"
+      ],
+      "text_length": 13,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 3,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Terms of Use",
+      "tag": "li",
+      "classes": [
+        "Menu-item"
+      ],
+      "text_length": 12,
+      "word_count": 3,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 4,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Nondiscrimination Policy",
+      "tag": "li",
+      "classes": [
+        "Menu-item"
+      ],
+      "text_length": 24,
+      "word_count": 2,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 5,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Sitemap",
+      "tag": "li",
+      "classes": [
+        "Menu-item"
+      ],
+      "text_length": 7,
+      "word_count": 1,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 6,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "Privacy & Opting Out of Cookies",
+      "tag": "li",
+      "classes": [
+        "Menu-item"
+      ],
+      "text_length": 31,
+      "word_count": 6,
+      "is_visible": true,
+      "dom_depth": 13,
+      "sibling_index": 7,
+      "link_density": 1.0,
+      "label": "other"
+    },
+    {
+      "text": "A not-for-profit organization, IEEE is the world's largest technical professional organization dedicated to advancing technology for the benefit of humanity.© Copyright 2026 IEEE - All rights reserved. Use of this web site signifies your agreement to the terms and conditions.",
+      "tag": "p",
+      "classes": [
+        "Footer-bottom-terms"
+      ],
+      "text_length": 276,
+      "word_count": 40,
+      "is_visible": true,
+      "dom_depth": 12,
+      "sibling_index": 0,
+      "link_density": 0.0,
+      "label": "journal"
+    }
+  ],
+  "ground_truth": {
+    "title": "STACKION: Ion Channel-Modulating Peptides Identification Using Stacking-Based Ensemble Machine Learning",
+    "authors": null,
+    "year": null,
+    "doi": null,
+    "journal": "IEEE",
+    "extraction_method": "rule_based"
+  },
+  "has_cite_button": false,
+  "has_structured_metadata": false,
+  "total_blocks": 37,
+  "labeled_blocks": 16
+}
