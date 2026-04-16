@@ -1,0 +1,23 @@
+{
+  "total_pages": 10,
+  "sources": {
+    "arxiv_simple": 3,
+    "ieee_conference": 3,
+    "springer_journal": 2,
+    "university_repo": 2
+  },
+  "complexity_distribution": {
+    "low": 0,
+    "medium": 6,
+    "high": 4
+  },
+  "cite_button_stats": {
+    "with_cite": 6,
+    "without_cite": 4
+  },
+  "structured_metadata_stats": {
+    "with_metadata": 6,
+    "without_metadata": 4
+  },
+  "collection_date": "2026-03-16 20:59:39"
+}
