@@ -939,6 +939,7 @@ def index():
     <html>
     <head>
       <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
       <title>Scientific Parser Demo</title>
       <style>{APP_THEME_CSS}</style>
     </head>
@@ -1405,6 +1406,7 @@ def parse():
     <html>
     <head>
       <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
       <title>Scientific Parser Result</title>
       <style>{APP_THEME_CSS}</style>
     </head>
