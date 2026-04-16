@@ -1,0 +1,25 @@
+{
+  "total_pages": 18,
+  "total_blocks": 12103,
+  "average_blocks_per_page": 672.3888888888889,
+  "label_distribution": {
+    "title": 528,
+    "content": 1893,
+    "journal": 317,
+    "other": 7979,
+    "year_candidate": 538,
+    "author_candidate": 588,
+    "abstract": 11,
+    "doi_candidate": 1,
+    "doi": 13,
+    "journal_info": 168,
+    "year": 64,
+    "author": 3
+  },
+  "complexity_distribution": {
+    "medium": 16,
+    "high": 2
+  },
+  "pages_with_cite_button": 12,
+  "pages_with_structured_metadata": 11
+}
