@@ -1,0 +1,34 @@
+{
+  "trained_at_utc": "2026-04-14T12:53:29.212672+00:00",
+  "best_model": "random_forest_balanced",
+  "split_strategy": "group_by_domain",
+  "train_samples": 2564,
+  "test_samples": 1073,
+  "labels": [
+    "author",
+    "doi",
+    "journal",
+    "other",
+    "title",
+    "year"
+  ],
+  "feature_notes": {
+    "text": "word + char tfidf",
+    "categorical": [
+      "tag",
+      "classes",
+      "source_type",
+      "domain"
+    ],
+    "numeric": [
+      "text_length",
+      "word_count",
+      "is_visible",
+      "dom_depth",
+      "sibling_index",
+      "link_density",
+      "digit_ratio",
+      "upper_ratio"
+    ]
+  }
+}
