@@ -1,10 +1,11 @@
 # inference_pipeline.py
 
 import json
+import os
 import re
 from dataclasses import dataclass, asdict
 from typing import Any, Dict, List, Optional, Tuple
-from urllib.parse import urlparse, urljoin
+from urllib.parse import urlparse, urljoin, quote
 from difflib import SequenceMatcher
 from functools import lru_cache
 import logging
@@ -26,6 +27,8 @@ SEARCH_TIME_BUDGET_SEC = 9.0
 
 DOI_RE = re.compile(r"\b10\.\d{4,9}/[-._;()/:A-Z0-9]+\b", re.IGNORECASE)
 NON_WORD_RE = re.compile(r"[^\w\s\-]", re.UNICODE)
+CYRILLIC_RE = re.compile(r"[\u0400-\u04FF]")
+_HTML_TAGS_RE = re.compile(r"<[^>]+>")
 
 EN_TO_RU_LAYOUT = str.maketrans(
     "`qwertyuiop[]asdfghjkl;'zxcvbnm,./"
@@ -190,6 +193,560 @@ def _datacite_attributes_cached(doi: str) -> Optional[dict]:
             LOGGER.warning("DataCite timeout/failure for DOI %s: %s", doi, e)
             time.sleep(0.15)
     return None
+
+
+def _openalex_mailto() -> str:
+    return (os.getenv("OPENALEX_MAILTO") or "example@example.com").strip()
+
+
+def _openalex_headers() -> dict:
+    return {
+        "User-Agent": f"scientific-parser/1.0 (mailto: {_openalex_mailto()})",
+        "Accept": "application/json",
+    }
+
+
+@lru_cache(maxsize=1024)
+def _openalex_works_search_cached(query: str, per_page: int) -> Tuple[dict, ...]:
+    """
+    OpenAlex fulltext search on works. Returns tuple of work dicts.
+    https://api.openalex.org/works?search=...
+    """
+    q = (query or "").strip()
+    if not q:
+        return tuple()
+    params = {
+        "search": q,
+        "per_page": str(max(1, min(per_page, 50))),
+        "mailto": _openalex_mailto(),
+    }
+    for timeout in API_TIMEOUTS:
+        try:
+            r = requests.get(
+                "https://api.openalex.org/works",
+                params=params,
+                timeout=timeout,
+                headers=_openalex_headers(),
+            )
+            if r.status_code != 200:
+                continue
+            data = r.json() or {}
+            results = data.get("results")
+            if not isinstance(results, list):
+                return tuple()
+            out: List[dict] = []
+            for w in results:
+                if isinstance(w, dict):
+                    out.append(w)
+            return tuple(out)
+        except requests.RequestException as e:
+            LOGGER.warning("OpenAlex search timeout/failure for query '%s': %s", q, e)
+            time.sleep(0.15)
+    return tuple()
+
+
+def _location_landing_url(loc: Optional[dict]) -> Optional[str]:
+    if not loc or not isinstance(loc, dict):
+        return None
+    url = (loc.get("landing_page_url") or "").strip()
+    return url or None
+
+
+def _location_pdf_url(loc: Optional[dict]) -> Optional[str]:
+    if not loc or not isinstance(loc, dict):
+        return None
+    pdf_url = (loc.get("pdf_url") or "").strip()
+    return pdf_url or None
+
+
+def _extract_journal_from_openalex_work(work: dict) -> Optional[str]:
+    loc = work.get("primary_location") if isinstance(work.get("primary_location"), dict) else None
+    src = loc.get("source") if isinstance(loc, dict) and isinstance(loc.get("source"), dict) else None
+    name = (src.get("display_name") or "").strip() if src else ""
+    return name or None
+
+
+def _extract_pdf_url_from_openalex_work(work: dict) -> Optional[str]:
+    best = work.get("best_oa_location") if isinstance(work.get("best_oa_location"), dict) else None
+    pdf1 = _location_pdf_url(best)
+    if pdf1:
+        return pdf1
+    prim = work.get("primary_location") if isinstance(work.get("primary_location"), dict) else None
+    pdf2 = _location_pdf_url(prim)
+    if pdf2:
+        return pdf2
+    locs = work.get("locations")
+    if isinstance(locs, list):
+        for loc in locs:
+            pdf3 = _location_pdf_url(loc if isinstance(loc, dict) else None)
+            if pdf3:
+                return pdf3
+    return None
+
+
+def _extract_source_url_from_openalex_work(work: dict) -> Optional[str]:
+    """
+    Prefer a human-readable landing page; DOI resolver as fallback.
+    """
+    doi = work.get("doi") or ""
+    doi = doi.strip() if isinstance(doi, str) else ""
+    doi_norm = normalize_doi(doi.replace("https://doi.org/", "")) if doi else ""
+
+    prim = work.get("primary_location") if isinstance(work.get("primary_location"), dict) else None
+    landing = _location_landing_url(prim)
+    if landing:
+        return landing
+
+    best = work.get("best_oa_location") if isinstance(work.get("best_oa_location"), dict) else None
+    landing2 = _location_landing_url(best)
+    if landing2:
+        return landing2
+
+    locs = work.get("locations")
+    if isinstance(locs, list):
+        for loc in locs:
+            landing3 = _location_landing_url(loc if isinstance(loc, dict) else None)
+            if landing3:
+                return landing3
+
+    if doi_norm:
+        return f"https://doi.org/{doi_norm}"
+    oid = work.get("id") or ""
+    if isinstance(oid, str) and oid.startswith("http"):
+        return oid
+    return None
+
+
+def _extract_authors_from_openalex_work(work: dict) -> Optional[List[str]]:
+    authorships = work.get("authorships")
+    if not isinstance(authorships, list):
+        return None
+    authors: List[str] = []
+    for ash in authorships:
+        if not isinstance(ash, dict):
+            continue
+        ia = ash.get("author") if isinstance(ash.get("author"), dict) else {}
+        dn = (ia.get("display_name") or "").strip()
+        if dn:
+            authors.append(dn)
+            continue
+        given = (ia.get("given_name") or "").strip()
+        family = (ia.get("family_name") or "").strip()
+        full = (" ".join([given, family])).strip()
+        if full:
+            authors.append(full)
+    out = authors[:40]
+    return out or None
+
+
+def _extract_year_from_openalex_work(work: dict) -> Optional[str]:
+    y = work.get("publication_year")
+    try:
+        if y is None:
+            return None
+        return str(int(y))
+    except Exception:
+        return None
+
+
+def _extract_biblio_pages_from_openalex_work(work: dict) -> Tuple[Optional[str], Optional[str], Optional[str]]:
+    biblio = work.get("biblio") if isinstance(work.get("biblio"), dict) else {}
+    volume = biblio.get("volume")
+    issue = biblio.get("issue")
+    first = biblio.get("first_page")
+    last = biblio.get("last_page")
+    vol_s = str(volume).strip() if volume not in (None, "") else None
+    issue_s = str(issue).strip() if issue not in (None, "") else None
+    pages_s = None
+    if first not in (None, "") and last not in (None, ""):
+        pages_s = f"{first}-{last}"
+    elif first not in (None, ""):
+        pages_s = str(first).strip()
+    return vol_s, issue_s, pages_s
+
+
+def _paper_from_openalex_work(
+    work: dict,
+    *,
+    enriched_by: str,
+    matched_query: str,
+    relevance: float,
+    title_sim: float,
+) -> PaperMetadata:
+    title = (work.get("display_name") or "").strip() or None
+
+    doi_raw = work.get("doi") or ""
+    doi_raw = doi_raw.strip() if isinstance(doi_raw, str) else ""
+    doi_norm = normalize_doi(doi_raw.replace("https://doi.org/", "")) if doi_raw else None
+
+    journal = _extract_journal_from_openalex_work(work)
+    vol_s, issue_s, pages_s = _extract_biblio_pages_from_openalex_work(work)
+
+    pdf_url = _extract_pdf_url_from_openalex_work(work)
+    source_url = _extract_source_url_from_openalex_work(work)
+
+    rel = max(0.0, min(1.0, float(relevance)))
+    ts = max(0.0, min(1.0, float(title_sim)))
+    final_score = ts * 0.55 + rel * 0.35 + 0.05
+
+    meta = PaperMetadata(
+        title=title,
+        authors=_extract_authors_from_openalex_work(work),
+        year=_extract_year_from_openalex_work(work),
+        journal=journal,
+        volume=vol_s,
+        issue=issue_s,
+        pages=pages_s,
+        doi=doi_norm,
+        pdf_url=pdf_url,
+        source_url=source_url,
+        enriched_by=enriched_by,
+        confidence={},
+        search_score=round(min(1.0, max(0.0, final_score)), 4),
+        matched_query=matched_query,
+    )
+
+    # If we have DOI — prefer CrossRef canonical metadata for bibliographic fields
+    if meta.doi:
+        enriched = crossref_enrich(meta.doi)
+        if enriched:
+            enriched.source_url = meta.source_url or enriched.source_url
+            enriched.pdf_url = enriched.pdf_url or meta.pdf_url
+            enriched.search_score = meta.search_score
+            enriched.matched_query = matched_query
+            enriched.enriched_by = enriched_by
+            # Для русскоязычных запросов не теряем русскоязычный заголовок из OpenAlex,
+            # если CrossRef вернул только латиницу/англоязычный вариант.
+            if meta.title and query_has_cyrillic(matched_query):
+                mt = meta.title or ""
+                et = enriched.title or ""
+                if CYRILLIC_RE.search(mt) and not CYRILLIC_RE.search(et):
+                    enriched.title = mt
+            return enriched
+
+    return meta
+
+
+def query_has_cyrillic(text: str) -> bool:
+    return bool(CYRILLIC_RE.search(text or ""))
+
+
+def search_openalex_candidates_by_title(title: str, per_page: int = 25) -> List[PaperMetadata]:
+    """
+    Supplemental catalog search via OpenAlex (helps RU/non-CrossRef coverage).
+    """
+    query_variants = _build_title_query_variants(title)
+    if not query_variants:
+        return []
+
+    original_norm = _normalize_text_for_compare(title)
+    started = time.monotonic()
+
+    best_by_doi: Dict[str, PaperMetadata] = {}
+    best_without_doi: List[PaperMetadata] = []
+    seen_queries = set()
+
+    def process_query(q: str) -> None:
+        if (time.monotonic() - started) > SEARCH_TIME_BUDGET_SEC:
+            return
+        if q in seen_queries:
+            return
+        seen_queries.add(q)
+
+        works = _openalex_works_search_cached(q, min(per_page, 25))
+        if not works:
+            return
+
+        rel_scores: List[float] = []
+        raw_scores: List[float] = []
+        for w in works:
+            rs = w.get("relevance_score")
+            try:
+                if rs is None:
+                    raw_scores.append(0.0)
+                else:
+                    raw_scores.append(float(rs))
+            except Exception:
+                raw_scores.append(0.0)
+
+        mx = max(raw_scores) if raw_scores else 1.0
+        if mx <= 0:
+            mx = 1.0
+
+        q_norm = _normalize_text_for_compare(q)
+
+        for idx, work in enumerate(works):
+            try:
+                rs_raw = raw_scores[idx] if idx < len(raw_scores) else 0.0
+                relevance = float(rs_raw) / mx if mx > 0 else 0.0
+            except Exception:
+                relevance = 0.0
+
+            if not isinstance(work, dict):
+                continue
+            w_title = (work.get("display_name") or "").strip()
+            if len(w_title) < 8:
+                continue
+
+            title_norm = _normalize_text_for_compare(w_title)
+            sim_o = SequenceMatcher(None, original_norm, title_norm).ratio()
+            sim_q = SequenceMatcher(None, q_norm, title_norm).ratio()
+            sim = max(sim_o, sim_q)
+            if sim < 0.35:
+                continue
+
+            paper = _paper_from_openalex_work(
+                work,
+                enriched_by="openalex_search",
+                matched_query=q,
+                relevance=relevance,
+                title_sim=sim,
+            )
+
+            if paper.doi:
+                existing = best_by_doi.get(paper.doi)
+                if existing is None or (paper.search_score or 0.0) > (existing.search_score or 0.0):
+                    best_by_doi[paper.doi] = paper
+            else:
+                best_without_doi.append(paper)
+
+    for q in query_variants[:4]:
+        process_query(q)
+
+    ranked = list(best_by_doi.values()) + best_without_doi
+    ranked.sort(key=lambda x: x.search_score or 0.0, reverse=True)
+    return ranked[:25]
+
+
+def _cyberleninka_pdf_url_from_article_page(source_url: str) -> Optional[str]:
+    """
+    У статей CyberLeninka PDF отдаётся по тому же пути, что и страница, с суффиксом /pdf.
+    Пример: https://cyberleninka.ru/article/n/slug -> .../slug/pdf
+    """
+    u = (source_url or "").strip()
+    if not u or "cyberleninka.ru" not in u.lower():
+        return None
+    if "/article/n/" not in u:
+        return None
+    base = u.split("#", 1)[0].rstrip("/")
+    if base.lower().endswith("/pdf"):
+        cand = base
+    else:
+        cand = base + "/pdf"
+    return cand if is_public_http_url(cand) else None
+
+
+def _strip_light_html_to_text(raw: str) -> str:
+    s = (raw or "").replace("\ufeff", "")
+    s = _HTML_TAGS_RE.sub(" ", s)
+    s = re.sub(r"\s+", " ", s).strip()
+    return s
+
+
+def _cyberleninka_prime_requests_session(sess: requests.Session) -> None:
+    """
+    CyberLeninka отдаёт /api/search 400 без «прогрева» сессии так же, как в браузере.
+    """
+    try:
+        sess.get("https://cyberleninka.ru/", timeout=min(10, API_TIMEOUTS[1]))
+    except requests.RequestException:
+        pass
+
+
+def _cyberleninka_search_page_url(query: str) -> str:
+    q = (query or "").strip()
+    return "https://cyberleninka.ru/search?q=" + quote(q)
+
+
+@lru_cache(maxsize=256)
+def _cyberleninka_search_api_cached(payload_key: str) -> Tuple[dict, ...]:
+    """
+    POST https://cyberleninka.ru/api/search
+    Тело — JSON: {mode, q, size, from}. Возвращает кортеж «статей» (как dict) из поля articles.
+    """
+    try:
+        payload = json.loads(payload_key)
+    except Exception:
+        return tuple()
+
+    if not isinstance(payload, dict):
+        return tuple()
+
+    sess = requests.Session()
+    sess.headers.update(
+        {
+            "User-Agent": (
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/120.0.0.0 Safari/537.36"
+            ),
+            "Accept": "application/json, text/plain, */*",
+        }
+    )
+
+    q = str(payload.get("q") or "").strip()
+    if not q:
+        return tuple()
+
+    ref = _cyberleninka_search_page_url(q)
+    _cyberleninka_prime_requests_session(sess)
+
+    try:
+        sess.get(ref, timeout=min(10, API_TIMEOUTS[1]))
+    except requests.RequestException:
+        pass
+
+    headers = {
+        "Content-Type": "application/json",
+        "Origin": "https://cyberleninka.ru",
+        "Referer": ref,
+    }
+    body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
+
+    for timeout in API_TIMEOUTS:
+        try:
+            r = sess.post(
+                "https://cyberleninka.ru/api/search",
+                data=body,
+                headers=headers,
+                timeout=timeout,
+            )
+            if r.status_code != 200:
+                continue
+            data = r.json() or {}
+            arts = data.get("articles") if isinstance(data, dict) else None
+            if isinstance(arts, list):
+                out: List[dict] = []
+                for a in arts:
+                    if isinstance(a, dict):
+                        out.append(a)
+                return tuple(out)
+        except (requests.RequestException, ValueError) as e:
+            LOGGER.warning("CyberLeninka search API failure for query '%s': %s", q, e)
+            time.sleep(0.15)
+    return tuple()
+
+
+def _paper_from_cyberleninka_hit(
+    item: dict,
+    *,
+    matched_query: str,
+    title_sim: float,
+) -> Optional[PaperMetadata]:
+    link = (item.get("link") or "").strip()
+    if not link.startswith("/"):
+        return None
+
+    source_url = urljoin("https://cyberleninka.ru", link)
+    if not is_public_http_url(source_url):
+        return None
+
+    raw_title = (item.get("name") or "").strip()
+    title = _strip_light_html_to_text(raw_title) or raw_title or None
+
+    authors = item.get("authors")
+    authors_list: Optional[List[str]] = None
+    if isinstance(authors, list):
+        cleaned = []
+        for a in authors:
+            if isinstance(a, str):
+                s = a.strip()
+                if s:
+                    cleaned.append(s)
+        authors_list = cleaned[:40] or None
+
+    year_s: Optional[str] = None
+    y = item.get("year")
+    if isinstance(y, int):
+        year_s = str(y)
+    elif isinstance(y, str) and y.strip():
+        year_s = y.strip()
+
+    journal = (item.get("journal") or "").strip() or None
+
+    ts = max(0.0, min(1.0, float(title_sim)))
+    final_score = ts * 0.75 + 0.08
+
+    pdf_guess = _cyberleninka_pdf_url_from_article_page(source_url)
+
+    return PaperMetadata(
+        title=title,
+        authors=authors_list,
+        year=year_s,
+        journal=journal,
+        doi=None,
+        pdf_url=pdf_guess,
+        source_url=source_url,
+        enriched_by="cyberleninka_search",
+        confidence={},
+        search_score=round(min(1.0, max(0.0, final_score)), 4),
+        matched_query=matched_query,
+    )
+
+
+def search_cyberleninka_candidates_by_title(title: str, per_page: int = 25) -> List[PaperMetadata]:
+    """
+    Прямой поиск по каталогу CyberLeninka через их JSON API (/api/search).
+    Нужен для русскоязычных записей, которые плохо покрыты CrossRef/OpenAlex.
+    """
+    query_variants = _build_title_query_variants(title)
+    if not query_variants:
+        return []
+
+    original_norm = _normalize_text_for_compare(title)
+    started = time.monotonic()
+
+    best_by_url: Dict[str, PaperMetadata] = {}
+    best_list: List[PaperMetadata] = []
+
+    seen_queries = set()
+
+    size = max(5, min(int(per_page or 10), 25))
+
+    def process_query(q: str) -> None:
+        if (time.monotonic() - started) > SEARCH_TIME_BUDGET_SEC:
+            return
+        if q in seen_queries:
+            return
+        seen_queries.add(q)
+
+        payload = {"mode": "articles", "q": q, "size": size, "from": 0}
+        items = _cyberleninka_search_api_cached(json.dumps(payload, sort_keys=True, ensure_ascii=False))
+        if not items:
+            return
+
+        q_norm = _normalize_text_for_compare(q)
+
+        for it in items:
+            if not isinstance(it, dict):
+                continue
+            raw_title = (it.get("name") or "").strip()
+            plain = _strip_light_html_to_text(raw_title)
+            if len(plain) < 8:
+                continue
+
+            title_norm = _normalize_text_for_compare(plain)
+            sim_o = SequenceMatcher(None, original_norm, title_norm).ratio()
+            sim_q = SequenceMatcher(None, q_norm, title_norm).ratio()
+            sim = max(sim_o, sim_q)
+            if sim < 0.34:
+                continue
+
+            paper = _paper_from_cyberleninka_hit(it, matched_query=q, title_sim=sim)
+            if paper is None or not paper.source_url:
+                continue
+
+            key = (paper.source_url or "").split("?", 1)[0].lower().rstrip("/")
+            existing = best_by_url.get(key)
+            if existing is None or (paper.search_score or 0.0) > (existing.search_score or 0.0):
+                best_by_url[key] = paper
+
+    for q in query_variants[:3]:
+        process_query(q)
+
+    best_list = list(best_by_url.values())
+    best_list.sort(key=lambda x: x.search_score or 0.0, reverse=True)
+    return best_list[:25]
 
 
 def extract_doi_rule_based(html: str) -> Optional[str]:
@@ -402,6 +959,83 @@ def crossref_enrich(doi: str, timeout: int = 15) -> Optional[PaperMetadata]:
     if not msg:
         return None
     return _paper_from_crossref_item(msg, enriched_by="crossref")
+
+def is_journal_rubric_list_url(url: str) -> bool:
+    """
+    Эвристика: страница списка статей (рубрика/выпуск), а не страница одной статьи.
+    Для таких URL поиск по полю «название» должен обрабатываться отдельно (см. resolve_article_from_journal_listing).
+    """
+    try:
+        p = urlparse(url or "")
+        host = (p.netloc or "").lower()
+        path = (p.path or "").lower()
+    except Exception:
+        return False
+    if "mmi.sgu.ru" in host and "rubrika" in path:
+        return True
+    if "mmi.sgu.ru" in host and "/ru/issue" in path:
+        return True
+    return False
+
+
+def find_article_url_on_listing_page(
+    html: str,
+    page_url: str,
+    title_query: str,
+    *,
+    min_similarity: float = 0.52,
+) -> Optional[str]:
+    """
+    Ищет на HTML-странице списка ссылку на статью, текст которой ближе всего к title_query
+    (например, список рубрики mmi.sgu.ru).
+    """
+    q = (title_query or "").strip()
+    if len(q) < 6:
+        return None
+    q_norm = _normalize_text_for_compare(q)
+    soup = BeautifulSoup(html, "html.parser")
+    best_href: Optional[str] = None
+    best_score = 0.0
+    for a in soup.find_all("a", href=True):
+        href = (a.get("href") or "").strip()
+        if not href:
+            continue
+        hlow = href.lower()
+        if "/articles/" not in hlow and "/article/" not in hlow:
+            continue
+        text = a.get_text(" ", strip=True)
+        if len(text) < 6:
+            continue
+        t_norm = _normalize_text_for_compare(text)
+        sim = SequenceMatcher(None, q_norm, t_norm).ratio()
+        if sim > best_score:
+            best_score = sim
+            best_href = href
+    if best_href is None or best_score < min_similarity:
+        return None
+    return urljoin(page_url, best_href)
+
+
+def resolve_article_from_journal_listing(listing_url: str, title_query: str) -> Optional[PaperMetadata]:
+    """
+    Загружает страницу рубрики/списка, находит ссылку на статью по названию и извлекает метаданные
+    как при обычном URL статьи (в т.ч. DOI → Crossref).
+    """
+    listing_url = (listing_url or "").strip()
+    title_query = (title_query or "").strip()
+    if not listing_url or not title_query:
+        return None
+    try:
+        html = fetch_html(listing_url)
+    except Exception:
+        return None
+    article_url = find_article_url_on_listing_page(html, listing_url, title_query)
+    if not article_url:
+        return None
+    if not is_public_http_url(article_url):
+        return None
+    return extract_metadata_from_url(article_url)
+
 
 def guess_title_from_url(url: str) -> Optional[str]:
     parsed = urlparse(url)
@@ -971,6 +1605,18 @@ def extract_metadata_from_url(url: str) -> PaperMetadata:
     meta.confidence["page_is_article"] = 1.0 if page_cls["is_article"] else 0.0
     meta.confidence["page_article_reason"] = page_cls["reason"]
 
+    # DOI в разметке страницы часто есть даже когда эвристика «не статья» (Drupal/журналы вроде mmi.sgu.ru).
+    doi_in_html = extract_doi_rule_based(html)
+    if doi_in_html:
+        doi_n = normalize_doi(doi_in_html)
+        enriched_early = crossref_enrich(doi_n)
+        if enriched_early:
+            enriched_early.source_url = url
+            enriched_early.confidence = enriched_early.confidence or {}
+            enriched_early.confidence.update(meta.confidence or {})
+            enriched_early.pdf_url = enriched_early.pdf_url or extract_pdf_url_from_html(html, source_url=url)
+            return enriched_early
+
     # Предклассификатор страницы: если это явно не статья и домен не из приоритетных, не запускаем тяжёлый ML.
     priority_hosts = ("arxiv.org", "ieeexplore.ieee.org", "sciencedirect.com", "link.springer.com", "cyberleninka.ru")
     if (not page_cls["is_article"]) and (not any(h in host for h in priority_hosts)):
@@ -1092,11 +1738,78 @@ def search_metadata_candidates_from_title(title: str, max_results: int = 5) -> L
         return []
 
     candidates = search_crossref_candidates_by_title(title, rows=15)
-    if candidates:
-        return candidates[:max_results]
-    relaxed = search_crossref_candidates_relaxed(title, rows=10)
-    if relaxed:
-        return relaxed[:max_results]
+    base: List[PaperMetadata] = list(candidates or [])
+    if not base:
+        relaxed = search_crossref_candidates_relaxed(title, rows=10)
+        base = list(relaxed or [])
+
+    # Russian / Cyrillic titles: CyberLeninka JSON search + OpenAlex (CrossRef часто бессилен)
+    if query_has_cyrillic(title):
+        cl = search_cyberleninka_candidates_by_title(title, per_page=25)
+        oa = search_openalex_candidates_by_title(title, per_page=25)
+
+        seen = set()
+        merged: List[PaperMetadata] = []
+
+        def key_for(p: PaperMetadata) -> str:
+            if p.doi:
+                return f"doi::{p.doi}"
+            su = (p.source_url or "").strip().lower().rstrip("/")
+            if su:
+                host = (urlparse(su).netloc or "").lower()
+                if host.endswith("cyberleninka.ru"):
+                    return f"url::{su}"
+            return f"title::{_normalize_text_for_compare(p.title or '')}"
+
+        for item in base:
+            k = key_for(item)
+            if k in seen:
+                continue
+            seen.add(k)
+            merged.append(item)
+
+        original_norm = _normalize_text_for_compare(title)
+
+        for item in cl:
+            k = key_for(item)
+            if k in seen:
+                continue
+
+            title_norm = _normalize_text_for_compare(item.title or "")
+            sim = SequenceMatcher(None, original_norm, title_norm).ratio()
+
+            landing = (item.source_url or "").lower()
+            prefer = ("cyberleninka.ru" in landing) and (sim >= 0.58)
+            if not prefer:
+                continue
+
+            seen.add(k)
+            merged.append(item)
+
+        for item in oa:
+            k = key_for(item)
+            if k in seen:
+                continue
+
+            title_norm = _normalize_text_for_compare(item.title or "")
+            sim = SequenceMatcher(None, original_norm, title_norm).ratio()
+
+            landing = (item.source_url or "").lower()
+            prefer = ("cyberleninka.ru" in landing) or (sim >= 0.72)
+            if not prefer:
+                continue
+
+            seen.add(k)
+            merged.append(item)
+
+        merged.sort(key=lambda x: x.search_score or 0.0, reverse=True)
+
+        out = merged[:max_results]
+        if out:
+            return out
+
+    if base:
+        return base[:max_results]
     return [PaperMetadata(title=title, source_url=None, confidence={})]
 
 
