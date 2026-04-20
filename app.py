@@ -17,17 +17,23 @@ from flask_limiter.util import get_remote_address
 
 from inference_pipeline import (
     PaperMetadata,
+    _cyberleninka_pdf_url_from_article_page,
+    crossref_enrich,
     explain_title_interpretation,
     export_bibtex,
     export_ris,
     extract_metadata_from_doi,
     extract_metadata_from_title,
     extract_metadata_from_url,
+    extract_pdf_url_from_html,
     extract_title_from_html_basic,
     fetch_html,
     format_bibliography_list,
     format_citation,
     guess_title_from_url,
+    is_journal_rubric_list_url,
+    query_has_cyrillic,
+    resolve_article_from_journal_listing,
     search_metadata_candidates_from_title,
 )
 from net_security import is_public_http_url
@@ -36,7 +42,12 @@ app = Flask(__name__)
 LOGGER = logging.getLogger(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "change-me-in-production")
 
-DB_PATH = os.path.join(os.path.dirname(__file__), "data", "app_state.db")
+# Portable .exe writes state next to the executable via SP_APP_HOME (see portable_launcher.py).
+_app_data_dir = os.getenv(
+    "SP_APP_HOME",
+    os.path.join(os.path.dirname(__file__), "data"),
+)
+DB_PATH = os.path.join(_app_data_dir, "app_state.db")
 MAX_URL_LEN = 2048
 MAX_TITLE_LEN = 350
 MAX_DOI_LEN = 255
@@ -745,6 +756,22 @@ def _merge_unique_papers(primary: List[PaperMetadata], extra: List[PaperMetadata
     return merged
 
 
+def _looks_like_direct_pdf_url(url: str) -> bool:
+    """
+    Unpaywall иногда кладёт в поле «url» landing (doi.org/html), а не файл PDF.
+    Без этой проверки в списке кандидатов оказывается HTML и загрузка всегда падает.
+    """
+    u = (url or "").strip()
+    if not u:
+        return False
+    low = u.lower().split("?", 1)[0].rstrip("/")
+    if low.endswith(".pdf"):
+        return True
+    if "/format/pdf" in low or "/pdf/" in low:
+        return True
+    return False
+
+
 def _query_unpaywall_pdf_url(doi: str) -> Optional[str]:
     doi = (doi or "").strip()
     if not doi:
@@ -762,20 +789,66 @@ def _query_unpaywall_pdf_url(doi: str) -> Optional[str]:
     except Exception:
         return None
 
+    def from_loc(loc: dict) -> Optional[str]:
+        if not isinstance(loc, dict):
+            return None
+        ufp = (loc.get("url_for_pdf") or "").strip()
+        if ufp:
+            return ufp
+        pub = (loc.get("url") or "").strip()
+        if pub and _looks_like_direct_pdf_url(pub):
+            return pub
+        return None
+
     best = data.get("best_oa_location") or {}
-    for key in ("url_for_pdf", "url"):
-        value = (best.get(key) or "").strip()
-        if value:
-            return value
+    hit = from_loc(best if isinstance(best, dict) else {})
+    if hit:
+        return hit
 
     for loc in data.get("oa_locations") or []:
-        if not isinstance(loc, dict):
-            continue
-        for key in ("url_for_pdf", "url"):
-            value = (loc.get(key) or "").strip()
-            if value:
-                return value
+        hit = from_loc(loc if isinstance(loc, dict) else {})
+        if hit:
+            return hit
     return None
+
+
+def _discover_pdf_from_html_landing(page_url: str) -> Optional[str]:
+    """
+    На странице издателя часто есть прямая ссылка на PDF (meta citation_pdf_url или <a href=...pdf>),
+    хотя ни CrossRef, ни Unpaywall её не передали.
+    """
+    page_url = (page_url or "").strip()
+    if not page_url.startswith("http"):
+        return None
+    path_low = page_url.lower().split("?", 1)[0]
+    if path_low.endswith(".pdf"):
+        return None
+    try:
+        html = fetch_html(page_url)
+    except Exception:
+        return None
+    return extract_pdf_url_from_html(html, source_url=page_url)
+
+
+def _collect_landing_discovery_urls(source_url: str, doi: str) -> List[str]:
+    """Уникальные страницы, где имеет смысл искать ссылку на PDF."""
+    out: List[str] = []
+    seen = set()
+
+    def push(u: str) -> None:
+        u = (u or "").strip()
+        if not u.startswith("http"):
+            return
+        key = u.split("#", 1)[0].rstrip("/").lower()
+        if key in seen:
+            return
+        seen.add(key)
+        out.append(u)
+
+    push(source_url)
+    if doi:
+        push(f"https://doi.org/{doi}")
+    return out
 
 
 def _extract_arxiv_pdf_candidate(source_url: str) -> Optional[str]:
@@ -802,7 +875,16 @@ def _build_pdf_candidates(*, pdf_url: str, doi: str, source_url: str) -> List[st
     add(pdf_url)
     if doi:
         add(_query_unpaywall_pdf_url(doi))
+
+    for landing in _collect_landing_discovery_urls(source_url, doi):
+        discovered = _discover_pdf_from_html_landing(landing)
+        if discovered:
+            add(discovered)
+
     add(_extract_arxiv_pdf_candidate(source_url))
+    cl_pdf = _cyberleninka_pdf_url_from_article_page(source_url)
+    if cl_pdf:
+        add(cl_pdf)
     return candidates
 
 
@@ -933,6 +1015,85 @@ def _fulltext_info(item: PaperMetadata) -> dict:
     }
 
 
+def _language_catalog_hint_block(title_input: str, candidates: List[PaperMetadata]) -> str:
+    """
+    Подсказка при рассогласовании языка запроса и заголовка в каталогах / низкой уверенности.
+    """
+    q = (title_input or "").strip()
+    if len(q) < 4 or not candidates:
+        return ""
+
+    top = candidates[0]
+    top_title = (top.title or "").strip()
+    if not top_title:
+        return ""
+
+    user_cyr = query_has_cyrillic(q)
+    cand_cyr = query_has_cyrillic(top_title)
+    sc = top.search_score
+    low_conf = sc is not None and float(sc) < 0.52
+
+    if user_cyr == cand_cyr and not low_conf:
+        return ""
+
+    parts: List[str] = []
+    if user_cyr != cand_cyr:
+        parts.append(
+            "Язык вашего запроса не совпадает с тем, как заголовок этой работы записан в каталогах "
+            "(часто CrossRef хранит англоязычный вариант, даже если на сайте журнала показан перевод названия)."
+        )
+    if top.doi:
+        cr = crossref_enrich(top.doi)
+        if cr and (cr.title or "").strip():
+            parts.append(f"Заголовок в CrossRef (по DOI {top.doi}): {cr.title.strip()}")
+    if low_conf and user_cyr == cand_cyr:
+        parts.append(
+            "Релевантность первого варианта относительно низкая — в выдачу могли попасть другие работы "
+            "по схожим словам (медицина, компьютерное зрение и т.д.)."
+        )
+    parts.append("Что попробовать: английский вариант названия с сайта / DOI / прямая ссылка на статью.")
+    text = "\n\n".join(p for p in parts if p)
+    return f"""
+        <div class="card" style="border-left:4px solid #2563eb;">
+        <h3 class="section-title">Подсказка по поиску по названию</h3>
+        <pre class="mono-box" style="white-space:pre-wrap;">{escape(text)}</pre>
+        </div>
+        """
+
+
+def _journal_rubric_usage_block(
+    url: str, title_input: str, *, listing_match_failed: bool, page_is_listing: bool
+) -> str:
+    if not (url or "").strip():
+        return ""
+
+    tit = (title_input or "").strip()
+    if listing_match_failed and tit:
+        msg = (
+            "Не удалось сопоставить введённое название со ссылкой на странице списка "
+            "(или нужная статья на другой странице списка).\n\n"
+            "Проверьте формулировку или вставьте прямую ссылку на статью …/articles/… "
+            "или укажите DOI."
+        )
+    elif page_is_listing and not tit:
+        msg = (
+            "Вы указали адрес страницы списка статей (рубрики), а не конкретной статьи.\n\n"
+            "Сделайте одно из двух:\n"
+            "• вставьте в поле «URL статьи» прямую ссылку на статью, вида …/ru/articles/… ;\n"
+            "• либо оставьте URL рубрики и **дополнительно** введите в поле «Название статьи» "
+            "точное название, как в списке на сайте — тогда система попытается найти ссылку в HTML списка."
+        )
+    else:
+        return ""
+
+    return f"""
+        <div class="card" style="border-left:4px solid #b45309;">
+        <h3 class="section-title">Страница журнала</h3>
+        <pre class="mono-box" style="white-space:pre-wrap;">{escape(msg)}</pre>
+        </div>
+        """
+
+
 @app.get("/")
 def index():
     return f"""
@@ -1025,11 +1186,13 @@ def index():
               <p>Сервис показывает несколько релевантных вариантов, проверяет доступность полного текста и помогает собрать аккуратный библиографический список для учебной или исследовательской работы.</p>
             </div>
           </section>
-          <section id="panel-howto" class="tab-panel" data-tab-panel="howto">
+            <section id="panel-howto" class="tab-panel" data-tab-panel="howto">
             <div class="card info-card">
               <h3 class="section-title">Как пользоваться</h3>
-              <p>Введи `URL`, `DOI` или название статьи, затем нажми `Parse` и дождись результатов анализа.</p>
-              <p>После этого выбери подходящий вариант, при необходимости скачай PDF, добавь запись в итоговый список и экспортируй ссылки в нужном формате.</p>
+              <p>Укажи <b>DOI</b> (если есть) — так точнее всего. Либо прямую <b>ссылку на страницу статьи</b> (не на список рубрики), либо <b>название</b> для поиска в каталогах.</p>
+              <p>Если в поле URL у тебя страница рубрики журнала (список заголовков), дополнительно введи <b>точное название</b> статьи, как в списке — тогда сервис попытается найти в HTML ссылку на статью. Проще всего вставить ссылку вида <code>…/articles/…</code> с сайта издателя.</p>
+              <p>Название в CrossRef часто <b>на английском</b>, даже при русской странице журнала: при поиске по кириллице смотри подсказки на экране результата.</p>
+              <p>После Parse выбери вариант, при необходимости скачай PDF, добавь в итоговый список и экспортируй в BibTeX / RIS.</p>
             </div>
           </section>
         </div>
@@ -1271,6 +1434,7 @@ def parse():
     mode_used = "unknown"
     candidates: List[PaperMetadata] = []
     interpretation = None
+    listing_match_failed = False
 
     if doi:
         mode_used = "doi"
@@ -1279,7 +1443,17 @@ def parse():
         candidates = [meta]
     elif url:
         mode_used = "url"
-        meta = extract_metadata_from_url(url)
+        meta = None
+        tit = (title_input or "").strip()
+        if tit and is_journal_rubric_list_url(url):
+            resolved = resolve_article_from_journal_listing(url, tit)
+            if resolved and (resolved.title or resolved.doi):
+                meta = resolved
+                mode_used = "url_listing_title_match"
+            else:
+                listing_match_failed = True
+        if meta is None:
+            meta = extract_metadata_from_url(url)
         if not meta.title and not meta.doi:
             guessed_title = None
             try:
@@ -1338,6 +1512,19 @@ def parse():
 Предполагаемая корректировка: {escape(interpretation.get("suggested") or "не требуется")}</pre>
         </div>
         """
+
+    journal_rubric_block = ""
+    if url:
+        journal_rubric_block = _journal_rubric_usage_block(
+            url,
+            title_input,
+            listing_match_failed=listing_match_failed,
+            page_is_listing=is_journal_rubric_list_url(url),
+        )
+
+    language_hint_block = ""
+    if (title_input or "").strip() and candidates and mode_used != "doi":
+        language_hint_block = _language_catalog_hint_block(title_input, candidates)
 
     selected_papers = _db_load_selected(_get_session_id())
     selected_block = ""
@@ -1449,6 +1636,8 @@ def parse():
         </div>
 
         {interpretation_block}
+        {journal_rubric_block}
+        {language_hint_block}
         {page_cls_block}
 
         <div class="card">
