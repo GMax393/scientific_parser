@@ -1,0 +1,3 @@
+# Зависимости только для локальной portable-сборки (.exe), не нужны на Render.
+pywebview>=5
+# waitress уже есть в основном requirements.txt

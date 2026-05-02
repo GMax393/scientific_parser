@@ -1,0 +1,39 @@
+services:
+  redis:
+    image: redis:7-alpine
+    # На VPS порт Redis наружу не открываем. Для отладки с хоста:
+    # ports:
+    #   - "127.0.0.1:6379:6379"
+    expose:
+      - "6379"
+
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      # DB 0 — Flask-Caching (см. app.py: при наличии REDIS_URL)
+      REDIS_URL: redis://redis:6379/0
+      # DB 1 — Flask-Limiter (общий счётчик лимитов между воркерами; имя именно RATELIMIT_STORAGE_URI)
+      RATELIMIT_STORAGE_URI: redis://redis:6379/1
+      FLASK_SECRET_KEY: change-me-in-production
+    volumes:
+      # SQLite и состояние сессий на диске хоста (персистентность между перезапусками контейнера)
+      - ./data:/app/data
+    depends_on:
+      - redis
+    restart: unless-stopped
+
+  # Телеграм-бот: docker compose --profile bot up -d
+  # Нужен TELEGRAM_BOT_TOKEN в .env (см. .env.example).
+  bot:
+    build: .
+    command: ["python", "telegram_bot.py"]
+    environment:
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+      SP_PUBLIC_URL: ${SP_PUBLIC_URL:-http://127.0.0.1:5000}
+      TELEGRAM_BATCH_MAX: ${TELEGRAM_BATCH_MAX:-12}
+      TELEGRAM_BATCH_PAUSE: ${TELEGRAM_BATCH_PAUSE:-1.8}
+    profiles:
+      - bot
+    restart: unless-stopped

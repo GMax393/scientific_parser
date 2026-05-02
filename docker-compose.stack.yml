@@ -1,0 +1,61 @@
+# Продакшен-стек: HTTPS (Caddy) + web + Redis + опционально бот.
+#
+# 1) Создайте .env рядом с этим файлом (см. .env.example).
+# 2) Запуск:
+#    docker compose -f docker-compose.stack.yml --profile bot up -d
+#
+# Сайт снаружи: https://$SP_DOMAIN (порт 80/443 на хосте).
+# Тонкий клиент и SP_PUBLIC_URL должны указывать на тот же https://...
+
+services:
+  redis:
+    image: redis:7-alpine
+    expose:
+      - "6379"
+    restart: unless-stopped
+
+  web:
+    build: .
+    expose:
+      - "5000"
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      RATELIMIT_STORAGE_URI: redis://redis:6379/1
+      FLASK_SECRET_KEY: ${FLASK_SECRET_KEY:-change-me-in-production}
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - redis
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      SP_DOMAIN: ${SP_DOMAIN:?Задайте SP_DOMAIN в .env}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - web
+    restart: unless-stopped
+
+  bot:
+    build: .
+    command: ["python", "telegram_bot.py"]
+    environment:
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:?Задайте TELEGRAM_BOT_TOKEN в .env}
+      # Полный URL сайта, например https://parser.example.com (как в браузере)
+      SP_PUBLIC_URL: ${SP_PUBLIC_URL:?Задайте SP_PUBLIC_URL в .env}
+      TELEGRAM_BATCH_MAX: ${TELEGRAM_BATCH_MAX:-12}
+      TELEGRAM_BATCH_PAUSE: ${TELEGRAM_BATCH_PAUSE:-1.8}
+    profiles:
+      - bot
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:
