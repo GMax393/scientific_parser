@@ -1,0 +1,6 @@
+# Подставьте домен в переменную окружения SP_DOMAIN (см. docker-compose.stack.yml).
+# TLS выдаётся Caddy автоматически (Let’s Encrypt).
+
+{$SP_DOMAIN} {
+    reverse_proxy web:5000
+}
