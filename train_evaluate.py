@@ -2,7 +2,7 @@ import json
 import os
 from collections import Counter
 from datetime import datetime, timezone
-from typing import Dict, List, Tuple
+from typing import Any, Dict, List, Tuple
 from urllib.parse import urlparse
 
 import joblib
@@ -98,7 +98,7 @@ def clean_and_rebalance(df: pd.DataFrame, other_ratio: float = 1.8) -> pd.DataFr
     return df.sample(frac=1.0, random_state=42).reset_index(drop=True)
 
 
-def build_preprocessor(text_max_features: int = 12000) -> ColumnTransformer:
+def build_preprocessor(text_max_features: int = 12000, use_sbert: bool = False) -> ColumnTransformer:
     numeric_features = [
         "text_length",
         "word_count",
@@ -110,14 +110,17 @@ def build_preprocessor(text_max_features: int = 12000) -> ColumnTransformer:
         "upper_ratio",
     ]
     categorical_features = ["tag", "classes", "source_type", "domain"]
-    return ColumnTransformer(
-        transformers=[
-            ("text_word", TfidfVectorizer(max_features=text_max_features, ngram_range=(1, 2), min_df=2), "text"),
-            ("text_char", TfidfVectorizer(max_features=5000, analyzer="char_wb", ngram_range=(3, 5), min_df=2), "text_char"),
-            ("cat", OneHotEncoder(handle_unknown="ignore"), categorical_features),
-            ("num", "passthrough", numeric_features),
-        ]
-    )
+    transformers: List[Tuple[str, object, Any]] = [
+        ("text_word", TfidfVectorizer(max_features=text_max_features, ngram_range=(1, 2), min_df=2), "text"),
+        ("text_char", TfidfVectorizer(max_features=5000, analyzer="char_wb", ngram_range=(3, 5), min_df=2), "text_char"),
+        ("cat", OneHotEncoder(handle_unknown="ignore"), categorical_features),
+        ("num", "passthrough", numeric_features),
+    ]
+    if use_sbert:
+        from sbert_transformer import LazySentenceEmbeddingTransformer
+
+        transformers.insert(0, ("sbert_text", LazySentenceEmbeddingTransformer(), "text"))
+    return ColumnTransformer(transformers=transformers)
 
 
 def build_model_candidates() -> Dict[str, object]:
@@ -250,7 +253,10 @@ def run_training_pipeline() -> Dict:
     y = df["label"]
     X_train, X_test, y_train, y_test, split_strategy = split_train_test(X, y)
 
-    preprocessor = build_preprocessor()
+    use_sbert = os.getenv("USE_SBERT", "").strip().lower() in ("1", "true", "yes", "on")
+    if use_sbert:
+        print("USE_SBERT=1: в признаки добавляются эмбеддинги Sentence-BERT (нужен pip install -r requirements-ml.txt).")
+    preprocessor = build_preprocessor(use_sbert=use_sbert)
     model_candidates = build_model_candidates()
 
     model_reports: Dict[str, Dict] = {}
@@ -299,8 +305,9 @@ def run_training_pipeline() -> Dict:
         "train_samples": int(len(X_train)),
         "test_samples": int(len(X_test)),
         "labels": sorted(y.unique().tolist()),
+        "use_sbert": use_sbert,
         "feature_notes": {
-            "text": "word + char tfidf",
+            "text": "word + char tfidf" + (" + sentence-transformers эмбеддинг по полю text" if use_sbert else ""),
             "categorical": ["tag", "classes", "source_type", "domain"],
             "numeric": [
                 "text_length",
@@ -337,6 +344,7 @@ def run_training_pipeline() -> Dict:
     print(f"Сохранено: {MODEL_PATH}")
     print(f"Метрики: {METRICS_PATH}")
     print(f"Сложные примеры: {HARD_EXAMPLES_PATH}")
+    print("Оценка на чужих доменах (OOD): python eval_out_of_domain.py [--save-json путь]")
     return metrics_payload
 
 
