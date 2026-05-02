@@ -1,4 +1,5 @@
 import ipaddress
+import os
 import socket
 from urllib.parse import urlparse
 
@@ -45,6 +46,10 @@ def is_public_http_url(url: str) -> bool:
         return False
     if host.endswith(".local"):
         return False
+
+    # Onion-адреса: DNS вне Tor не резолвится. Разрешаем только явно (исследовательские сценарии через Tor).
+    if host.endswith(".onion"):
+        return os.getenv("ALLOW_ONION", "").strip().lower() in ("1", "true", "yes", "on")
 
     try:
         infos = socket.getaddrinfo(host, parsed.port or 443, type=socket.SOCK_STREAM)
