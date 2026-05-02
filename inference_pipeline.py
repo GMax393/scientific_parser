@@ -26,6 +26,8 @@ API_TIMEOUTS = (4, 8)
 SEARCH_TIME_BUDGET_SEC = 9.0
 
 DOI_RE = re.compile(r"\b10\.\d{4,9}/[-._;()/:A-Z0-9]+\b", re.IGNORECASE)
+# Строгая проверка «похожести на DOI» для пользовательского ввода (до запроса к Crossref).
+DOI_STRICT_INPUT_RE = re.compile(r"^10\.\d{4,}/\S+$", re.IGNORECASE)
 NON_WORD_RE = re.compile(r"[^\w\s\-]", re.UNICODE)
 CYRILLIC_RE = re.compile(r"[\u0400-\u04FF]")
 _HTML_TAGS_RE = re.compile(r"<[^>]+>")
@@ -78,7 +80,11 @@ def fetch_html(url: str, timeout: int = 20) -> str:
             "Referer": "https://www.google.com/",
         }
     )
-    r = s.get(url, timeout=timeout)
+    proxies = None
+    tor_proxy = (os.getenv("TOR_SOCKS_PROXY") or "").strip()
+    if tor_proxy:
+        proxies = {"http": tor_proxy, "https": tor_proxy}
+    r = s.get(url, timeout=timeout, proxies=proxies)
     r.raise_for_status()
     return r.text
 
@@ -785,11 +791,121 @@ def normalize_doi(doi: str) -> str:
     return doi.strip()
 
 
+def doi_syntax_plausible(doi: str) -> bool:
+    """Проверка формы DOI (частые ошибки OCR / опечатки в PDF)."""
+    d = normalize_doi(doi or "").strip()
+    return bool(DOI_STRICT_INPUT_RE.match(d))
+
+
+def openalex_retraction_hint(doi: str) -> Optional[bool]:
+    """OpenAlex помечает retracted; офлайн/ошибка API → None."""
+    nd = normalize_doi(doi or "").strip()
+    if not nd:
+        return None
+    url = f"https://api.openalex.org/works/https://doi.org/{quote(nd, safe='')}"
+    try:
+        r = requests.get(url, timeout=15)
+        if r.status_code != 200:
+            return None
+        data = r.json() or {}
+        return bool(data.get("is_retracted"))
+    except Exception:
+        return None
+
+
+def _attach_quality_hints(meta: PaperMetadata) -> None:
+    """Подмешивает в meta.confidence метку рестракции (float 1.0) при наличии DOI."""
+    if not meta or not meta.doi:
+        return
+    retracted = openalex_retraction_hint(meta.doi)
+    if retracted is True:
+        meta.confidence = meta.confidence or {}
+        meta.confidence["retracted_openalex"] = 1.0
+
+
 def _normalize_text_for_compare(text: str) -> str:
     text = (text or "").strip().lower().replace("ё", "е")
     text = NON_WORD_RE.sub(" ", text)
     text = re.sub(r"\s+", " ", text)
     return text.strip()
+
+
+def similarity_normalized_titles(user_title: str, meta_title: Optional[str]) -> float:
+    """Сходство строк заголовков после нормализации (для сопоставления с вводом пользователя)."""
+    a = _normalize_text_for_compare(user_title or "")
+    b = _normalize_text_for_compare(meta_title or "")
+    if not a or not b:
+        return 0.0
+    return SequenceMatcher(None, a, b).ratio()
+
+
+def explain_candidate_ranking(
+    user_title: Optional[str],
+    user_doi: Optional[str],
+    item: PaperMetadata,
+) -> str:
+    """
+    Пояснение ранжирования варианта: проценты по доступным сигналам (заголовок, авторы, год, DOI).
+    """
+    signals: List[str] = []
+    blend: List[float] = []
+
+    ut = (user_title or "").strip()
+    ud = normalize_doi(user_doi) if user_doi else None
+    if not ud:
+        ud = None
+
+    if ut and (item.title or "").strip():
+        sim = similarity_normalized_titles(ut, item.title)
+        pct = sim * 100.0
+        signals.append(f"совпадение по названию ≈ {pct:.0f}%")
+        blend.append(pct)
+
+    if ut and item.authors:
+        toks = re.findall(r"[A-Za-zА-Яа-яЁё]{3,}", ut)
+        auth_join = " ".join(item.authors).lower()
+        hits = sum(1 for t in toks[:8] if t.lower() in auth_join)
+        if toks:
+            ap = min(100.0, (hits / max(min(len(toks), 8), 1)) * 100.0)
+            if hits:
+                signals.append(f"совпадение по авторам ≈ {ap:.0f}%")
+                blend.append(ap)
+
+    if ut and item.year:
+        ym = re.search(r"\b(19\d{2}|20\d{2})\b", ut)
+        if ym:
+            ok = ym.group(1) == str(item.year).strip()
+            yp = 100.0 if ok else 0.0
+            signals.append(f"совпадение по году ≈ {yp:.0f}%")
+            blend.append(yp)
+
+    if ud and item.doi and normalize_doi(item.doi) == ud:
+        mconf = item.confidence or {}
+        if float(mconf.get("doi_invalid") or 0) >= 1.0:
+            signals.append(
+                "DOI: строка совпадает с единственной записью, но формат не прошёл проверку — "
+                "метаданные из Crossref, скорее всего, не получены; «100%» здесь не про валидность идентификатора"
+            )
+            blend.append(0.0)
+        else:
+            signals.append("совпадение по DOI 100%")
+            blend.append(100.0)
+
+    if item.search_score is not None:
+        signals.append(f"внутренняя оценка каталога search_score={item.search_score:.3f}")
+
+    if item.matched_query and item.matched_query != ut:
+        mq = item.matched_query if len(item.matched_query) <= 90 else item.matched_query[:87] + "…"
+        signals.append(f"использован вариант запроса «{mq}»")
+
+    summary = ""
+    if blend:
+        summary = f" Сводная оценка по числовым признакам ≈ {sum(blend) / len(blend):.0f}%."
+
+    if not signals:
+        return "Ранжирование по скору каталога (CrossRef и др.) и правилам слияния дубликатов."
+
+    return "Объяснение (explain): " + "; ".join(signals) + "." + summary
 
 
 def _looks_like_capslock_input(text: str) -> bool:
@@ -978,6 +1094,123 @@ def is_journal_rubric_list_url(url: str) -> bool:
     return False
 
 
+def is_cyberleninka_non_article_page(url: str) -> bool:
+    """
+    True для главной CyberLeninka, журналов, поиска и т.п. — всё, что не карточка статьи /article/n/....
+
+    Если пользователь указывает такой URL вместе с названием, парсить HTML страницы бессмысленно:
+    на главной нет метаданных статьи (попадает рекламный текст из <title>).
+    """
+    try:
+        p = urlparse((url or "").strip())
+        host = (p.netloc or "").lower()
+    except Exception:
+        return False
+    if "cyberleninka.ru" not in host:
+        return False
+    path = (p.path or "").strip().lower()
+    if path.startswith("/article/n/"):
+        return False
+    return True
+
+
+_JUNK_ANCHOR_RE = re.compile(
+    r"^(read\s*more|далее|подробнее|читать(\s+далее)?|ещё|еще|more|next|prev|previous|назад|войти|регистрац|"
+    r"все\s+новости|архив|cookie|политика\s+конфиденциальности)\b",
+    re.IGNORECASE,
+)
+
+_BAD_LISTING_PATH_PREFIXES = (
+    "/wp-admin",
+    "/wp-login",
+    "/login",
+    "/register",
+    "/cart",
+    "/checkout",
+    "/search",
+    "/tag/",
+    "/tags/",
+    "/category/",
+    "/author/",
+    "/static/",
+    "/assets/",
+    "/images/",
+    "/img/",
+    "/fonts/",
+    "/ajax/",
+    "/api/",
+)
+
+
+def _netloc_key(netloc: str) -> str:
+    n = (netloc or "").lower()
+    if n.startswith("www."):
+        n = n[4:]
+    return n
+
+
+def _link_in_boilerplate_nav(a) -> bool:
+    for parent in a.parents:
+        name = getattr(parent, "name", None)
+        if name in {"nav", "footer", "header", "aside"}:
+            return True
+        try:
+            if parent.get("role") == "navigation":
+                return True
+        except Exception:
+            pass
+    return False
+
+
+def _is_junk_anchor_label(label: str, sim: float) -> bool:
+    t = (label or "").strip()
+    if len(t) < 2:
+        return True
+    low = t.lower()
+    if len(t) < 12 and sim < 0.72 and low in {"далее", "ещё", "еще", "more", "next", "prev", "назад"}:
+        return True
+    return _JUNK_ANCHOR_RE.match(low) is not None
+
+
+def _path_looks_like_article_url(path: str, netloc: str) -> bool:
+    pl = (path or "").lower()
+    nl = (netloc or "").lower()
+    if nl.endswith("doi.org") and "/10." in pl:
+        return True
+    markers = (
+        "/article/",
+        "/articles/",
+        "/paper/",
+        "/papers/",
+        "/doi/",
+        "/publication",
+        "/publikats",
+        "/fulltext",
+        "/document",
+        "/docs/",
+        "/content/",
+        "/science/article",
+        "/chapter/",
+        "/abs/",
+        "/html/",
+        "/meta/",
+        "/reader/",
+        "/view/",
+    )
+    return any(m in pl for m in markers)
+
+
+def _path_allowed_for_general_link(path: str) -> bool:
+    pl = (path or "").lower()
+    if not pl or pl == "/":
+        return False
+    for pfx in _BAD_LISTING_PATH_PREFIXES:
+        if pl.startswith(pfx):
+            return False
+    segments = [s for s in pl.split("/") if s]
+    return len(segments) >= 2
+
+
 def find_article_url_on_listing_page(
     html: str,
     page_url: str,
@@ -986,44 +1219,102 @@ def find_article_url_on_listing_page(
     min_similarity: float = 0.52,
 ) -> Optional[str]:
     """
-    Ищет на HTML-странице списка ссылку на статью, текст которой ближе всего к title_query
-    (например, список рубрики mmi.sgu.ru).
+    Ищет на HTML-странице ссылку, текст/заголовок которой ближе всего к title_query.
+
+    Два уровня: «строгий» (типичные пути статей /doi/, /article/, …) и «общий» (любая
+    содержательная ссылка на том же сайте с длинным якорем) — чтобы работать не только
+    с заранее известными издателями.
     """
     q = (title_query or "").strip()
     if len(q) < 6:
         return None
     q_norm = _normalize_text_for_compare(q)
+    try:
+        page_host_key = _netloc_key(urlparse(page_url).netloc)
+    except Exception:
+        page_host_key = ""
+
     soup = BeautifulSoup(html, "html.parser")
-    best_href: Optional[str] = None
-    best_score = 0.0
+    strict_min = max(0.48, float(min_similarity) - 0.02)
+    general_min = max(0.54, float(min_similarity) + 0.02)
+
+    best_strict = {"sim": -1.0, "len": -1, "url": ""}
+    best_general = {"sim": -1.0, "len": -1, "url": ""}
+
+    def better(rec: dict, sim: float, alen: int) -> bool:
+        if sim > rec["sim"]:
+            return True
+        if sim == rec["sim"] and alen > rec["len"]:
+            return True
+        return False
+
     for a in soup.find_all("a", href=True):
+        if _link_in_boilerplate_nav(a):
+            continue
         href = (a.get("href") or "").strip()
-        if not href:
+        if not href or href.startswith("#") or href.lower().startswith("javascript:"):
             continue
-        hlow = href.lower()
-        if "/articles/" not in hlow and "/article/" not in hlow:
+        abs_url = urljoin(page_url, href)
+        if not is_public_http_url(abs_url):
             continue
-        text = a.get_text(" ", strip=True)
-        if len(text) < 6:
+        try:
+            pu = urlparse(abs_url)
+            cand_host_key = _netloc_key(pu.netloc)
+            path = pu.path or ""
+        except Exception:
             continue
+
+        if cand_host_key != page_host_key:
+            nl = (pu.netloc or "").lower()
+            if nl not in ("doi.org", "www.doi.org"):
+                continue
+
+        text = a.get_text(" ", strip=True) or ""
+        title_attr = (a.get("title") or "").strip()
         t_norm = _normalize_text_for_compare(text)
-        sim = SequenceMatcher(None, q_norm, t_norm).ratio()
-        if sim > best_score:
-            best_score = sim
-            best_href = href
-    if best_href is None or best_score < min_similarity:
+        ta_norm = _normalize_text_for_compare(title_attr)
+        sim_text = SequenceMatcher(None, q_norm, t_norm).ratio() if t_norm else 0.0
+        sim_attr = SequenceMatcher(None, q_norm, ta_norm).ratio() if ta_norm else 0.0
+        sim = max(sim_text, sim_attr)
+        label = text if len(text) >= len(title_attr) else title_attr
+        if _is_junk_anchor_label(label, sim):
+            continue
+        if len(text) < 6 and len(title_attr) < 6:
+            continue
+
+        anchor_len = max(len(text), len(title_attr))
+        path_article = _path_looks_like_article_url(path, pu.netloc or "")
+
+        if path_article and sim >= strict_min:
+            if better(best_strict, sim, anchor_len):
+                best_strict = {"sim": sim, "len": anchor_len, "url": abs_url}
+        if anchor_len >= 10 and sim >= general_min and _path_allowed_for_general_link(path):
+            if better(best_general, sim, anchor_len):
+                best_general = {"sim": sim, "len": anchor_len, "url": abs_url}
+
+    chosen = ""
+    if best_strict["url"]:
+        chosen = best_strict["url"]
+    elif best_general["url"]:
+        chosen = best_general["url"]
+
+    if not chosen:
         return None
-    return urljoin(page_url, best_href)
+    base_listing = (page_url or "").split("#")[0].rstrip("/").lower()
+    base_pick = chosen.split("#")[0].rstrip("/").lower()
+    if base_pick == base_listing:
+        return None
+    return chosen
 
 
-def resolve_article_from_journal_listing(listing_url: str, title_query: str) -> Optional[PaperMetadata]:
+def resolve_article_from_listing_by_title(listing_url: str, title_query: str) -> Optional[PaperMetadata]:
     """
-    Загружает страницу рубрики/списка, находит ссылку на статью по названию и извлекает метаданные
-    как при обычном URL статьи (в т.ч. DOI → Crossref).
+    Универсально: загружает страницу (рубрика, выпуск, главная раздела и т.д.), ищет ссылку
+    по близости текста к title_query, затем извлекает метаданные как для обычного URL статьи.
     """
     listing_url = (listing_url or "").strip()
     title_query = (title_query or "").strip()
-    if not listing_url or not title_query:
+    if not listing_url or not title_query or len(title_query) < 6:
         return None
     try:
         html = fetch_html(listing_url)
@@ -1035,6 +1326,14 @@ def resolve_article_from_journal_listing(listing_url: str, title_query: str) -> 
     if not is_public_http_url(article_url):
         return None
     return extract_metadata_from_url(article_url)
+
+
+def resolve_article_from_journal_listing(listing_url: str, title_query: str) -> Optional[PaperMetadata]:
+    """
+    Загружает страницу рубрики/списка, находит ссылку на статью по названию и извлекает метаданные
+    как при обычном URL статьи (в т.ч. DOI → Crossref).
+    """
+    return resolve_article_from_listing_by_title(listing_url, title_query)
 
 
 def guess_title_from_url(url: str) -> Optional[str]:
@@ -1356,6 +1655,55 @@ def format_citation(m: PaperMetadata, style: str = "gost") -> str:
         doi = f", doi: {m.doi}" if m.doi else ""
         prefix = f"{a}, " if a else ""
         return f"{prefix}{title}, {journal}{vol}{no}{pages}, {year}{doi}."
+
+    if style == "journal_auto":
+        jl = (m.journal or "").lower()
+        if "nature" in jl:
+            return format_citation(m, "nature")
+        if any(x in jl for x in ("springer", "bmc", "biomed central", "frontiers")):
+            return format_citation(m, "springer")
+        return format_citation(m, "gost")
+
+    if style == "springer":
+        au = _format_authors(m.authors, "apa")
+        title = m.title or "Untitled"
+        j = m.journal or ""
+        y = m.year or ""
+        vol = m.volume or ""
+        iss = m.issue or ""
+        pg = m.pages or ""
+        voliss = ""
+        if vol or iss or pg:
+            voliss = (vol or "") + (f"({iss})" if iss else "") + (f":{pg}" if pg else "")
+        doi = f"https://doi.org/{m.doi}" if m.doi else ""
+        left = f"{au} {title}." if au else f"{title}."
+        mid = f" {j} " if j else " "
+        tail = f" {y} {voliss} {doi}".replace("  ", " ").strip()
+        return (left + mid + tail).strip()
+
+    if style == "nature":
+        au = _format_authors(m.authors, "ieee") or "Authors"
+        title = m.title or "Untitled"
+        j = m.journal or ""
+        vol = m.volume or ""
+        pg = m.pages or ""
+        yr = m.year or ""
+        bits = [f"{au}.", title + "."]
+        if j:
+            bits.append(j + ".")
+        tail_parts = []
+        if vol:
+            tail_parts.append(vol)
+        if pg:
+            tail_parts.append(pg)
+        if yr:
+            tail_parts.append(f"({yr})")
+        if tail_parts:
+            bits.append(" ".join(tail_parts) + ".")
+        doi = f"doi:{m.doi}" if m.doi else ""
+        if doi:
+            bits.append(doi)
+        return " ".join(x for x in bits if x)
 
     # GOST-like
 
@@ -1820,21 +2168,40 @@ def extract_metadata_from_title(title: str) -> PaperMetadata:
     return PaperMetadata(title=(title or "").strip(), source_url=None, confidence={})
 
 def extract_metadata_from_doi(doi: str) -> PaperMetadata:
-    doi = normalize_doi(doi)
+    nd = normalize_doi(doi or "")
+    if not nd.strip():
+        return PaperMetadata(
+            doi=(doi or "").strip() or None,
+            source_url=None,
+            enriched_by=None,
+            confidence={"doi_invalid": 1.0},
+        )
 
-    meta = crossref_enrich(doi)
+    if not doi_syntax_plausible(nd):
+        return PaperMetadata(
+            doi=nd,
+            source_url=f"https://doi.org/{nd}",
+            enriched_by="doi_validation",
+            confidence={"doi_invalid": 1.0},
+        )
+
+    meta = crossref_enrich(nd)
     if meta:
-        meta.source_url = f"https://doi.org/{doi}"
+        meta.source_url = f"https://doi.org/{nd}"
         meta.confidence = meta.confidence or {}
+        _attach_quality_hints(meta)
         return meta
 
-    meta2 = datacite_enrich(doi)
+    meta2 = datacite_enrich(nd)
     if meta2:
-        meta2.source_url = f"https://doi.org/{doi}"
+        meta2.source_url = f"https://doi.org/{nd}"
         meta2.confidence = meta2.confidence or {}
+        _attach_quality_hints(meta2)
         return meta2
 
-    return PaperMetadata(doi=doi, source_url=f"https://doi.org/{doi}", enriched_by=None, confidence={})
+    out = PaperMetadata(doi=nd, source_url=f"https://doi.org/{nd}", enriched_by=None, confidence={})
+    _attach_quality_hints(out)
+    return out
 
 def extract_title_from_html_basic(html: str) -> Optional[str]:
     soup = BeautifulSoup(html, "html.parser")
