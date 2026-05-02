@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Scientific Parser (local)",
+  "version": "1.0.0",
+  "description": "Открыть выделенный текст как DOI в локальном Scientific Parser (127.0.0.1:5000).",
+  "permissions": ["contextMenus"],
+  "host_permissions": ["http://127.0.0.1/*", "http://localhost/*"],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
