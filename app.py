@@ -12,6 +12,7 @@ from urllib.parse import urlparse
 
 import requests
 from flask import Flask, Response, g, jsonify, request, session, stream_with_context
+from flask_caching import Cache
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
@@ -19,6 +20,7 @@ from inference_pipeline import (
     PaperMetadata,
     _cyberleninka_pdf_url_from_article_page,
     crossref_enrich,
+    explain_candidate_ranking,
     explain_title_interpretation,
     export_bibtex,
     export_ris,
@@ -31,10 +33,14 @@ from inference_pipeline import (
     format_bibliography_list,
     format_citation,
     guess_title_from_url,
+    is_cyberleninka_non_article_page,
     is_journal_rubric_list_url,
     query_has_cyrillic,
     resolve_article_from_journal_listing,
+    resolve_article_from_listing_by_title,
+    search_cyberleninka_candidates_by_title,
     search_metadata_candidates_from_title,
+    similarity_normalized_titles,
 )
 from net_security import is_public_http_url
 
@@ -53,13 +59,29 @@ MAX_TITLE_LEN = 350
 MAX_DOI_LEN = 255
 MAX_PAYLOAD_LEN = 50000
 MAX_PDF_BYTES = 25 * 1024 * 1024
+MAX_BATCH_LINES = 10
+MAX_BATCH_CHARS = 12000
 
+CITATION_STYLES = ("gost", "apa", "ieee", "journal_auto", "springer", "nature")
+
+
+def _citation_style(value: str) -> str:
+    v = (value or "gost").strip().lower()
+    return v if v in CITATION_STYLES else "gost"
+
+
+# Лимиты по IP: ключ — get_remote_address. Для нескольких воркеров задайте RATELIMIT_STORAGE_URI (например redis://...).
 limiter = Limiter(
     get_remote_address,
     app=app,
     default_limits=["120 per hour", "30 per minute"],
-    storage_uri="memory://",
+    storage_uri=os.getenv("RATELIMIT_STORAGE_URI", "memory://"),
 )
+
+_cache_config: dict = {"CACHE_TYPE": "SimpleCache"}
+if (os.getenv("REDIS_URL") or "").strip():
+    _cache_config = {"CACHE_TYPE": "RedisCache", "CACHE_REDIS_URL": os.getenv("REDIS_URL")}
+cache = Cache(app, config=_cache_config)
 
 APP_THEME_CSS = """
 :root {
@@ -259,6 +281,12 @@ input:focus, select:focus {
   color: #1e3a8a;
   border: 1px solid #c7d2fe;
 }
+.btn-warn {
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+.btn-warn:hover { filter: brightness(0.97); }
 .theme-toggle {
   min-width: 116px;
   text-align: center;
@@ -656,6 +684,22 @@ def _init_db() -> None:
             );
             """
         )
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS search_history (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                session_id TEXT NOT NULL,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                mode TEXT,
+                url TEXT,
+                doi TEXT,
+                title_query TEXT,
+                result_title TEXT,
+                ok INTEGER NOT NULL DEFAULT 1,
+                error_message TEXT
+            );
+            """
+        )
         conn.commit()
     finally:
         conn.close()
@@ -696,6 +740,67 @@ def _db_save_selected(session_id: str, paper: PaperMetadata) -> bool:
 def _db_clear_selected(session_id: str) -> None:
     _get_db().execute("DELETE FROM selected_papers WHERE session_id = ?", (session_id,))
     _get_db().commit()
+
+
+def _db_pop_last_selected(session_id: str) -> bool:
+    """Удаляет последнюю по времени добавления запись сессии. True, если строка была удалена."""
+    db = _get_db()
+    row = db.execute(
+        """
+        SELECT paper_key FROM selected_papers
+        WHERE session_id = ?
+        ORDER BY datetime(created_at) DESC, paper_key DESC
+        LIMIT 1
+        """,
+        (session_id,),
+    ).fetchone()
+    if not row:
+        return False
+    db.execute(
+        "DELETE FROM selected_papers WHERE session_id = ? AND paper_key = ?",
+        (session_id, row["paper_key"]),
+    )
+    db.commit()
+    return True
+
+
+def _anonymous_mode() -> bool:
+    """При SP_ANONYMOUS=1 не пишем историю поиска (локальные/чувствительные сценарии)."""
+    return os.getenv("SP_ANONYMOUS", "").strip().lower() in ("1", "true", "yes", "on")
+
+
+def _db_log_search(
+    session_id: str,
+    mode_used: str,
+    url: str,
+    doi: str,
+    title_query: str,
+    result_title: str,
+    ok: bool = True,
+    error_message: Optional[str] = None,
+) -> None:
+    if _anonymous_mode():
+        return
+    try:
+        _get_db().execute(
+            """
+            INSERT INTO search_history(session_id, mode, url, doi, title_query, result_title, ok, error_message)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                session_id,
+                mode_used,
+                (url or "")[:2000],
+                (doi or "")[:MAX_DOI_LEN],
+                (title_query or "")[:MAX_TITLE_LEN],
+                (result_title or "")[:500],
+                1 if ok else 0,
+                (error_message or "")[:2000] if error_message else None,
+            ),
+        )
+        _get_db().commit()
+    except Exception:
+        LOGGER.exception("search_history insert failed")
 
 
 def _validate_input_length(value: str, max_len: int, field_name: str) -> Optional[str]:
@@ -956,32 +1061,64 @@ def _try_download_pdf_from_candidates(candidates: List[str]) -> Tuple[Optional[R
     return None, None, "Не удалось получить полный PDF: ссылка отсутствует или доступ ограничен издателем."
 
 
+def _pdf_request_headers(candidate: str) -> dict:
+    parsed = urlparse(candidate)
+    origin = f"{parsed.scheme}://{parsed.netloc}" if parsed.scheme and parsed.netloc else ""
+    return {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+        "Accept": "application/pdf,*/*;q=0.8",
+        "Referer": origin or "https://www.google.com/",
+    }
+
+
 def _probe_pdf_candidates(candidates: List[str]) -> Tuple[bool, Optional[str], str]:
+    """Сначала HEAD (Content-Type, размер), при сомнении — GET с чтением первых байт (%PDF)."""
     for candidate in candidates:
+        headers = _pdf_request_headers(candidate)
         try:
-            parsed = urlparse(candidate)
-            origin = f"{parsed.scheme}://{parsed.netloc}" if parsed.scheme and parsed.netloc else ""
+            h = requests.head(candidate, timeout=(5, 20), headers=headers, allow_redirects=True)
+            if h.status_code == 200:
+                ct = (h.headers.get("Content-Type") or "").lower()
+                cl_raw = h.headers.get("Content-Length")
+                if cl_raw:
+                    try:
+                        if int(cl_raw) > MAX_PDF_BYTES:
+                            continue
+                    except ValueError:
+                        pass
+                if "pdf" in ct:
+                    return True, candidate, "PDF доступен (HEAD: Content-Type, размер в пределах лимита)."
+        except Exception:
+            pass
+
+        try:
             r = requests.get(
                 candidate,
                 timeout=30,
-                headers={
-                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-                    "Accept": "application/pdf,*/*;q=0.8",
-                    "Referer": origin or "https://www.google.com/",
-                },
+                headers=headers,
                 allow_redirects=True,
                 stream=True,
             )
             if r.status_code != 200:
+                r.close()
                 continue
             content_type = (r.headers.get("Content-Type") or "").lower()
+            try:
+                content_length = int(r.headers.get("Content-Length") or 0)
+            except ValueError:
+                content_length = 0
+            if content_length and content_length > MAX_PDF_BYTES:
+                r.close()
+                continue
             first_chunk = b""
-            for chunk in r.iter_content(chunk_size=16):
+            for chunk in r.iter_content(chunk_size=2048):
                 first_chunk = chunk or b""
                 break
             starts_like_pdf = first_chunk.startswith(b"%PDF")
+            r.close()
             if "pdf" in content_type or starts_like_pdf:
-                return True, candidate, "PDF доступен для скачивания."
+                detail = "по сигнатуре и заголовкам ответа" if starts_like_pdf else "по Content-Type"
+                return True, candidate, f"PDF доступен для скачивания ({detail})."
         except Exception:
             continue
     return False, None, "PDF не найден или ограничен paywall."
@@ -1094,6 +1231,24 @@ def _journal_rubric_usage_block(
         """
 
 
+def _generic_listing_hint_block(*, generic_match_failed: bool, title_input: str) -> str:
+    if not generic_match_failed or not (title_input or "").strip():
+        return ""
+    msg = (
+        "На странице по указанному URL не найдена ссылка, текст которой достаточно близок "
+        "к введённому названию (поиск по ссылкам на том же сайте).\n\n"
+        "Скопируйте заголовок с сайта дословно, откройте страницу списка выпуска/рубрики, "
+        "куда входит статья, либо вставьте прямую ссылку на материал или DOI. "
+        "Для главной страницы портала иногда проще оставить только поле «Название» без URL."
+    )
+    return f"""
+        <div class="card" style="border-left:4px solid #0369a1;">
+        <h3 class="section-title">Подбор статьи по странице</h3>
+        <pre class="mono-box" style="white-space:pre-wrap;">{escape(msg)}</pre>
+        </div>
+        """
+
+
 @app.get("/")
 def index():
     return f"""
@@ -1126,6 +1281,7 @@ def index():
             </div>
           </div>
           <div class="topbar-right">
+            <a class="btn btn-soft nav-link" href="/history">История</a>
             <button id="themeToggle" class="btn theme-toggle">🌙 Dark</button>
           </div>
         </div>
@@ -1169,6 +1325,9 @@ def index():
                       <option value="gost">ГОСТ-like</option>
                       <option value="apa">APA</option>
                       <option value="ieee">IEEE</option>
+                      <option value="journal_auto">Журнал (авто по названию)</option>
+                      <option value="springer">Springer-подобный</option>
+                      <option value="nature">Nature-подобный</option>
                     </select>
                   </div>
                 </div>
@@ -1178,21 +1337,50 @@ def index():
                 </div>
               </form>
             </div>
+            <div class="card" style="margin-top:14px;">
+              <h3 class="section-title">Массовый импорт</h3>
+              <p style="color:var(--muted);font-size:14px;">До {MAX_BATCH_LINES} строк: DOI (<code>10....</code>), URL или свободное название. Каждая строка обрабатывается отдельно (без эвристик «страница списка + заголовок»). Для сложных случаев используйте форму выше.</p>
+              <form method="POST" action="/parse_batch">
+                <label class="label"><b>Строки</b></label>
+                <textarea name="batch" rows="7" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--border);font-family:inherit;" placeholder="10.1000/182&#10;https://doi.org/10.1000/182"></textarea>
+                <div style="margin-top:10px;">
+                  <label class="label"><b>Стиль цитирования</b></label>
+                  <select name="citation_style">
+                    <option value="gost">ГОСТ-like</option>
+                    <option value="apa">APA</option>
+                    <option value="ieee">IEEE</option>
+                    <option value="journal_auto">Журнал (авто по названию)</option>
+                    <option value="springer">Springer-подобный</option>
+                    <option value="nature">Nature-подобный</option>
+                  </select>
+                </div>
+                <div style="margin-top:12px;">
+                  <button type="submit" class="btn btn-soft">Разобрать пакет</button>
+                </div>
+              </form>
+            </div>
           </section>
           <section id="panel-about" class="tab-panel" data-tab-panel="about">
             <div class="card info-card">
               <h3 class="section-title">О проекте</h3>
-              <p><b>Scientific Parser</b> помогает быстро извлекать метаданные научных статей по `URL`, `DOI` или названию.</p>
-              <p>Сервис показывает несколько релевантных вариантов, проверяет доступность полного текста и помогает собрать аккуратный библиографический список для учебной или исследовательской работы.</p>
+              <p><b>Scientific Parser</b> извлекает метаданные по URL, DOI или названию и собирает библиографию.</p>
+              <p><b>Где участвует ML.</b> Классификатор блоков страницы: TF‑IDF (слово и символьные n‑граммы) + признаки DOM (тег, классы, глубина, плотность ссылок и др.) предсказывает тип каждого текстового блока — заголовок, авторы, год, журнал, DOI и т.д., чтобы вытащить поля со страницы журнала (не класс «References» целиком). Дополнительно можно включить эмбеддинги Sentence‑BERT по полю текста блока: при обучении задайте <code>USE_SBERT=1</code> и зависимости из <code>requirements-ml.txt</code>. LayoutLM и аналоги требуют отдельной разметки/инфраструктуры и не входят в базовый пайплайн.</p>
+              <p><b>Нормализация запроса по названию.</b> CAPS приводятся к нормальному виду, строятся варианты раскладки (в т.ч. «ghbdtn» → «привет» через подстановку раскладки), показывается блок «Я вас понял так»; опечатки частично снимаются нечётким сопоставлением с заголовками из CrossRef.</p>
+              <p><b>Безопасность и кэш.</b> Исходящие URL проверяются на SSRF в <code>net_security.py</code> (схема, запрет приватных IP после DNS, опционально <code>ALLOW_ONION=1</code> для onion‑хостов и <code>TOR_SOCKS_PROXY</code> для запросов через Tor). В процессе используется <code>lru_cache</code> для повторяющихся API‑запросов; при переменной <code>REDIS_URL</code> подключаются Redis и Flask‑Caching (см. также <code>RATELIMIT_STORAGE_URI</code> для лимитов).</p>
+              <p><b>Интеграции.</b> JSON для внешних инструментов: <code>/api/work?doi=…</code>. Расширение Chrome: каталог <code>extensions/chrome</code>. Telegram: скрипт <code>telegram_bot.py</code> (токен в <code>TELEGRAM_BOT_TOKEN</code>, URL сервиса в <code>SP_PUBLIC_URL</code>).</p>
+              <p><b>Срок жизни демо.</b> Публичный адрес зависит от хостинга; для демонстрации без сети запишите короткое видео экрана или используйте локальный запуск / portable (см. <code>README_PORTABLE.txt</code> при сборке).</p>
+              <p><b>Открытые данные разметки.</b> Файл размеченных страниц лежит в репозитории в <code>data/annotated_dataset.json</code> (при публикации на GitHub может служить открытым датасетом).</p>
             </div>
           </section>
             <section id="panel-howto" class="tab-panel" data-tab-panel="howto">
             <div class="card info-card">
               <h3 class="section-title">Как пользоваться</h3>
               <p>Укажи <b>DOI</b> (если есть) — так точнее всего. Либо прямую <b>ссылку на страницу статьи</b> (не на список рубрики), либо <b>название</b> для поиска в каталогах.</p>
-              <p>Если в поле URL у тебя страница рубрики журнала (список заголовков), дополнительно введи <b>точное название</b> статьи, как в списке — тогда сервис попытается найти в HTML ссылку на статью. Проще всего вставить ссылку вида <code>…/articles/…</code> с сайта издателя.</p>
+              <p>Если в URL открыта <b>страница списка</b> (рубрика, выпуск, раздел) на любом сайте, дополнительно введи <b>название</b> статьи как в списке — сервис ищет на этой странице ссылку с похожим текстом (на том же домене) и переходит к карточке статьи. Надёжнее по-прежнему дать прямую ссылку на материал или DOI.</p>
               <p>Название в CrossRef часто <b>на английском</b>, даже при русской странице журнала: при поиске по кириллице смотри подсказки на экране результата.</p>
-              <p>После Parse выбери вариант, при необходимости скачай PDF, добавь в итоговый список и экспортируй в BibTeX / RIS.</p>
+              <p>После Parse открой варианты: у каждого есть блок <b>«Почему этот вариант в списке»</b> — краткое пояснение ранжирования (сходство заголовка, год, DOI, search_score).</p>
+              <p><b>Экспорт BibTeX / RIS.</b> Добавь нужные варианты кнопкой «Добавить в итоговый список». В шапке результата или в блоке итогового списка нажми <b>BibTeX</b> или <b>RIS</b> — браузер скачает файл <code>selected_references.bib</code> или <code>selected_references.ris</code> для Zotero, JabRef и т.п. Отдельно доступен JSON для скриптов: <code>/api/work?doi=...</code>.</p>
+              <p>Список сохраняется между поисками; на экране результата можно <b>убрать последний</b> добавленный источник или <b>очистить весь список</b>. Недавние запросы (режим и краткий итог) смотри в разделе <a href="/history">История</a> (отключается переменной <code>SP_ANONYMOUS=1</code>).</p>
             </div>
           </section>
         </div>
@@ -1225,6 +1413,26 @@ def index():
             localStorage.setItem(key, next);
             apply(next);
           }});
+        }})();
+        (function() {{
+          const q = new URLSearchParams(window.location.search);
+          const form = document.getElementById("parseForm");
+          if (!form) return;
+          const doi = q.get("doi");
+          const url = q.get("url");
+          const title = q.get("title");
+          if (doi) {{
+            const el = form.querySelector('[name="doi"]');
+            if (el) el.value = doi;
+          }}
+          if (url) {{
+            const el = form.querySelector('[name="url"]');
+            if (el) el.value = url;
+          }}
+          if (title) {{
+            const el = form.querySelector('[name="title"]');
+            if (el) el.value = title;
+          }}
         }})();
         (function() {{
           const tabs = Array.from(document.querySelectorAll("[data-tab-target]"));
@@ -1321,7 +1529,16 @@ def save_candidate():
 @limiter.limit("10/minute")
 def clear_selected():
     _db_clear_selected(_get_session_id())
-    return "Итоговый список очищен. Вернитесь назад и обновите страницу."
+    return jsonify({"ok": True, "message": "Итоговый список очищен"})
+
+
+@app.get("/pop_last_selected")
+@limiter.limit("30/minute")
+def pop_last_selected():
+    sid = _get_session_id()
+    if not _db_pop_last_selected(sid):
+        return jsonify({"ok": False, "message": "Итоговый список уже пуст"})
+    return jsonify({"ok": True, "message": "Последняя добавленная запись удалена"})
 
 
 @app.get("/download_pdf")
@@ -1407,6 +1624,259 @@ def export_ris_endpoint():
     )
 
 
+@app.get("/api/work")
+@limiter.limit("120/minute")
+@cache.cached(timeout=120, query_string=True)
+def api_work_metadata():
+    """
+    JSON метаданных: ровно один из query-параметров doi, url или title.
+    Для интеграций (тонкий клиент, скрипты, Zotero и т.д.).
+    """
+    doi = (request.args.get("doi") or "").strip()
+    url = (request.args.get("url") or "").strip()
+    title = (request.args.get("title") or "").strip()
+    n_params = sum(bool(x) for x in (doi, url, title))
+    if n_params == 0:
+        return (
+            jsonify(
+                {
+                    "ok": False,
+                    "error": "Передайте один из параметров: doi, url или title",
+                }
+            ),
+            400,
+        )
+    if n_params > 1:
+        return (
+            jsonify(
+                {
+                    "ok": False,
+                    "error": "Укажите только один параметр: doi, url или title",
+                }
+            ),
+            400,
+        )
+
+    if doi:
+        meta = extract_metadata_from_doi(doi)
+        return jsonify({"ok": True, "mode": "doi", "metadata": asdict(meta)})
+
+    if url:
+        verr = _validate_input_length(url, MAX_URL_LEN, "url")
+        if verr:
+            return jsonify({"ok": False, "error": verr}), 400
+        if not is_public_http_url(url):
+            return jsonify({"ok": False, "error": "URL не разрешён политикой безопасности"}), 400
+        meta = extract_metadata_from_url(url)
+        return jsonify({"ok": True, "mode": "url", "metadata": asdict(meta)})
+
+    verr = _validate_input_length(title, MAX_TITLE_LEN, "title")
+    if verr:
+        return jsonify({"ok": False, "error": verr}), 400
+    cands = search_metadata_candidates_from_title(title, max_results=4)
+    if not cands:
+        p = extract_metadata_from_title(title)
+        if not (p.title or p.doi):
+            return jsonify({"ok": False, "error": "Не найдено", "metadata": None}), 404
+        cands = [p]
+    primary = cands[0]
+    out: dict = {"ok": True, "mode": "title", "metadata": asdict(primary)}
+    if len(cands) > 1:
+        out["candidates"] = [asdict(c) for c in cands]
+    return jsonify(out)
+
+
+@app.get("/history")
+@limiter.limit("60/minute")
+def search_history_page():
+    if _anonymous_mode():
+        return (
+            "<p>История поиска отключена (SP_ANONYMOUS=1).</p><p><a href='/'>На главную</a></p>",
+            403,
+        )
+    sid = _get_session_id()
+    rows = _get_db().execute(
+        """
+        SELECT created_at, mode, url, doi, title_query, result_title, ok, error_message
+        FROM search_history
+        WHERE session_id = ?
+        ORDER BY id DESC
+        LIMIT 40
+        """,
+        (sid,),
+    ).fetchall()
+    cards: List[str] = []
+    for r in rows:
+        raw_snippet = (r["title_query"] or "").strip() or (r["doi"] or "").strip() or (r["url"] or "").strip()
+        snippet = raw_snippet[:200] + ("…" if len(raw_snippet) > 200 else "")
+        if r["ok"]:
+            outcome = (r["result_title"] or "—")[:200]
+            outcome_html = escape(outcome)
+        else:
+            outcome_html = escape((r["error_message"] or "ошибка")[:300])
+        cards.append(
+            f"""<div class="card" style="margin-bottom:10px;padding:12px;">
+            <div style="color:var(--muted);font-size:13px;">{escape(r["created_at"] or "")}</div>
+            <div><b>{escape(r["mode"] or "")}</b></div>
+            <div style="margin-top:6px;">Запрос: {escape(snippet) if snippet else "—"}</div>
+            <div style="margin-top:6px;">Итог: {outcome_html}</div>
+            </div>"""
+        )
+    body = "".join(cards) if cards else "<p class='empty-text'>Пока нет сохранённых запросов в этой сессии.</p>"
+    return f"""
+    <html>
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>История поиска</title>
+      <style>{APP_THEME_CSS}</style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="topbar">
+          <div class="topbar-left">
+            <div class="brand">📚 История</div>
+            <a class="btn nav-link" href="/">Главная</a>
+          </div>
+          <div class="topbar-right">
+            <button id="themeToggle" class="btn theme-toggle">🌙 Dark</button>
+          </div>
+        </div>
+        <div class="hero"><h2>Последние запросы</h2>
+        <p>До 40 записей для текущей сессии браузера. Отключение: <code>SP_ANONYMOUS=1</code>.</p></div>
+        {body}
+      </div>
+      <script>
+        (function() {{
+          const root = document.documentElement;
+          const key = "sp_theme";
+          const btn = document.getElementById("themeToggle");
+          function apply(theme) {{
+            if (theme === "dark") {{
+              root.setAttribute("data-theme", "dark");
+              if (btn) btn.textContent = "☀️ Light";
+            }} else {{
+              root.removeAttribute("data-theme");
+              if (btn) btn.textContent = "🌙 Dark";
+            }}
+          }}
+          apply(localStorage.getItem(key) || "light");
+          if (btn) {{
+            btn.addEventListener("click", function() {{
+              const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+              localStorage.setItem(key, next);
+              apply(next);
+            }});
+          }}
+        }})();
+      </script>
+    </body>
+    </html>
+    """
+
+
+@app.post("/parse_batch")
+@limiter.limit("8/hour")
+def parse_batch():
+    raw = (request.form.get("batch") or "").strip()
+    if len(raw) > MAX_BATCH_CHARS:
+        return f"Слишком большой текст пакета (max {MAX_BATCH_CHARS} символов).", 400
+    citation_style = _citation_style(request.form.get("citation_style") or "gost")
+    lines = [ln.strip() for ln in raw.splitlines() if ln.strip()][:MAX_BATCH_LINES]
+    if not lines:
+        return "Введите хотя бы одну непустую строку (DOI, URL или название).", 400
+
+    blocks: List[str] = []
+    for i, line in enumerate(lines, start=1):
+        try:
+            if re.match(r"^10\.\d+", line):
+                m = extract_metadata_from_doi(line)
+                mode_line = "doi"
+            elif line.lower().startswith("http://") or line.lower().startswith("https://"):
+                if not is_public_http_url(line):
+                    blocks.append(
+                        f'<div class="card" style="border-left:4px solid var(--danger);"><b>Строка {i}</b> — URL запрещён политикой безопасности.</div>'
+                    )
+                    continue
+                m = extract_metadata_from_url(line)
+                mode_line = "url"
+            else:
+                m = extract_metadata_from_title(line)
+                mode_line = "title"
+            cit = format_citation(m, style=citation_style)
+            blocks.append(
+                f"""<div class="card"><div><b>Строка {i}</b> ({escape(mode_line)})</div>
+                <pre class="mono-box" style="margin-top:8px;white-space:pre-wrap;">{escape(cit)}</pre></div>"""
+            )
+            _db_log_search(_get_session_id(), f"batch:{mode_line}", "", "", line, (m.title or "")[:500])
+        except Exception as e:
+            blocks.append(
+                f"""<div class="card" style="border-left:4px solid var(--warning);"><b>Строка {i}</b> — ошибка: {escape(str(e))}</div>"""
+            )
+            _db_log_search(
+                _get_session_id(),
+                "batch",
+                "",
+                "",
+                line,
+                "",
+                ok=False,
+                error_message=str(e)[:500],
+            )
+
+    joined = "\n".join(blocks)
+    return f"""
+    <html>
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Пакетный разбор</title>
+      <style>{APP_THEME_CSS}</style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="topbar">
+          <div class="topbar-left">
+            <div class="brand">📚 Пакетный разбор</div>
+            <a class="btn nav-link" href="/">Главная</a>
+          </div>
+          <div class="topbar-right">
+            <button id="themeToggle" class="btn theme-toggle">🌙 Dark</button>
+          </div>
+        </div>
+        <div class="hero"><h2>Результаты ({len(lines)} строк)</h2>
+        <p>Стиль: {escape(citation_style.upper())}. Добавление в общий список из этого режима не выполняется — используйте одиночный Parse.</p></div>
+        {joined}
+      </div>
+      <script>
+        (function() {{
+          const root = document.documentElement;
+          const key = "sp_theme";
+          const btn = document.getElementById("themeToggle");
+          function apply(theme) {{
+            if (theme === "dark") {{
+              root.setAttribute("data-theme", "dark");
+              if (btn) btn.textContent = "☀️ Light";
+            }} else {{
+              root.removeAttribute("data-theme");
+              if (btn) btn.textContent = "🌙 Dark";
+            }}
+          }}
+          apply(localStorage.getItem(key) || "light");
+          if (btn) {{
+            btn.addEventListener("click", function() {{
+              const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+              localStorage.setItem(key, next);
+              apply(next);
+            }});
+          }}
+        }})();
+      </script>
+    </body>
+    </html>
+    """
+
+
 @app.post("/parse")
 @limiter.limit("20/minute")
 def parse():
@@ -1419,8 +1889,7 @@ def parse():
         max_variants = max(1, min(10, int(max_variants_raw)))
     except ValueError:
         max_variants = 5
-    if citation_style not in ("gost", "apa", "ieee"):
-        citation_style = "gost"
+    citation_style = _citation_style(citation_style)
 
     err = _validate_input_length(url, MAX_URL_LEN, "url") or _validate_input_length(title_input, MAX_TITLE_LEN, "title") or _validate_input_length(doi, MAX_DOI_LEN, "doi")
     if err:
@@ -1435,6 +1904,7 @@ def parse():
     candidates: List[PaperMetadata] = []
     interpretation = None
     listing_match_failed = False
+    generic_listing_match_failed = False
 
     if doi:
         mode_used = "doi"
@@ -1445,6 +1915,7 @@ def parse():
         mode_used = "url"
         meta = None
         tit = (title_input or "").strip()
+        candidates_built = False
         if tit and is_journal_rubric_list_url(url):
             resolved = resolve_article_from_journal_listing(url, tit)
             if resolved and (resolved.title or resolved.doi):
@@ -1452,25 +1923,73 @@ def parse():
                 mode_used = "url_listing_title_match"
             else:
                 listing_match_failed = True
+        if (
+            meta is None
+            and tit
+            and len(tit) >= 4
+            and is_cyberleninka_non_article_page(url)
+        ):
+            cl_list = search_cyberleninka_candidates_by_title(tit, per_page=max(25, max_variants))
+            if cl_list:
+                meta = cl_list[0]
+                mode_used = "url_cyberleninka_title_search"
+                related = search_metadata_candidates_from_title(meta.title or tit, max_results=max_variants)
+                candidates = _merge_unique_papers(cl_list, related, max_variants)
+            else:
+                interpretation = explain_title_interpretation(tit)
+                candidates = search_metadata_candidates_from_title(tit, max_results=max_variants)
+                meta = candidates[0] if candidates else extract_metadata_from_title(tit)
+                mode_used = "url_cyberleninka_title_fallback"
+            candidates_built = True
         if meta is None:
             meta = extract_metadata_from_url(url)
-        if not meta.title and not meta.doi:
-            guessed_title = None
-            try:
-                html = fetch_html(url)
-                guessed_title = extract_title_from_html_basic(html)
-            except Exception:
+        if not candidates_built:
+            if not meta.title and not meta.doi:
                 guessed_title = None
-            if not guessed_title:
-                guessed_title = guess_title_from_url(url)
-            if guessed_title:
-                meta2 = extract_metadata_from_title(guessed_title)
-                if meta2 and (meta2.title or meta2.doi):
-                    mode_used = "title_fallback"
-                    meta2.source_url = url
-                    meta = meta2
-        related = search_metadata_candidates_from_title(meta.title or "", max_results=max_variants) if meta.title else []
-        candidates = _merge_unique_papers([meta], related, max_variants)
+                try:
+                    html = fetch_html(url)
+                    guessed_title = extract_title_from_html_basic(html)
+                except Exception:
+                    guessed_title = None
+                if not guessed_title:
+                    guessed_title = guess_title_from_url(url)
+                if guessed_title:
+                    meta2 = extract_metadata_from_title(guessed_title)
+                    if meta2 and (meta2.title or meta2.doi):
+                        mode_used = "title_fallback"
+                        meta2.source_url = url
+                        meta = meta2
+            tit_cmp = (title_input or "").strip()
+            if (
+                tit_cmp
+                and len(tit_cmp) >= 6
+                and mode_used
+                not in (
+                    "url_listing_title_match",
+                    "url_cyberleninka_title_search",
+                    "url_cyberleninka_title_fallback",
+                )
+            ):
+                page_score = (meta.confidence or {}).get("page_article_score")
+                try:
+                    ps_val = float(page_score) if page_score is not None else None
+                except (TypeError, ValueError):
+                    ps_val = None
+                page_is_article = ps_val is not None and ps_val >= 0.45
+                meta_title = (meta.title or "").strip()
+                sim = similarity_normalized_titles(tit_cmp, meta_title) if meta_title else 0.0
+                needs_listing_scan = (not meta_title) or (not page_is_article) or (sim < 0.42)
+                if needs_listing_scan:
+                    resolved_g = resolve_article_from_listing_by_title(url, tit_cmp)
+                    u_meta = (resolved_g.source_url or "").split("#")[0].rstrip("/").lower() if resolved_g else ""
+                    u_in = (url or "").split("#")[0].rstrip("/").lower()
+                    if resolved_g and u_meta and u_meta != u_in and (resolved_g.title or resolved_g.doi):
+                        meta = resolved_g
+                        mode_used = "url_generic_title_match"
+                    elif needs_listing_scan:
+                        generic_listing_match_failed = True
+            related = search_metadata_candidates_from_title(meta.title or "", max_results=max_variants) if meta.title else []
+            candidates = _merge_unique_papers([meta], related, max_variants)
     else:
         mode_used = "title_multi"
         interpretation = explain_title_interpretation(title_input)
@@ -1501,6 +2020,23 @@ def parse():
         </div>
         """
 
+    qual_block = ""
+    _mc = meta.confidence or {}
+    if float(_mc.get("doi_invalid") or 0) >= 1.0:
+        qual_block += """
+        <div class="card" style="border-left:4px solid var(--warning);">
+          <h3 class="section-title">Проверка DOI</h3>
+          <p>Строка не похожа на корректный DOI (часто при копировании из PDF или OCR). Проверьте префикс <code>10.</code>, суффикс после «/» и отсутствие пробелов.</p>
+        </div>
+        """
+    if float(_mc.get("retracted_openalex") or 0) >= 1.0:
+        qual_block += """
+        <div class="card" style="border-left:4px solid var(--danger);">
+          <h3 class="section-title">Возможная рестракция</h3>
+          <p>По данным OpenAlex запись помечена как retracted. Уточните статус на сайте издателя.</p>
+        </div>
+        """
+
     interpretation_block = ""
     if interpretation and interpretation.get("variants"):
         variants = ", ".join(interpretation.get("variants", [])[:4])
@@ -1522,6 +2058,11 @@ def parse():
             page_is_listing=is_journal_rubric_list_url(url),
         )
 
+    generic_listing_block = _generic_listing_hint_block(
+        generic_match_failed=generic_listing_match_failed,
+        title_input=title_input or "",
+    )
+
     language_hint_block = ""
     if (title_input or "").strip() and candidates and mode_used != "doi":
         language_hint_block = _language_catalog_hint_block(title_input, candidates)
@@ -1536,6 +2077,8 @@ def parse():
           <div class="mt-10 action-row">
             <a class="btn btn-soft" href="/export_bibtex">Экспорт BibTeX</a>
             <a class="btn btn-soft" href="/export_ris">Экспорт RIS</a>
+            <button type="button" class="btn btn-soft" id="popLastSelectedBtn">Убрать последний</button>
+            <button type="button" class="btn btn-warn" id="clearAllSelectedBtn">Очистить весь список</button>
           </div>
         </div>
         """
@@ -1571,6 +2114,11 @@ def parse():
             f'>Скачать полный PDF</button>'
         )
 
+        rank_expl = explain_candidate_ranking(
+            (title_input or "").strip() or None,
+            (doi or "").strip() or None,
+            item,
+        )
         open_attr = "open" if idx <= 1 else ""
         variants_html += f"""
         <details class="variant-collapse" {open_attr}>
@@ -1581,6 +2129,7 @@ def parse():
           <div class="variant-body">
             <div class="row"><b>Citation:</b> {escape(format_citation(item, style=citation_style))}</div>
             <div class="row"><span class="status-chip {item_status_class}">{item_status_icon} {escape(full["label"])}</span></div>
+            <div class="row"><b>Почему этот вариант в списке:</b> {escape(rank_expl)}</div>
             <div class="row"><b>Комментарий:</b> {escape(full["reason"])}</div>
             <div class="row"><b>Ссылки:</b><br/>{links}</div>
             <div class="row action-row">{pdf_btn} {save_btn}</div>
@@ -1588,6 +2137,15 @@ def parse():
           </div>
         </details>
         """
+
+    _db_log_search(
+        _get_session_id(),
+        mode_used,
+        url,
+        doi,
+        title_input,
+        (meta.title or "")[:500],
+    )
 
     return f"""
     <html>
@@ -1609,6 +2167,7 @@ def parse():
               <a class="btn" href="/">Новый поиск</a>
               <a class="btn btn-soft" href="/export_bibtex">BibTeX</a>
               <a class="btn btn-soft" href="/export_ris">RIS</a>
+              <a class="btn btn-soft" href="/history">История</a>
             </div>
           </div>
           <div class="topbar-right">
@@ -1637,8 +2196,10 @@ def parse():
 
         {interpretation_block}
         {journal_rubric_block}
+        {generic_listing_block}
         {language_hint_block}
         {page_cls_block}
+        {qual_block}
 
         <div class="card">
           <h3 class="section-title">Блок полного текста (лучший результат)</h3>
@@ -1747,6 +2308,33 @@ def parse():
             window.location.reload();
           }}).catch(() => showToast("Не удалось сохранить вариант", true));
         }}
+        function bindSelectedListButtons() {{
+          const popBtn = document.getElementById("popLastSelectedBtn");
+          const clearBtn = document.getElementById("clearAllSelectedBtn");
+          if (popBtn) {{
+            popBtn.addEventListener("click", () => {{
+              fetch("/pop_last_selected")
+                .then((r) => r.json())
+                .then((data) => {{
+                  showToast(data.message || "Готово", !data.ok);
+                  if (data.ok) window.location.reload();
+                }})
+                .catch(() => showToast("Не удалось обновить список", true));
+            }});
+          }}
+          if (clearBtn) {{
+            clearBtn.addEventListener("click", () => {{
+              if (!confirm("Удалить все статьи из итогового списка?")) return;
+              fetch("/clear_selected")
+                .then((r) => r.json())
+                .then((data) => {{
+                  showToast(data.message || "Готово", !data.ok);
+                  if (data.ok) window.location.reload();
+                }})
+                .catch(() => showToast("Не удалось очистить список", true));
+            }});
+          }}
+        }}
         function bindActionButtons() {{
           document.querySelectorAll(".download-pdf-btn").forEach((btn) => {{
             btn.addEventListener("click", () => {{
@@ -1765,6 +2353,7 @@ def parse():
           }});
         }}
         bindActionButtons();
+        bindSelectedListButtons();
       </script>
     </body>
     </html>
