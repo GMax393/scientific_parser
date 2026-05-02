@@ -1,6 +1,6 @@
 {
-  "trained_at_utc": "2026-04-14T12:53:29.212672+00:00",
-  "best_model": "random_forest_balanced",
+  "trained_at_utc": "2026-05-02T12:12:05.835423+00:00",
+  "best_model": "linear_svc_calibrated",
   "split_strategy": "group_by_domain",
   "train_samples": 2564,
   "test_samples": 1073,
@@ -12,8 +12,9 @@
     "title",
     "year"
   ],
+  "use_sbert": true,
   "feature_notes": {
-    "text": "word + char tfidf",
+    "text": "word + char tfidf + sentence-transformers эмбеддинг по полю text",
     "categorical": [
       "tag",
       "classes",
