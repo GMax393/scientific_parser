@@ -9,4 +9,7 @@ joblib
 rapidfuzz
 gunicorn
 flask-limiter
+flask-caching
+redis
+pytest
 waitress
