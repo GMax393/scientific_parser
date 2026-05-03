@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Telegram-бот для Scientific Parser.
+Telegram-бот для BiblioParser.
 
   set TELEGRAM_BOT_TOKEN=...
   set SP_PUBLIC_URL=http://127.0.0.1:5000   (для справки в /help)
@@ -59,7 +59,7 @@ except ImportError as _imp_err:
 _sessions_lock = threading.Lock()
 _sessions: Dict[str, Dict[str, Any]] = {}
 
-WELCOME_HTML = """🎓 <b>Scientific Parser</b>
+WELCOME_HTML = """🎓 <b>BiblioParser</b>
 
 Я помогаю собрать метаданные статьи: авторы, журнал, год, DOI, ссылка на PDF (если есть).
 
