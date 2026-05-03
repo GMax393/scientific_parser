@@ -825,7 +825,9 @@ def handle_request_exception(err):
 
 
 @app.get("/health")
+@limiter.exempt
 def health():
+    # Иначе хостинг (Railway, Render и т.д.) получает 429 на health check и роняет инстанс.
     return jsonify({"status": "ok"}), 200
 
 
