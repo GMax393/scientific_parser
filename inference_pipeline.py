@@ -28,6 +28,7 @@ SEARCH_TIME_BUDGET_SEC = 9.0
 DOI_RE = re.compile(r"\b10\.\d{4,9}/[-._;()/:A-Z0-9]+\b", re.IGNORECASE)
 # Строгая проверка «похожести на DOI» для пользовательского ввода (до запроса к Crossref).
 DOI_STRICT_INPUT_RE = re.compile(r"^10\.\d{4,}/\S+$", re.IGNORECASE)
+_BOOKISH_BANNER_YEAR_RE = re.compile(r"\(\s*(?:19|20)\d{2}\s*\)")
 NON_WORD_RE = re.compile(r"[^\w\s\-]", re.UNICODE)
 CYRILLIC_RE = re.compile(r"[\u0400-\u04FF]")
 _HTML_TAGS_RE = re.compile(r"<[^>]+>")
@@ -1493,6 +1494,352 @@ def crossref_search_doi_by_title(title: str, timeout: int = 15) -> Optional[str]
             return candidate.doi
     return None
 
+
+def _openlibrary_doc_title(doc: Dict[str, Any]) -> str:
+    t = doc.get("title")
+    if isinstance(t, list) and t:
+        return str(t[0] or "").strip()
+    return str(t or "").strip()
+
+
+def _openlibrary_publish_year(doc: Dict[str, Any]) -> Optional[int]:
+    for key in ("first_publish_year", "publish_year"):
+        y = doc.get(key)
+        if y is None:
+            continue
+        try:
+            return int(y)
+        except (TypeError, ValueError):
+            continue
+    return None
+
+
+_SKIP_TITLE_WORDS = frozenset(
+    {"the", "a", "an", "on", "in", "of", "and", "for", "to", "at", "by", "key", "from"}
+)
+
+
+def _first_significant_title_keyword(title: str) -> Optional[str]:
+    """Первое значимое слово заголовка (для короткого запроса author+title в Open Library)."""
+    for raw in re.split(r"[^\w]+", title):
+        w = raw.strip()
+        if len(w) >= 4 and w.lower() not in _SKIP_TITLE_WORDS:
+            return w[:80]
+    return None
+
+
+def _extract_publisher_hint_from_reference_line(cite_line: str) -> Optional[str]:
+    """Хвост строки цитаты «... Title. Publisher, City.» — издательство до первой запятой."""
+    s = (cite_line or "").strip().rstrip(".")
+    if not s:
+        return None
+    chunks = re.split(r"\.\s+", s)
+    if len(chunks) < 2:
+        return None
+    tail = chunks[-1].strip()
+    if "," not in tail:
+        return None
+    left = tail.split(",")[0].strip()
+    if len(left) < 3:
+        return None
+    if re.fullmatch(r"\d{4}", left):
+        return None
+    return left[:220]
+
+
+def _edition_publishers_flat(ed: Dict[str, Any]) -> List[str]:
+    p = ed.get("publishers")
+    if isinstance(p, list):
+        return [str(x).strip() for x in p if str(x).strip()]
+    if isinstance(p, str) and p.strip():
+        return [p.strip()]
+    return []
+
+
+def _normalize_publisher_for_match(s: str) -> str:
+    s = re.sub(r"[-_/]+", " ", (s or "").lower())
+    s = re.sub(r"[^\w\s]", " ", s)
+    return " ".join(s.split())
+
+
+def _publisher_hint_fit_score(pub_line: str, hint: str) -> float:
+    """Сходство строки издателя из каталога с подсказкой из цитаты (подстрока / токены / fuzzy)."""
+    h = _normalize_publisher_for_match(hint)
+    p = _normalize_publisher_for_match(pub_line)
+    if not h or not p:
+        return 0.0
+    if h in p or p in h:
+        return 1.0
+    th = [t for t in h.split() if len(t) >= 3]
+    pw = p.split()
+    set_p = set(t for t in pw if len(t) >= 3)
+    if th and set_p:
+        inter = len(set(th) & set_p)
+        uni = len(set(th) | set_p) or 1
+        jacc = inter / uni
+    else:
+        jacc = 0.0
+    return max(jacc, SequenceMatcher(None, h, p).ratio())
+
+
+def _openlibrary_edition_supplement(
+    work_key: str,
+    year_hint: Optional[str],
+    publisher_hint: Optional[str] = None,
+) -> Dict[str, Any]:
+    """Подтягивает издательство, страницы и ISBN из /works/.../editions (индекс search часто их не содержит)."""
+    out: Dict[str, Any] = {}
+    if not isinstance(work_key, str) or not work_key.startswith("/works/"):
+        return out
+    try:
+        r = requests.get(
+            f"https://openlibrary.org{work_key}/editions.json",
+            timeout=API_TIMEOUTS,
+            headers={"User-Agent": "BiblioParser/1.0 (openlibrary.org editions)"},
+        )
+        if not r.ok:
+            return out
+        entries = r.json().get("entries") or []
+    except Exception as ex:
+        LOGGER.debug("openlibrary editions: %s", ex)
+        return out
+
+    if not entries:
+        return out
+
+    def _edition_year(ed: Dict[str, Any]) -> Optional[int]:
+        pd = ed.get("publish_date")
+        if pd:
+            m = re.search(r"(19|20)\d{2}", str(pd))
+            if m:
+                return int(m.group(0))
+        return None
+
+    ywant = int(year_hint) if year_hint and year_hint.isdigit() else None
+    ph = (publisher_hint or "").strip()
+
+    def _edition_rank_score(ed: Dict[str, Any]) -> float:
+        ey = _edition_year(ed)
+        y_pri = 0.0
+        if ywant is not None and ey is not None:
+            if ey == ywant:
+                y_pri = 100.0
+            elif abs(ey - ywant) <= 1:
+                y_pri = 72.0
+            elif abs(ey - ywant) <= 2:
+                y_pri = 45.0
+            else:
+                y_pri = max(0.0, 20.0 - float(abs(ey - ywant)))
+        elif ey is not None:
+            y_pri = 8.0
+        pub_sc = 0.0
+        if ph:
+            for pl in _edition_publishers_flat(ed):
+                pub_sc = max(pub_sc, _publisher_hint_fit_score(pl, ph))
+        return y_pri + pub_sc * 55.0
+
+    chosen = max(entries, key=_edition_rank_score)
+    best_pub_fit = 0.0
+    if ph:
+        for pl in _edition_publishers_flat(chosen):
+            best_pub_fit = max(best_pub_fit, _publisher_hint_fit_score(pl, ph))
+
+    pubs = chosen.get("publishers")
+    if isinstance(pubs, list) and pubs:
+        out["publisher"] = str(pubs[0]).strip()
+    elif isinstance(pubs, str) and pubs.strip():
+        out["publisher"] = pubs.strip()
+
+    np = chosen.get("number_of_pages")
+    if np is not None:
+        try:
+            out["pages"] = str(int(np))
+        except (TypeError, ValueError):
+            out["pages"] = str(np)
+
+    i13, i10 = chosen.get("isbn_13"), chosen.get("isbn_10")
+    if isinstance(i13, list) and i13:
+        out["isbn"] = str(i13[0])
+    elif isinstance(i13, str) and i13.strip():
+        out["isbn"] = i13.strip()
+    elif isinstance(i10, list) and i10:
+        out["isbn"] = str(i10[0])
+    elif isinstance(i10, str) and i10.strip():
+        out["isbn"] = i10.strip()
+
+    if ph:
+        out["publisher_match_score"] = round(best_pub_fit, 4)
+        out["publisher_hint_used"] = ph[:220]
+
+    return out
+
+
+def search_openlibrary_docs(title: str, author: Optional[str], year: Optional[str]) -> List[Dict[str, Any]]:
+    """Поиск в каталоге Open Library (search.json), без API-ключа."""
+    title = (title or "").strip()
+    author = (author or "").strip()
+    if not title and not author:
+        return []
+
+    s = requests.Session()
+    s.headers.update(
+        {
+            "User-Agent": "BiblioParser/1.0 (metadata enrichment; openlibrary.org)",
+            "Accept": "application/json",
+        }
+    )
+    docs: List[Dict[str, Any]] = []
+
+    def _merge(new_docs: List[Dict[str, Any]]) -> None:
+        seen = {str(d.get("key") or id(d)) for d in docs}
+        for d in new_docs:
+            sig = str(d.get("key") or id(d))
+            if sig not in seen:
+                seen.add(sig)
+                docs.append(d)
+
+    try:
+        # Короткий запрос (фамилия + первое значимое слово заголовка) часто лучше длинной строки с агрегатора.
+        if title and author:
+            kw = _first_significant_title_keyword(title)
+            if kw:
+                r = s.get(
+                    "https://openlibrary.org/search.json",
+                    params={"limit": "22", "title": kw, "author": author[:120]},
+                    timeout=API_TIMEOUTS,
+                )
+                if r.ok:
+                    _merge(r.json().get("docs") or [])
+        if title:
+            params: Dict[str, str] = {"limit": "22", "title": title[:400]}
+            if author:
+                params["author"] = author[:120]
+            r = s.get("https://openlibrary.org/search.json", params=params, timeout=API_TIMEOUTS)
+            if r.ok:
+                _merge(r.json().get("docs") or [])
+    except Exception as ex:
+        LOGGER.debug("openlibrary title/author: %s", ex)
+
+    try:
+        q = " ".join(x for x in (title, author, year or "") if x).strip()
+        if q:
+            r = s.get(
+                "https://openlibrary.org/search.json",
+                params={"q": q[:500], "limit": "22"},
+                timeout=API_TIMEOUTS,
+            )
+            if r.ok:
+                _merge(r.json().get("docs") or [])
+    except Exception as ex:
+        LOGGER.debug("openlibrary q=: %s", ex)
+
+    return docs
+
+
+def pick_best_openlibrary_doc(
+    docs: List[Dict[str, Any]],
+    title_hint: str,
+    year_hint: Optional[str],
+    author_surname: Optional[str],
+) -> Optional[Dict[str, Any]]:
+    if not docs or not (title_hint or "").strip():
+        return None
+    nt = _normalize_text_for_compare(title_hint)
+    best_doc: Optional[Dict[str, Any]] = None
+    best_score = 0.0
+    ywant: Optional[int] = None
+    if year_hint and year_hint.isdigit():
+        ywant = int(year_hint)
+
+    for doc in docs:
+        ol_title = _openlibrary_doc_title(doc)
+        if not ol_title:
+            continue
+        sim = SequenceMatcher(None, nt, _normalize_text_for_compare(ol_title)).ratio()
+        score = sim
+        py = _openlibrary_publish_year(doc)
+        if ywant is not None and py is not None:
+            if py == ywant:
+                score += 0.48
+            elif abs(py - ywant) <= 1:
+                score += 0.12
+        if author_surname:
+            blob = " ".join(doc.get("author_name") or []).lower()
+            if author_surname.lower() in blob:
+                score += 0.18
+        if score > best_score:
+            best_score = score
+            best_doc = doc
+
+    if best_doc is None:
+        return None
+    if best_score < 0.52:
+        return None
+    ol_title = _openlibrary_doc_title(best_doc)
+    sim_only = SequenceMatcher(None, nt, _normalize_text_for_compare(ol_title)).ratio()
+    py = _openlibrary_publish_year(best_doc)
+    year_ok = ywant is not None and py is not None and py == ywant
+    if sim_only < 0.36 and not year_ok:
+        return None
+    return best_doc
+
+
+def merge_openlibrary_into_metadata(
+    doc: Dict[str, Any],
+    meta: PaperMetadata,
+    publisher_hint: Optional[str] = None,
+) -> PaperMetadata:
+    """Подставляет издательство, объём, при необходимости уточняет заголовок и автора."""
+    ol_title = _openlibrary_doc_title(doc)
+    if ol_title:
+        meta.title = ol_title
+
+    pub = doc.get("publisher")
+    if isinstance(pub, list) and pub:
+        meta.journal = str(pub[0]).strip()
+    elif isinstance(pub, str) and pub.strip():
+        meta.journal = pub.strip()
+
+    npages = doc.get("number_of_pages_median")
+    if npages is None:
+        npages = doc.get("number_of_pages")
+    if isinstance(npages, list) and npages:
+        npages = npages[0]
+    if npages is not None:
+        try:
+            meta.pages = str(int(npages))
+        except (TypeError, ValueError):
+            meta.pages = str(npages)
+
+    an = doc.get("author_name")
+    if isinstance(an, list) and an:
+        meta.authors = [str(x).strip() for x in an[:12] if str(x).strip()]
+
+    meta.confidence = meta.confidence or {}
+    isbn_l = doc.get("isbn")
+    if isinstance(isbn_l, list) and isbn_l:
+        meta.confidence["isbn"] = str(isbn_l[0])
+    wkey = doc.get("key")
+    if isinstance(wkey, str) and wkey.startswith("/"):
+        meta.confidence["openlibrary_url"] = f"https://openlibrary.org{wkey}"
+        sup = _openlibrary_edition_supplement(wkey, meta.year, publisher_hint)
+        if sup.get("publisher"):
+            meta.journal = sup["publisher"]
+        if sup.get("pages"):
+            meta.pages = sup["pages"]
+        if sup.get("isbn"):
+            meta.confidence["isbn"] = sup["isbn"]
+        if sup.get("publisher_match_score") is not None:
+            meta.confidence["openlibrary_publisher_match_score"] = float(sup["publisher_match_score"])
+        if sup.get("publisher_hint_used"):
+            meta.confidence["reference_publisher_hint"] = str(sup["publisher_hint_used"])[:220]
+
+    eb = meta.enriched_by or ""
+    if "openlibrary" not in eb:
+        meta.enriched_by = f"{eb}+openlibrary" if eb else "openlibrary"
+    return meta
+
+
 def predict_blocks(model, blocks: List[Dict[str, Any]]) -> Tuple[List[str], List[List[float]], List[str]]:
     rows = []
     for b in blocks:
@@ -1930,6 +2277,77 @@ def classify_article_page(html: str, url: str) -> Dict[str, Any]:
     }
 
 
+def _extract_reference_listing_primary_citation(html: str) -> Optional[str]:
+    """Строка вида «Author (YYYY) Title…» на страницах списков цитирования (SCIRP и др.)."""
+    soup = BeautifulSoup(html, "html.parser")
+    for tag in soup(["script", "style"]):
+        tag.decompose()
+    for meta in soup.find_all("meta"):
+        prop = (meta.get("property") or meta.get("name") or "").lower()
+        if prop in ("og:description", "description"):
+            c = (meta.get("content") or "").strip()
+            if c and _BOOKISH_BANNER_YEAR_RE.search(c) and len(c) >= 25:
+                return c[:900]
+    text = soup.get_text("\n", strip=True)
+    lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
+    skip_frag = (
+        "copyright",
+        "follow scirp",
+        "contact us",
+        "login",
+        "journals a-z",
+        "select journal",
+        "scientific research publishing",
+    )
+    for ln in lines:
+        low = ln.lower()
+        if any(f in low for f in skip_frag) and len(ln) < 100:
+            continue
+        if _BOOKISH_BANNER_YEAR_RE.search(ln) and len(ln) >= 28:
+            if re.match(r"^[A-Za-zА-Яа-яЁё0-9]", ln):
+                return ln[:900]
+    return None
+
+
+def _strip_publisher_tail_from_citation_line(line: str) -> str:
+    """Убирает хвост «. Издательство, город» — он часто сбивает поиск в Crossref."""
+    s = (line or "").strip()
+    if not s:
+        return s
+    cut_patterns = (
+        r"\.\s*McGraw-Hill\b",
+        r",\s*McGraw-Hill\b",
+        r"\.\s*Springer\b",
+        r",\s*Springer\b",
+        r"\.\s*John Wiley\b",
+        r",\s*John Wiley\b",
+    )
+    for pat in cut_patterns:
+        m = re.search(pat, s, re.I)
+        if m:
+            s = s[: m.start()].rstrip("., ")
+            break
+    return s
+
+
+def _parse_paren_year_book_citation(line: str) -> Tuple[Optional[str], Optional[str], Optional[str]]:
+    """Разбор строки «Author, I. (YYYY) Book title…» → фамилия, год, заголовок."""
+    s = (line or "").strip()
+    if not s:
+        return None, None, None
+    m = re.match(
+        r"^\s*([^(\n]+?)\s*\(\s*((?:19|20)\d{2})\s*\)\s*(.+)$",
+        s,
+    )
+    if not m:
+        return None, None, None
+    author_chunk, year, title_rest = m.group(1).strip(), m.group(2), m.group(3).strip()
+    surname = author_chunk.split(",")[0].strip() or None
+    title_rest = _strip_publisher_tail_from_citation_line(title_rest)
+    title_rest = title_rest.rstrip(". ")
+    return surname, year, title_rest or None
+
+
 def extract_metadata_from_url(url: str) -> PaperMetadata:
     meta = PaperMetadata(source_url=url, confidence={})
 
@@ -1965,8 +2383,92 @@ def extract_metadata_from_url(url: str) -> PaperMetadata:
             enriched_early.pdf_url = enriched_early.pdf_url or extract_pdf_url_from_html(html, source_url=url)
             return enriched_early
 
+    # Карточка вторичной ссылки без DOI (напр. SCIRP «references»): видимая цитата → Crossref bibliographic search.
+    path_low = (urlparse(url).path or "").lower()
+    if "scirp.org" in host and ("reference" in path_low or "referencespapers" in path_low):
+        cite_line = _extract_reference_listing_primary_citation(html)
+        if cite_line:
+            surname, year_hint, title_only = _parse_paren_year_book_citation(cite_line)
+            if title_only:
+                cite_query = f"{surname} {title_only}".strip() if surname else title_only
+            else:
+                cite_query = _strip_publisher_tail_from_citation_line(cite_line)
+            if not year_hint:
+                ym = re.search(r"\(\s*((?:19|20)\d{2})\s*\)", cite_line)
+                year_hint = ym.group(1) if ym else None
+            cands = search_crossref_candidates_relaxed(cite_query, rows=18)
+            if year_hint:
+                same_year = [c for c in cands if (c.year or "").strip() == year_hint]
+                if same_year:
+                    cands = same_year + [c for c in cands if c not in same_year]
+                else:
+                    # Нет совпадения по году (типично для старых монографий) — чужой DOI хуже, чем «только разбор строки».
+                    cands = []
+            if cands:
+                best = cands[0]
+                best.source_url = url
+                best.confidence = best.confidence or {}
+                best.confidence.update(meta.confidence or {})
+                best.confidence["enriched_by"] = "crossref_from_reference_listing"
+                best.confidence["reference_listing_query"] = cite_query[:240]
+                best.pdf_url = best.pdf_url or extract_pdf_url_from_html(html, source_url=url)
+                return best
+            # Запись без DOI: строка цитаты + при возможности обогащение из Open Library (издательство, стр., ISBN).
+            if title_only or cite_line:
+                fallback = PaperMetadata(
+                    title=title_only or cite_query[:500],
+                    authors=[surname] if surname else None,
+                    year=year_hint,
+                    source_url=url,
+                    confidence=dict(meta.confidence or {}),
+                    enriched_by="reference_page_parse_only",
+                )
+                fb = fallback.confidence or {}
+                fb["reference_banner_raw"] = cite_line[:900] if cite_line else ""
+                ol_doc = None
+                if title_only:
+                    ol_docs = search_openlibrary_docs(title_only, surname or "", year_hint or "")
+                    ol_doc = pick_best_openlibrary_doc(
+                        ol_docs, title_only, year_hint, surname
+                    )
+                if ol_doc:
+                    pub_hint = (
+                        _extract_publisher_hint_from_reference_line(cite_line) if cite_line else None
+                    )
+                    merge_openlibrary_into_metadata(ol_doc, fallback, publisher_hint=pub_hint)
+                    fb = fallback.confidence or {}
+                    note_ol = (
+                        "В Crossref нет однозначной записи с этим годом; издательство, объём и ISBN уточнены по Open Library. "
+                        "Сверьте с нужным изданием (год, город, переплёт)."
+                    )
+                    mscore = fb.get("openlibrary_publisher_match_score")
+                    if (
+                        pub_hint
+                        and mscore is not None
+                        and float(mscore) < 0.5
+                    ):
+                        note_ol += (
+                            " В Open Library для этой работы нет издания с близким к цитате издателем — "
+                            "показана запись с наилучшим сочетанием года и издателя в каталоге."
+                        )
+                    fb["reference_note"] = note_ol
+                else:
+                    fb["reference_note"] = (
+                        "Нет однозначного совпадения в Crossref по году/названию; "
+                        "проверьте издательство и число страниц (Open Library, WorldCat, каталог издателя)."
+                    )
+                fallback.confidence = fb
+                return fallback
+
     # Предклассификатор страницы: если это явно не статья и домен не из приоритетных, не запускаем тяжёлый ML.
-    priority_hosts = ("arxiv.org", "ieeexplore.ieee.org", "sciencedirect.com", "link.springer.com", "cyberleninka.ru")
+    priority_hosts = (
+        "arxiv.org",
+        "ieeexplore.ieee.org",
+        "sciencedirect.com",
+        "link.springer.com",
+        "cyberleninka.ru",
+        "scirp.org",
+    )
     if (not page_cls["is_article"]) and (not any(h in host for h in priority_hosts)):
         guessed = extract_title_from_html_basic(html) or guess_title_from_url(url)
         if guessed:
