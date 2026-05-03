@@ -886,7 +886,7 @@ def _query_unpaywall_pdf_url(doi: str) -> Optional[str]:
             f"https://api.unpaywall.org/v2/{doi}",
             params={"email": "scientific.parser.demo@gmail.com"},
             timeout=20,
-            headers={"User-Agent": "scientific-parser/1.0"},
+            headers={"User-Agent": "biblio-parser/1.0"},
         )
         if r.status_code != 200:
             return None
@@ -1256,14 +1256,14 @@ def index():
     <head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>Scientific Parser Demo</title>
+      <title>BiblioParser Demo</title>
       <style>{APP_THEME_CSS}</style>
     </head>
     <body>
       <div class="container">
         <div class="topbar">
           <div class="topbar-left">
-            <div class="brand">📚 Scientific Parser</div>
+            <div class="brand">📚 BiblioParser</div>
             <div class="topbar-tabs" id="topbarTabs">
               <div class="tab-indicator" id="tabIndicator"></div>
               <a class="btn nav-link tab-button active" href="#home" data-tab-target="home">
@@ -1287,7 +1287,7 @@ def index():
         </div>
 
         <div class="hero">
-          <h1>Scientific Parser Demo</h1>
+          <h1>BiblioParser Demo</h1>
           <p>Извлечение метаданных научных статей, проверка полного текста и экспорт библиографии.</p>
         </div>
         <div id="tabContentRoot" class="tab-shell">
@@ -1298,21 +1298,21 @@ def index():
                 <div class="field-wrap">
                   <span class="field-icon">🔗</span>
                   <input class="with-icon" name="url" placeholder="https://..." />
-                </div>
+        </div>
 
                 <div style="height:10px;"></div>
                 <label class="label"><b>DOI</b> (опционально)</label>
                 <div class="field-wrap">
                   <span class="field-icon">🧬</span>
                   <input class="with-icon" name="doi" placeholder="10.1016/j.net.2025.103970" />
-                </div>
+        </div>
 
                 <div style="height:10px;"></div>
                 <label class="label"><b>Название статьи</b> (опционально)</label>
                 <div class="field-wrap">
                   <span class="field-icon">📝</span>
                   <input class="with-icon" name="title" placeholder="Toward Verified Artificial Intelligence" />
-                </div>
+        </div>
 
                 <div class="grid-2" style="margin-top:12px;">
                   <div>
@@ -1334,8 +1334,8 @@ def index():
 
                 <div style="margin-top:14px;">
                   <button id="parseSubmitBtn" class="btn btn-primary">Parse</button>
-                </div>
-              </form>
+        </div>
+      </form>
             </div>
             <div class="card" style="margin-top:14px;">
               <h3 class="section-title">Массовый импорт</h3>
@@ -1363,7 +1363,7 @@ def index():
           <section id="panel-about" class="tab-panel" data-tab-panel="about">
             <div class="card info-card">
               <h3 class="section-title">О проекте</h3>
-              <p><b>Scientific Parser</b> извлекает метаданные по URL, DOI или названию и собирает библиографию.</p>
+              <p><b>BiblioParser</b> извлекает метаданные по URL, DOI или названию и собирает библиографию.</p>
               <p><b>Где участвует ML.</b> Классификатор блоков страницы: TF‑IDF (слово и символьные n‑граммы) + признаки DOM (тег, классы, глубина, плотность ссылок и др.) предсказывает тип каждого текстового блока — заголовок, авторы, год, журнал, DOI и т.д., чтобы вытащить поля со страницы журнала (не класс «References» целиком). Дополнительно можно включить эмбеддинги Sentence‑BERT по полю текста блока: при обучении задайте <code>USE_SBERT=1</code> и зависимости из <code>requirements-ml.txt</code>. LayoutLM и аналоги требуют отдельной разметки/инфраструктуры и не входят в базовый пайплайн.</p>
               <p><b>Нормализация запроса по названию.</b> CAPS приводятся к нормальному виду, строятся варианты раскладки (в т.ч. «ghbdtn» → «привет» через подстановку раскладки), показывается блок «Я вас понял так»; опечатки частично снимаются нечётким сопоставлением с заголовками из CrossRef.</p>
               <p><b>Безопасность и кэш.</b> Исходящие URL проверяются на SSRF в <code>net_security.py</code> (схема, запрет приватных IP после DNS, опционально <code>ALLOW_ONION=1</code> для onion‑хостов и <code>TOR_SOCKS_PROXY</code> для запросов через Tor). В процессе используется <code>lru_cache</code> для повторяющихся API‑запросов; при переменной <code>REDIS_URL</code> подключаются Redis и Flask‑Caching (см. также <code>RATELIMIT_STORAGE_URI</code> для лимитов).</p>
@@ -2152,14 +2152,14 @@ def parse():
     <head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>Scientific Parser Result</title>
+      <title>BiblioParser Result</title>
       <style>{APP_THEME_CSS}</style>
     </head>
     <body>
       <div class="container">
         <div class="topbar">
           <div class="topbar-left">
-            <div class="brand">📚 Scientific Parser</div>
+            <div class="brand">📚 BiblioParser</div>
             <div class="result-nav">
               <a class="btn nav-link" href="/">Главная</a>
               <a class="btn nav-link" href="/#about">О проекте</a>
