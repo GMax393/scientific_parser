@@ -22,6 +22,10 @@ except Exception:
 
 MODEL_PATH = "models/block_classifier.joblib"
 LOGGER = logging.getLogger(__name__)
+
+
+def _block_classifier_model_path() -> str:
+    return os.path.join(os.path.dirname(os.path.abspath(__file__)), MODEL_PATH)
 API_TIMEOUTS = (4, 8)
 SEARCH_TIME_BUDGET_SEC = 9.0
 
@@ -2527,7 +2531,35 @@ def extract_metadata_from_url(url: str) -> PaperMetadata:
             return enriched
 
     blocks = extract_blocks_from_html(html)
-    model = joblib.load(MODEL_PATH)
+    _ml_path = _block_classifier_model_path()
+    if not os.path.isfile(_ml_path):
+        LOGGER.warning(
+            "Модель блокового классификатора не найдена (%s). Парсинг URL без ML "
+            "(положите block_classifier.joblib в models/ для полного режима).",
+            _ml_path,
+        )
+        meta.pdf_url = pdf_from_html
+        if not meta.title:
+            meta.title = extract_title_from_html_basic(html) or guess_title_from_url(url)
+        if (not meta.doi and not meta.title):
+            t = extract_title_from_html_basic(html)
+            if t:
+                doi2 = crossref_search_doi_by_title(t)
+                if doi2:
+                    enriched = crossref_enrich(doi2)
+                    if enriched:
+                        enriched.source_url = url
+                        return enriched
+        elif not meta.doi and meta.title:
+            doi2 = crossref_search_doi_by_title(meta.title)
+            if doi2:
+                enriched = crossref_enrich(doi2)
+                if enriched:
+                    enriched.source_url = url
+                    return enriched
+        return meta
+
+    model = joblib.load(_ml_path)
 
     preds, proba, classes = predict_blocks(model, blocks)
 
