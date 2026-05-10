@@ -1,0 +1,182 @@
+=== CASE 1
+INPUT  : Иванов И. И., Петров А. Б. Распознавание образов в медицине // Журнал общей химии. — 2003. — Т. 73, № 5. — С. 12–18.
+AUTHORS: ['И. И. Иванов', 'А. Б. Петров']
+TITLE  : Распознавание образов в медицине
+YEAR   : 2003
+JOURNAL: Журнал общей химии
+VOL/ISS: 73 / 5
+PAGES  : 12-18
+DOI    : None
+VIA    : parsed_only
+GOST   : Иванов, И. И. Распознавание образов в медицине / И. И. Иванов, А. Б. Петров // Журнал общей химии. — 2003. — Т. 73, № 5. — С. 12–18.
+INDICES: ['vak', 'scopus', 'rsci']
+
+=== CASE 2
+INPUT  : Smith J., Doe A. (2015) Some article title here. Journal of X, 12(3), 45-67. DOI: 10.1234/xyz
+AUTHORS: ['J. Smith', 'A. Doe']
+TITLE  : Some article title here
+YEAR   : 2015
+JOURNAL: Journal of X 45-67
+VOL/ISS: 12 / 3
+PAGES  : 45-67
+DOI    : None
+VIA    : parsed_only
+GOST   : Smith, J. Some article title here / J. Smith, A. Doe // Journal of X 45-67. — 2015. — Т. 12, № 3. — С. 45–67.
+INDICES: []
+
+=== CASE 3
+INPUT  : 10.1038/s41586-020-2649-2
+AUTHORS: ['Charles R. Harris', 'K. Jarrod Millman', 'Stéfan J. van der Walt', 'Ralf Gommers', 'Pauli Virtanen', 'David Cournapeau', 'Eric Wieser', 'Julian Taylor', 'Sebastian Berg', 'Nathaniel J. Smith', 'Robert Kern', 'Matti Picus', 'Stephan Hoyer', 'Marten H. van Kerkwijk', 'Matthew Brett', 'Allan Haldane', 'Jaime Fernández del Río', 'Mark Wiebe', 'Pearu Peterson', 'Pierre Gérard-Marchant', 'Kevin Sheppard', 'Tyler Reddy', 'Warren Weckesser', 'Hameer Abbasi', 'Christoph Gohlke', 'Travis E. Oliphant']
+TITLE  : Array programming with NumPy
+YEAR   : 2020
+JOURNAL: Nature
+VOL/ISS: 585 / 7825
+PAGES  : 357-362
+DOI    : 10.1038/s41586-020-2649-2
+VIA    : doi
+GOST   : Array programming with NumPy / C. R. Harris [и др.] // Nature. — 2020. — Т. 585, № 7825. — С. 357–362. — DOI: 10.1038/s41586-020-2649-2.
+INDICES: ['scopus', 'wos']
+
+=== CASE 4
+INPUT  : Колмогоров А. Н. Основные понятия теории вероятностей. — М.: Наука, 1974. — 120 с.
+AUTHORS: ['А. Н. Колмогоров']
+TITLE  : Основные понятия теории вероятностей. — М.: Наука, 1974. — 120 с
+YEAR   : 1974
+JOURNAL: None
+VOL/ISS: None / None
+PAGES  : None
+DOI    : None
+VIA    : parsed_only
+GOST   : Колмогоров, А. Н. Основные понятия теории вероятностей. — М.: Наука, 1974. — 120 с. — 1974.
+INDICES: []
+
+=== DRAFT REPORT
+[
+  {
+    "index": 1,
+    "input": "Иванов И. И., Петров А. Б. Распознавание образов в медицине // Журнал общей химии. — 2003. — Т. 73, № 5. — С. 12–18.",
+    "status": "partial",
+    "matched_via": "parsed_only",
+    "metadata": {
+      "title": "Распознавание образов в медицине",
+      "authors": [
+        "И. И. Иванов",
+        "А. Б. Петров"
+      ],
+      "year": "2003",
+      "journal": "Журнал общей химии",
+      "volume": "73",
+      "issue": "5",
+      "pages": "12-18",
+      "doi": null,
+      "pdf_url": null,
+      "source_url": null,
+      "enriched_by": "citation_string",
+      "confidence": {
+        "citation_parsed": 1.0
+      },
+      "search_score": null,
+      "matched_query": null
+    },
+    "completeness": {
+      "missing": [],
+      "warnings": [
+        {
+          "field": "doi",
+          "label": "DOI",
+          "level": "recommended"
+        }
+      ],
+      "ok": true,
+      "score": 0.86,
+      "filled": 6,
+      "total": 7
+    },
+    "reasons": [
+      "DOI не найден"
+    ],
+    "candidates_count": 8
+  },
+  {
+    "index": 2,
+    "input": "Колмогоров А. Н. Основные понятия теории вероятностей. — М.: Наука, 1974. — 120 с.",
+    "status": "partial",
+    "matched_via": "parsed_only",
+    "metadata": {
+      "title": "Основные понятия теории вероятностей. — М.: Наука, 1974. — 120 с",
+      "authors": [
+        "А. Н. Колмогоров"
+      ],
+      "year": "1974",
+      "journal": null,
+      "volume": null,
+      "issue": null,
+      "pages": null,
+      "doi": null,
+      "pdf_url": null,
+      "source_url": null,
+      "enriched_by": "citation_string",
+      "confidence": {
+        "citation_parsed": 1.0
+      },
+      "search_score": null,
+      "matched_query": null
+    },
+    "completeness": {
+      "missing": [
+        {
+          "field": "journal",
+          "label": "журнал",
+          "level": "required"
+        }
+      ],
+      "warnings": [
+        {
+          "field": "doi",
+          "label": "DOI",
+          "level": "recommended"
+        },
+        {
+          "field": "volume",
+          "label": "том",
+          "level": "recommended"
+        },
+        {
+          "field": "pages",
+          "label": "страницы",
+          "level": "recommended"
+        }
+      ],
+      "ok": false,
+      "score": 0.43,
+      "filled": 3,
+      "total": 7
+    },
+    "reasons": [
+      "DOI не найден",
+      "нет поля: {'field': 'journal', 'label': 'журнал', 'level': 'required'}"
+    ],
+    "candidates_count": 8
+  },
+  {
+    "index": 3,
+    "input": "ничего полезного",
+    "status": "partial",
+    "matched_via": "parsed_only",
+    "metadata": {
+      "title": "ничего полезного",
+      "authors": null,
+      "year": null,
+      "journal": null,
+      "volume": null,
+      "issue": null,
+      "pages": null,
+      "doi": null,
+      "pdf_url": null,
+      "source_url": null,
+      "enriched_by": "citation_string",
+      "confidence": {
+        "citation_parsed": 1.0
+      },
+      "search_score": null,
+      "matched_query":
