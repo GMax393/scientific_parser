@@ -3,6 +3,7 @@
 import json
 import os
 import re
+from html import unescape
 from dataclasses import dataclass, asdict
 from typing import Any, Dict, List, Optional, Tuple
 from urllib.parse import urlparse, urljoin, quote
@@ -33,6 +34,7 @@ DOI_RE = re.compile(r"\b10\.\d{4,9}/[-._;()/:A-Z0-9]+\b", re.IGNORECASE)
 # Строгая проверка «похожести на DOI» для пользовательского ввода (до запроса к Crossref).
 DOI_STRICT_INPUT_RE = re.compile(r"^10\.\d{4,}/\S+$", re.IGNORECASE)
 _BOOKISH_BANNER_YEAR_RE = re.compile(r"\(\s*(?:19|20)\d{2}\s*\)")
+_YEAR_TAIL_RE = re.compile(r"(?:19|20)\d{2}\s*\.?\s*$")
 NON_WORD_RE = re.compile(r"[^\w\s\-]", re.UNICODE)
 CYRILLIC_RE = re.compile(r"[\u0400-\u04FF]")
 _HTML_TAGS_RE = re.compile(r"<[^>]+>")
@@ -90,6 +92,21 @@ def fetch_html(url: str, timeout: int = 20) -> str:
     if tor_proxy:
         proxies = {"http": tor_proxy, "https": tor_proxy}
     r = s.get(url, timeout=timeout, proxies=proxies)
+    host_l = (urlparse(url).netloc or "").lower()
+    if r.status_code == 403 and "scirp.org" in host_l:
+        # SCIRP часто режет «ботоподобные» клиенты; второй запрос с заголовками как у Chrome.
+        s.headers.update(
+            {
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+                "Upgrade-Insecure-Requests": "1",
+                "Sec-Fetch-Dest": "document",
+                "Sec-Fetch-Mode": "navigate",
+                "Sec-Fetch-Site": "none",
+                "Sec-Fetch-User": "?1",
+                "Cache-Control": "max-age=0",
+            }
+        )
+        r = s.get(url, timeout=timeout, proxies=proxies)
     r.raise_for_status()
     return r.text
 
@@ -1932,11 +1949,32 @@ def _split_author(author: str) -> Tuple[str, str]:
 
 
 def _format_author_gost(author: str) -> str:
+    """ГОСТ Р 7.0.100-2018: Фамилия И. О. (с пробелом между инициалами)."""
     family, given = _split_author(author)
     if not family and not given:
         return ""
-    initials = "".join(f"{x[0].upper()}." for x in given.split() if x)
+    initials = " ".join(f"{x[0].upper()}." for x in given.split() if x)
     return f"{family} {initials}".strip()
+
+
+def _format_author_gost_inverted(author: str) -> str:
+    """ГОСТ Р 7.0.100-2018: И. О. Фамилия (форма после «/»)."""
+    family, given = _split_author(author)
+    if not family and not given:
+        return ""
+    initials = " ".join(f"{x[0].upper()}." for x in given.split() if x)
+    return f"{initials} {family}".strip()
+
+
+def _format_author_gost_lead(author: str) -> str:
+    """ГОСТ Р 7.0.100-2018: «Фамилия, И. О.» — только для первого автора в шапке."""
+    family, given = _split_author(author)
+    if not family and not given:
+        return ""
+    initials = " ".join(f"{x[0].upper()}." for x in given.split() if x)
+    if not initials:
+        return family
+    return f"{family}, {initials}".strip()
 
 
 def _format_author_apa(author: str) -> str:
@@ -1972,11 +2010,13 @@ def _format_authors(authors: Optional[List[str]], style: str) -> str:
             return ", ".join(values)
         return ", ".join(values[:6]) + ", et al."
 
+    # ГОСТ Р 7.0.100-2018: до трёх авторов перечисляются полностью,
+    # при четырёх и более указывается первый автор с пометкой «и др.».
     values = [_format_author_gost(a) for a in authors if a]
     values = [v for v in values if v]
     if len(values) <= 3:
         return ", ".join(values)
-    return ", ".join(values[:3]) + " [и др.]"
+    return f"{values[0]} [и др.]"
 
 
 def format_citation(m: PaperMetadata, style: str = "gost") -> str:
@@ -2056,38 +2096,96 @@ def format_citation(m: PaperMetadata, style: str = "gost") -> str:
             bits.append(doi)
         return " ".join(x for x in bits if x)
 
-    # GOST-like
+    # ГОСТ Р 7.0.100-2018 (упрощённый, но ближе к стандарту, чем «GOST-like»):
+    # 1 автор:        «Иванов, И. И. Заглавие // Журнал. — Год. — Т. X, № Y. — С. A–B. — DOI: ...»
+    # 2-3 автора:     «Иванов, И. И. Заглавие / И. И. Иванов, П. П. Петров // Журнал. — Год. — ...»
+    # 4 и более:      «Заглавие / И. И. Иванов [и др.] // Журнал. — Год. — ...»
+    # Электронный ресурс без DOI: «[Электронный ресурс]» + URL.
 
-    parts = []
-    gost_authors = _format_authors(m.authors, "gost")
-    if gost_authors:
-        parts.append(gost_authors)
+    NBSP = "\u00A0"
+    EM_DASH = "\u2014"
+    EN_DASH = "\u2013"
 
-    if m.title:
-        parts.append(m.title)
+    def _norm_pages(p: str) -> str:
+        return re.sub(r"\s*[-–—]\s*", EN_DASH, (p or "").strip())
 
-    left = ". ".join([p for p in parts if p]).strip()
+    title = (m.title or "").strip()
+    authors_norm = [a for a in (m.authors or []) if a and a.strip()]
+    if not title and not authors_norm:
+        return "Недостаточно данных для оформления ссылки."
 
-    right_parts = []
-    if m.journal:
-        right_parts.append(m.journal)
+    is_pure_url_resource = bool(m.source_url) and not m.doi and not m.journal
+
+    def _join_with_period(parts: List[str]) -> str:
+        out: List[str] = []
+        for raw_p in parts:
+            p = (raw_p or "").rstrip().rstrip(".").rstrip()
+            if p:
+                out.append(p)
+        return ". ".join(out).strip()
+
+    leading_block = ""
+    after_slash_block = ""
+    n_authors = len(authors_norm)
+    if 1 <= n_authors <= 3:
+        leading_block = _format_author_gost_lead(authors_norm[0])
+        inverted = [_format_author_gost_inverted(a) for a in authors_norm]
+        inverted = [v for v in inverted if v]
+        if n_authors >= 2:
+            after_slash_block = ", ".join(inverted)
+    elif n_authors >= 4:
+        first_inv = _format_author_gost_inverted(authors_norm[0])
+        after_slash_block = f"{first_inv} [и др.]" if first_inv else ""
+
+    title_block = title
+    if is_pure_url_resource and title_block:
+        title_block = f"{title_block}{NBSP}: [Электронный ресурс]"
+
+    head_parts: List[str] = []
+    if leading_block:
+        head_parts.append(leading_block)
+    if title_block:
+        if after_slash_block:
+            head_parts.append(f"{title_block} / {after_slash_block}")
+        else:
+            head_parts.append(title_block)
+    elif after_slash_block:
+        head_parts.append(after_slash_block)
+    head = _join_with_period(head_parts)
+
+    middle = (m.journal or "").strip().rstrip(".")
+
+    tail_segments: List[str] = []
     if m.year:
-        right_parts.append(m.year)
+        tail_segments.append(str(m.year))
+    vol_iss_parts = []
     if m.volume:
-        right_parts.append(f"Т. {m.volume}")
+        vol_iss_parts.append(f"Т.{NBSP}{m.volume}")
     if m.issue:
-        right_parts.append(f"№ {m.issue}")
+        vol_iss_parts.append(f"№{NBSP}{m.issue}")
+    if vol_iss_parts:
+        tail_segments.append(", ".join(vol_iss_parts))
     if m.pages:
-        right_parts.append(f"С. {m.pages}")
+        tail_segments.append(f"С.{NBSP}{_norm_pages(m.pages)}")
     if m.doi:
-        right_parts.append(f"DOI: {m.doi}")
+        tail_segments.append(f"DOI: {m.doi}")
+    if is_pure_url_resource and m.source_url:
+        tail_segments.append(f"URL: {m.source_url}")
 
-    right = ". ".join([p for p in right_parts if p]).strip()
-    if right and left:
-        return f"{left} // {right}."
-    if right:
-        return f"{right}."
-    return left or "Недостаточно данных для оформления ссылки."
+    sep = f". {EM_DASH} "
+    tail = sep.join(s for s in tail_segments if s).strip()
+
+    body_pieces: List[str] = []
+    if head:
+        body_pieces.append(head)
+    if middle:
+        body_pieces.append(middle)
+    body = " // ".join(body_pieces) if body_pieces else ""
+    if not body:
+        return tail + "." if tail else "Недостаточно данных для оформления ссылки."
+    if tail:
+        return f"{body}{sep}{tail}."
+    return f"{body}."
 
 
 def format_citation_ru_gost_like(m: PaperMetadata) -> str:
@@ -2152,6 +2250,210 @@ def export_ris(items: List[PaperMetadata]) -> str:
         lines.append("ER  -")
         chunks.append("\n".join(lines))
     return "\n\n".join(chunks) if chunks else "TY  - GEN\nER  -"
+
+
+def export_csl_json(items: List[PaperMetadata]) -> str:
+    """
+    CSL JSON — массив объектов для citeproc-js, Pandoc (--citeproc), Hugo Academic и т.п.
+    Упрощённая модель: тип article-journal, авторы как literal.
+    """
+    out: List[Dict[str, Any]] = []
+    for idx, item in enumerate(items, start=1):
+        bid = f"src{idx}"
+        authors: List[Dict[str, str]] = []
+        for a in item.authors or []:
+            s = (a or "").strip()
+            if s:
+                authors.append({"literal": s})
+        entry: Dict[str, Any] = {
+            "id": bid,
+            "type": "article-journal",
+            "title": item.title or "",
+        }
+        if authors:
+            entry["author"] = authors
+        yraw = (item.year or "").strip()
+        ym = re.search(r"\b((?:19|20)\d{2})\b", yraw) if yraw else None
+        if ym:
+            try:
+                entry["issued"] = {"date-parts": [[int(ym.group(1))]]}
+            except ValueError:
+                pass
+        if item.journal:
+            entry["container-title"] = item.journal
+        if item.volume:
+            entry["volume"] = item.volume
+        if item.issue:
+            entry["issue"] = item.issue
+        if item.pages:
+            entry["page"] = item.pages
+        if item.doi:
+            entry["DOI"] = item.doi
+        if item.source_url:
+            entry["URL"] = item.source_url
+        out.append(entry)
+    return json.dumps(out, ensure_ascii=False, indent=2)
+
+
+def _latex_escape(s: str) -> str:
+    """Минимальное экранирование служебных символов LaTeX внутри \\bibitem."""
+    if not s:
+        return ""
+    repl = {
+        "\\": r"\textbackslash{}",
+        "&": r"\&",
+        "%": r"\%",
+        "$": r"\$",
+        "#": r"\#",
+        "_": r"\_",
+        "{": r"\{",
+        "}": r"\}",
+        "^": r"\^{}",
+        "~": r"\~{}",
+    }
+    out = []
+    for ch in s:
+        out.append(repl.get(ch, ch))
+    return "".join(out)
+
+
+def _bibitem_key(item: "PaperMetadata", idx: int) -> str:
+    """Ключ для \\bibitem: фамилия первого автора + год + порядковый номер."""
+    first_author = ""
+    if item.authors:
+        first_token = (item.authors[0] or "").split()
+        if first_token:
+            first_author = first_token[-1] if len(first_token) > 1 else first_token[0]
+    base = re.sub(r"[^A-Za-z0-9]+", "", first_author) or "src"
+    year = re.sub(r"[^0-9]", "", item.year or "") or "nd"
+    return f"{base.lower()}{year}{idx}"
+
+
+def export_latex_thebibliography(items: List[PaperMetadata], style: str = "gost") -> str:
+    """
+    Готовый фрагмент LaTeX `\\begin{thebibliography}{N} ... \\end{thebibliography}`,
+    с одним `\\bibitem{key}` на запись и текстом цитаты в выбранном стиле.
+    Достаточно вставить в .tex — внешних .bib не требуется.
+    """
+    if not items:
+        return (
+            "% Empty bibliography. Run BiblioParser to fill it.\n"
+            "\\begin{thebibliography}{1}\n"
+            "\\end{thebibliography}\n"
+        )
+    width = max(2, len(str(len(items))))
+    lines = [f"\\begin{{thebibliography}}{{{'9' if len(items) < 10 else width * '9'}}}"]
+    for idx, item in enumerate(items, start=1):
+        key = _bibitem_key(item, idx)
+        citation = format_citation(item, style=style)
+        lines.append(f"\\bibitem{{{key}}} {_latex_escape(citation)}")
+    lines.append("\\end{thebibliography}")
+    return "\n".join(lines) + "\n"
+
+
+# --- Полнота / провенанс полей ---------------------------------------------
+
+# Минимальный набор обязательных полей для корректной библиографической записи.
+REQUIRED_FIELDS: Tuple[str, ...] = ("title", "authors", "year", "journal")
+RECOMMENDED_FIELDS: Tuple[str, ...] = ("doi", "volume", "pages")
+
+
+def _has_field(item: PaperMetadata, name: str) -> bool:
+    val = getattr(item, name, None)
+    if isinstance(val, list):
+        return bool(val)
+    return bool((val or "").strip()) if isinstance(val, str) else bool(val)
+
+
+def paper_completeness(item: PaperMetadata) -> Dict[str, object]:
+    """
+    Возвращает дикт {missing, warnings, ok, score} с описанием полноты записи.
+    `score` — доля заполненных обязательных + рекомендуемых полей в [0, 1].
+    """
+    missing: List[Dict[str, str]] = []
+    warnings: List[Dict[str, str]] = []
+    field_labels = {
+        "title": "название",
+        "authors": "авторы",
+        "year": "год",
+        "journal": "журнал",
+        "doi": "DOI",
+        "volume": "том",
+        "issue": "выпуск",
+        "pages": "страницы",
+    }
+
+    for f in REQUIRED_FIELDS:
+        if not _has_field(item, f):
+            missing.append({"field": f, "label": field_labels.get(f, f), "level": "required"})
+
+    for f in RECOMMENDED_FIELDS:
+        if not _has_field(item, f):
+            warnings.append({"field": f, "label": field_labels.get(f, f), "level": "recommended"})
+
+    has_pages = bool((item.pages or "").strip())
+    has_volume = bool((item.volume or "").strip())
+    if not has_pages and has_volume:
+        warnings.append({
+            "field": "pages",
+            "label": "страницы",
+            "level": "info",
+            "hint": "online-first: укажите article number вручную, если нужно",
+        })
+
+    if item.year:
+        try:
+            y = int(re.sub(r"[^0-9]", "", item.year)[:4] or "0")
+            if y and (y < 1900 or y > 2100):
+                warnings.append({"field": "year", "label": "год", "level": "warn", "hint": f"подозрительное значение: {item.year}"})
+        except Exception:
+            pass
+
+    if item.doi and not re.match(r"^10\.\d{4,9}/", item.doi.strip()):
+        warnings.append({"field": "doi", "label": "DOI", "level": "warn", "hint": f"формат не похож на DOI: {item.doi}"})
+
+    total = len(REQUIRED_FIELDS) + len(RECOMMENDED_FIELDS)
+    filled = sum(1 for f in (*REQUIRED_FIELDS, *RECOMMENDED_FIELDS) if _has_field(item, f))
+    score = filled / total if total else 0.0
+
+    return {
+        "missing": missing,
+        "warnings": warnings,
+        "ok": not missing,
+        "score": round(score, 2),
+        "filled": filled,
+        "total": total,
+    }
+
+
+def paper_provenance(item: PaperMetadata) -> Dict[str, str]:
+    """
+    Грубая разметка «откуда взялось каждое поле». Используется,
+    чтобы в карточке варианта показать рядом с полями метку источника
+    (Crossref / каталог / HTML-страница / ML-классификация блоков).
+    """
+    enriched_by = (item.enriched_by or "").lower()
+    is_crossref = "crossref" in enriched_by
+    is_openalex = "openalex" in enriched_by
+    is_cl = "cyberleninka" in enriched_by or "cyberleninka" in (item.source_url or "").lower()
+    conf = item.confidence or {}
+
+    def _field_source(field: str) -> str:
+        if is_crossref:
+            return "Crossref"
+        if is_openalex:
+            return "OpenAlex"
+        if is_cl:
+            return "КиберЛенинка"
+        if field in conf and isinstance(conf.get(field), (int, float)) and conf.get(field):
+            return "ML-классификация HTML"
+        return "HTML-страница"
+
+    out: Dict[str, str] = {}
+    for f in ("title", "authors", "year", "journal", "doi", "volume", "issue", "pages"):
+        if _has_field(item, f):
+            out[f] = _field_source(f)
+    return out
 
 
 def extract_pdf_url_from_html(html: str, source_url: Optional[str] = None) -> Optional[str]:
@@ -2281,19 +2583,113 @@ def classify_article_page(html: str, url: str) -> Dict[str, Any]:
     }
 
 
+def _scirp_citation_regex_raw(html: str) -> Optional[str]:
+    """Выдергивает цитату из сырого HTML (устойчиво к порядку узлов BeautifulSoup)."""
+    if not html:
+        return None
+    html = unescape(html)
+    patterns = (
+        r'(Recommendation\s+ITU-R\s+M\.[\d\-\u2010\u2011\u2013]+\s*,\s*"[^"]{10,650}",\s*\d{4}\.)',
+        r'(Recommendation\s+ITU-R\s+M\.[\d\-\u2010\u2011\u2013]+\s*,\s*&quot;[^&]{10,650}&quot;,\s*\d{4}\.)',
+        r'(IST-[A-Z0-9\-]+(?:\s+[A-Z]{2,10})?,\s*"[^"]{5,320}",\s*[^<]{5,120}(?:available\s+at\s+https?://[^\s<]{10,400}|(?:Sept|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Oct|Nov|Dec)\.?\s*\d{4}))',
+        r'(IST-[A-Z0-9\-]+(?:\s+[A-Z]{2,10})?,\s*&quot;[^&]{5,320}&quot;,\s*[^<]{5,120}(?:available\s+at\s+https?://[^\s<]{10,400}|(?:Sept|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Oct|Nov|Dec)\.?\s*\d{4}))',
+    )
+    for pat in patterns:
+        m = re.search(pat, html, flags=re.I | re.DOTALL)
+        if not m:
+            continue
+        t = re.sub(r"<[^>]+>", " ", m.group(1))
+        t = re.sub(r"\s+", " ", t).strip()
+        if 25 <= len(t) <= 900 and "select journal" not in t.lower():
+            return t
+    return None
+
+
+def _scirp_citation_from_dom(soup: BeautifulSoup) -> Optional[str]:
+    """Берёт текст цитаты из разметки: узел перед «has been cited by» (устойчивее порядку get_text())."""
+    for node in soup.find_all(string=re.compile(r"has\s+been\s+cited\s+by", re.I)):
+        el = node.parent
+        for _ in range(24):
+            if el is None:
+                break
+            prev = el.find_previous_sibling()
+            if prev:
+                t = prev.get_text(" ", strip=True)
+                low = t.lower()
+                if (
+                    18 <= len(t) <= 1400
+                    and "select journal" not in low[:80]
+                    and "abstract:" not in low[:80]
+                    and not re.fullmatch(r"[A-Z]{1,6}", t.strip())
+                ):
+                    return t[:900]
+            el = el.parent
+    return None
+
+
+def _clean_article_citations_block(raw: str) -> Optional[str]:
+    """Оставляет строку(и), похожую на библиографию; выкидывает простыню меню/типа «AA», «OJBM»."""
+    raw = re.sub(r"\s+", " ", (raw or "").strip())
+    if len(raw) < 15:
+        return None
+    bad_tokens = ("select journal", "journals a-z", "follow scirp", "abstract:")
+    if any(b in raw.lower()[:120] for b in bad_tokens):
+        return None
+    # Если между заголовками попали тысячи символов — режем по последней осмысленной части
+    if len(raw) > 1600:
+        parts = re.split(
+            r"\s+(?=Recommendation\s|IST-|ITU-R|[A-Z]{2,15},\s*[\"']|[\"'][D\d])",
+            raw,
+        )
+        for p in reversed(parts):
+            p = p.strip()
+            if 18 <= len(p) <= 900 and not re.fullmatch(r"[A-Z]{2,5}(\s+[A-Z]{2,5})*", p):
+                return p[:900]
+        return None
+    return raw[:900]
+
+
 def _extract_reference_listing_primary_citation(html: str) -> Optional[str]:
-    """Строка вида «Author (YYYY) Title…» на страницах списков цитирования (SCIRP и др.)."""
+    """Строка цитируемого источника на страницах списков цитирования (SCIRP и др.)."""
+    html = unescape(html or "")
+    raw_hit = _scirp_citation_regex_raw(html)
+    if raw_hit:
+        return raw_hit
+
     soup = BeautifulSoup(html, "html.parser")
     for tag in soup(["script", "style"]):
         tag.decompose()
+
+    dom_cite = _scirp_citation_from_dom(soup)
+    if dom_cite:
+        cleaned = _clean_article_citations_block(dom_cite)
+        if cleaned:
+            return cleaned
+
     for meta in soup.find_all("meta"):
         prop = (meta.get("property") or meta.get("name") or "").lower()
         if prop in ("og:description", "description"):
             c = (meta.get("content") or "").strip()
             if c and _BOOKISH_BANNER_YEAR_RE.search(c) and len(c) >= 25:
                 return c[:900]
-    text = soup.get_text("\n", strip=True)
-    lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
+            if c and _YEAR_TAIL_RE.search(c) and len(c) >= 25 and "itu" in c.lower():
+                return c[:900]
+
+    raw_text = soup.get_text("\n", strip=True)
+    # SCIRP: блок между «Article citations» и «has been cited by» (стандарты ITU-R без года в скобках).
+    m_block = re.search(
+        r"Article citations\s*(?:More>>)?\s*(.+?)\s+has been cited by",
+        raw_text,
+        flags=re.I | re.DOTALL,
+    )
+    if m_block:
+        cite = re.sub(r"\s+", " ", m_block.group(1)).strip(" -\t")
+        # Раньше отбрасывали строки с https — так терялись отчёты IST-WINNER и др.
+        cite = _clean_article_citations_block(cite)
+        if cite and 12 <= len(cite) <= 900:
+            return cite
+
+    lines = [ln.strip() for ln in raw_text.splitlines() if ln.strip()]
     skip_frag = (
         "copyright",
         "follow scirp",
@@ -2302,14 +2698,44 @@ def _extract_reference_listing_primary_citation(html: str) -> Optional[str]:
         "journals a-z",
         "select journal",
         "scientific research publishing",
+        "journals by subject",
+        "publish with us",
+        "paper submission",
     )
     for ln in lines:
         low = ln.lower()
-        if any(f in low for f in skip_frag) and len(ln) < 100:
+        if any(f in low for f in skip_frag):
+            continue
+        if len(ln) > 700:
+            continue
+        if re.fullmatch(r"[A-Z]{1,6}", ln.strip()):
             continue
         if _BOOKISH_BANNER_YEAR_RE.search(ln) and len(ln) >= 28:
             if re.match(r"^[A-Za-zА-Яа-яЁё0-9]", ln):
                 return ln[:900]
+        # Год в конце строки (рекомендации ITU-R, отчёты): «…», 2003.
+        if (
+            len(ln) >= 20
+            and _YEAR_TAIL_RE.search(ln)
+            and re.match(r"^[A-Za-zА-Яа-яЁё0-9\"]", ln)
+            and ("itu-r" in low or "recommendation itu" in low or '"' in ln)
+        ):
+            return ln[:900]
+        # Технические отчёты: кавычки в названии + месяц/год или «available at»
+        if (
+            len(ln) >= 35
+            and '"' in ln
+            and (
+                "available at" in low
+                or re.search(
+                    r"\b(?:jan|feb|mar|apr|may|jun|jul|aug|sept?|oct|nov|dec)\.?\s+(?:19|20)\d{2}\b",
+                    ln,
+                    re.I,
+                )
+            )
+            and "abstract" not in low[:30]
+        ):
+            return ln[:900]
     return None
 
 
@@ -2355,9 +2781,26 @@ def _parse_paren_year_book_citation(line: str) -> Tuple[Optional[str], Optional[
 def extract_metadata_from_url(url: str) -> PaperMetadata:
     meta = PaperMetadata(source_url=url, confidence={})
 
+    html: Optional[str] = None
     try:
         html = fetch_html(url)
+    except ValueError:
+        meta.confidence = meta.confidence or {}
+        meta.confidence["fetch_blocked"] = 1.0
+        meta.confidence["fetch_blocked_reason"] = "non_public_or_blocked_url"
+    except requests.HTTPError as e:
+        meta.confidence = meta.confidence or {}
+        code = e.response.status_code if e.response is not None else None
+        if code is not None:
+            meta.confidence["fetch_http_status"] = float(code)
+    except requests.RequestException:
+        meta.confidence = meta.confidence or {}
+        meta.confidence["fetch_network_error"] = 1.0
     except Exception:
+        meta.confidence = meta.confidence or {}
+        meta.confidence["fetch_other_error"] = 1.0
+
+    if html is None:
         # Фоллбек: пробуем угадать название из URL и найти DOI через CrossRef
         guessed = guess_title_from_url(url)
         if guessed:
@@ -2366,31 +2809,59 @@ def extract_metadata_from_url(url: str) -> PaperMetadata:
                 enriched = crossref_enrich(doi)
                 if enriched:
                     enriched.source_url = url
+                    if meta.confidence:
+                        enriched.confidence = enriched.confidence or {}
+                        for k, v in meta.confidence.items():
+                            if k not in enriched.confidence:
+                                enriched.confidence[k] = v
                     return enriched
         return meta
 
     host = (urlparse(url).netloc or "").lower()
+    path_low = (urlparse(url).path or "").lower()
+    # Страница «кто цитирует / вторичная ссылка» на SCIRP: первый DOI в HTML почти всегда у *цитирующей* статьи, не у источника в заголовке.
+    is_scirp_reference_page = "scirp.org" in host and (
+        "reference" in path_low or "referencespapers" in path_low
+    )
+
     page_cls = classify_article_page(html, url)
     meta.confidence["page_article_score"] = float(page_cls["score"])
     meta.confidence["page_is_article"] = 1.0 if page_cls["is_article"] else 0.0
     meta.confidence["page_article_reason"] = page_cls["reason"]
 
     # DOI в разметке страницы часто есть даже когда эвристика «не статья» (Drupal/журналы вроде mmi.sgu.ru).
-    doi_in_html = extract_doi_rule_based(html)
-    if doi_in_html:
-        doi_n = normalize_doi(doi_in_html)
-        enriched_early = crossref_enrich(doi_n)
-        if enriched_early:
-            enriched_early.source_url = url
-            enriched_early.confidence = enriched_early.confidence or {}
-            enriched_early.confidence.update(meta.confidence or {})
-            enriched_early.pdf_url = enriched_early.pdf_url or extract_pdf_url_from_html(html, source_url=url)
-            return enriched_early
+    if not is_scirp_reference_page:
+        doi_in_html = extract_doi_rule_based(html)
+        if doi_in_html:
+            doi_n = normalize_doi(doi_in_html)
+            enriched_early = crossref_enrich(doi_n)
+            if enriched_early:
+                enriched_early.source_url = url
+                enriched_early.confidence = enriched_early.confidence or {}
+                enriched_early.confidence.update(meta.confidence or {})
+                enriched_early.pdf_url = enriched_early.pdf_url or extract_pdf_url_from_html(html, source_url=url)
+                return enriched_early
 
     # Карточка вторичной ссылки без DOI (напр. SCIRP «references»): видимая цитата → Crossref bibliographic search.
-    path_low = (urlparse(url).path or "").lower()
-    if "scirp.org" in host and ("reference" in path_low or "referencespapers" in path_low):
+    if is_scirp_reference_page:
         cite_line = _extract_reference_listing_primary_citation(html)
+        if not cite_line:
+            return PaperMetadata(
+                title=None,
+                authors=None,
+                year=None,
+                source_url=url,
+                confidence={
+                    **(meta.confidence or {}),
+                    "reference_note": (
+                        "Не удалось выделить строку цитаты на странице SCIRP. Частые причины: сайт отдаёт другой HTML "
+                        "или блокирует запросы с IP сервера (403), из‑за этого не работает разбор. "
+                        "Откройте ссылку в браузере или вставьте текст источника вручную."
+                    ),
+                    "scirp_parse_failed": 1.0,
+                },
+                enriched_by="scirp_reference_unparsed",
+            )
         if cite_line:
             surname, year_hint, title_only = _parse_paren_year_book_citation(cite_line)
             if title_only:
@@ -2400,6 +2871,16 @@ def extract_metadata_from_url(url: str) -> PaperMetadata:
             if not year_hint:
                 ym = re.search(r"\(\s*((?:19|20)\d{2})\s*\)", cite_line)
                 year_hint = ym.group(1) if ym else None
+            if not year_hint:
+                ym2 = re.search(r"(?:,\s*|\s)((?:19|20)\d{2})\s*\.?\s*$", cite_line.strip())
+                year_hint = ym2.group(1) if ym2 else None
+            if not year_hint:
+                ym3 = re.search(
+                    r"\b(?:jan|feb|mar|apr|may|jun|jul|aug|sept?|oct|nov|dec)\.?\s+((?:19|20)\d{2})\b",
+                    cite_line,
+                    re.I,
+                )
+                year_hint = ym3.group(1) if ym3 else None
             cands = search_crossref_candidates_relaxed(cite_query, rows=18)
             if year_hint:
                 same_year = [c for c in cands if (c.year or "").strip() == year_hint]
@@ -2410,17 +2891,37 @@ def extract_metadata_from_url(url: str) -> PaperMetadata:
                     cands = []
             if cands:
                 best = cands[0]
-                best.source_url = url
-                best.confidence = best.confidence or {}
-                best.confidence.update(meta.confidence or {})
-                best.confidence["enriched_by"] = "crossref_from_reference_listing"
-                best.confidence["reference_listing_query"] = cite_query[:240]
-                best.pdf_url = best.pdf_url or extract_pdf_url_from_html(html, source_url=url)
-                return best
+                sim_cf = SequenceMatcher(
+                    None,
+                    _normalize_text_for_compare(cite_line[:650]),
+                    _normalize_text_for_compare((best.title or "")[:650]),
+                ).ratio()
+                cite_low = cite_line.lower()
+                grey = any(
+                    x in cite_low
+                    for x in (
+                        "recommendation itu",
+                        "itu-r",
+                        "itu r ",
+                        "ist-winner",
+                        "etsi ",
+                        "ieee std",
+                    )
+                )
+                need_sim = 0.52 if grey else 0.38
+                if sim_cf >= need_sim:
+                    best.source_url = url
+                    best.confidence = best.confidence or {}
+                    best.confidence.update(meta.confidence or {})
+                    best.confidence["enriched_by"] = "crossref_from_reference_listing"
+                    best.confidence["reference_listing_query"] = cite_query[:240]
+                    best.confidence["crossref_title_similarity"] = round(sim_cf, 4)
+                    best.pdf_url = best.pdf_url or extract_pdf_url_from_html(html, source_url=url)
+                    return best
             # Запись без DOI: строка цитаты + при возможности обогащение из Open Library (издательство, стр., ISBN).
             if title_only or cite_line:
                 fallback = PaperMetadata(
-                    title=title_only or cite_query[:500],
+                    title=title_only or (cite_query[:500] if cite_query else "") or cite_line[:500],
                     authors=[surname] if surname else None,
                     year=year_hint,
                     source_url=url,
@@ -2430,10 +2931,13 @@ def extract_metadata_from_url(url: str) -> PaperMetadata:
                 fb = fallback.confidence or {}
                 fb["reference_banner_raw"] = cite_line[:900] if cite_line else ""
                 ol_doc = None
-                if title_only:
-                    ol_docs = search_openlibrary_docs(title_only, surname or "", year_hint or "")
+                ol_title_seed = title_only or cite_query or cite_line
+                if ol_title_seed:
+                    ol_docs = search_openlibrary_docs(
+                        ol_title_seed, surname or "", year_hint or ""
+                    )
                     ol_doc = pick_best_openlibrary_doc(
-                        ol_docs, title_only, year_hint, surname
+                        ol_docs, ol_title_seed, year_hint, surname
                     )
                 if ol_doc:
                     pub_hint = (
@@ -2849,6 +3353,453 @@ def datacite_enrich(doi: str, timeout: int = 15) -> Optional[PaperMetadata]:
         enriched_by="datacite",
         confidence={},
     )
+
+# --- Free-form citation string parser ---------------------------------------
+#
+# Парсер свободной строки цитирования (то, что отсутствует в Zotero/JabRef:
+# у них импорт идёт только по DOI/ISBN/arXiv ID). Сначала разбираем строку
+# регулярными выражениями (год, страницы, том, выпуск, авторы, заголовок),
+# затем — если что-то нашлось — обогащаем через CrossRef и при наличии
+# кириллицы пробуем CyberLeninka.
+
+_YEAR_PAREN_RE = re.compile(r"\(\s*((?:19|20)\d{2})\s*\)")
+_YEAR_DASH_RE = re.compile(r"[-—–]\s*((?:19|20)\d{2})\b")
+_YEAR_COMMA_RE = re.compile(r",\s*((?:19|20)\d{2})\b")
+_PAGES_RU_RE = re.compile(r"С\.?\s*(\d{1,5}\s*[-–—]\s*\d{1,5})", re.IGNORECASE)
+_PAGES_EN_RE = re.compile(r"\bpp?\.\s*(\d{1,5}\s*[-–—]\s*\d{1,5})", re.IGNORECASE)
+_PAGES_BARE_RE = re.compile(r"(?:^|[\s:,])(\d{1,4}\s*[-–—]\s*\d{1,4})(?=[.\s,]|$)")
+_VOLUME_RU_RE = re.compile(r"\bТ\.?\s*(\d{1,4})", re.IGNORECASE)
+_VOLUME_EN_RE = re.compile(r"\bVol\.?\s*(\d{1,4})", re.IGNORECASE)
+_ISSUE_RU_RE = re.compile(r"№\s*(\d{1,4})")
+_ISSUE_EN_RE = re.compile(r"\bNo\.?\s*(\d{1,4})", re.IGNORECASE)
+_VOL_ISS_NUMERIC_RE = re.compile(r"\b(\d{1,4})\s*\(\s*(\d{1,4})\s*\)")
+_AUTHOR_TOKEN_RE = re.compile(
+    r"(?P<surname1>[A-ZА-ЯЁ][a-zа-яё\-']{1,30})\s+(?P<init1>[A-ZА-ЯЁ]\.\s*(?:[A-ZА-ЯЁ]\.\s*)?)"
+    r"|(?P<init2>[A-ZА-ЯЁ]\.\s*(?:[A-ZА-ЯЁ]\.\s*)?)\s*(?P<surname2>[A-ZА-ЯЁ][a-zа-яё\-']{1,30})"
+)
+_AUTHOR_SEP_RE = re.compile(r"^[\s,;./]+(?:and\s+)?", re.IGNORECASE)
+
+
+def _extract_leading_authors(prefix: str) -> Tuple[List[str], int]:
+    """
+    Разобрать начало строки как последовательность «Фамилия И. И.» / «И. И. Фамилия»,
+    остановиться, как только встретится «не-автор». Возвращает (список авторов,
+    смещение в исходной строке, до которого расходовали ввод).
+    """
+    if not prefix:
+        return [], 0
+    authors: List[str] = []
+    pos = 0
+    text = prefix
+    last_end = 0
+    while pos < len(text) and len(authors) < 12:
+        m = _AUTHOR_TOKEN_RE.match(text, pos)
+        if not m:
+            break
+        if m.group("surname1"):
+            initials = re.sub(r"\s+", " ", m.group("init1")).strip()
+            name = f"{initials} {m.group('surname1')}".strip()
+        else:
+            initials = re.sub(r"\s+", " ", m.group("init2")).strip()
+            name = f"{initials} {m.group('surname2')}".strip()
+        if name not in authors:
+            authors.append(name)
+        pos = m.end()
+        last_end = pos
+        sep = _AUTHOR_SEP_RE.match(text[pos:])
+        if not sep:
+            break
+        pos += sep.end()
+    return authors, last_end
+
+
+def _strip_field(line: str, *patterns: re.Pattern) -> str:
+    out = line
+    for pat in patterns:
+        out = pat.sub(" ", out)
+    return re.sub(r"\s{2,}", " ", out).strip(" .,—–-")
+
+
+def _extract_pages_from_line(line: str) -> Optional[str]:
+    for pat in (_PAGES_RU_RE, _PAGES_EN_RE):
+        m = pat.search(line)
+        if m:
+            return re.sub(r"\s*", "", m.group(1)).replace("—", "-").replace("–", "-")
+    m = _PAGES_BARE_RE.search(line)
+    if m:
+        rng = re.sub(r"\s*", "", m.group(1)).replace("—", "-").replace("–", "-")
+        # отсечь похожие на «3-4» в номере тома, оставляя только реальные диапазоны страниц
+        if "-" in rng:
+            a, b = rng.split("-", 1)
+            try:
+                ai = int(a)
+                bi = int(b)
+                if bi > ai and bi - ai >= 1 and bi <= 9999:
+                    return rng
+            except ValueError:
+                pass
+    return None
+
+
+def parse_citation_string(line: str) -> Tuple[PaperMetadata, Dict[str, Any]]:
+    """
+    Разобрать свободную строку цитаты (русский / английский смешанный формат)
+    и попробовать обогатить её через CrossRef и CyberLeninka.
+
+    Возвращает кортеж (PaperMetadata, info), где info содержит:
+    - parsed: словарь распознанных полей до обогащения
+    - matched_via: 'doi' | 'crossref' | 'cyberleninka' | 'parsed_only'
+    - candidates: список альтернативных вариантов из CrossRef/CyberLeninka
+    """
+    raw = (line or "").strip()
+    info: Dict[str, Any] = {
+        "input": raw,
+        "parsed": {},
+        "matched_via": "parsed_only",
+        "candidates": [],
+    }
+    if not raw:
+        return PaperMetadata(confidence={"citation_parse_empty": 1.0}), info
+
+    # 1. DOI — самый надёжный путь
+    doi_match = DOI_RE.search(raw)
+    if doi_match:
+        doi_norm = normalize_doi(doi_match.group(0))
+        enriched = crossref_enrich(doi_norm)
+        if enriched and (enriched.title or enriched.authors):
+            enriched.enriched_by = (enriched.enriched_by or "crossref") + "+citation_string"
+            enriched.confidence = enriched.confidence or {}
+            enriched.confidence["citation_parsed"] = 1.0
+            info["matched_via"] = "doi"
+            info["parsed"] = {"doi": doi_norm}
+            return enriched, info
+
+    # 2. Локальный разбор полей по регуляркам
+    year = None
+    for pat in (_YEAR_PAREN_RE, _YEAR_DASH_RE, _YEAR_COMMA_RE):
+        m = pat.search(raw)
+        if m:
+            year = m.group(1)
+            break
+    pages = _extract_pages_from_line(raw)
+    vol = None
+    iss = None
+    m_vol_iss = _VOL_ISS_NUMERIC_RE.search(raw)
+    if m_vol_iss:
+        vol, iss = m_vol_iss.group(1), m_vol_iss.group(2)
+    if vol is None:
+        for pat in (_VOLUME_RU_RE, _VOLUME_EN_RE):
+            m = pat.search(raw)
+            if m:
+                vol = m.group(1)
+                break
+    if iss is None:
+        for pat in (_ISSUE_RU_RE, _ISSUE_EN_RE):
+            m = pat.search(raw)
+            if m:
+                iss = m.group(1)
+                break
+
+    # Авторов и заголовок вытаскиваем последовательно: фамилии-инициалы идут с начала,
+    # как только встречается слово, не подходящее под шаблон автора, — это уже заголовок.
+    has_paren_year = bool(_YEAR_PAREN_RE.search(raw))
+    body_after = raw
+    if has_paren_year:
+        m_paren = _YEAR_PAREN_RE.search(raw)
+        prefix = raw[: m_paren.start()].rstrip()
+        body_after = raw[m_paren.end():].strip()
+        authors_list, used = _extract_leading_authors(prefix)
+        title_residual = prefix[used:].strip(" .,;:") if used < len(prefix) else ""
+    elif "//" in raw:
+        prefix, _, body_after = raw.partition("//")
+        prefix = prefix.rstrip()
+        body_after = body_after.strip()
+        authors_list, used = _extract_leading_authors(prefix)
+        title_residual = prefix[used:].strip(" .,;:")
+    else:
+        authors_list, used = _extract_leading_authors(raw)
+        title_residual = raw[used:].strip(" .,;:")
+        body_after = ""
+
+    # Заголовок и журнал из «остатка»
+    title: Optional[str] = None
+    journal: Optional[str] = None
+    body_clean = _strip_field(
+        body_after,
+        _YEAR_PAREN_RE,
+        _YEAR_DASH_RE,
+        _PAGES_RU_RE,
+        _PAGES_EN_RE,
+        _VOLUME_RU_RE,
+        _VOLUME_EN_RE,
+        _ISSUE_RU_RE,
+        _ISSUE_EN_RE,
+        _VOL_ISS_NUMERIC_RE,
+    )
+    body_clean = re.sub(r"\b(?:DOI|doi)\s*:?\s*\S+", "", body_clean).strip(" .,—–-")
+
+    def _clean_journal(s: str) -> Optional[str]:
+        s = (s or "").strip(" .,—–-:;")
+        s = re.sub(r"\s*,\s*,+", "", s)
+        s = re.sub(r"\s{2,}", " ", s).strip(" .,—–-:;")
+        return s or None
+
+    if title_residual:
+        title = title_residual
+        if body_clean:
+            journal = _clean_journal(body_clean.split(".")[0])
+    elif "//" in body_clean:
+        t, _, j = body_clean.partition("//")
+        title = t.strip(" .,—–-") or None
+        journal = _clean_journal(j.split(".")[0])
+    else:
+        # английская модель: "Title. Journal Name volume(issue), pages"
+        segs = [s.strip(" .,—–-") for s in re.split(r"\.\s+|,\s+(?=[A-ZА-ЯЁ])", body_clean) if s.strip()]
+        if segs:
+            title = segs[0] or None
+            if len(segs) > 1:
+                journal = _clean_journal(segs[1])
+
+    parsed_meta = PaperMetadata(
+        title=title,
+        authors=authors_list or None,
+        year=year,
+        journal=journal,
+        volume=vol,
+        issue=iss,
+        pages=pages,
+        confidence={"citation_parsed": 1.0},
+        enriched_by="citation_string",
+    )
+    info["parsed"] = {
+        "authors": authors_list,
+        "title": title,
+        "year": year,
+        "journal": journal,
+        "volume": vol,
+        "issue": iss,
+        "pages": pages,
+    }
+
+    # 3. Обогащение CrossRef по самой информативной строке (заголовок + первый автор)
+    query_seed = title or ""
+    if authors_list and authors_list[0]:
+        first_surname = authors_list[0].split()[-1]
+        if first_surname and first_surname not in query_seed:
+            query_seed = f"{query_seed} {first_surname}".strip()
+    if year and year not in query_seed:
+        query_seed = f"{query_seed} {year}".strip()
+
+    if query_seed and len(query_seed) >= 6:
+        cands = search_crossref_candidates_relaxed(query_seed, rows=8) or []
+        if year:
+            same_year = [c for c in cands if (c.year or "").strip() == year]
+            cands = same_year + [c for c in cands if c not in same_year] if same_year else cands
+        if cands:
+            best = cands[0]
+            sim = SequenceMatcher(
+                None,
+                _normalize_text_for_compare(title or query_seed),
+                _normalize_text_for_compare(best.title or ""),
+            ).ratio()
+            best.search_score = round(0.5 * sim + 0.5 * float(best.search_score or 0.0), 4)
+            year_ok = bool(best.year and year and (best.year or "").strip() == year.strip())
+            # Минимальный порог сходства заголовков, чтобы случайно не подхватить чужой DOI.
+            if sim >= 0.7 or (sim >= 0.55 and year_ok):
+                merged = best
+                merged.confidence = merged.confidence or {}
+                merged.confidence["citation_parsed"] = 1.0
+                merged.confidence["citation_title_similarity"] = round(sim, 3)
+                merged.enriched_by = (merged.enriched_by or "crossref") + "+citation_string"
+                if not merged.pages and pages:
+                    merged.pages = pages
+                if not merged.volume and vol:
+                    merged.volume = vol
+                if not merged.issue and iss:
+                    merged.issue = iss
+                if not merged.authors and authors_list:
+                    merged.authors = authors_list
+                info["matched_via"] = "crossref"
+                info["candidates"] = [asdict(c) for c in cands[:5]]
+                return merged, info
+            info["candidates"] = [asdict(c) for c in cands[:5]]
+
+    # 4. CyberLeninka, если в строке есть кириллица
+    if title and CYRILLIC_RE.search(title):
+        try:
+            cl_cands = search_cyberleninka_candidates_by_title(title, per_page=15) or []
+        except Exception:
+            cl_cands = []
+        if cl_cands:
+            best = cl_cands[0]
+            sim = SequenceMatcher(
+                None,
+                _normalize_text_for_compare(title),
+                _normalize_text_for_compare(best.title or ""),
+            ).ratio()
+            if sim >= 0.6:
+                best.confidence = best.confidence or {}
+                best.confidence["citation_parsed"] = 1.0
+                best.enriched_by = (best.enriched_by or "cyberleninka") + "+citation_string"
+                if not best.pages and pages:
+                    best.pages = pages
+                if not best.volume and vol:
+                    best.volume = vol
+                if not best.issue and iss:
+                    best.issue = iss
+                if not best.authors and authors_list:
+                    best.authors = authors_list
+                if not best.year and year:
+                    best.year = year
+                info["matched_via"] = "cyberleninka"
+                info["candidates"] = [asdict(c) for c in cl_cands[:5]] + info.get("candidates", [])
+                return best, info
+            info["candidates"] = (info.get("candidates") or []) + [asdict(c) for c in cl_cands[:3]]
+
+    return parsed_meta, info
+
+
+# --- Journal indices (ВАК / Scopus / WoS / RSCI) ----------------------------
+#
+# Локальный JSON-каталог: для журнала определяем, входит ли он в перечень ВАК,
+# Scopus, Web of Science, RSCI. У Zotero / JabRef этой подсказки нет.
+
+_JOURNAL_INDICES_CACHE: Optional[Dict[str, Any]] = None
+
+
+def _normalize_journal_key(name: str) -> str:
+    s = (name or "").lower().strip()
+    s = re.sub(r"[«»\"'()\[\]]+", "", s)
+    s = re.sub(r"\s+", " ", s)
+    s = s.replace("ё", "е")
+    return s
+
+
+def _load_journal_indices() -> Dict[str, Any]:
+    global _JOURNAL_INDICES_CACHE
+    if _JOURNAL_INDICES_CACHE is not None:
+        return _JOURNAL_INDICES_CACHE
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "journal_indices.json")
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            raw = json.load(f) or {}
+    except FileNotFoundError:
+        raw = {}
+    except Exception:
+        LOGGER.exception("journal_indices: load failed")
+        raw = {}
+    by_issn = {(k or "").strip().lower(): v for k, v in (raw.get("by_issn") or {}).items()}
+    by_name = {_normalize_journal_key(k): v for k, v in (raw.get("by_name") or {}).items()}
+    _JOURNAL_INDICES_CACHE = {"by_issn": by_issn, "by_name": by_name, "loaded_at": time.time()}
+    return _JOURNAL_INDICES_CACHE
+
+
+def journal_indices_for(item: PaperMetadata) -> List[str]:
+    """Список индексов журнала для PaperMetadata: ['vak', 'scopus', 'wos', 'rsci']."""
+    if not item or not item.journal:
+        return []
+    cat = _load_journal_indices()
+    key = _normalize_journal_key(item.journal)
+    info = cat["by_name"].get(key)
+    if not info:
+        for k, v in cat["by_name"].items():
+            if not k:
+                continue
+            if k in key or key in k:
+                info = v
+                break
+    if not info:
+        return []
+    return [str(x).strip().lower() for x in (info.get("indices") or []) if str(x).strip()]
+
+
+# --- Validation of a draft reference list -----------------------------------
+#
+# Проверка готового списка литературы: каждая строка пропускается через
+# parse_citation_string, дополняется проверкой полноты (paper_completeness)
+# и помечается статусом для отчёта (то, чего нет в Zotero / JabRef).
+
+_DRAFT_LINE_PREFIX_RE = re.compile(r"^\s*(?:\d+\.|\[\s*\d+\s*\]|\(\s*\d+\s*\))\s*")
+
+
+def _split_draft_lines(text: str, *, max_lines: int = 200) -> List[str]:
+    """Аккуратное деление черновика на ссылки: «1. …», «[1] …», или построчно."""
+    if not (text or "").strip():
+        return []
+    lines = [ln.strip() for ln in (text or "").splitlines() if ln.strip()]
+    cleaned: List[str] = []
+    for ln in lines:
+        ln_clean = _DRAFT_LINE_PREFIX_RE.sub("", ln, count=1).strip()
+        if ln_clean:
+            cleaned.append(ln_clean)
+        if len(cleaned) >= max_lines:
+            break
+    return cleaned
+
+
+def validate_draft_text(
+    text: str,
+    *,
+    max_lines: int = 80,
+    citation_style: str = "gost",
+) -> List[Dict[str, Any]]:
+    """
+    Проверить список литературы. Каждая строка → распознаётся, обогащается,
+    проверяется на минимальный набор полей (title, authors, year, journal/source).
+
+    Для каждой строки дополнительно формируется suggested_citation — цитата по
+    обогащённым метаданным в выбранном стиле («как должно выглядеть» после каталогов).
+    soft_warnings — необязательные поля и мягкие замечания paper_completeness.
+    """
+    style = (citation_style or "gost").strip().lower()
+    items: List[Dict[str, Any]] = []
+    for idx, line in enumerate(_split_draft_lines(text, max_lines=max_lines), start=1):
+        meta, info = parse_citation_string(line)
+        completeness = paper_completeness(meta)
+        status = "ok"
+        reasons: List[str] = []
+        if info.get("matched_via") == "parsed_only":
+            status = "not_found" if not (meta.title or meta.doi) else "partial"
+            if not meta.doi:
+                reasons.append("DOI не найден")
+        if completeness.get("missing"):
+            status = "partial" if status == "ok" else status
+            for f in completeness.get("missing") or []:
+                if isinstance(f, dict):
+                    reasons.append(f"нет поля: {f.get('label') or f.get('field')}")
+                else:
+                    reasons.append(f"нет поля: {f}")
+        soft_warnings: List[str] = []
+        for w in completeness.get("warnings") or []:
+            if not isinstance(w, dict):
+                continue
+            lab = w.get("label") or w.get("field") or ""
+            hint = (w.get("hint") or "").strip()
+            if hint:
+                soft_warnings.append(f"{lab}: {hint}" if lab else hint)
+            elif lab:
+                soft_warnings.append(f"рекомендуется уточнить: {lab}")
+        try:
+            suggested_citation = format_citation(meta, style=style)
+        except Exception:
+            suggested_citation = ""
+        items.append(
+            {
+                "index": idx,
+                "input": line,
+                "status": status,
+                "matched_via": info.get("matched_via"),
+                "metadata": asdict(meta),
+                "completeness": completeness,
+                "reasons": reasons,
+                "soft_warnings": soft_warnings,
+                "suggested_citation": suggested_citation,
+                "journal_indices": journal_indices_for(meta),
+                "candidates_count": len(info.get("candidates") or []),
+            }
+        )
+    return items
+
 
 if __name__ == "__main__":
     test_url = "https://www.sciencedirect.com/science/article/pii/S1738573325005388"
