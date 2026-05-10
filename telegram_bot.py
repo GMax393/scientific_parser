@@ -6,14 +6,16 @@ Telegram-бот для BiblioParser.
   set SP_PUBLIC_URL=http://127.0.0.1:5000   (для справки в /help)
   python telegram_bot.py
 
-Команды: /start, /help, /doi, /url, /title
+Команды: /start, /help, /doi, /url, /title, /cite (/citation), /draft
 Также: свободный текст (DOI / URL / длинное название), несколько строк — пакетный режим.
 """
 
 from __future__ import annotations
 
+import json
 import logging
 import os
+import re
 import secrets
 import threading
 import time
@@ -29,10 +31,16 @@ LOGGER = logging.getLogger(__name__)
 TOKEN = (os.getenv("TELEGRAM_BOT_TOKEN") or "").strip()
 BASE = (os.getenv("SP_PUBLIC_URL") or "http://127.0.0.1:5000").rstrip("/")
 
+USE_HTTP_BATCH = os.getenv("SP_USE_HTTP_BATCH", "").strip().lower() in ("1", "true", "yes", "on")
+
 BATCH_MAX_LINES = int(os.getenv("TELEGRAM_BATCH_MAX", "12"))
 BATCH_PAUSE_SEC = float(os.getenv("TELEGRAM_BATCH_PAUSE", "1.8"))
 SESSION_TTL_SEC = 3600
 MAX_LINE_LEN_FOR_BATCH = 280
+MAX_CITE_LINE_LEN = 4000
+DRAFT_VALIDATE_MAX_LINES = min(80, int(os.getenv("TELEGRAM_DRAFT_MAX_LINES", "40")))
+DRAFT_REPORT_DETAIL_LINES = 25
+_JOURNAL_INDEX_LABELS = {"vak": "ВАК", "scopus": "Scopus", "wos": "WoS", "rsci": "РИНЦ"}
 
 TG_API = "https://api.telegram.org"
 
@@ -46,7 +54,10 @@ try:
         extract_metadata_from_title,
         extract_metadata_from_url,
         format_citation,
+        journal_indices_for,
+        parse_citation_string,
         search_metadata_candidates_from_title,
+        validate_draft_text,
     )
     from net_security import is_public_http_url
 except ImportError as _imp_err:
@@ -67,6 +78,10 @@ WELCOME_HTML = """🎓 <b>BiblioParser</b>
 • <code>/doi</code> — DOI, пример: <code>/doi 10.1038/s41586-020-2649-2</code>
 • <code>/url</code> — ссылка на страницу статьи
 • <code>/title</code> — поиск по названию (несколько вариантов — кнопка «Следующий вариант»)
+• <code>/cite</code> или <code>/citation</code> — одна библиографическая строка (с DOI или без); разбор и сопоставление с каталогами
+• <code>/draft</code> — многострочный черновик списка литературы (до """ + str(
+    DRAFT_VALIDATE_MAX_LINES
+) + """ строк в одном сообщении): статус по каждой строке
 
 <b>Без команд</b>
 • Одна строка: похоже на URL, DOI или длинное название — обработаю автоматически
@@ -75,6 +90,8 @@ WELCOME_HTML = """🎓 <b>BiblioParser</b>
 ) + """ с
 
 Под результатом — кнопки: <b>PDF</b>, <b>цитата</b>, <b>BibTeX</b>, <b>RIS</b>.
+
+Если задано <code>SP_USE_HTTP_BATCH=1</code>, пакет обрабатывается тем же эндпоинтом <code>/api/batch</code>, что и расширение (NDJSON на сервере). Импорт .bib/.ris, экспорт CSL и вкладка «Отклонённые URL» в истории относятся к веб-сессии и в бот по умолчанию не переносятся.
 
 Сложные страницы удобнее открыть в веб-интерфейсе: """ + html_escape(
     BASE
@@ -95,6 +112,22 @@ def _answer_cb(token: str, cq_id: str, text: str = "") -> None:
         body["text"] = text[:200]
         body["show_alert"] = False
     _post(token, "answerCallbackQuery", body)
+
+
+def _after_command(text: str, cmd: str) -> str:
+    """Текст после /cmd или /cmd@BotName; многострочный ввод поддерживается (re.DOTALL)."""
+    m = re.match(
+        rf"^/{re.escape(cmd)}(?:@[A-Za-z0-9_]+)?\s*(.*)$",
+        (text or "").strip(),
+        flags=re.DOTALL | re.IGNORECASE,
+    )
+    return (m.group(1) or "").strip() if m else ""
+
+
+def _command_match(text: str, cmd: str) -> bool:
+    return bool(
+        re.match(rf"^/{re.escape(cmd)}(?:@[A-Za-z0-9_]+)?(\s|$)", (text or "").strip(), re.IGNORECASE)
+    )
 
 
 def _reply_html(token: str, chat_id: int, text: str) -> None:
@@ -170,6 +203,10 @@ def _format_one_paper_html(d: Dict[str, Any], *, header: str) -> str:
     if float(conf.get("retracted_openalex") or 0) >= 1.0:
         lines.append("🛑 <i>OpenAlex: возможна рестракция — проверьте у издателя.</i>")
 
+    ref_note = conf.get("reference_note")
+    if ref_note and str(ref_note).strip():
+        lines.append(f"ℹ️ <i>{html_escape(str(ref_note)[:800])}</i>")
+
     if d.get("title"):
         lines.append(f"📌 <b>{html_escape(str(d['title']))}</b>")
 
@@ -183,6 +220,13 @@ def _format_one_paper_html(d: Dict[str, Any], *, header: str) -> str:
     bib_parts = []
     if d.get("journal"):
         bib_parts.append(html_escape(str(d["journal"])))
+    try:
+        jidx = journal_indices_for(_paper_from_dict(d))
+        if jidx:
+            jlab = ", ".join(_JOURNAL_INDEX_LABELS.get(x, x) for x in jidx)
+            lines.append(f"🏷 <b>Индексация журнала:</b> {html_escape(jlab)}")
+    except Exception:
+        pass
     if d.get("year"):
         bib_parts.append(html_escape(str(d["year"])))
     if d.get("volume"):
@@ -330,7 +374,68 @@ def _resolve_title_candidates(title: str) -> List[PaperMetadata]:
     return cands
 
 
+def _handle_batch_via_http(token: str, chat_id: int, raw: str) -> None:
+    lines = [ln.strip() for ln in raw.splitlines() if ln.strip()]
+    lines = lines[:BATCH_MAX_LINES]
+    _reply_html(
+        token,
+        chat_id,
+        f"📚 Пакет через сервер <code>/api/batch</code>: <b>{len(lines)}</b> строк.",
+    )
+    url = f"{BASE}/api/batch"
+    try:
+        r = requests.post(
+            url,
+            json={"batch": "\n".join(lines), "citation_style": "gost"},
+            stream=True,
+            timeout=(15, 600),
+            headers={"Accept": "application/x-ndjson, application/json"},
+        )
+        if r.status_code == 400:
+            try:
+                err_obj = r.json()
+                msg = (err_obj.get("error") or err_obj.get("message") or r.text)[:500]
+            except Exception:
+                msg = r.text[:500]
+            _reply_html(token, chat_id, f"Пакет отклонён: <code>{html_escape(msg)}</code>")
+            return
+        r.raise_for_status()
+    except requests.RequestException as e:
+        _reply_html(token, chat_id, f"Нет связи с <code>{html_escape(BASE)}</code>: <code>{html_escape(str(e)[:400])}</code>")
+        return
+
+    papers: List[PaperMetadata] = []
+    errors = 0
+    try:
+        for raw_line in r.iter_lines(decode_unicode=True):
+            if not raw_line or not str(raw_line).strip():
+                continue
+            try:
+                evt = json.loads(raw_line)
+            except Exception:
+                continue
+            if evt.get("event") == "item":
+                if evt.get("ok") and evt.get("metadata"):
+                    papers.append(_paper_from_dict(evt["metadata"]))
+                else:
+                    errors += 1
+        summary = f"Готово: распознано <b>{len(papers)}</b>"
+        if errors:
+            summary += f", с ошибками строк: <b>{errors}</b>"
+        _reply_html(token, chat_id, summary + ".")
+    except requests.RequestException as e:
+        _reply_html(token, chat_id, f"Обрыв потока: <code>{html_escape(str(e)[:400])}</code>")
+        return
+
+    for i, p in enumerate(papers):
+        label = f"📎 {i + 1}/{len(papers)} · batch HTTP"
+        _deliver_papers(token, chat_id, [p], header=label)
+
+
 def _handle_batch(token: str, chat_id: int, raw: str) -> None:
+    if USE_HTTP_BATCH:
+        _handle_batch_via_http(token, chat_id, raw)
+        return
     lines = [ln.strip() for ln in raw.splitlines() if ln.strip()]
     lines = lines[:BATCH_MAX_LINES]
     _reply_html(
@@ -431,6 +536,105 @@ def _handle_url(token: str, chat_id: int, url: str) -> None:
     except Exception as e:
         LOGGER.exception("url")
         _reply_html(token, chat_id, f"Ошибка: <code>{html_escape(str(e))}</code>")
+
+
+def _handle_cite(token: str, chat_id: int, line: str) -> None:
+    line = (line or "").strip()
+    if not line:
+        _reply_html(
+            token,
+            chat_id,
+            "После <code>/cite</code> вставьте одну библиографическую строку "
+            "(как в списке литературы). Пример: <code>/cite Иванов И.И. Заголовок // Журнал. 2020. № 2. С. 5–10.</code>",
+        )
+        return
+    if len(line) > MAX_CITE_LINE_LEN:
+        _reply_html(
+            token,
+            chat_id,
+            f"Строка слишком длинная (макс. {MAX_CITE_LINE_LEN} символов).",
+        )
+        return
+    try:
+        _reply_html(token, chat_id, "⏳ Разбираю цитату…")
+        meta, info = parse_citation_string(line)
+        via = str(info.get("matched_via") or "—")
+        header = f"📎 Разбор цитаты · {via}"
+        _deliver_papers(token, chat_id, [meta], header=header)
+    except Exception as e:
+        LOGGER.exception("cite")
+        _reply_html(token, chat_id, f"Ошибка: <code>{html_escape(str(e))}</code>")
+
+
+def _handle_draft(token: str, chat_id: int, body: str) -> None:
+    body = (body or "").strip()
+    if not body:
+        _reply_html(
+            token,
+            chat_id,
+            "Отправьте в <b>одном сообщении</b>: первая строка <code>/draft</code>, с новой строки — "
+            "список литературы (до "
+            + str(DRAFT_VALIDATE_MAX_LINES)
+            + " записей). Нумерация <code>1.</code> / <code>[1]</code> снимается автоматически.",
+        )
+        return
+    try:
+        _reply_html(token, chat_id, "⏳ Проверяю список…")
+        items = validate_draft_text(
+            body,
+            max_lines=DRAFT_VALIDATE_MAX_LINES,
+            citation_style="gost",
+        )
+    except Exception as e:
+        LOGGER.exception("draft")
+        _reply_html(token, chat_id, f"Ошибка: <code>{html_escape(str(e))}</code>")
+        return
+
+    summary = {"ok": 0, "partial": 0, "not_found": 0}
+    for it in items:
+        st = str(it.get("status") or "")
+        if st in summary:
+            summary[st] += 1
+
+    parts: List[str] = [
+        "📋 <b>Проверка списка литературы</b>",
+        f"Строк: <b>{len(items)}</b>",
+        f"✓ OK: <b>{summary['ok']}</b> · ⚠ частично: <b>{summary['partial']}</b> · ✗ не найдено: <b>{summary['not_found']}</b>",
+        "",
+    ]
+    shown = items[:DRAFT_REPORT_DETAIL_LINES]
+    for it in shown:
+        st = str(it.get("status") or "")
+        emoji = "✓" if st == "ok" else ("⚠" if st == "partial" else "✗")
+        via = html_escape(str(it.get("matched_via") or "—"))
+        head = f"{emoji} <b>#{it.get('index')}</b> · <code>{html_escape(st)}</code> · <i>{via}</i>"
+        inp = str(it.get("input") or "")[:320]
+        parts.append(head)
+        parts.append(f"<pre>{html_escape(inp)}</pre>")
+        reasons = it.get("reasons") or []
+        if reasons:
+            rtxt = "; ".join(str(x) for x in reasons[:6])
+            parts.append(f"<b>Пропуски:</b> <i>{html_escape(rtxt)}</i>")
+        soft = it.get("soft_warnings") or []
+        if soft:
+            stxt = "; ".join(str(x) for x in soft[:5])
+            parts.append(f"<b>Замечания:</b> <i>{html_escape(stxt)}</i>")
+        sug = (it.get("suggested_citation") or "").strip()
+        if sug:
+            if len(sug) > 520:
+                sug = sug[:517] + "…"
+            parts.append("<b>Как оформить (ГОСТ-подобно):</b>")
+            parts.append(f"<pre>{html_escape(sug)}</pre>")
+        parts.append("")
+    if len(items) > DRAFT_REPORT_DETAIL_LINES:
+        parts.append(
+            f"<i>… ещё {len(items) - DRAFT_REPORT_DETAIL_LINES} строк. Полный JSON: POST {html_escape(BASE)}/validate_draft</i>"
+        )
+
+    msg = "\n".join(parts).strip()
+    if len(msg) > 4090:
+        msg = msg[:4080] + "…"
+    _reply_html(token, chat_id, msg)
 
 
 def _handle_title(token: str, chat_id: int, title: str) -> None:
@@ -615,6 +819,12 @@ def main() -> None:
                 _handle_url(token, chat_id, text[5:].strip())
             elif text.startswith("/title "):
                 _handle_title(token, chat_id, text[7:].strip())
+            elif _command_match(text, "cite"):
+                _handle_cite(token, chat_id, _after_command(text, "cite"))
+            elif _command_match(text, "citation"):
+                _handle_cite(token, chat_id, _after_command(text, "citation"))
+            elif _command_match(text, "draft"):
+                _handle_draft(token, chat_id, _after_command(text, "draft"))
             elif _is_batch_candidate(text):
                 try:
                     _handle_batch(token, chat_id, text)
