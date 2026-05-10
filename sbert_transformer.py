@@ -9,12 +9,18 @@
 
 from __future__ import annotations
 
+import logging
 import os
 from typing import Optional
 
 import numpy as np
 from sklearn.base import BaseEstimator, TransformerMixin
 
+LOGGER = logging.getLogger(__name__)
+
+# Размер вектора для модели по умолчанию (paraphrase-multilingual-MiniLM-L12-v2).
+_DEFAULT_EMB_DIM = 384
+_SBERT_MISSING_WARNED = False
 
 DEFAULT_MODEL = os.getenv(
     "SBERT_MODEL_NAME",
@@ -35,10 +41,22 @@ class LazySentenceEmbeddingTransformer(BaseEstimator, TransformerMixin):
     def transform(self, X):
         try:
             from sentence_transformers import SentenceTransformer
-        except ImportError as e:
-            raise ImportError(
-                "Для SBERT установите пакеты: pip install -r requirements-ml.txt"
-            ) from e
+        except ImportError:
+            # Пайплайн обучен с USE_SBERT=1; в контейнере часто нет torch/sentence-transformers.
+            # Нули той же размерности, что у эмбеддинга модели по умолчанию — предсказание хуже, но не падает.
+            global _SBERT_MISSING_WARNED
+            if not _SBERT_MISSING_WARNED:
+                LOGGER.warning(
+                    "Пакет sentence_transformers недоступен; SBERT-признаки заменены нулями "
+                    "(качество классификатора ниже). Установите: pip install -r requirements-ml.txt"
+                )
+                _SBERT_MISSING_WARNED = True
+            if hasattr(X, "fillna"):
+                n = len(X)
+            else:
+                n = len(list(X))
+            dim = int(os.getenv("SBERT_FALLBACK_DIM", str(_DEFAULT_EMB_DIM)))
+            return np.zeros((n, dim), dtype=np.float32)
 
         if hasattr(X, "fillna"):
             texts = X.fillna("").astype(str).tolist()
