@@ -3770,6 +3770,7 @@ def validate_draft_text(
                 else:
                     reasons.append(f"нет поля: {f}")
         soft_warnings: List[str] = []
+        recommended_fields: List[str] = []
         for w in completeness.get("warnings") or []:
             if not isinstance(w, dict):
                 continue
@@ -3778,7 +3779,13 @@ def validate_draft_text(
             if hint:
                 soft_warnings.append(f"{lab}: {hint}" if lab else hint)
             elif lab:
-                soft_warnings.append(f"рекомендуется уточнить: {lab}")
+                recommended_fields.append(str(lab))
+        if recommended_fields:
+            uniq_labels: List[str] = []
+            for label in recommended_fields:
+                if label not in uniq_labels:
+                    uniq_labels.append(label)
+            soft_warnings.append("Рекомендуется уточнить: " + ", ".join(uniq_labels) + ".")
         try:
             suggested_citation = format_citation(meta, style=style)
         except Exception:
