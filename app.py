@@ -410,6 +410,28 @@ input:focus, select:focus {
   font-size: 12px;
   color: var(--muted);
 }
+.style-example {
+  margin-top: 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--border) 72%, #60a5fa 28%);
+  background: color-mix(in srgb, var(--card) 82%, #1d4ed8 18%);
+  color: color-mix(in srgb, var(--text) 86%, #dbeafe 14%);
+  font-size: 12px;
+  line-height: 1.45;
+}
+.mode-reco {
+  margin-top: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--border) 74%, #93c5fd 26%);
+  background: color-mix(in srgb, var(--card) 88%, #1d4ed8 12%);
+  color: color-mix(in srgb, var(--text) 80%, #bfdbfe 20%);
+}
 .action-row {
   display: flex;
   flex-wrap: wrap;
@@ -1788,7 +1810,7 @@ def index():
                   </div>
                   <div>
                     <label class="label"><b>Стиль цитирования</b></label>
-                    <select name="citation_style">
+                    <select name="citation_style" id="mainCitationStyle">
                       <option value="gost">ГОСТ-like</option>
                       <option value="apa">APA</option>
                       <option value="ieee">IEEE</option>
@@ -1796,6 +1818,7 @@ def index():
                       <option value="springer">Springer-подобный</option>
                       <option value="nature">Nature-подобный</option>
                     </select>
+                    <div class="hint style-example" id="styleHintMain"></div>
                   </div>
                 </div>
 
@@ -1806,10 +1829,10 @@ def index():
             </div>
 
             <div class="card" style="margin-top:14px;">
-              <h3 class="section-title">Распознать строку цитирования</h3>
+              <h3 class="section-title">Оформить одну ссылку в выбранном стиле</h3>
               <p class="hint" style="margin-top:0;">
-                Вставьте готовую библиографическую строку (русский или английский текст, с DOI или без).
-                Поля разбираются эвристически; при наличии данных запись сопоставляется с Crossref и при кириллице — с КиберЛенинкой.
+                Вставьте готовую библиографическую строку (русский или английский текст, с DOI или без), и сервис
+                оформит ссылку в выбранном стиле. При наличии данных запись дополнительно сверяется с каталогами.
               </p>
               <label class="label"><b>Строка</b></label>
               <div class="batch-dropzone">
@@ -1825,16 +1848,26 @@ def index():
                   <option value="springer">Springer-подобный</option>
                   <option value="nature">Nature-подобный</option>
                 </select>
+                <div class="hint style-example" id="styleHintSingle"></div>
               </div>
               <div style="margin-top:12px;">
-                <button type="button" class="btn btn-soft" id="citationParseBtn">Разобрать строку</button>
+                <button type="button" class="btn btn-soft" id="citationParseBtn">Оформить ссылку</button>
               </div>
               <pre class="mono-box mt-12" id="citationParseResult" style="display:none;white-space:pre-wrap;"></pre>
               <div id="citationParseMeta" class="hint mt-10" style="display:none;"></div>
             </div>
 
-            <div class="card" style="margin-top:14px;">
-              <h3 class="section-title">Проверить черновик списка литературы</h3>
+            <div class="card" id="listWorkflowCard" style="margin-top:14px;">
+              <h3 class="section-title">Оформить список литературы</h3>
+              <div class="batch-line-status" style="margin-top:8px;">
+                <button type="button" class="btn btn-soft" id="modeDetailedBtn">С диагностикой</button>
+                <button type="button" class="btn" id="modeFastBtn">Быстрое оформление</button>
+              </div>
+              <div id="listModeHint" class="hint" style="margin-top:8px;">
+                Режим «С диагностикой»: показывает пропуски полей и даёт подсказки «как оформить».
+              </div>
+              <div id="listModeReco" class="mode-reco">Рекомендовано для: финальной проверки перед сдачей.</div>
+              <div id="listDetailedMode" style="margin-top:10px;">
               <p class="hint" style="margin-top:0;">
                 Каждая непустая строка обрабатывается отдельно: распознавание, сопоставление с каталогами, отметка
                 <b>обязательных пропусков</b> и <b>мягких замечаний</b>, плюс блок <b>«как оформить»</b> — цитата по уже обогащённым полям в выбранном стиле (её можно копировать в работу после проверки).
@@ -1854,12 +1887,14 @@ def index():
                   <option value="springer">Springer-подобный</option>
                   <option value="nature">Nature-подобный</option>
                 </select>
+                <div class="hint style-example" id="styleHintDraft"></div>
               </div>
               <div style="margin-top:12px;">
-                <button type="button" class="btn btn-soft" id="draftValidateBtn">Проверить список</button>
+                <button type="button" class="btn btn-soft" id="draftValidateBtn">Проверить и подсказать</button>
               </div>
               <div id="draftValidateSummary" class="batch-line-status mt-10" style="display:none;"></div>
               <div id="draftValidateBody" class="mt-10" style="display:none;"></div>
+              </div>
             </div>
 
             <div id="lastResultCard" class="card" style="margin-top:14px;border-left:4px solid var(--accent);" hidden>
@@ -1877,9 +1912,8 @@ def index():
               </div>
             </div>
 
-            <div class="card" style="margin-top:14px;">
-              <h3 class="section-title">Массовый импорт</h3>
-              <p style="color:var(--muted);font-size:14px;">До {MAX_BATCH_LINES} строк: DOI (<code>10....</code>), URL или свободное название. После обработки выдаётся <b>единый библиографический список</b> в выбранном стиле — его можно скопировать, скачать BibTeX/RIS или сразу добавить в общий итоговый список.</p>
+              <div id="listFastModeCard" style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">
+              <p style="color:var(--muted);font-size:14px;margin-top:0;">До {MAX_BATCH_LINES} строк: DOI (<code>10....</code>), URL или свободное название. Этот режим делает быстрое оформление всего списка без детальной диагностики по каждой строке.</p>
               <form id="batchForm" method="POST" action="/parse_batch">
                 <label class="label"><b>Строки</b></label>
                 <div id="batchDropZone" class="batch-dropzone">
@@ -1906,9 +1940,10 @@ def index():
                     <option value="springer">Springer-подобный</option>
                     <option value="nature">Nature-подобный</option>
                   </select>
+                <div class="hint style-example" id="styleHintBatch"></div>
                 </div>
                 <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
-                  <button type="submit" id="batchSubmitBtn" class="btn btn-soft">Разобрать пакет</button>
+                  <button type="submit" id="batchSubmitBtn" class="btn btn-soft">Оформить без диагностики</button>
                   <button type="button" id="batchCancelBtn" class="btn" style="display:none;">Отменить</button>
                   <button type="button" id="batchClearInputBtn" class="btn">Очистить</button>
                   <button type="button" id="batchShareBtn" class="btn" hidden>Скопировать ссылку</button>
@@ -1928,11 +1963,10 @@ def index():
                 <div class="batch-progress-track" aria-hidden="true">
                   <div class="batch-progress-fill" id="batchProgressFill"></div>
                 </div>
-                <div id="batchLineStatus" class="batch-line-status" aria-live="polite"></div>
               </div>
 
-              <div id="batchResults" class="card" hidden style="margin-top:14px;">
-                <h3 class="section-title">Готовый библиографический список</h3>
+              <div id="batchResults" hidden style="margin-top:14px;padding:12px;border:1px solid var(--border);border-radius:12px;background:color-mix(in srgb, var(--card) 92%, #1d4ed8 8%);">
+                <h3 class="section-title">Результат</h3>
                 <div id="batchResultsMeta" class="hint" style="margin-bottom:10px;"></div>
                 <pre class="mono-box" id="batchBibliographyText"></pre>
                 <div class="mt-10 action-row">
@@ -1953,6 +1987,7 @@ def index():
                   <summary><span style="color:#b91c1c;">Не удалось обработать</span></summary>
                   <div class="variant-body" id="batchErrorsBody"></div>
                 </details>
+              </div>
               </div>
             </div>
           </section>
@@ -2208,6 +2243,61 @@ def index():
           }});
         }})();
         (function() {{
+          const styleExamples = {{
+            gost: "Пример: Иванов И.И. Название статьи // Журнал. 2024. Т. 10, № 2. С. 15–22.",
+            apa: "Пример: Ivanov, I. I. (2024). Article title. Journal Name, 10(2), 15–22.",
+            ieee: "Пример: I. I. Ivanov, “Article title,” Journal Name, vol. 10, no. 2, pp. 15–22, 2024.",
+            journal_auto: "Пример: стиль подбирается под журнал по названию/контексту записи.",
+            springer: "Пример: Ivanov I.I. Article title. Journal Name (2024) 10:15–22.",
+            nature: "Пример: Ivanov II. Article title. Journal Name 10, 15–22 (2024).",
+          }};
+          function bindStyleHint(selectId, hintId) {{
+            const sel = document.getElementById(selectId);
+            const hint = document.getElementById(hintId);
+            if (!sel || !hint) return;
+            const render = function() {{
+              const key = (sel.value || "gost").toLowerCase();
+              hint.textContent = styleExamples[key] || styleExamples.gost;
+            }};
+            sel.addEventListener("change", render);
+            render();
+          }}
+          bindStyleHint("mainCitationStyle", "styleHintMain");
+          bindStyleHint("citationParseStyle", "styleHintSingle");
+          bindStyleHint("draftCitationStyle", "styleHintDraft");
+          bindStyleHint("batchCitationStyle", "styleHintBatch");
+        }})();
+        (function() {{
+          const detailedBtn = document.getElementById("modeDetailedBtn");
+          const fastBtn = document.getElementById("modeFastBtn");
+          const workflowCard = document.getElementById("listWorkflowCard");
+          const detailedWrap = document.getElementById("listDetailedMode");
+          const fastCard = document.getElementById("listFastModeCard");
+          const hint = document.getElementById("listModeHint");
+          const reco = document.getElementById("listModeReco");
+          if (!detailedBtn || !fastBtn || !detailedWrap || !fastCard || !hint || !reco) return;
+          // Оба режима должны жить в одном "окне" (одной карточке).
+          if (workflowCard && fastCard.parentElement !== workflowCard) {{
+            workflowCard.appendChild(fastCard);
+          }}
+          function setMode(mode) {{
+            const detailed = mode === "detailed";
+            detailedWrap.style.display = detailed ? "block" : "none";
+            fastCard.style.display = detailed ? "none" : "block";
+            detailedBtn.className = detailed ? "btn btn-soft" : "btn";
+            fastBtn.className = detailed ? "btn" : "btn btn-soft";
+            hint.textContent = detailed
+              ? "Режим «С диагностикой»: показывает пропуски полей и даёт подсказки «как оформить»."
+              : "Режим «Быстрое оформление»: сразу формирует итоговый список и экспорт в выбранном стиле.";
+            reco.textContent = detailed
+              ? "Рекомендовано для: финальной проверки перед сдачей."
+              : "Рекомендовано для: быстрого получения списка, когда нужна скорость.";
+          }}
+          detailedBtn.addEventListener("click", function() {{ setMode("detailed"); }});
+          fastBtn.addEventListener("click", function() {{ setMode("fast"); }});
+          setMode("detailed");
+        }})();
+        (function() {{
           const btn = document.getElementById("draftValidateBtn");
           const ta = document.getElementById("draftValidateInput");
           const stDraft = document.getElementById("draftCitationStyle");
@@ -2254,8 +2344,11 @@ def index():
                 const rows = (data.items || []).map(function(it) {{
                   const st0 = it.status || "";
                   const cls = st0 === "ok" ? "ok" : (st0 === "partial" ? "run" : "err");
-                  const reasons = (it.reasons || []).map(function(x) {{ return esc(x); }}).join("; ");
-                  const soft = (it.soft_warnings || []).map(function(x) {{ return esc(x); }}).join("; ");
+                  const reasons = (it.reasons || []).map(function(x) {{ return esc(x); }}).join(", ");
+                  const soft = (it.soft_warnings || []).map(function(x) {{ return esc(x); }}).join(", ");
+                  const nextStep = (it.reasons || it.soft_warnings || []).length
+                    ? "Чтобы уточнить поля автоматически, используйте выше форму DOI/URL и затем повторите проверку."
+                    : "";
                   const sug = (it.suggested_citation || "").trim();
                   const jidx = (it.journal_indices || []).join(", ");
                   let sugBlock = "";
@@ -2264,13 +2357,14 @@ def index():
                       + '<pre class="mono-box" style="margin-top:4px;white-space:pre-wrap;">' + esc(sug) + '</pre>';
                   }}
                   return '<div class="card" style="padding:10px;margin-bottom:8px;border-left:4px solid var(--border);">'
-                    + '<div class="batch-line-status"><span class="pill ' + cls + '">#' + esc(it.index) + " — " + esc(st0) + '</span>'
+                    + '<div class="batch-line-status"><span class="pill ' + cls + '">' + esc(st0) + '</span>'
                     + '<span class="pill">' + esc(it.matched_via || "—") + '</span>'
                     + (jidx ? '<span class="pill run">' + esc(jidx) + '</span>' : "")
                     + '</div>'
                     + '<div class="hint" style="margin-top:6px;word-break:break-word;"><b>Было в черновике:</b> ' + esc(it.input || "") + '</div>'
                     + (reasons ? '<div class="hint" style="margin-top:4px;color:var(--danger);"><b>Пропуски:</b> ' + reasons + '</div>' : "")
                     + (soft ? '<div class="hint" style="margin-top:4px;color:var(--warning);"><b>Замечания:</b> ' + soft + '</div>' : "")
+                    + (nextStep ? '<div class="hint" style="margin-top:4px;"><b>Как уточнить:</b> ' + esc(nextStep) + '</div>' : "")
                     + sugBlock
                     + "</div>";
                 }}).join("");
@@ -2333,7 +2427,6 @@ def index():
           const statusSub = document.getElementById("batchStatusSub");
           const statusCounter = document.getElementById("batchStatusCounter");
           const progressFill = document.getElementById("batchProgressFill");
-          const lineStatus = document.getElementById("batchLineStatus");
           const results = document.getElementById("batchResults");
           const resultsMeta = document.getElementById("batchResultsMeta");
           const bibText = document.getElementById("batchBibliographyText");
@@ -2377,21 +2470,11 @@ def index():
             statusSub.textContent = "0 / " + (total || 0);
             statusCounter.textContent = "0%";
             progressFill.style.width = "0%";
-            lineStatus.innerHTML = "";
-            for (let i = 1; i <= (total || 0); i += 1) {{
-              const pill = document.createElement("span");
-              pill.className = "pill";
-              pill.dataset.idx = String(i);
-              pill.textContent = "#" + i;
-              lineStatus.appendChild(pill);
-            }}
           }}
           function markLine(idx, state, title) {{
-            const pill = lineStatus.querySelector('[data-idx="' + idx + '"]');
-            if (!pill) return;
-            pill.classList.remove("ok", "err", "run");
-            if (state) pill.classList.add(state);
-            if (title) pill.title = title;
+            // Пер-строчные плашки вида #1 #2 #3 убраны,
+            // чтобы не дублировать основной прогресс-бар.
+            void idx; void state; void title;
           }}
           function updateProgress(done, total) {{
             const pct = total > 0 ? Math.round((done / total) * 100) : 0;
@@ -2476,9 +2559,8 @@ def index():
             const total = data.total || 0;
             const ok = data.ok_count || 0;
             const errs = data.error_count || 0;
-            resultsMeta.textContent = "Стиль: " + (data.style || "gost").toUpperCase()
-              + ". Обработано: " + ok + " из " + total
-              + (errs ? (", не удалось: " + errs) : "") + ".";
+            resultsMeta.textContent = "Результат (стиль: " + (data.style || "gost") + ")"
+              + (errs ? (". Не удалось обработать: " + errs) : ".");
             bibText.textContent = data.bibliography || "";
             const lines = (savedItems || []).map(function(it, i) {{
               const cit = (it && it.citation) || "";
@@ -2507,7 +2589,6 @@ def index():
           function resetUI() {{
             status.hidden = true;
             results.hidden = true;
-            lineStatus.innerHTML = "";
             cancelBtn.style.display = "none";
             hint.textContent = "";
             lastResult = null;
@@ -3370,8 +3451,8 @@ def parse_batch():
             <button id="themeToggle" class="btn theme-toggle">🌙 Dark</button>
           </div>
         </div>
-        <div class="hero"><h2>Готовый библиографический список</h2>
-        <p>Стиль: {escape(citation_style.upper())}. Обработано: {len(items)} из {len(lines)}.</p></div>
+        <div class="hero"><h2>Результат</h2>
+        <p>Результат (стиль: {escape(citation_style)}).</p></div>
 
         <div class="card">
           <h3 class="section-title">Библиографический список</h3>
